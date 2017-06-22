@@ -1,0 +1,29 @@
+piece_index:
+    path:     /
+    defaults: { _controller: "YSoftInstrumBundle:Piece:index" }
+    methods:  GET
+
+piece_show:
+    path:     /piece/{id}/show
+    defaults: { _controller: "YSoftInstrumBundle:Piece:show" }
+    methods:  GET
+
+piece_new:
+    path:     /piece/new
+    defaults: { _controller: "YSoftInstrumBundle:Piece:new" }
+    methods:  [GET, POST]
+
+piece_edit:
+    path:     /piece/{id}/edit
+    defaults: { _controller: "YSoftInstrumBundle:Piece:edit" }
+    methods:  [GET, POST]
+
+piece_delete:
+    path:     /piece/{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Piece:delete" }
+    methods:  DELETE
+
+piece_import:
+    path:     /import
+    defaults: { _controller: "YSoftInstrumBundle:Piece:import" }
+    methods: [GET, POST]

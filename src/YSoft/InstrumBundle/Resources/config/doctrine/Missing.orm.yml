@@ -1,0 +1,23 @@
+YSoft\InstrumBundle\Entity\Missing:
+  type: entity
+  table: null
+  repositoryClass: YSoft\InstrumBundle\Repository\MissingRepository
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    voice:
+      type: string
+      length: 255
+    createdAt:
+      type: datetime
+
+  manyToOne:
+    piece:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      inversedBy: missings
+      
+  lifecycleCallbacks: {  }

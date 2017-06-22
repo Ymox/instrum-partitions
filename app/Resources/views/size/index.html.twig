@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Sizes list</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Minwidth</th>
+				<th>Maxwidth</th>
+				<th>Minheight</th>
+				<th>Maxheight</th>
+				<th>Note</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for size in sizes %}
+			<tr>
+				<td><a href="{{ path('size_show', { 'name': size.name }) }}">{{ size.name }}</a></td>
+				<td>{{ size.minWidth }}</td>
+				<td>{{ size.maxWidth }}</td>
+				<td>{{ size.minHeight }}</td>
+				<td>{{ size.maxHeight }}</td>
+				<td>{{ size.note }}</td>
+				<td>
+					<ul>
+						<li>
+							<a href="{{ path('size_show', { 'name': size.name }) }}"><i class="fa fa-eye"></i></a>
+						</li>
+						<li>
+							<a href="{{ path('size_edit', { 'name': size.name }) }}" class="btn btn-danger">><i class="fa fa-pencil"></i></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+	<ul>
+		<li>
+			<a href="{{ path('size_new') }}">Create a new size</a>
+		</li>
+	</ul>
+{% endblock %}

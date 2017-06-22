@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Missing</h1>
+
+	<table>
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ missing.id }}</td>
+			</tr>
+			<tr>
+				<th>Voice</th>
+				<td>{{ missing.voice }}</td>
+			</tr>
+			<tr>
+				<th>Createdat</th>
+				<td>{% if missing.createdAt %}{{ missing.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul>
+		<li>
+			<a href="{{ path('missing_index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
+		</li>
+	</ul>
+{% endblock %}

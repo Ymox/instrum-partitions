@@ -1,0 +1,42 @@
+ysoft:
+  instrum:
+    fields:
+      id: Numéro
+      piece:
+        name: Nom
+        translation: Traduction
+        composers: Compositeurs
+        arrangers: Arrangeurs
+        size: Taille
+        instrumentation: Instrumentation
+        type: Type
+        status: Etat
+        missings: Manques
+        publisher: Editeur
+        year: Année
+        reference: Référence
+        note: Remarques
+        created_at: Date de saisie
+      missing:
+        voice: Voix
+      person:
+        firstName: Prénom
+        lastName: Nom de famille
+
+    flash:
+      success:
+        creation:
+          piece: La pièce a bien été enregistrée avec le N° <b>%id%</b>
+
+    piece:
+      index:
+        title: Partitions
+        heading: Liste des partitions
+      new:
+        title: &piece_new Nouvelle partition
+        heading: *piece_new
+
+    person:
+      new:
+        title: &person_new Nouvelle personne
+        heading: *person_new

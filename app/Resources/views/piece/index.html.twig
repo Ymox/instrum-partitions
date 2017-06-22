@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ysoft.instrum.piece.index.title'|trans }}{% endblock %}
+
+{% block body %}
+	<h1>{{ 'ysoft.instrum.piece.index.heading'|trans }}</h1>
+
+	<form class="table-responsive">
+		<table class="table table-sm table-striped table-hover">
+			<thead>
+				<tr>
+					<th colspan="8">
+						<ul class="pagination mx-auto">
+						{% set page = app.request.query.get('page', 1) %}
+						{% if nbPages > 5 and page > 3 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link">{{ 'global.action.first'|trans }}</a></li>
+						{% endif %}
+						{%- if not (page == 1) %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link">{{ 'global.action.previous'|trans }}</a></li>
+						{% endif %}
+						{% if page > 3 %}
+							<li class="page-item"><a class="page-link">…</a></li>
+						{% endif %}
+						{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
+							<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('piece_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
+						{% endfor %}
+						{% if page < nbPages - 2 %}
+							<li class="page-item"><a class="page-link">…</a></li>
+						{% endif %}
+						{%- if not (page == nbPages) %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link">{{ 'global.action.next'|trans }}</a></li>
+						{% endif %}
+						{% if nbPages > 5 and page < nbPages - 2 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ 'global.action.last'|trans }}</a></li>
+						{% endif %}
+						</ul>
+					</th>
+				</tr>
+				<tr>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') in ['id', null]) %}-{{ app.request.query.get('direction', 'asc') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'id', 'direction': ((app.request.query.get('field') == 'id' and app.request.query.get('direction') == 'desc') ? 'asc' : 'desc')})) }}">{{ 'ysoft.instrum.fields.id'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'name') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'name', 'direction': ((app.request.query.get('field') == 'name' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.name'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'translation') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'translation', 'direction': ((app.request.query.get('field') == 'translation' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.translation'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'composer') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'composer', 'direction': ((app.request.query.get('field') == 'composer' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.composers'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'arranger') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'arranger', 'direction': ((app.request.query.get('field') == 'arranger' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.year'|trans }}</a></th>
+					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-success"><i class="fa fa-plus"></i></a></th>
+				</tr>
+				<tr>
+					<th><input type="number" name="q[id]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.id'|trans }}" size="5" maxlength="4" /></th>
+					<th colspan="2"><input type="text" name="q[name]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.name'|trans }}"{% if app.request.get('q')['name'] is defined %} value="{{ app.request.get('q')['name'] }}"{% endif %} /></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th class="text-center"><button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i></button>
+					 	<a href="{{ path('piece_index') }}" class="btn btn-secondary"><i class="fa fa-refresh"></i></a></th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.name'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.translation'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.composers'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.year'|trans }}</th>
+					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
+				</tr>
+				<tr>
+					<th colspan="8">
+						<ul class="pagination mx-auto">
+						{% set page = app.request.query.get('page', 1) %}
+						{% if nbPages > 5 and page > 3 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link">{{ 'global.action.first'|trans }}</a></li>
+						{% endif %}
+						{%- if not (page == 1) %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link">{{ 'global.action.previous'|trans }}</a></li>
+						{% endif %}
+						{% if page > 3 %}
+							<li class="page-item"><a class="page-link">…</a></li>
+						{% endif %}
+						{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
+							<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('piece_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
+						{% endfor %}
+						{% if page < nbPages - 2 %}
+							<li class="page-item"><a class="page-link">…</a></li>
+						{% endif %}
+						{%- if not (page == nbPages) %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link">{{ 'global.action.next'|trans }}</a></li>
+						{% endif %}
+						{% if nbPages > 5 and page < nbPages - 2 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ 'global.action.last'|trans }}</a></li>
+						{% endif %}
+						</ul>
+					</th>
+				</tr>
+			</tfoot>
+			<tbody>
+			{% for piece in pieces %}
+				<tr{% if piece.status == 'incomplete' %} class="bg-warning"
+					{%- elseif piece.status == 'lent' %} class="text-muted"
+					{%- elseif piece.status == 'lost' %} class="bg-danger"{% endif %}>
+					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.id }}</a></td>
+					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.name }}</td>
+					<td>{% if piece.translation %}<a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.translation }}</a>{% endif %}</td>
+					<td>{{ piece.composers|join(', ') }}</td>
+					<td>{{ piece.arrangers|join(', ') }}</td>
+					<td>{{ piece.publisher }}</td>
+					<td>{{ piece.year }}</td>
+					<td class="text-center">
+						<a href="{{ path('piece_show', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+						<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-warning" class="btn btn-danger"><i class="fa fa-pencil"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

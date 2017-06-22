@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{ 'ysoft.instrum.person.index.heading'|trans }}</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th><a href="{{ path('person_new') }}" class="btn btn-success"><i class="fa fa-plus"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for person in people %}
+			<tr>
+				<td>{{ person.id }}</a></td>
+				<td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.firstName }}</a></td>
+				<td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.lastName }}</a></td>
+				<td>
+					<a href="{{ path('person_show', { 'id': person.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
+					<a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-danger">><i class="fa fa-pencil"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Statuses list</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.status.id'|trans }}</th>
+				<th>{{ 'ysoft.instrum.fields.status.name'|trans }}</th>
+				<th><a href="{{ path('status_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for status in statuses %}
+			<tr>
+				<td><a href="{{ path('status_show', { 'id': status.id }) }}">{{ status.id }}</a></td>
+				<td>{{ status.name }}</td>
+				<td>
+					<a href="{{ path('status_show', { 'id': status.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
+					<a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-sm btn-warning" class="btn btn-danger">><i class="fa fa-pencil"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

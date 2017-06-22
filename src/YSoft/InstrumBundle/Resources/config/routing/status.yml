@@ -1,0 +1,24 @@
+status_index:
+    path:     /
+    defaults: { _controller: "YSoftInstrumBundle:Status:index" }
+    methods:  GET
+
+status_show:
+    path:     /{id}/show
+    defaults: { _controller: "YSoftInstrumBundle:Status:show" }
+    methods:  GET
+
+status_new:
+    path:     /new
+    defaults: { _controller: "YSoftInstrumBundle:Status:new" }
+    methods:  [GET, POST]
+
+status_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YSoftInstrumBundle:Status:edit" }
+    methods:  [GET, POST]
+
+status_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Status:delete" }
+    methods:  DELETE

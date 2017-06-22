@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>{% block title %}Partitiothèque Instrum{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/tether.min.css') }}" />
+		{% block stylesheets %}{% endblock %}
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+	</head>
+	<body>
+		<div class="container">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert alert-{{ label }}">
+						{{ message|raw }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% block body %}{% endblock %}
+		</div>
+		<div id="Modal" class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<i class="fa fa-spinner fa-pulse"></i>
+				</div>
+			</div>
+		</div>
+		<script src="{{ asset('js/jquery.min.js') }}"></script>
+		<script src="{{ asset('js/tether.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

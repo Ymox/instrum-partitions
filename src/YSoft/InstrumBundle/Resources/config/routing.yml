@@ -1,0 +1,18 @@
+y_soft_instrum_person:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/person.yml"
+    prefix:   /person
+
+y_soft_instrum_size:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/size.yml"
+    prefix:   /size
+
+y_soft_instrum_status:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/status.yml"
+    prefix:   /status
+
+y_soft_instrum_missing:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/missing.yml"
+    prefix:   /missing
+
+y_soft_instrum_piece:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/piece.yml"

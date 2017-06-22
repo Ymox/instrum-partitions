@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ piece.name }}{% endblock %}
+
+{% block body %}
+	<h1>{{ piece.name }}
+		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
+				<td>{{ piece.id }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.composers'|trans }}</th>
+				<td>{{ piece.composers|join(', ') }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</th>
+				<td>{{ piece.arrangers|join(', ') }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</th>
+				<td>{{ piece.publisher }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.year'|trans }}</th>
+				<td>{{ piece.year }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.reference'|trans }}</th>
+				<td>{{ piece.reference }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
+				<td>{{ piece.status }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
+				<td>{{ piece.note|nl2br }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
+				<td>{{ piece.createdAt|date('Y-m-d H:i:s') }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul>
+		<li>
+			<a href="{{ path('piece_index') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i></a>
+		</li>
+		<li>
+			<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-warning" class="btn btn-sm btn-danger"><i class="fa fa-pencil"></i></a>
+		</li>
+		<li>
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}

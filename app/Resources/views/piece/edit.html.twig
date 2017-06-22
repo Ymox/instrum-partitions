@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ piece.name }}{% endif %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}" />
+{% endblock %}
+
+{% block body %}
+	<h1>{{ piece.name }}
+		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
+
+	{{ form_start(edit_form) }}
+		{{ form_widget(edit_form) }}
+		<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>
+	{{ form_end(edit_form) }}
+
+	<ul>
+		<li>
+			<a href="{{ path('piece_index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
+		</li>
+		<li>
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}
+
+{% block javascripts %}
+		<script src="{{ asset('js/entity_adder.js') }}"></script>
+		<script src="{{ asset('js/collection_adder.js') }}"></script>
+		<script src="{{ asset('js/select2.min.js') }}"></script>
+		<script src="{{ asset('js/ajaxify.js') }}"></script>
+		<script>/*<[CDATA[*/
+		$(document).ready( function() {
+			$('select').select2();
+		});
+		/*]]>*/
+		</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+YSoft\InstrumBundle\Entity\Type:
+  type: entity
+  table: null
+  repositoryClass: YSoft\InstrumBundle\Repository\TypeRepository
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+      unique: true
+
+  oneToMany:
+    pieces:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      mappedBy: type
+
+  lifecycleCallbacks: {  }

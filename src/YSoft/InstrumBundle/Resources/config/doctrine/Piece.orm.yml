@@ -1,0 +1,96 @@
+YSoft\InstrumBundle\Entity\Piece:
+  type: entity
+  table: null
+  repositoryClass: YSoft\InstrumBundle\Repository\PieceRepository
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+    translation:
+      type: string
+      length: 255
+      nullable: true
+    level:
+      type: float
+      nullable: true
+    year:
+      type: smallint
+      nullable: true
+    reference:
+      type: string
+      length: 255
+      nullable: true
+      unique: true
+    note:
+      type: text
+      nullable: true
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+
+  oneToMany:
+    missings:
+      targetEntity: YSoft\InstrumBundle\Entity\Missing
+      mappedBy: piece
+      cascade:
+        - persist
+        - remove
+
+  manyToOne:
+    publisher:
+      targetEntity: YSoft\InstrumBundle\Entity\Publisher
+      inversedBy: pieces
+      cascade:
+        - persist
+        - remove
+    size:
+      targetEntity: YSoft\InstrumBundle\Entity\Size
+      inversedBy: pieces
+      cascade:
+        - persist
+      joinColumn:
+        name: size
+        referencedColumnName: name
+    status:
+      targetEntity: YSoft\InstrumBundle\Entity\Status
+      inversedBy: pieces
+      cascade:
+        - persist
+    instrumentation:
+      targetEntity: YSoft\InstrumBundle\Entity\Instrumentation
+      inversedBy: pieces
+      cascade:
+        - persist
+    type:
+      targetEntity: YSoft\InstrumBundle\Entity\Type
+      inversedBy: pieces
+      cascade:
+        - persist
+
+  manyToMany:
+    composers:
+      targetEntity: YSoft\InstrumBundle\Entity\Person
+      inversedBy: compositions
+      cascade:
+        - persist
+        - remove
+      joinTable:
+        name: piece_composer
+    arrangers:
+      targetEntity: YSoft\InstrumBundle\Entity\Person
+      inversedBy: arrangements
+      cascade:
+        - persist
+        - remove
+      joinTable:
+        name: piece_arranger
+
+  lifecycleCallbacks: {  }

@@ -1,0 +1,4 @@
+y_soft_instrum:
+  resource: "@YSoftInstrumBundle/Resources/config/routing.yml"
+  prefix:   /
+

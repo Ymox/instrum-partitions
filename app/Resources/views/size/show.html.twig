@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Size</h1>
+
+	<table>
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<td>{{ size.name }}</td>
+			</tr>
+			<tr>
+				<th>Minwidth</th>
+				<td>{{ size.minWidth }}</td>
+			</tr>
+			<tr>
+				<th>Maxwidth</th>
+				<td>{{ size.maxWidth }}</td>
+			</tr>
+			<tr>
+				<th>Minheight</th>
+				<td>{{ size.minHeight }}</td>
+			</tr>
+			<tr>
+				<th>Maxheight</th>
+				<td>{{ size.maxHeight }}</td>
+			</tr>
+			<tr>
+				<th>Note</th>
+				<td>{{ size.note }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul>
+		<li>
+			<a href="{{ path('size_index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
+		</li>
+		<li>
+			<a href="{{ path('size_edit', { 'name': size.name }) }}" class="btn btn-sm btn-danger">><i class="fa fa-pencil"></i></a>
+		</li>
+		<li>
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}

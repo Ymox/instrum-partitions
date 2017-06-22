@@ -1,0 +1,28 @@
+YSoft\InstrumBundle\Entity\Person:
+  type: entity
+  table: people
+  repositoryClass: YSoft\InstrumBundle\Repository\PersonRepository
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    firstName:
+      type: string
+      length: 255
+    lastName:
+      type: string
+      length: 255
+
+  manyToMany:
+    compositions:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      mappedBy: composers
+    
+    arrangements:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      mappedBy: arrangers
+
+  lifecycleCallbacks: {  }

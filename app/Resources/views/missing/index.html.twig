@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Missings list</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Voice</th>
+				<th>Createdat</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for missing in missings %}
+			<tr>
+				<td><a href="{{ path('missing_show', { 'id': missing.id }) }}">{{ missing.id }}</a></td>
+				<td>{{ missing.voice }}</td>
+				<td>{% if missing.createdAt %}{{ missing.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+				<td>
+					<ul>
+						<li>
+							<a href="{{ path('missing_show', { 'id': missing.id }) }}"><i class="fa fa-eye"></i></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+	
+{% endblock %}
