@@ -16,14 +16,16 @@ class PersonController extends Controller
      * Lists all person entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $people = $em->getRepository('YSoftInstrumBundle:Person')->findAll();
+        $people = $em->getRepository('YSoftInstrumBundle:Person')->paginateBy(array(), array('lastName' => 'ASC'), $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
 
         return $this->render('person/index.html.twig', array(
-            'people' => $people,
+            'people'  => $people,
+            'nbPages' => max(ceil($people->count() / $this->getParameter('paginate.per_page')), 1),
+
         ));
     }
 

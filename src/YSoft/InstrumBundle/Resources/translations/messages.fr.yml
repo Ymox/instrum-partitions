@@ -22,6 +22,8 @@ ysoft:
       person:
         firstName: Prénom
         lastName: Nom de famille
+        compositions: Compositions
+        arrangements: Arrangements
 
     flash:
       success:
@@ -40,3 +42,6 @@ ysoft:
       new:
         title: &person_new Nouvelle personne
         heading: *person_new
+      index:
+        title: &person_index Compositeurs et arrangeurs
+        heading: *person_index

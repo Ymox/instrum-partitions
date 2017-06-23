@@ -111,7 +111,7 @@
 					<td>{{ piece.year }}</td>
 					<td class="text-center">
 						<a href="{{ path('piece_show', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
-						<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-warning" class="btn btn-danger"><i class="fa fa-pencil"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+						<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-warning" class="btn btn-warning"><i class="fa fa-pencil"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 					</td>
 				</tr>
 			{% endfor %}

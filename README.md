@@ -1,6 +1,6 @@
 # Instrum partitions
 
-L'Union Instrumentale de Bex fête ses 150 ans en 2017. On peut imaginer la quantité de partitions qui ont été jouées depuis… et cela représente une grande quantité de données d'archives qui sont sous différents formats. Le plus vieux à ce jour est un système de "cartes de visites" pour chaque partition, ce qui rend fastidieux la recherche. Heureusement, ce système a été saisi dans un fichier Excel, et c'est la liste la plus à jour à l'heure actuelle.
+L'Union Instrumentale de Bex fête ses 150 ans en 2019. On peut imaginer la quantité de partitions qui ont été jouées depuis… et cela représente une grande quantité de données d'archives qui sont sous différents formats. Le plus vieux à ce jour est un système de "cartes de visites" pour chaque partition, ce qui rend fastidieux la recherche. Heureusement, ce système a été saisi dans un fichier Excel, et c'est la liste la plus à jour à l'heure actuelle.
 
 Seulement :
  

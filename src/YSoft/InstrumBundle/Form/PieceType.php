@@ -3,16 +3,15 @@
 namespace YSoft\InstrumBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class PieceType extends AbstractType
 {
     private $urlGenerator;
 
-    public function __construct(Router $urlGenerator)
+    public function __construct(\Symfony\Component\Routing\Generator\UrlGeneratorInterface$urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }

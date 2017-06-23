@@ -1,25 +1,84 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ 'ysoft.instrum.person.index.title'|trans }}{% endblock %}
+
 {% block body %}
 	<h1>{{ 'ysoft.instrum.person.index.heading'|trans }}</h1>
 
-	<table>
+	<table class="table table-condensed table-hover">
 		<thead>
 			<tr>
-				<th>Firstname</th>
-				<th>Lastname</th>
+				<th colspan="8">
+					<ul class="pagination mx-auto">
+					{% set page = app.request.query.get('page', 1) %}
+					{% if nbPages > 5 and page > 3 %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': 1})) }}" class="page-link">{{ 'global.action.first'|trans }}</a></li>
+					{% endif %}
+					{%- if not (page == 1) %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page - 1})) }}" class="page-link">{{ 'global.action.previous'|trans }}</a></li>
+					{% endif %}
+					{% if page > 3 %}
+						<li class="page-item"><a class="page-link">…</a></li>
+					{% endif %}
+					{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
+						<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('person_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
+					{% endfor %}
+					{% if page < nbPages - 2 %}
+						<li class="page-item"><a class="page-link">…</a></li>
+					{% endif %}
+					{%- if not (page == nbPages) %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page + 1})) }}" class="page-link">{{ 'global.action.next'|trans }}</a></li>
+					{% endif %}
+					{% if nbPages > 5 and page < nbPages - 2 %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ 'global.action.last'|trans }}</a></li>
+					{% endif %}
+					</ul>
+				</th>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.person.firstName'|trans }}</th>
+				<th>{{ 'ysoft.instrum.fields.person.lastName'|trans }}</th>
 				<th><a href="{{ path('person_new') }}" class="btn btn-success"><i class="fa fa-plus"></i></a></th>
 			</tr>
 		</thead>
+		<tfoot>
+			<tr>
+				<th colspan="8">
+					<ul class="pagination mx-auto">
+					{% set page = app.request.query.get('page', 1) %}
+					{% if nbPages > 5 and page > 3 %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': 1})) }}" class="page-link">{{ 'global.action.first'|trans }}</a></li>
+					{% endif %}
+					{%- if not (page == 1) %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page - 1})) }}" class="page-link">{{ 'global.action.previous'|trans }}</a></li>
+					{% endif %}
+					{% if page > 3 %}
+						<li class="page-item"><a class="page-link">…</a></li>
+					{% endif %}
+					{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
+						<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('person_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
+					{% endfor %}
+					{% if page < nbPages - 2 %}
+						<li class="page-item"><a class="page-link">…</a></li>
+					{% endif %}
+					{%- if not (page == nbPages) %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page + 1})) }}" class="page-link">{{ 'global.action.next'|trans }}</a></li>
+					{% endif %}
+					{% if nbPages > 5 and page < nbPages - 2 %}
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ 'global.action.last'|trans }}</a></li>
+					{% endif %}
+					</ul>
+				</th>
+			</tr>
+		</tfoot>
 		<tbody>
 		{% for person in people %}
 			<tr>
-				<td>{{ person.id }}</a></td>
 				<td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.firstName }}</a></td>
 				<td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.lastName }}</a></td>
 				<td>
-					<a href="{{ path('person_show', { 'id': person.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
-					<a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-danger">><i class="fa fa-pencil"></i></a>
+					<a href="{{ path('person_show', { 'id': person.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
+					<a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
 				</td>
 			</tr>
 		{% endfor %}

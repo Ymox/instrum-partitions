@@ -1,21 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-	<h1>Person</h1>
+{% block title %}{{ person }}{% endblock %}
 
-	<table>
+{% block body %}
+	<h1>{{ person }}</h1>
+
+	<table class="table table-condensed table-hover">
 		<tbody>
 			<tr>
-				<th>Id</th>
-				<td>{{ person.id }}</td>
-			</tr>
-			<tr>
-				<th>Firstname</th>
+				<th>{{ 'ysoft.instrum.fields.person.firstName'|trans }}</th>
 				<td>{{ person.firstName }}</td>
 			</tr>
 			<tr>
-				<th>Lastname</th>
+				<th>{{ 'ysoft.instrum.fields.person.lastName'|trans }}</th>
 				<td>{{ person.lastName }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.person.compositions'|trans }}</th>
+				<td>{{ person.compositions.count }}</th>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.person.arrangements'|trans }}</th>
+				<td>{{ person.arrangements.count }}</th>
 			</tr>
 		</tbody>
 	</table>
@@ -25,7 +31,7 @@
 			<a href="{{ path('person_index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
 		</li>
 		<li>
-			<a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-sm btn-danger">><i class="fa fa-pencil"></i></a>
+			<a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
 		</li>
 		<li>
 			{{ form_start(delete_form) }}
