@@ -21,7 +21,7 @@ class PieceController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if ($request->query->get('q')['id']) {
+        if (@$request->query->get('q')['id']) {
             return $this->redirectToRoute('piece_show', array('id' => $request->query->get('q')['id']));
         }
 
