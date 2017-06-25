@@ -44,17 +44,17 @@
 					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'arranger') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'arranger', 'direction': ((app.request.query.get('field') == 'arranger' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</a></th>
 					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</a></th>
 					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.year'|trans }}</a></th>
-					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-success"><i class="fa fa-plus"></i></a></th>
+					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
 				</tr>
 				<tr>
 					<th><input type="number" name="q[id]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.id'|trans }}" size="5" maxlength="4" /></th>
 					<th colspan="2"><input type="text" name="q[name]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.name'|trans }}"{% if app.request.get('q')['name'] is defined %} value="{{ app.request.get('q')['name'] }}"{% endif %} /></th>
+					<th><input type="text" name="q[composer]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.composers'|trans }}"{% if app.request.get('q')['composer'] is defined %} value="{{ app.request.get('q')['composer'] }}"{% endif %} /></th>
+					<th><input type="text" name="q[arranger]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}"{% if app.request.get('q')['arranger'] is defined %} value="{{ app.request.get('q')['arranger'] }}"{% endif %} /></th>
 					<th></th>
 					<th></th>
-					<th></th>
-					<th></th>
-					<th class="text-center"><button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i></button>
-					 	<a href="{{ path('piece_index') }}" class="btn btn-secondary"><i class="fa fa-refresh"></i></a></th>
+					<th class="text-center"><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-filter"></i></button>
+					 	<a href="{{ path('piece_index') }}" class="btn btn-sm btn-secondary"><i class="fa fa-refresh"></i></a></th>
 				</tr>
 			</thead>
 			<tfoot>
