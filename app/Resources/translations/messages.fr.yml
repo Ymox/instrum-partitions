@@ -3,7 +3,3 @@ global:
     new: Nouveau
     show: Détails
     edit: Editer
-    next: Suivant
-    previous: Précédent
-    first: Premier
-    last: Dernier

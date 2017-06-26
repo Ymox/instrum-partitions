@@ -12,10 +12,10 @@
 					<ul class="pagination mx-auto">
 					{% set page = app.request.query.get('page', 1) %}
 					{% if nbPages > 5 and page > 3 %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': 1})) }}" class="page-link">{{ 'global.action.first'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': 1})) }}" class="page-link"><i class="fa fa-fast-backward"></i></a></li>
 					{% endif %}
 					{%- if not (page == 1) %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page - 1})) }}" class="page-link">{{ 'global.action.previous'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-step-backward"></i></a></li>
 					{% endif %}
 					{% if page > 3 %}
 						<li class="page-item"><a class="page-link">…</a></li>
@@ -27,10 +27,10 @@
 						<li class="page-item"><a class="page-link">…</a></li>
 					{% endif %}
 					{%- if not (page == nbPages) %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page + 1})) }}" class="page-link">{{ 'global.action.next'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-step-forward"></i></a></li>
 					{% endif %}
 					{% if nbPages > 5 and page < nbPages - 2 %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ 'global.action.last'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': nbPages})) }}" class="page-link"><i class="fa fa-fast-forward"></i></a></li>
 					{% endif %}
 					</ul>
 				</th>
@@ -47,10 +47,10 @@
 					<ul class="pagination mx-auto">
 					{% set page = app.request.query.get('page', 1) %}
 					{% if nbPages > 5 and page > 3 %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': 1})) }}" class="page-link">{{ 'global.action.first'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': 1})) }}" class="page-link"><i class="fa fa-fast-backward"></i></a></li>
 					{% endif %}
 					{%- if not (page == 1) %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page - 1})) }}" class="page-link">{{ 'global.action.previous'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-step-backward"></i></a></li>
 					{% endif %}
 					{% if page > 3 %}
 						<li class="page-item"><a class="page-link">…</a></li>
@@ -62,10 +62,10 @@
 						<li class="page-item"><a class="page-link">…</a></li>
 					{% endif %}
 					{%- if not (page == nbPages) %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page + 1})) }}" class="page-link">{{ 'global.action.next'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-step-forward"></i></a></li>
 					{% endif %}
 					{% if nbPages > 5 and page < nbPages - 2 %}
-						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ 'global.action.last'|trans }}</a></li>
+						<li class="page-item"><a href="{{ path('person_index', app.request.query|merge({'page': nbPages})) }}" class="page-link"><i class="fa fa-fast-forward"></i></a></li>
 					{% endif %}
 					</ul>
 				</th>
