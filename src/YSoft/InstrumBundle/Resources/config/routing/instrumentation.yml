@@ -1,0 +1,24 @@
+instrumentation_index:
+    path:     /
+    defaults: { _controller: "YSoftInstrumBundle:Instrumentation:index" }
+    methods:  GET
+
+instrumentation_show:
+    path:     /{id}/show
+    defaults: { _controller: "YSoftInstrumBundle:Instrumentation:show" }
+    methods:  GET
+
+instrumentation_new:
+    path:     /new
+    defaults: { _controller: "YSoftInstrumBundle:Instrumentation:new" }
+    methods:  [GET, POST]
+
+instrumentation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YSoftInstrumBundle:Instrumentation:edit" }
+    methods:  [GET, POST]
+
+instrumentation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Instrumentation:delete" }
+    methods:  DELETE

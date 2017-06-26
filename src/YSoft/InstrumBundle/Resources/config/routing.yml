@@ -1,3 +1,7 @@
+y_soft_instrum_instrumentation:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/instrumentation.yml"
+    prefix:   /instrumentation
+
 y_soft_instrum_person:
     resource: "@YSoftInstrumBundle/Resources/config/routing/person.yml"
     prefix:   /person

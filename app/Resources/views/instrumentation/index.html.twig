@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Instrumentations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for instrumentation in instrumentations %}
+            <tr>
+                <td><a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}">{{ instrumentation.id }}</a></td>
+                <td>{{ instrumentation.name }}</td>
+                <td>{{ instrumentation.note }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('instrumentation_edit', { 'id': instrumentation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('instrumentation_new') }}">Create a new instrumentation</a>
+        </li>
+    </ul>
+{% endblock %}
