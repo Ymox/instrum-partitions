@@ -3,3 +3,8 @@ global:
     new: Nouveau
     show: Détails
     edit: Editer
+
+ysoft:
+  login:
+    user: Utilisateur
+    password: Mot de passe
