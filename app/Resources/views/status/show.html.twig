@@ -1,29 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-	<h1>Status</h1>
+{% block title %}{{ status.name }} | {{ parent() }}{% endblock %}
 
-	<table>
+{% block body %}
+	<h1>{{ status.name }}</h1>
+
+	<table class="table table-condensed">
 		<tbody>
 			<tr>
-				<th>Id</th>
+				<th>{{ 'ysoft.instrum.fields.status.id'|trans }}</th>
 				<td>{{ status.id }}</td>
-			</tr>
-			<tr>
-				<th>Name</th>
-				<td>{{ status.name }}</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<ul>
-		<li>
+	<ul class="list-inline">
+		<li class="list-inline-item">
 			<a href="{{ path('status_index') }}" class="btn btn-secondary"><i class="fa fa-list"></i></a>
 		</li>
-		<li>
-			<a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+		<li class="list-inline-item">
+			<a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
 		</li>
-		<li>
+		<li class="list-inline-item">
 			{{ form_start(delete_form) }}
 				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
 			{{ form_end(delete_form) }}

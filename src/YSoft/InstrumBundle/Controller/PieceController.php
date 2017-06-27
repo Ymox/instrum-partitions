@@ -57,7 +57,16 @@ class PieceController extends Controller
             $em->persist($piece);
             $em->flush();
 
-            $this->addFlash('success', $this->get('translator')->trans('ysoft.instrum.flash.success.creation.piece', array('%id%' => $piece->getId())));
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'ysoft.instrum.flash.success.creation.piece',
+                    array(
+                        '%id%'   => $piece->getId(),
+                        '%name%' => $piece->getName(),
+                    )
+                )
+            );
             return $this->redirectToRoute('piece_new');
         }
 

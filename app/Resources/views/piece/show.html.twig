@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ piece.name }}{% endblock %}
+{% block title %}{{ piece.name }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 	<h1>{{ piece.name }}

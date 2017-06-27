@@ -13,9 +13,28 @@ class SizeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('minWidth')->add('maxWidth')->add('minHeight')->add('maxHeight')->add('note');
+        $builder
+            ->add('name', null, array(
+                'label_format' => 'ysoft.instrum.fields.size.%name%',
+            ))
+            ->add('minWidth', null, array(
+                'label_format' => 'ysoft.instrum.fields.size.%name%',
+            ))
+            ->add('maxWidth', null, array(
+                'label_format' => 'ysoft.instrum.fields.size.%name%',
+            ))
+            ->add('minHeight', null, array(
+                'label_format' => 'ysoft.instrum.fields.size.%name%',
+            ))
+            ->add('maxHeight', null, array(
+                'label_format' => 'ysoft.instrum.fields.size.%name%',
+            ))
+            ->add('note', null, array(
+                'label_format' => 'ysoft.instrum.fields.size.%name%',
+            ))
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

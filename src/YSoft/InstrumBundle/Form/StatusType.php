@@ -13,9 +13,16 @@ class StatusType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id')->add('name');
+        $builder
+            ->add('id', null, array(
+                'label_format' => 'ysoft.instrum.fields.status.%name%',
+            ))
+            ->add('name', null, array(
+                'label_format' => 'ysoft.instrum.fields.status.%name%',
+            ))
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -1,6 +1,6 @@
 {% extends app.request.xmlHttpRequest ? 'base_ajax.html.twig' : 'base.html.twig' %}
 
-{% block title %}{{ 'ysoft.instrum.person.new.title'|trans }}{% endblock %}
+{% block title %}{{ 'ysoft.instrum.person.new.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 	{% if app.request.xmlHttpRequest %}

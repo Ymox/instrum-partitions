@@ -7,6 +7,3 @@ missing_show:
     path:     /{id}/show
     defaults: { _controller: "YSoftInstrumBundle:Missing:show" }
     methods:  GET
-
-
-

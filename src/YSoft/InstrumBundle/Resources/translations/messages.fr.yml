@@ -18,17 +18,29 @@ ysoft:
         note: Remarques
         created_at: Date de saisie
       missing:
+        piece: Pièce
         voice: Voix
+        created_at: Date de saisie
       person:
         firstName: Prénom
         lastName: Nom de famille
         compositions: Compositions
         arrangements: Arrangements
+      size:
+        maxHeight: Hauteur maximale
+        maxWidth: Largeur maximale 
+        minHeight: Hauteur minimale
+        minWidth: Hauteur minimale
+        name: Nom
+        note: Notes
+      status:
+        id: Identifiant machine
+        name: Nom
 
     flash:
       success:
         creation:
-          piece: La pièce a bien été enregistrée avec le N° <b>%id%</b>
+          piece: La pièce <i>%name%</i> a bien été enregistrée avec le N° <b>%id%</b>
 
     piece:
       index:
@@ -45,3 +57,32 @@ ysoft:
       index:
         title: &person_index Compositeurs et arrangeurs
         heading: *person_index
+    
+    missing:
+      index:
+        title: &missing_index Liste des voix manquantes
+        heading: *missing_index
+
+    instrumentation:
+      index:
+        title: &instrumentation_index Liste des instrumentations
+        heading: *instrumentation_index
+      new:
+        title: &instrumentation_new Nouvelle instrumentation
+        heading: *instrumentation_new
+
+    size:
+      index:
+        title: &size_index Tailles de partitions
+        heading: *size_index
+      new:
+        title: &size_new Nouvelle taille de partition
+        heading: *size_new
+
+    status:
+      index:
+        title: &status_index Statuts
+        heading: *status_index
+      new:
+        title: &status_new Nouveau statut
+        heading: *status_new

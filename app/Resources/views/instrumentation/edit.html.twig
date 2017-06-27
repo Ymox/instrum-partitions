@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Instrumentation edit</h1>
+	<h1>{{ instrumentation.name }}</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+	{{ form_start(edit_form) }}
+		{{ form_widget(edit_form) }}
+		<input type="submit" value="Edit" />
+	{{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('instrumentation_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+	<ul class="list-inline">
+		<li class="list-inline-item">
+			<a href="{{ path('instrumentation_index') }}"><i class="fa fa-list"></i></a>
+		</li>
+		<li class="list-inline-item">
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'ysoft.instrum.piece.new.title'|trans }}{% endblock %}
+{% block title %}{{ 'ysoft.instrum.piece.new.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}" />

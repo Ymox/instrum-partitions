@@ -1,41 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ 'ysoft.instrum.instrumentation.index.title'|trans }} | {{ parent() }}{% endblock %}
+
 {% block body %}
-    <h1>Instrumentations list</h1>
+	<h1>{{ 'ysoft.instrum.instrumentation.index.heading'|trans }}</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Note</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for instrumentation in instrumentations %}
-            <tr>
-                <td><a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}">{{ instrumentation.id }}</a></td>
-                <td>{{ instrumentation.name }}</td>
-                <td>{{ instrumentation.note }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('instrumentation_edit', { 'id': instrumentation.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('instrumentation_new') }}">Create a new instrumentation</a>
-        </li>
-    </ul>
+	<table class="table table-condensed table-hover">
+		<thead>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.instrumentation.name'|trans }}</th>
+				<th>{{ 'ysoft.instrum.fields.instrumentation.note'|trans }}</th>
+				<th><a href="{{ path('instrumentation_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for instrumentation in instrumentations %}
+			<tr>
+				<td><a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}">{{ instrumentation.name }}</a></td>
+				<td>{{ instrumentation.note }}</td>
+				<td>
+					<a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
+					<a href="{{ path('instrumentation_edit', { 'id': instrumentation.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

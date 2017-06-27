@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'ysoft.instrum.person.index.title'|trans }}{% endblock %}
+{% block title %}{{ 'ysoft.instrum.person.index.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 	<h1>{{ 'ysoft.instrum.person.index.heading'|trans }}</h1>

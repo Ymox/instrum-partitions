@@ -13,9 +13,16 @@ class InstrumentationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('note');
+        $builder
+            ->add('name', null, array(
+                'label_format' => 'ysoft.instrum.fields.instrumentation.%name%',
+            ))
+            ->add('note', null, array(
+                'label_format' => 'ysoft.instrum.fields.instrumentation.%name%',
+            ))
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

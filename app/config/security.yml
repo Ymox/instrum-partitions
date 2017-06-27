@@ -48,6 +48,7 @@ security:
   access_control:
     - { path: /new, roles: ROLE_USER }
     - { path: /edit, roles: ROLE_USER }
+    - { path: /delete, roles: ROLE_ADMIN }
     - { path: ^/instrumentation, roles: ROLE_ADMIN }
     - { path: ^/status, roles: ROLE_ADMIN }
     - { path: ^/size, roles: ROLE_ADMIN }

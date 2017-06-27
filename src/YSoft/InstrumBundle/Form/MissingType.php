@@ -16,7 +16,8 @@ class MissingType extends AbstractType
         $builder
             ->add('voice', null, array(
                 'label_format' => 'ysoft.instrum.fields.missing.voice',
-            ));
+            ))
+        ;
     }
 
     /**
