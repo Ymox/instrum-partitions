@@ -26,7 +26,7 @@ class MissingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'YSoft\InstrumBundle\Entity\Status'
+            'data_class' => 'YSoft\InstrumBundle\Entity\Missing'
         ));
     }
 
