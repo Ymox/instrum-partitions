@@ -99,9 +99,10 @@
 			</tfoot>
 			<tbody>
 			{% for piece in pieces %}
-				<tr{% if piece.status == 'incomplete' %} class="bg-warning"
-					{%- elseif piece.status == 'lent' %} class="text-muted"
-					{%- elseif piece.status == 'lost' %} class="bg-danger"{% endif %}>
+				<tr{% if piece.status.id == 'incomplete' %} class="table-warning text-warning"
+					{%- elseif piece.status.id == 'lent' %} class="text-muted"
+					{%- elseif piece.status.id == 'unstamped' %} class="table-success text-success"
+					{%- elseif piece.status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
 					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.id }}</a></td>
 					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.name }}</td>
 					<td>{% if piece.translation %}<a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.translation }}</a>{% endif %}</td>
