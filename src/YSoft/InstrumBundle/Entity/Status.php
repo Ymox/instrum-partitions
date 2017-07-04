@@ -111,4 +111,9 @@ class Status
     {
         return $this->pieces;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
