@@ -42,7 +42,7 @@ class InstrumentationController extends Controller
             $em->persist($instrumentation);
             $em->flush();
 
-            return $this->redirectToRoute('instrumentation_show', array('id' => $instrumentation->getId()));
+            return $this->redirectToRoute('instrumentation_index');
         }
 
         return $this->render('instrumentation/new.html.twig', array(
@@ -78,7 +78,7 @@ class InstrumentationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('instrumentation_edit', array('id' => $instrumentation->getId()));
+            return $this->redirectToRoute('instrumentation_index');
         }
 
         return $this->render('instrumentation/edit.html.twig', array(

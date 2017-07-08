@@ -103,7 +103,7 @@ class PieceController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('piece_edit', array('id' => $piece->getId()));
+            return $this->redirectToRoute('piece_show', array('id' => $piece->getId()));
         }
 
         return $this->render('piece/edit.html.twig', array(

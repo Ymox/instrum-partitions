@@ -7,3 +7,8 @@ missing_show:
     path:     /{id}/show
     defaults: { _controller: "YSoftInstrumBundle:Missing:show" }
     methods:  GET
+    
+missing_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Missing:delete" }
+    methods:  DELETE
