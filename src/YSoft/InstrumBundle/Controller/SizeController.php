@@ -42,7 +42,7 @@ class SizeController extends Controller
             $em->persist($size);
             $em->flush();
 
-            return $this->redirectToRoute('size_show', array('name' => $size->getName()));
+            return $this->redirectToRoute('size_index');
         }
 
         return $this->render('size/new.html.twig', array(
@@ -78,7 +78,7 @@ class SizeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('size_edit', array('name' => $size->getName()));
+            return $this->redirectToRoute('size_index');
         }
 
         return $this->render('size/edit.html.twig', array(

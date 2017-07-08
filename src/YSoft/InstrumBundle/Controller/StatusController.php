@@ -78,7 +78,7 @@ class StatusController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('status_edit', array('id' => $status->getId()));
+            return $this->redirectToRoute('status_index');
         }
 
         return $this->render('status/edit.html.twig', array(
