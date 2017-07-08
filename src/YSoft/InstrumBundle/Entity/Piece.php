@@ -8,7 +8,7 @@ namespace YSoft\InstrumBundle\Entity;
 class Piece
 {
     /**
-     * @var integer
+     * @var float
      */
     private $id;
 
@@ -48,7 +48,7 @@ class Piece
     private $level;
 
     /**
-     * @var \YSoft\InstrumBundle\Entity\Instrumentatio
+     * @var \YSoft\InstrumBundle\Entity\Instrumentation
      */
     private $instrumentation;
 
@@ -100,7 +100,7 @@ class Piece
     /**
      * Get id
      *
-     * @return integer
+     * @return float
      */
     public function getId()
     {
