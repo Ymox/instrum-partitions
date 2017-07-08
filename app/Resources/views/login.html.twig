@@ -2,15 +2,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Authentification | Partitiothèque Instrum</title>
+		<title>{{ 'ysoft.login.title'|trans }} | {{ 'global.site_name'|trans }}</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 	</head>
 	<body>
 		<div class="container">
+			<h1>{{ 'ysoft.login.heading'|trans }}</h1>
 			{% if error %}
-				<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				<div class="text-error text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}
 			<form method="post" class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 mx-auto text-center">
 				<div class="form-group">
