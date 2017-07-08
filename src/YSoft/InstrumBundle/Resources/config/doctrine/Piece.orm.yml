@@ -4,10 +4,11 @@ YSoft\InstrumBundle\Entity\Piece:
   repositoryClass: YSoft\InstrumBundle\Repository\PieceRepository
   id:
     id:
-      type: integer
+      type: float
       id: true
       generator:
         strategy: AUTO
+
   fields:
     name:
       type: string
