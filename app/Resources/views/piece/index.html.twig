@@ -12,26 +12,26 @@
 					<th colspan="8">
 						<ul class="pagination mx-auto">
 						{% set page = app.request.query.get('page', 1) %}
-						{% if nbPages > 5 and page > 3 %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link"><i class="fa fa-fast-backward"></i></a></li>
-						{% endif %}
 						{%- if not (page == 1) %}
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-step-backward"></i></a></li>
 						{% endif %}
-						{% if page > 3 %}
+						{% if nbPages > 5 and page > 3 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link">1</a></li>
+						{% endif %}
+						{% if page > 4 %}
 							<li class="page-item"><a class="page-link">…</a></li>
 						{% endif %}
 						{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
 							<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('piece_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
 						{% endfor %}
-						{% if page < nbPages - 2 %}
+						{% if page < nbPages - 3 %}
 							<li class="page-item"><a class="page-link">…</a></li>
+						{% endif %}
+						{% if nbPages > 5 and page < nbPages - 2 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ nbPages }}</a></li>
 						{% endif %}
 						{%- if not (page == nbPages) %}
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-step-forward"></i></a></li>
-						{% endif %}
-						{% if nbPages > 5 and page < nbPages - 2 %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link"><i class="fa fa-fast-forward"></i></a></li>
 						{% endif %}
 						</ul>
 					</th>
@@ -72,26 +72,26 @@
 					<th colspan="8">
 						<ul class="pagination mx-auto">
 						{% set page = app.request.query.get('page', 1) %}
-						{% if nbPages > 5 and page > 3 %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link"><i class="fa fa-fast-backward"></i></a></li>
-						{% endif %}
 						{%- if not (page == 1) %}
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-step-backward"></i></a></li>
 						{% endif %}
-						{% if page > 3 %}
+						{% if nbPages > 5 and page > 3 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link">1</a></li>
+						{% endif %}
+						{% if page > 4 %}
 							<li class="page-item"><a class="page-link">…</a></li>
 						{% endif %}
 						{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
 							<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('piece_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
 						{% endfor %}
-						{% if page < nbPages - 2 %}
+						{% if page < nbPages - 3 %}
 							<li class="page-item"><a class="page-link">…</a></li>
+						{% endif %}
+						{% if nbPages > 5 and page < nbPages - 2 %}
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ nbPages }}</a></li>
 						{% endif %}
 						{%- if not (page == nbPages) %}
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-step-forward"></i></a></li>
-						{% endif %}
-						{% if nbPages > 5 and page < nbPages - 2 %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link"><i class="fa fa-fast-forward"></i></a></li>
 						{% endif %}
 						</ul>
 					</th>
