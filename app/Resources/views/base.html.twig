@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>{% block title %}Partitiothèque Instrum{% endblock %}</title>
+		<title>{% block title %}{{ 'global.site_name'|trans }}{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/tether.min.css') }}" />

@@ -1,4 +1,5 @@
 global:
+  site_name: Partitiothèque Instrum
   action:
     new: Nouveau
     show: Détails
@@ -6,5 +7,7 @@ global:
 
 ysoft:
   login:
+    title: &title Authentification
+    heading: *title
     user: Utilisateur
     password: Mot de passe
