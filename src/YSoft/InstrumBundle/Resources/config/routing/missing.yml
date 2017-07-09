@@ -2,11 +2,6 @@ missing_index:
     path:     /
     defaults: { _controller: "YSoftInstrumBundle:Missing:index" }
     methods:  GET
-
-missing_show:
-    path:     /{id}/show
-    defaults: { _controller: "YSoftInstrumBundle:Missing:show" }
-    methods:  GET
     
 missing_delete:
     path:     /{id}/delete

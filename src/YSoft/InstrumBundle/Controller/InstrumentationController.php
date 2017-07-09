@@ -52,20 +52,6 @@ class InstrumentationController extends Controller
     }
 
     /**
-     * Finds and displays a instrumentation entity.
-     *
-     */
-    public function showAction(Instrumentation $instrumentation)
-    {
-        $deleteForm = $this->createDeleteForm($instrumentation);
-
-        return $this->render('instrumentation/show.html.twig', array(
-            'instrumentation' => $instrumentation,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing instrumentation entity.
      *
      */

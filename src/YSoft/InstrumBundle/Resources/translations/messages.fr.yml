@@ -36,6 +36,12 @@ ysoft:
       status:
         id: Identifiant machine
         name: Nom
+      instrumentation:
+        name: Nom
+        note: Notes
+      publisher:
+        name: Nom
+        note: Notes
 
     flash:
       success:

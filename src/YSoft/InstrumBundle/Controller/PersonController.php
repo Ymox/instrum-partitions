@@ -25,7 +25,6 @@ class PersonController extends Controller
         return $this->render('person/index.html.twig', array(
             'people'  => $people,
             'nbPages' => max(ceil($people->count() / $this->getParameter('paginate.per_page')), 1),
-
         ));
     }
 

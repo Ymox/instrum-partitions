@@ -29,18 +29,6 @@ class MissingController extends Controller
     }
 
     /**
-     * Finds and displays a missing entity.
-     *
-     */
-    public function showAction(Missing $missing)
-    {
-
-        return $this->render('missing/show.html.twig', array(
-            'missing' => $missing,
-        ));
-    }
-
-    /**
      * Deletes a missing entity.
      *
      */
