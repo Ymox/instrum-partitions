@@ -42,7 +42,7 @@ class PieceType extends AbstractType
             ->add('arrangers', null, array(
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
                 'query_builder' => function (\YSoft\InstrumBundle\Repository\PersonRepository $repo) {
-                return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
+                    return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
                 'attr'         => array(
                     'class' => 'addable',
@@ -56,7 +56,7 @@ class PieceType extends AbstractType
                     return [
                         'title' => $instrumentation->getNote(),
                     ];
-                }
+                },
             ))
             ->add('type', null, array(
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
@@ -95,7 +95,8 @@ class PieceType extends AbstractType
                 'prototype'    => true,
                 'allow_add'    => true,
                 'allow_delete' => true,
-                'label_format' => 'ysoft.instrum.fields.piece.%name%'
+                'by_reference' => false,
+                'label_format' => 'ysoft.instrum.fields.piece.%name%',
             ))
             ->add('publisher', null, array(
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
@@ -103,8 +104,8 @@ class PieceType extends AbstractType
             ->add('year', null, array(
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
                 'attr'         => array(
-                    'max' => date('Y')
-                )
+                    'max' => date('Y'),
+                ),
             ))
             ->add('reference', null, array(
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
