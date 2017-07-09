@@ -41,5 +41,4 @@ class InstrumentationType extends AbstractType
         return 'ysoft_instrumbundle_instrumentation';
     }
 
-
 }

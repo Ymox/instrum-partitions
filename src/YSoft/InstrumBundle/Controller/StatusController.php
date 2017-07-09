@@ -42,26 +42,12 @@ class StatusController extends Controller
             $em->persist($status);
             $em->flush();
 
-            return $this->redirectToRoute('status_show', array('id' => $status->getId()));
+            return $this->redirectToRoute('status_index');
         }
 
         return $this->render('status/new.html.twig', array(
             'status' => $status,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a status entity.
-     *
-     */
-    public function showAction(Status $status)
-    {
-        $deleteForm = $this->createDeleteForm($status);
-
-        return $this->render('status/show.html.twig', array(
-            'status' => $status,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

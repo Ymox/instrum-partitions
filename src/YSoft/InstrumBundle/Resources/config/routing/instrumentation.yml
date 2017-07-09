@@ -3,11 +3,6 @@ instrumentation_index:
     defaults: { _controller: "YSoftInstrumBundle:Instrumentation:index" }
     methods:  GET
 
-instrumentation_show:
-    path:     /{id}/show
-    defaults: { _controller: "YSoftInstrumBundle:Instrumentation:show" }
-    methods:  GET
-
 instrumentation_new:
     path:     /new
     defaults: { _controller: "YSoftInstrumBundle:Instrumentation:new" }

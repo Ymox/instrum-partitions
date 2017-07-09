@@ -16,7 +16,7 @@
 		<tbody>
 		{% for instrumentation in instrumentations %}
 			<tr>
-				<td><a href="{{ path('instrumentation_show', { 'id': instrumentation.id }) }}">{{ instrumentation.name }}</a></td>
+				<td>{{ instrumentation.name }}</td>
 				<td>{{ instrumentation.note }}</td>
 				<td>
 					<a href="{{ path('instrumentation_edit', { 'id': instrumentation.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>

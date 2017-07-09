@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'ysoft.instrum.status.index.title'|trans }} | {{ parent() )}}{% endblock %}
+{% block title %}{{ 'ysoft.instrum.status.index.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 	<h1>{{ 'ysoft.instrum.status.index.heading'|trans }}</h1>
@@ -15,9 +15,8 @@
 		<tbody>
 		{% for status in statuses %}
 			<tr>
-				<td>{#<a href="{{ path('status_show', { 'id': status.id }) }}">#}{{ status.name }}{#</a>#}</td>
+				<td>{{ status.name }}</td>
 				<td>
-					{#<a href="{{ path('status_show', { 'id': status.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>#}
 					<a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-sm btn-outline-warning" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
 				</td>
 			</tr>
