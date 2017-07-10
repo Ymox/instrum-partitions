@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ysoft.instrum.publisher.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'ysoft.instrum.publisher.index.heading'|trans }}</h1>
+
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>{{ 'ysoft.instrum.fields.publisher.name'|trans }}</th>
+                <th>{{ 'ysoft.instrum.fields.publisher.note'|trans }}</th>
+                <th class="text-center"><a href="{{ path('publisher_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publisher in publishers %}
+            <tr>
+                <td>{{ publisher.name }}</td>
+                <td>{{ publisher.note }}</td>
+                <td class="text-center">
+                    <a href="{{ path('publisher_edit', { 'id': publisher.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+					<form action="{{ path('publisher_delete', {'id': publisher.id}) }}" method="post">
+						<input type="hidden" id="{{ publisher.id }}" />
+						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+					</form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,3 +1,7 @@
+y_soft_instrum_publisher:
+    resource: "@YSoftInstrumBundle/Resources/config/routing/publisher.yml"
+    prefix:   /publisher
+
 y_soft_instrum_instrumentation:
     resource: "@YSoftInstrumBundle/Resources/config/routing/instrumentation.yml"
     prefix:   /instrumentation

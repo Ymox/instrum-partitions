@@ -66,8 +66,8 @@ ysoft:
     
     missing:
       index:
-        title: &missing_index Liste des voix manquantes
-        heading: *missing_index
+        title: &missing_index Voix manquantes
+        heading: Liste des voix manquantes
 
     instrumentation:
       index:
@@ -92,3 +92,11 @@ ysoft:
       new:
         title: &status_new Nouveau statut
         heading: *status_new
+
+    publisher:
+      index:
+        title: &publisher_index Editeurs
+        heading: Liste des éditeurs
+      new:
+        title: &publisher_new Nouvel éditeur
+        heading: *publisher_new
