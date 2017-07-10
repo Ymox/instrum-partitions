@@ -260,6 +260,7 @@ class Piece
      */
     public function addMissing(\YSoft\InstrumBundle\Entity\Missing $missing)
     {
+        $missing->setPiece($this);
         $this->missings[] = $missing;
 
         return $this;
