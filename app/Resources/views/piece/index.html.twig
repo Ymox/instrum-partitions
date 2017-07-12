@@ -13,7 +13,7 @@
 						<ul class="pagination mx-auto">
 						{% set page = app.request.query.get('page', 1) %}
 						{%- if not (page == 1) %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-step-backward"></i></a></li>
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-chevron-left"></i></a></li>
 						{% endif %}
 						{% if nbPages > 5 and page > 3 %}
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link">1</a></li>
@@ -31,7 +31,7 @@
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ nbPages }}</a></li>
 						{% endif %}
 						{%- if not (page == nbPages) %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-step-forward"></i></a></li>
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-chevron-right"></i></a></li>
 						{% endif %}
 						</ul>
 					</th>
@@ -47,7 +47,7 @@
 					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
 				</tr>
 				<tr>
-					<th><input type="number" name="q[id]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.id'|trans }}" size="5" maxlength="4" min="1" /></th>
+					<th><input type="number" name="q[id]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.id'|trans }}"{% if app.request.get('q')['id'] is defined %} value="{{ app.request.get('q')['id'] }}"{% endif %} size="5" maxlength="4" min="1" /></th>
 					<th colspan="2"><input type="text" name="q[name]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.name'|trans }}"{% if app.request.get('q')['name'] is defined %} value="{{ app.request.get('q')['name'] }}"{% endif %} /></th>
 					<th><input type="text" name="q[composer]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.composers'|trans }}"{% if app.request.get('q')['composer'] is defined %} value="{{ app.request.get('q')['composer'] }}"{% endif %} /></th>
 					<th><input type="text" name="q[arranger]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}"{% if app.request.get('q')['arranger'] is defined %} value="{{ app.request.get('q')['arranger'] }}"{% endif %} /></th>
@@ -73,7 +73,7 @@
 						<ul class="pagination mx-auto">
 						{% set page = app.request.query.get('page', 1) %}
 						{%- if not (page == 1) %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-step-backward"></i></a></li>
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fa fa-chevron-left"></i></a></li>
 						{% endif %}
 						{% if nbPages > 5 and page > 3 %}
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': 1})) }}" class="page-link">1</a></li>
@@ -91,7 +91,7 @@
 							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ nbPages }}</a></li>
 						{% endif %}
 						{%- if not (page == nbPages) %}
-							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-step-forward"></i></a></li>
+							<li class="page-item"><a href="{{ path('piece_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fa fa-chevron-right"></i></a></li>
 						{% endif %}
 						</ul>
 					</th>
