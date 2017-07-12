@@ -34,7 +34,13 @@
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
-				<td>{{ piece.status }}</td>
+				<td>{{ piece.status }}
+					{% if piece.status.id == 'incomplete' %}
+					({% for missing in piece.missings -%}
+					<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
+					{% endfor -%})
+					{% endif %}
+				</td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
