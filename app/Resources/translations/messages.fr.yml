@@ -11,3 +11,13 @@ ysoft:
     heading: *title
     user: Utilisateur
     password: Mot de passe
+
+  menu:
+    partitions: Partitions
+    people: Personnes
+    missings: Manques
+    statuses: Statuts
+    types: Types
+    instrumentations: Instrumentations
+    publishers: Editeurs
+    logout: Déconnexion
