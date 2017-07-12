@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>{{ 'ysoft.login.heading'|trans }}</h1>
+			<h1 class="text-center">{{ 'ysoft.login.heading'|trans }}</h1>
 			{% if error %}
 				<div class="text-error text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}
