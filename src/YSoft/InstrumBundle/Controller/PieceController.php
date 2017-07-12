@@ -21,13 +21,13 @@ class PieceController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if (@$request->query->get('q')['id']) {
+        $repo = $this->getDoctrine()->getManager()->getRepository('YSoftInstrumBundle:Piece');
+
+        if (@$request->query->get('q')['id'] && $repo->find($request->query->get('q')['id'])) {
             return $this->redirectToRoute('piece_show', array('id' => $request->query->get('q')['id']));
         }
 
-        $em = $this->getDoctrine()->getManager();
-
-        $pieces = $em->getRepository('YSoftInstrumBundle:Piece')->searchBy(
+        $pieces = $repo->searchBy(
             $request->query->get('q', array()),
             array(
                 $request->query->get('field', 'id') => $request->query->get('direction', 'asc'),
