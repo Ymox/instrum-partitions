@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ysoft.instrum.type.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ 'ysoft.instrum.type.index.heading'|trans }}</h1>
+
+	<table class="table table-sm table-hover">
+		<thead>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.type.name'|trans }}</th>
+				<th><a href="{{ path('type_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for type in types %}
+			<tr>
+				<td>{{ type.name }}</td>
+				<td><a href="{{ path('type_edit', { 'id': type.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"</a></td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

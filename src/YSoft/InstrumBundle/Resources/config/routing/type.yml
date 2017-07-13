@@ -1,0 +1,24 @@
+type_index:
+    path:     /
+    defaults: { _controller: "YSoftInstrumBundle:Type:index" }
+    methods:  GET
+
+type_show:
+    path:     /{id}/show
+    defaults: { _controller: "YSoftInstrumBundle:Type:show" }
+    methods:  GET
+
+type_new:
+    path:     /new
+    defaults: { _controller: "YSoftInstrumBundle:Type:new" }
+    methods:  [GET, POST]
+
+type_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YSoftInstrumBundle:Type:edit" }
+    methods:  [GET, POST]
+
+type_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Type:delete" }
+    methods:  DELETE

@@ -42,6 +42,8 @@ ysoft:
       publisher:
         name: Nom
         note: Notes
+      type:
+        name: Nom
 
     flash:
       success:
@@ -100,3 +102,11 @@ ysoft:
       new:
         title: &publisher_new Nouvel éditeur
         heading: *publisher_new
+
+    type:
+      index:
+        title: &type_index Liste des types
+        heading: *type_index
+      new:
+        title: &type_new Nouveau type
+        heading: *type_new

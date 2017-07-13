@@ -12,22 +12,25 @@
 			<li class="nav-item{% if 'person' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('person_index') }}">{{ 'ysoft.menu.people'|trans }}</a>
 			</li>
-			<li class="nav-item"{% if 'missing' in app.request.get('_route') %} active{% endif %}>
+			<li class="nav-item{% if 'missing' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('missing_index') }}">{{ 'ysoft.menu.missings'|trans }}</a>
 			</li>
 			{% if is_granted('ROLE_ADMIN') -%}
-			<li class="nav-item"{% if 'publisher' in app.request.get('_route') %} active{% endif %}>
+			<li class="nav-item{% if 'publisher' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('publisher_index') }}">{{ 'ysoft.menu.publishers'|trans }}</a>
 			</li>
-			<li class="nav-item"{% if 'status' in app.request.get('_route') %} active{% endif %}>
+			<li class="nav-item{% if 'status' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('status_index') }}">{{ 'ysoft.menu.statuses'|trans }}</a>
 			</li>
-			<li class="nav-item"{% if 'instrumentation' in app.request.get('_route') %} active{% endif %}>
+			<li class="nav-item{% if 'instrumentation' in app.request.get('_route') %} active{% endif %}"">
 				<a class="nav-link" href="{{ path('instrumentation_index') }}">{{ 'ysoft.menu.instrumentations'|trans }}</a>
 			</li>
-			{#<li class="nav-item"{% if 'type' in app.request.get('_route') %} active{% endif %}>
+			<li class="nav-item{% if 'type' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('type_index') }}">{{ 'ysoft.menu.types'|trans }}</a>
-			</li>#}
+			</li>
+			<li class="nav-item{% if 'size' in app.request.get('_route') %} active{% endif %}">
+				<a class="nav-link" href="{{ path('size_index') }}">{{ 'ysoft.menu.sizes'|trans }}</a>
+			</li>
 			{% endif %}
 		</ul>
 		{%- if is_granted('ROLE_USER') %}

@@ -18,6 +18,7 @@ ysoft:
     missings: Manques
     statuses: Statuts
     types: Types
+    sizes: Tailles
     instrumentations: Instrumentations
     publishers: Editeurs
     logout: Déconnexion
