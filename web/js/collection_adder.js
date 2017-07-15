@@ -4,7 +4,7 @@ $(document).ready( function() {
 		$(this).prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
 		$('>div, >tbody>tr', this).filter(function() {
 	    	return $('>.remover', this).length === 0;
-	    }).css('position', 'relative').append('<button class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;">✖</button>')
+	    }).css('position', 'relative').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;">✖</button>')
 	});
 	$('form').on('click', '.adder', function() {
 	    var $container = $(this).closest('div').find('[data-prototype]');
@@ -14,9 +14,10 @@ $(document).ready( function() {
 	    $container.append(prototype);
 	    $('>div, >tbody>tr', $container).filter(function() {
 	    	return $('>.remover', this).length === 0;
-	    }).css('position', 'relative').append('<button class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;">✖</button>')
+	    }).css('position', 'relative').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;">✖</button>')
 	});
-	$('form').on('click', '.remover', function(e) {
-		$(e.target).closest('div').remove();
+	$('form').on('click', '.remover', function() {
+		$(this).toggleClass('btn-danger btn-secondary').text($(this).is('.btn-danger') ? '✖' : '↺');
+		$(this).closest('div').toggleClass('card-danger card-inverse').find(':input:not(button)').prop('disabled', !$(this).is('.btn-danger'));
 	});
 });
