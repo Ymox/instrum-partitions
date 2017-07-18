@@ -13,6 +13,7 @@ ysoft:
     password: Mot de passe
 
   menu:
+    concerts: Concerts
     partitions: Partitions
     people: Personnes
     missings: Manques

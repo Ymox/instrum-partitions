@@ -88,6 +88,11 @@ class Piece
     private $arrangers;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $concerts;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -95,6 +100,7 @@ class Piece
         $this->missings = new \Doctrine\Common\Collections\ArrayCollection();
         $this->composers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->arrangers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->concerts = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -496,5 +502,39 @@ class Piece
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add concert
+     *
+     * @param \YSoft\InstrumBundle\Entity\Concert $concert
+     *
+     * @return Piece
+     */
+    public function addConcert(\YSoft\InstrumBundle\Entity\Concert $concert)
+    {
+        $this->concerts[] = $concert;
+
+        return $this;
+    }
+
+    /**
+     * Remove concert
+     *
+     * @param \YSoft\InstrumBundle\Entity\Concert $concert
+     */
+    public function removeConcert(\YSoft\InstrumBundle\Entity\Concert $concert)
+    {
+        $this->concerts->removeElement($concert);
+    }
+
+    /**
+     * Get concerts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConcerts()
+    {
+        return $this->concerts;
     }
 }

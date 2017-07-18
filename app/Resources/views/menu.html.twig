@@ -6,6 +6,9 @@
 
 	<div class="collapse navbar-collapse" id="Menu">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item{% if 'concert' in app.request.get('_route') %} active{% endif %}">
+				<a class="nav-link" href="{{ path('concert_index') }}">{{ 'ysoft.menu.concerts'|trans }}</a>
+			</li>
 			<li class="nav-item{% if 'piece' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('piece_index') }}">{{ 'ysoft.menu.partitions'|trans }}</a>
 			</li>
@@ -15,10 +18,10 @@
 			<li class="nav-item{% if 'missing' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('missing_index') }}">{{ 'ysoft.menu.missings'|trans }}</a>
 			</li>
-			{% if is_granted('ROLE_ADMIN') -%}
 			<li class="nav-item{% if 'publisher' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('publisher_index') }}">{{ 'ysoft.menu.publishers'|trans }}</a>
 			</li>
+			{% if is_granted('ROLE_ADMIN') -%}
 			<li class="nav-item{% if 'status' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('status_index') }}">{{ 'ysoft.menu.statuses'|trans }}</a>
 			</li>

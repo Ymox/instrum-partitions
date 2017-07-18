@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ysoft.instrum.concert.index.title'|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'ysoft.instrum.concert.index.heading'|trans }}</h1>
+
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th>{{ 'ysoft.instrum.fields.concert.name'|trans }}</th>
+                <th>{{ 'ysoft.instrum.fields.concert.date'|trans }}</th>
+                <th><a href="{{ path('concert_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for concert in concerts %}
+            <tr>
+                <td><a href="{{ path('concert_show', { 'id': concert.id }) }}">{{ concert.name }}</a></td>
+                <td>{{ concert.date|date('Y-m-d H:i') }}</td>
+                <td>
+                	<a href="{{ path('concert_show', { 'id': concert.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('concert_edit', { 'id': concert.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

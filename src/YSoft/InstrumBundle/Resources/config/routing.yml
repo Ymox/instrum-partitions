@@ -1,3 +1,7 @@
+y_soft_instrum_concert:
+  resource: "@YSoftInstrumBundle/Resources/config/routing/concert.yml"
+  prefix:   /concert
+
 y_soft_instrum_type:
   resource: "@YSoftInstrumBundle/Resources/config/routing/type.yml"
   prefix:   /type

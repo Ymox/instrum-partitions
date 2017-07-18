@@ -44,6 +44,10 @@ ysoft:
         note: Notes
       type:
         name: Nom
+      concert:
+        name: Nom
+        date: Date
+        pieces: Pièces
 
     flash:
       success:
@@ -110,3 +114,11 @@ ysoft:
       new:
         title: &type_new Nouveau type
         heading: *type_new
+      
+    concert:
+      index:
+        title: &program_index Liste des concerts
+        heading: *program_index
+      new:
+        title: &program_new Nouveau concert
+        heading: *program_new      

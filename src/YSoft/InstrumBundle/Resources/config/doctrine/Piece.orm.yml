@@ -93,5 +93,8 @@ YSoft\InstrumBundle\Entity\Piece:
         - remove
       joinTable:
         name: piece_arranger
+    concerts:
+      targetEntity: YSoft\InstrumBundle\Entity\Concert
+      mappedBy: pieces
 
   lifecycleCallbacks: {  }
