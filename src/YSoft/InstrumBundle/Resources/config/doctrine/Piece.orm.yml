@@ -82,7 +82,6 @@ YSoft\InstrumBundle\Entity\Piece:
       inversedBy: compositions
       cascade:
         - persist
-        - remove
       joinTable:
         name: piece_composer
     arrangers:
@@ -90,7 +89,6 @@ YSoft\InstrumBundle\Entity\Piece:
       inversedBy: arrangements
       cascade:
         - persist
-        - remove
       joinTable:
         name: piece_arranger
     concerts:
