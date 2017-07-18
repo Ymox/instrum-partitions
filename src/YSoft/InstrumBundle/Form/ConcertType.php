@@ -18,7 +18,8 @@ class ConcertType extends AbstractType
                 'label_format' => 'ysoft.instrum.fields.concert.%name%'
             ))
             ->add('date', null, array(
-                'label_format' => 'ysoft.instrum.fields.concert.%name%'
+                'label_format' => 'ysoft.instrum.fields.concert.%name%',
+                'years'        => range(date('Y') - 20, date('Y') + 3),
             ))
             ->add('pieces', null, array(
                 'choice_label' => function($piece) {
