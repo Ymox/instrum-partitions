@@ -41,9 +41,9 @@ YSoft\InstrumBundle\Entity\Piece:
     missings:
       targetEntity: YSoft\InstrumBundle\Entity\Missing
       mappedBy: piece
+      orphanRemoval: true
       cascade:
         - persist
-        - remove
 
   manyToOne:
     publisher:
