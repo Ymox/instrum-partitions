@@ -22,7 +22,8 @@
 				<td>{{ missing.createdAt|date('Y-m-d H:i:s') }}</td>
 				<td>
 					<form action="{{ path('missing_delete', {'id': missing.id}) }}" method="post">
-						<input type="hidden" id="{{ missing.id }}" />
+						<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
+						<input type="hidden" name="_method" value="DELETE" />
 						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
 					</form>
 				</td>

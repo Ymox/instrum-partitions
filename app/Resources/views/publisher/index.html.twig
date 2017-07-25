@@ -21,7 +21,8 @@
                 <td class="text-center">
                     <a href="{{ path('publisher_edit', { 'id': publisher.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
 					<form action="{{ path('publisher_delete', {'id': publisher.id}) }}" method="post">
-						<input type="hidden" id="{{ publisher.id }}" />
+						<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
+						<input type="hidden" name="_method" value="DELETE" />
 						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
 					</form>
                 </td>
