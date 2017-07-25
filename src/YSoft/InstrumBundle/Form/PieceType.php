@@ -59,6 +59,7 @@ class PieceType extends AbstractType
                 },
             ))
             ->add('type', null, array(
+                'choice_label' => 'name',
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
             ))
             ->add('size', null, array(
