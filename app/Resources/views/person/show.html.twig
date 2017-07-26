@@ -9,17 +9,15 @@
 		<tbody>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.person.firstName'|trans }}</th>
-				<td>{{ person.firstName }}</td>
+				<td colspan="3">{{ person.firstName }}</td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.person.lastName'|trans }}</th>
-				<td>{{ person.lastName }}</td>
+				<td colspan="3">{{ person.lastName }}</td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.person.compositions'|trans }}</th>
 				<td>{{ person.compositions.count }}{% if person.compositions.count %} <a href="{{ path('piece_index', {'q': {'composer': person.lastName}}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-list"></i></a>{% endif %}</th>
-			</tr>
-			<tr>
 				<th>{{ 'ysoft.instrum.fields.person.arrangements'|trans }}</th>
 				<td>{{ person.arrangements.count }}{% if person.arrangements.count %} <a href="{{ path('piece_index', {'q': {'arranger': person.lastName}}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-list"></i></a>{% endif %}</th>
 			</tr>

@@ -9,46 +9,48 @@
 	<table class="table">
 		<tbody>
 			<tr>
-				<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
-				<td>{{ piece.id }}</td>
-			</tr>
-			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.composers'|trans }}</th>
-				<td>{{ piece.composers|join(', ') }}</td>
+				<td colspan="3">{{ piece.composers|join(', ') }}</td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</th>
-				<td>{{ piece.arrangers|join(', ') }}</td>
+				<td colspan="3">{{ piece.arrangers|join(', ') }}</td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</th>
 				<td>{{ piece.publisher }}</td>
+				<th>{{ 'ysoft.instrum.fields.piece.instrumentation'|trans }}</th>
+				<td>
+				    {%- if piece.instrumentation -%}
+				    {{ piece.instrumentation.name }} ({{ piece.instrumentation.note }})
+				    {%- endif -%}
+			    </td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.year'|trans }}</th>
 				<td>{{ piece.year }}</td>
-			</tr>
-			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.reference'|trans }}</th>
 				<td>{{ piece.reference }}</td>
 			</tr>
+			</tr>
+				<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
+				<td>{{ piece.id }}</td>
+				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
+				<td>{{ piece.createdAt|date('Y-m-d H:i:s') }}</td>
+			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
-				<td>{{ piece.status }}
-					{% if piece.status.id == 'incomplete' %}
+				<td colspan="3">{{ piece.status }}
+					{%- if not piece.missings.empty %}
 					({% for missing in piece.missings -%}
 					<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
 					{% endfor -%})
-					{% endif %}
+					{%- endif %}
 				</td>
 			</tr>
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
-				<td>{{ piece.note|nl2br }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
-				<td>{{ piece.createdAt|date('Y-m-d H:i:s') }}</td>
+				<td colspan="3">{{ piece.note|nl2br }}</td>
 			</tr>
 		</tbody>
 	</table>
