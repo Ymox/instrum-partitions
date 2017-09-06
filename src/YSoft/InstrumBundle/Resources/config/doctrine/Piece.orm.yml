@@ -41,6 +41,7 @@ YSoft\InstrumBundle\Entity\Piece:
     missings:
       targetEntity: YSoft\InstrumBundle\Entity\Missing
       mappedBy: piece
+      fetch: EXTRA_LAZY
       orphanRemoval: true
       cascade:
         - persist

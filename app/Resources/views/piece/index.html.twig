@@ -99,7 +99,7 @@
 			</tfoot>
 			<tbody>
 			{% for piece in pieces %}
-				<tr{% if piece.status.id == 'stowed' and piece.missings.count %} class="table-warning text-warning"
+				<tr{% if piece.status.id == 'stowed' and piece.missings|length %} class="table-warning text-warning"
 					{%- elseif piece.status.id == 'lent' %} class="text-muted"
 					{%- elseif piece.status.id == 'unstamped' %} class="table-success text-success"
 					{%- elseif piece.status.id == 'unverified' %} class="table-info text-info"
