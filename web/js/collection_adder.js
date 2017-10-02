@@ -17,7 +17,7 @@ $(document).ready( function() {
 	    }).css('position', 'relative').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;">✖</button>')
 	});
 	$('form').on('click', '.remover', function() {
-		$(this).toggleClass('btn-danger btn-secondary').text($(this).is('.btn-danger') ? '✖' : '↺');
-		$(this).closest('div').toggleClass('card-danger card-inverse').find(':input:not(button)').prop('disabled', !$(this).is('.btn-danger'));
+		$(this).toggleClass('btn-danger btn-light').text($(this).is('.btn-danger') ? '✖' : '↺');
+		$(this).closest('div').toggleClass('bg-danger text-white').find(':input:not(button)').prop('disabled', !$(this).is('.btn-danger'));
 	});
 });

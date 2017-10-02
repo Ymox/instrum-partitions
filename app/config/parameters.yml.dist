@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    instrum_password: "This is a default password. Change it to a bcrypted one"
+    
+    admin_password: "This is a default password. Change it to a bcrypted one"
