@@ -16,14 +16,21 @@ class ConcertController extends Controller
      * Lists all concert entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getManager()->getRepository('YSoftInstrumBundle:Concert');
 
-        $concerts = $em->getRepository('YSoftInstrumBundle:Concert')->findAll();
+        $concerts = $repository->findBy(
+            array(),
+            array('date' => 'DESC'),
+            $this->getParameter('paginate.per_page'),
+            ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
+        );
+        $nbConcerts = $repository->countAll();
 
         return $this->render('concert/index.html.twig', array(
             'concerts' => $concerts,
+            'nbPages' => max(ceil($nbConcerts / $this->getParameter('paginate.per_page')), 1),
         ));
     }
 

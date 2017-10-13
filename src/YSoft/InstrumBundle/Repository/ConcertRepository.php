@@ -10,4 +10,11 @@ namespace YSoft\InstrumBundle\Repository;
  */
 class ConcertRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countAll()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb ->select($qb->expr()->count('c.id'));
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
