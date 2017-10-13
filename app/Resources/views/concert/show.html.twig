@@ -14,7 +14,7 @@
             </tr>
             {% for piece in concert.pieces -%}
             <tr>
-                <td colspan="2">{{ piece.name }}</td>
+                <td colspan="2"><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
             </tr>
             {% endfor -%}
         </tbody>
