@@ -21,7 +21,7 @@
 						<li class="page-item"><a class="page-link">…</a></li>
 					{% endif %}
 					{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
-						<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('piece_index', {'page': i}) }}" class="page-link">{{ i }}</a></li>
+						<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('concert_index', {'page': i}) }}" class="page-link">{{ i }}</a></li>
 					{% endfor %}
 					{% if page < nbPages - 3 %}
 						<li class="page-item"><a class="page-link">…</a></li>
@@ -56,7 +56,7 @@
 						<li class="page-item"><a class="page-link">…</a></li>
 					{% endif %}
 					{% for i in max(1, page - 2)..min(nbPages, page + 2) %}
-						<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('piece_index', {'page': i}) }}" class="page-link">{{ i }}</a></li>
+						<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path('concert_index', {'page': i}) }}" class="page-link">{{ i }}</a></li>
 					{% endfor %}
 					{% if page < nbPages - 3 %}
 						<li class="page-item"><a class="page-link">…</a></li>
