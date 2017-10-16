@@ -3,11 +3,13 @@
 namespace YSoft\InstrumBundle\Controller;
 
 use YSoft\InstrumBundle\Entity\Piece;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use YSoft\InstrumBundle\Entity\Person;
 use YSoft\InstrumBundle\Entity\Publisher;
+use YSoft\InstrumBundle\Entity\Concert;
 
 /**
  * Piece controller.
@@ -146,6 +148,50 @@ class PieceController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Allows to handle duplicates in database
+     *
+     * @param Request $request
+     * @param Piece $master The piece that will be kept
+     * @param Piece $duplicate The piece that will be deleted
+     */
+    public function duplicatesAction(Request $request, Piece $master, Piece $duplicate)
+    {
+        $masterForm = $this->createForm('YSoft\InstrumBundle\Form\PieceType', $master);
+        $masterForm->add('concerts', EntityType::class, array(
+            'class' => Concert::class,
+            'choice_label' => 'name',
+            'multiple' => true,
+        ));
+        $masterForm->handleRequest($request);
+
+        if ($masterForm->isSubmitted() && $masterForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($duplicate);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'ysoft.instrum.flash.success.duplicates.piece'
+                )
+            );
+            return $this->redirectToRoute('piece_show', array('id' => $master->getId()));
+        }
+
+        $duplicateForm = $this->createForm('YSoft\InstrumBundle\Form\PieceType', $duplicate);
+        $duplicateForm->add('concerts', EntityType::class, array(
+            'class' => Concert::class,
+            'choice_label' => 'name',
+            'multiple' => true,
+        ));
+
+        return $this->render('piece/duplicates.html.twig', array(
+            'piece' => $master,
+            'master_form' => $masterForm->createView(),
+            'duplicate_form' => $duplicateForm->createView(),
+        ));
     }
 
     public function importAction(Request $request)

@@ -55,5 +55,6 @@ security:
     - { path: ^/status, roles: ROLE_ADMIN }
     - { path: ^/size, roles: ROLE_ADMIN }
     - { path: ^/type, roles: ROLE_ADMIN }
+    - { path: ^/piece/duplicates, roles: ROLE_ADMIN }
 
     - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

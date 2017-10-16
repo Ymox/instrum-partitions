@@ -23,6 +23,11 @@ piece_delete:
     defaults: { _controller: "YSoftInstrumBundle:Piece:delete" }
     methods:  DELETE
 
+piece_duplicates:
+    path:     /piece/duplicates/{master}/{duplicate}
+    defaults: { _controller: "YSoftInstrumBundle:Piece:duplicates" }
+    methods:  [GET, POST]
+
 piece_import:
     path:     /import
     defaults: { _controller: "YSoftInstrumBundle:Piece:import" }

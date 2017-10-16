@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ piece.name }} | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}" />
+{% endblock %}
+
+{% block body %}
+	<h1>{{ piece.name }}
+		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
+
+	{{ form_start(master_form) }}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{{ 'ysoft.instrum.piece.duplicates.duplicate'|trans }}</th>
+				<th><i class="fa fa-arrow-right fa-2x"></i></th>
+				<th>{{ 'ysoft.instrum.piece.duplicates.master'|trans }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for field in duplicate_form if field.vars.block_prefixes[1] != 'hidden' -%}
+			<tr data-name="{{ field.vars.full_name }}">
+				<td class="duplicate">{{ form_row(field, {'attr': {'disabled': true}}) }}</td>
+				<td>
+					{% if field.vars.multiple is defined and field.vars.multiple -%}
+					<button type="button" class="btn btn-sm btn-outline-warning action merge"><i class="fa fa-compress"></i></button>
+					{% endif -%}
+					<button type="button" class="btn btn-sm btn-outline-info action overwrite"><i class="fa fa-files-o"></i></button>
+				</td>
+				<td class="master">{{ form_row(master_form[field.vars.name]) }}</td>
+			</tr>
+			{% endfor -%}
+		</tbody>
+	</table>
+	<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check"></i></button>
+	{{ form_end(master_form) }}
+
+	<ul class="list-inline float-right">
+		<li class="list-inline-item">
+			<a href="{{ path('piece_index') }}" class="btn btn-light"><i class="fa fa-list"></i></a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block javascripts %}
+		<script src="{{ asset('js/entity_adder.js') }}"></script>
+		<script src="{{ asset('js/collection_adder.js') }}"></script>
+		<script src="{{ asset('js/select2.min.js') }}"></script>
+		<script src="{{ asset('js/ajaxify.js') }}"></script>
+		<script>/*<[CDATA[*/
+		$(document).ready( function() {
+			$('select').select2();
+		});
+		$('.action').click( function() {
+			var name = $(this).closest('tr').data('name');
+			var value = $(this).closest('tr').find('.duplicate [name="' + name + '"]').val();
+			if ($(this).is('.merge')) {
+				value = value.concat($(this).closest('tr').find('.master [name="' + name + '"]').val());
+			}
+			$(this).closest('tr').find('.master [name="' + name + '"]').val(value);
+			$(this).closest('tr').find('.master [name="' + name + '"]').change();
+		});
+		/*]]>*/
+		</script>
+{% endblock %}

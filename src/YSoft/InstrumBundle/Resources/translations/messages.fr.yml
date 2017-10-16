@@ -54,13 +54,15 @@ ysoft:
       success:
         creation:
           piece: La pièce <i>%name%</i> a bien été enregistrée avec le N° <b>%id%</b>
+        duplicates:
+          piece: Cette pièce est désormais <b>uniquement sous ce numéro</b>
 
     piece:
       index:
         title: Partitions
         heading: Liste des partitions
         last_played:
-          unknown: &unknown Inconnu
+          unknown: &unknown Inconnue
         modal:
           title: Signification des couleurs
           status_incomplete: Rangé, mais partitions manquantes
@@ -70,6 +72,9 @@ ysoft:
       show:
         last_played:
           unknown: *unknown
+      duplicates:
+        master: Enregistrement maître
+        duplicate: Enregistrement à supprimer
 
     person:
       new:
