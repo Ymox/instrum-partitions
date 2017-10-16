@@ -45,7 +45,8 @@
 					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</a><br />
 						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.year'|trans }}</a>)</th>
 					<th>{{ 'ysoft.instrum.fields.piece.last_played'|trans }}</th>
-					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+					<th class="text-center"><button type="button" class="btn btn-sm btn-info"data-toggle="modal" data-target="#Help"><i class="fa fa-info-circle"></i></button>
+						<a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
 				</tr>
 				<tr>
 					<th><input type="number" name="q[id]" class="form-control" placeholder="{{ 'ysoft.instrum.fields.id'|trans }}"{% if app.request.get('q')['id'] is defined %} value="{{ app.request.get('q')['id'] }}"{% endif %} maxlength="4" min="1" style="width: 5em;" /></th>
@@ -116,10 +117,10 @@
 					<td>{{ piece.arrangers|join(', ') }}</td>
 					<td>{{ piece.publisher }}{% if piece.year %} ({{ piece.year }}){% endif %}</td>
 					<td{% if not piece.concerts.isEmpty %} title="{{ piece.concerts.first.date|date('Y-m-d') }}">
-					    {{- piece.concerts.first.date|date('Y') }}
-					    {%- else -%}>
-					    <i>{{ 'ysoft.instrum.piece.index.last_played.unknown'|trans }}</i>
-					    {%- endif %}</td>
+							{{- piece.concerts.first.date|date('Y') }}
+							{%- else -%}>
+							<i>{{ 'ysoft.instrum.piece.index.last_played.unknown'|trans }}</i>
+							{%- endif %}</td>
 					<td class="text-center">
 						<a href="{{ path('piece_show', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
 						<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-warning" class="btn btn-warning"><i class="fa fa-pencil"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
@@ -128,4 +129,32 @@
 			{% endfor %}
 			</tbody>
 		</table>
+	</form>
+	<div class="modal fade" id="Help">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">{{ 'ysoft.instrum.piece.index.modal.title'|trans }}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-sm table-hover">
+						{% for status in statuses -%}
+						<tr{% if status.id == 'lent' %} class="text-muted"
+    						{%- elseif status.id == 'unstamped' %} class="table-success text-success"
+    						{%- elseif status.id == 'unverified' %} class="table-info text-info"
+    						{%- elseif status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
+    						<td>{{ status }}</td>
+    					</tr>
+						{% endfor %}
+						<tr class="table-warning text-warning">
+							<td>{{ 'ysoft.instrum.piece.index.modal.status_incomplete'|trans }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

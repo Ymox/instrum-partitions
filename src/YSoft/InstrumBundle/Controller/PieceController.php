@@ -39,6 +39,7 @@ class PieceController extends Controller
         return $this->render('piece/index.html.twig', array(
             'pieces' => $pieces,
             'nbPages' => max(ceil($pieces->count() / $this->getParameter('paginate.per_page')), 1),
+            'statuses' => $this->getDoctrine()->getManager()->getRepository('YSoftInstrumBundle:Status')->findAll(),
         ));
     }
 
