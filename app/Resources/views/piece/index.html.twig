@@ -42,8 +42,9 @@
 						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'translation') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'translation', 'direction': ((app.request.query.get('field') == 'translation' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.translation'|trans }}</a>)</th>
 					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'composer') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'composer', 'direction': ((app.request.query.get('field') == 'composer' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.composers'|trans }}</a></th>
 					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'arranger') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'arranger', 'direction': ((app.request.query.get('field') == 'arranger' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</a></th>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</a></th>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.year'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</a><br />
+						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'ysoft.instrum.fields.piece.year'|trans }}</a>)</th>
+					<th>{{ 'ysoft.instrum.fields.piece.last_played'|trans }}</th>
 					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
 				</tr>
 				<tr>
@@ -64,8 +65,9 @@
 						({{ 'ysoft.instrum.fields.piece.translation'|trans }})</th>
 					<th>{{ 'ysoft.instrum.fields.piece.composers'|trans }}</th>
 					<th>{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</th>
-					<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</th>
-					<th>{{ 'ysoft.instrum.fields.piece.year'|trans }}</th>
+					<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }}<br />
+						({{ 'ysoft.instrum.fields.piece.year'|trans }})</th>
+					<th>{{ 'ysoft.instrum.fields.piece.last_played'|trans }}</th>
 					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 				</tr>
 				<tr>
@@ -112,8 +114,12 @@
 						</td>
 					<td>{{ piece.composers|join(', ') }}</td>
 					<td>{{ piece.arrangers|join(', ') }}</td>
-					<td>{{ piece.publisher }}</td>
-					<td>{{ piece.year }}</td>
+					<td>{{ piece.publisher }}{% if piece.year %} ({{ piece.year }}){% endif %}</td>
+					<td{% if not piece.concerts.isEmpty %} title="{{ piece.concerts.first.date|date('Y-m-d') }}">
+					    {{- piece.concerts.first.date|date('Y') }}
+					    {%- else -%}>
+					    <i>{{ 'ysoft.instrum.piece.index.last_played.unknown'|trans }}</i>
+					    {%- endif %}</td>
 					<td class="text-center">
 						<a href="{{ path('piece_show', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
 						<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-warning" class="btn btn-warning"><i class="fa fa-pencil"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>

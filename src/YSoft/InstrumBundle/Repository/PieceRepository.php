@@ -25,7 +25,8 @@ class PieceRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb ->leftJoin('p.composers', 'c')->addSelect('c')
             ->leftJoin('p.arrangers', 'a')->addSelect('a')
-            ->leftJoin('p.publisher', 'pu')->addSelect('pu');
+            ->leftJoin('p.publisher', 'pu')->addSelect('pu')
+            ->leftJoin('p.concerts', 's')->addSelect('s')->setMaxResults(1);
 
         foreach ($criteria as $field => $value) {
             if (empty($value)) {

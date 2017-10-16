@@ -12,11 +12,17 @@
             <tr>
                 <th colspan="2">{{ 'ysoft.instrum.fields.concert.pieces'|trans }}</th>
             </tr>
+            {%- if concert.date > date('now - 5 days') %}
             {% for piece in concert.pieces -%}
             <tr>
                 <td colspan="2"><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
             </tr>
             {% endfor -%}
+            {% else -%}
+            <tr>
+            	<td colspan="2" class="table-info text-info">{{ 'ysoft.instrum.concert.show.too_early'|trans }}</td>
+        	</tr>
+            {% endif -%}
         </tbody>
     </table>
 

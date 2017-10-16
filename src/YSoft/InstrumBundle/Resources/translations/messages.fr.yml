@@ -17,6 +17,7 @@ ysoft:
         reference: Référence
         note: Remarques
         created_at: Date de saisie
+        last_played: Dernière interprétation
       missing:
         piece: Pièce
         voice: Voix
@@ -58,9 +59,14 @@ ysoft:
       index:
         title: Partitions
         heading: Liste des partitions
+        last_played:
+          unknown: &unknown Inconnu
       new:
         title: &piece_new Nouvelle partition
         heading: *piece_new
+      show:
+        last_played:
+          unknown: *unknown
 
     person:
       new:
@@ -121,4 +127,6 @@ ysoft:
         heading: *program_index
       new:
         title: &program_new Nouveau concert
-        heading: *program_new      
+        heading: *program_new   
+      show:
+        too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !   

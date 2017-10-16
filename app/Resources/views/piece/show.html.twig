@@ -9,6 +9,17 @@
 	<table class="table">
 		<tbody>
 			<tr>
+				<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
+				<td>{{ piece.id }}</td>
+				<th>{{ 'ysoft.instrum.fields.piece.last_played'|trans }}</th>
+				<td>{% if not piece.concerts.isEmpty -%}
+					<a href="{{ path('concert_show', {'id': piece.concerts.first.id}) }}">{{ piece.concerts.first.name }}</a> ({{ piece.concerts.first.date|date('Y-m-d') }})
+					{%- else -%}
+				    <i>{{ 'ysoft.instrum.piece.show.last_played.unknown'|trans }}</i>
+					{%- endif -%}
+				</td>
+			</tr>
+			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.composers'|trans }}</th>
 				<td colspan="3">{{ piece.composers|join(', ') }}</td>
 			</tr>
@@ -17,30 +28,20 @@
 				<td colspan="3">{{ piece.arrangers|join(', ') }}</td>
 			</tr>
 			<tr>
-				<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }}</th>
-				<td>{{ piece.publisher }}</td>
-				<th>{{ 'ysoft.instrum.fields.piece.instrumentation'|trans }}</th>
-				<td>
-				    {%- if piece.instrumentation -%}
-				    {{ piece.instrumentation.name }} ({{ piece.instrumentation.note }})
-				    {%- endif -%}
-			    </td>
-			</tr>
-			<tr>
-				<th>{{ 'ysoft.instrum.fields.piece.year'|trans }}</th>
-				<td>{{ piece.year }}</td>
+				<th>{{ 'ysoft.instrum.fields.piece.publisher'|trans }} ({{ 'ysoft.instrum.fields.piece.year'|trans }})</th>
+				<td>{{ piece.publisher }}{% if piece.year %} ({{ piece.year }}){% endif %}</td>
 				<th>{{ 'ysoft.instrum.fields.piece.reference'|trans }}</th>
 				<td>{{ piece.reference }}</td>
 			</tr>
 			</tr>
-				<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
-				<td>{{ piece.id }}</td>
-				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
-				<td>{{ piece.createdAt|date('Y-m-d H:i:s') }}</td>
-			</tr>
-			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.instrumentation'|trans }}</th>
+				<td{%- if piece.instrumentation %} title="{{ piece.instrumentation.note }}">
+				    {{ piece.instrumentation.name }}
+				    {%- else -%}>
+				    {%- endif -%}
+			    </td>
 				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
-				<td colspan="3">{{ piece.status }}
+				<td>{{ piece.status }}
 					{%- if not piece.missings.empty %}
 					({% for missing in piece.missings -%}
 					<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
@@ -51,6 +52,10 @@
 			<tr>
 				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
 				<td colspan="3">{{ piece.note|nl2br }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
+				<td colspan="3">{{ piece.createdAt|date('Y-m-d à H:i:s') }}</td>
 			</tr>
 		</tbody>
 	</table>
