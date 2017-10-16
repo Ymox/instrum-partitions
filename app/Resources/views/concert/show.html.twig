@@ -12,7 +12,7 @@
             <tr>
                 <th colspan="2">{{ 'ysoft.instrum.fields.concert.pieces'|trans }}</th>
             </tr>
-            {%- if concert.date > date('now - 5 days') %}
+            {%- if not is_granted('ROLE_USER') and (concert.date < date('now + 5 days')) %}
             {% for piece in concert.pieces -%}
             <tr>
                 <td colspan="2"><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
