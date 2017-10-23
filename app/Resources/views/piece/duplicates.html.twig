@@ -15,17 +15,22 @@
 		<thead>
 			<tr>
 				<th>{{ 'ysoft.instrum.piece.duplicates.duplicate'|trans }}</th>
-				<th><i class="fa fa-arrow-right fa-2x"></i></th>
+				<th class="text-center"><i class="fa fa-arrow-right"></i></th>
 				<th>{{ 'ysoft.instrum.piece.duplicates.master'|trans }}</th>
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<th>{{ duplicate_form.vars.data.id }}</th>
+				<td class="text-center"><a href="{{ path('piece_duplicates', {'master': duplicate_form.vars.data.id, 'duplicate': master_form.vars.data.id}) }}" class="btn btn-info"><i class="fa fa-arrows-h fa-2x"></i></a></td>
+				<th>{{ master_form.vars.data.id }}</th>
+			</tr>
 			{% for field in duplicate_form if field.vars.block_prefixes[1] != 'hidden' -%}
 			<tr data-name="{{ field.vars.full_name }}">
-				<td class="duplicate">{{ form_row(field, {'attr': {'disabled': true}}) }}</td>
-				<td>
-					{% if field.vars.multiple is defined and field.vars.multiple -%}
-					<button type="button" class="btn btn-sm btn-outline-warning action merge"><i class="fa fa-compress"></i></button>
+				<td class="duplicate">{{ form_row(field, {'disabled': true, 'options': {'disabled': 'disabled'}}) }}</td>
+				<td class="text-center">
+					{% if field.vars.multiple is defined and field.vars.multiple or field.vars.compound -%}
+					<button type="button" class="btn btn-sm btn-outline-warning action merge{% if field.vars.compound %} compound{% endif %}"><i class="fa fa-compress"></i></button>
 					{% endif -%}
 					<button type="button" class="btn btn-sm btn-outline-info action overwrite"><i class="fa fa-files-o"></i></button>
 				</td>
@@ -54,13 +59,33 @@
 			$('select').select2();
 		});
 		$('.action').click( function() {
-			var name = $(this).closest('tr').data('name');
-			var value = $(this).closest('tr').find('.duplicate [name="' + name + '"]').val();
+			var $row = $(this).closest('tr');
+			var value = $row.find('.duplicate :input').prop('disabled', false).serializeArray();
+			var elementSize = 1;
+			$row.find('.duplicate :input').prop('disabled', true);
 			if ($(this).is('.merge')) {
-				value = value.concat($(this).closest('tr').find('.master [name="' + name + '"]').val());
+				var masterValues = $row.find('.master :input').serializeArray();
+				var diff = $(value).not(masterValues).get();
+				if ($(this).is('.compound')) {
+					for (var i = 0; i < diff.length; i++) {
+						$row.find('.master .adder').click();
+					}
+					elementSize = $($row.find('.master [data-prototype]').data('prototype')).find(':input:not(button)').length;
+				}
+				value = masterValues.concat(diff);
+				if (!$(this).is('.compound')) {
+					value = [{
+						"name": value[0].name,
+						"value": value.map(function(e) {
+							return e.value;
+						})
+					}];
+				}
 			}
-			$(this).closest('tr').find('.master [name="' + name + '"]').val(value);
-			$(this).closest('tr').find('.master [name="' + name + '"]').change();
+			$.each(value, function(i, e) {
+				e.name = e.name.replace(/\d(?=\](\[[\w\[\]]+\])*)/, Math.floor(i / elementSize));
+				$row.find('.master [name="' + e.name + '"]').val(e.value).change();
+			});
 		});
 		/*]]>*/
 		</script>
