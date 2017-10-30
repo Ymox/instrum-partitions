@@ -103,7 +103,7 @@
 			<tbody>
 			{% for piece in pieces %}
 				<tr{% if piece.status.id == 'stowed' and piece.missings|length %} class="table-warning text-warning"
-					{%- elseif piece.status.id == 'lent' %} class="text-muted"
+					{%- elseif piece.status.id in ['lent', 'returned'] %} class="text-muted"
 					{%- elseif piece.status.id == 'unstamped' %} class="table-success text-success"
 					{%- elseif piece.status.id == 'unverified' %} class="table-info text-info"
 					{%- elseif piece.status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
