@@ -20,7 +20,7 @@ Seulement :
 - c'est difficilement évolutif sans complexifier la recherche sur les nouvelles informations (programmes des concerts notamment — "quand a-t'on joué quoi") ;
 - c'est difficilement compatible avec une GED qui à terme semble inévitable.
 
-Du coup, ce projet est là pour faire un pont entre les précédentes solutions et celles qui probablement viendront un jour.
+Du coup, ce projet est là pour faire un pont entre les précédentes solutions et celles qui probablement viendront un jour, tout en permettant de rapidement collecter les informations pour la SUISA.
 
 Actuellement, le projet permet donc de saisir des partitions au niveau de :
 
@@ -38,22 +38,22 @@ Actuellement, le projet permet donc de saisir des partitions au niveau de :
 - la référence ;
 - d'éventuelles remarques.
 
-Le projet fonctionne avec Symfony 3 (3.3.5 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
+Le projet fonctionne avec Symfony 3 (3.3.11 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
 
 ## Statuts de partitions
 
 L'application est livrée avec 6 statuts qui sont parfois liés à un élément de mise en page :
 
-Dénomination          | Couleur                           | Utilisation
-----------------------|-----------------------------------|---
-Non vérifié (inconnu) | Bleu                              | Nouvelles pièces qui viennent d'être reçues<br />Pièces ressorties des archives<br />Pièces de retour de prêt<br />Pièces dont le statut réel est bel et bien inconnu
-Vérifié, non marqué   | Vert                              | Pièces dont l'état a été vérifié (les éventuels manques ayant été saisis), mais le temps de mettre les numéros sur toutes les partitions n'a pas été pris
-Rangé                 | Blanc (mise en page "par défaut") | Pièces qui dorment dans les cartons, avec les partitions ayant le numéro dessus. Ceci indépendamment du fait que toutes les voix soient présentes ou non
-Perdu                 | Rouge                             | Pièces qui sont présentes dans la base de données, mais dont la partition physique n'est plus du tout disponible (trop de manques donc jetées, jamais revenu de prêt, partitions qui ont subi trop d'outrages du temps, trop de mauvais souvenirs…)
-Prêté                 | Gris clair (texte seulement)      | Pièces qui sont en prêt chez d'autres sociétés
-Matériel rendu        | Blanc (mise en page "par défaut") | Pièces qui étaient ici en prêt. Elles sont dans la base de données pour l'historique de ce qui a été joué
+Dénomination               | Couleur                           | Utilisation
+---------------------------|-----------------------------------|---
+Non vérifié (inconnu)      | Bleu                              | Nouvelles pièces qui viennent d'être reçues<br />Pièces ressorties des archives<br />Pièces de retour de prêt<br />Pièces dont le statut réel est bel et bien inconnu
+Vérifié, non marqué        | Vert                              | Pièces dont l'état a été vérifié (les éventuels manques ayant été saisis), mais le temps de mettre les numéros sur toutes les partitions n'a pas été pris
+Rangé                      | Blanc (mise en page "par défaut") | Pièces qui dorment dans les cartons, avec les partitions ayant le numéro dessus. Ceci indépendamment du fait que toutes les voix soient présentes ou non
+Perdu                      | Rouge                             | Pièces qui sont présentes dans la base de données, mais dont la partition physique n'est plus du tout disponible (trop de manques donc jetées, jamais revenu de prêt, partitions qui ont subi trop d'outrages du temps, trop de mauvais souvenirs…)
+Prêté  à une autre société | Gris clair (texte seulement)      | Pièces qui sont en prêt chez d'autres sociétés
+Rendu à une autre société  | Gris clair (texte seulement)      | Pièces qui étaient prêtées par d'autres sociétés. Elles sont dans la base de données pour l'historique de ce qui a été joué
 
-A noter que si le statut est "Rangé" et qu'il y a des manques de signalé, la couleur n'est plus blanche, mais orange.
+A noter que si le statut est "Rangé" ou "Vérifié, non marqué" et qu'il y a des manques de signalé, la couleur n'est plus blanche, mais orange.
 
 ### Statuts et cycle de vie d'une pièce
 
@@ -77,13 +77,12 @@ A noter que si le statut est "Rangé" et qu'il y a des manques de signalé, la c
 
 3. **Prêt à d'autres sociétés**
 
-	Les directeurs aiment bien pouvoir emprunter des partitions quelque part pour les jouer jouer autre part, et il faut dire que les comptes des sociétés s'en trouvent moins grêlés de frais. Il y a un statut prévu pour ça : **Prêté**.
+	Les directeurs aiment bien pouvoir emprunter des partitions quelque part pour les jouer jouer autre part, et il faut dire que les comptes des sociétés s'en trouvent moins grêlés de frais. Il y a un statut prévu pour ça : **Prêté à une autre société**.
 
 4. **Retour de prêt**
 
 	1. Si on ne fait que prendre note du retour, le statut devient **Non vérifié (inconnu)**, en attendant qu'on ait le temps de vérifier. On ne range évidemment pas ces partitions dans les archives.
 	2. Si en revanche le temps de tout vérifier est pris, comme les originaux sont déjà marqués, on va juste relever les éventuels manques et mettre le statut **Rangé**.
-
 
 
 ## A venir
