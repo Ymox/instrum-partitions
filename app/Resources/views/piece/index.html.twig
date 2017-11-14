@@ -143,11 +143,11 @@
 					<table class="table table-sm table-hover">
 						{% for status in statuses -%}
 						<tr{% if status.id in ['lent', 'returned'] %} class="text-muted"
-    						{%- elseif status.id == 'unstamped' %} class="table-success text-success"
-    						{%- elseif status.id == 'unverified' %} class="table-info text-info"
-    						{%- elseif status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
-    						<td>{{ status }}</td>
-    					</tr>
+							{%- elseif status.id == 'unstamped' %} class="table-success text-success"
+							{%- elseif status.id == 'unverified' %} class="table-info text-info"
+							{%- elseif status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
+							<td>{{ status }}</td>
+						</tr>
 						{% endfor %}
 						<tr class="table-warning text-warning">
 							<td>{{ 'ysoft.instrum.piece.index.modal.status_incomplete'|trans }}</td>

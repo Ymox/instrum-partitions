@@ -15,7 +15,7 @@
 				<td>{% if not piece.concerts.isEmpty -%}
 					<a href="{{ path('concert_show', {'id': piece.concerts.first.id}) }}">{{ piece.concerts.first.name }}</a> ({{ piece.concerts.first.date|date('Y-m-d') }})
 					{%- else -%}
-				    <i>{{ 'ysoft.instrum.piece.show.last_played.unknown'|trans }}</i>
+					<i>{{ 'ysoft.instrum.piece.show.last_played.unknown'|trans }}</i>
 					{%- endif -%}
 				</td>
 			</tr>
@@ -36,10 +36,10 @@
 			</tr>
 				<th>{{ 'ysoft.instrum.fields.piece.instrumentation'|trans }}</th>
 				<td{%- if piece.instrumentation %} title="{{ piece.instrumentation.note }}">
-				    {{ piece.instrumentation.name }}
-				    {%- else -%}>
-				    {%- endif -%}
-			    </td>
+					{{ piece.instrumentation.name }}
+					{%- else -%}>
+					{%- endif -%}
+				</td>
 				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
 				<td>{{ piece.status }}
 					{%- if not piece.missings.empty %}
