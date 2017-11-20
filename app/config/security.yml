@@ -9,13 +9,7 @@ security:
   providers:
     in_memory:
       memory:
-        users:
-          instrum:
-            password: "%instrum_password%"
-            roles: ROLE_USER
-          instrum_admin:
-            password: "%admin_password%"
-            roles: ROLE_SUPER_ADMIN
+        users: "%application_users%"
 
   encoders:
     Symfony\Component\Security\Core\User\User:
