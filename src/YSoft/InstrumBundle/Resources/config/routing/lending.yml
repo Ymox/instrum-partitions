@@ -1,0 +1,24 @@
+lending_index:
+    path:     /
+    defaults: { _controller: "YSoftInstrumBundle:Lending:index" }
+    methods:  GET
+
+lending_show:
+    path:     /{id}/show
+    defaults: { _controller: "YSoftInstrumBundle:Lending:show" }
+    methods:  GET
+
+lending_new:
+    path:     /new
+    defaults: { _controller: "YSoftInstrumBundle:Lending:new" }
+    methods:  [GET, POST]
+
+lending_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YSoftInstrumBundle:Lending:edit" }
+    methods:  [GET, POST]
+
+lending_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Lending:delete" }
+    methods:  DELETE

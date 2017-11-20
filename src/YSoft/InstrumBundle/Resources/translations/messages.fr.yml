@@ -49,6 +49,16 @@ ysoft:
         name: Nom
         date: Date
         pieces: Pièces
+      band:
+        name: Nom
+        lendings: Prêts
+      lending:
+        band: Ensemble
+        contact: Personne de contact
+        start: Commencé 
+        end: Clos
+        ours: C'est nous qui prêtons
+        pieces: Partitions
 
     flash:
       success:
@@ -138,3 +148,38 @@ ysoft:
         heading: *program_new   
       show:
         too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !   
+
+    band:
+      index:
+        title: &band_index Liste des ensembles
+        heading: *band_index
+      new:
+        title: &band_new Nouvel ensemble
+        heading: *band_new
+
+    lending:
+      ours:
+        by: Par
+        to: A
+      index:
+        title: &lending_index Liste des prêts
+        heading: *lending_index
+        not_ended: &not_ended Pas clos
+      new:
+        title: &lending_new Nouveau prêt
+        heading: *lending_new
+      show:
+        title:
+          by: &lending_show_by Prêt par %band% du %date%
+          to: &lending_show_to Prêt à %band% du %date%
+        heading:
+          by: *lending_show_by
+          to: *lending_show_to
+        not_ended: *not_ended
+      edit:
+        title:
+          by: *lending_show_by
+          to: *lending_show_to
+        heading:
+          by: *lending_show_by
+          to: *lending_show_to

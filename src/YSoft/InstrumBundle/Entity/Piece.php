@@ -91,6 +91,11 @@ class Piece
      * @var \Doctrine\Common\Collections\Collection
      */
     private $concerts;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $lendings;
 
     /**
      * Constructor
@@ -101,6 +106,7 @@ class Piece
         $this->composers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->arrangers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->concerts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lendings = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -536,5 +542,39 @@ class Piece
     public function getConcerts()
     {
         return $this->concerts;
+    }
+
+    /**
+     * Add lending
+     *
+     * @param \YSoft\InstrumBundle\Entity\Lending $lending
+     *
+     * @return Piece
+     */
+    public function addLending(\YSoft\InstrumBundle\Entity\Lending $lending)
+    {
+        $this->lendings[] = $lending;
+
+        return $this;
+    }
+
+    /**
+     * Remove lending
+     *
+     * @param \YSoft\InstrumBundle\Entity\Lending $lending
+     */
+    public function removeLending(\YSoft\InstrumBundle\Entity\Lending $lending)
+    {
+        $this->lendings->removeElement($lending);
+    }
+
+    /**
+     * Get lendings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLendings()
+    {
+        return $this->lendings;
     }
 }

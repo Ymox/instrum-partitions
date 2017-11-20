@@ -95,6 +95,10 @@ YSoft\InstrumBundle\Entity\Piece:
     concerts:
       targetEntity: YSoft\InstrumBundle\Entity\Concert
       mappedBy: pieces
-      orderBy: { "date": 'DESC' } 
+      orderBy: { "date": 'DESC' }
+    lendings:
+      targetEntity: YSoft\InstrumBundle\Entity\Lending
+      mappedBy: pieces
+      orderBy: { start: DESC }
 
   lifecycleCallbacks: {  }

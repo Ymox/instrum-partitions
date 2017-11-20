@@ -6,7 +6,6 @@ y_soft_instrum_type:
   resource: "@YSoftInstrumBundle/Resources/config/routing/type.yml"
   prefix:   /type
 
-
 y_soft_instrum_publisher:
   resource: "@YSoftInstrumBundle/Resources/config/routing/publisher.yml"
   prefix:   /publisher
@@ -30,6 +29,14 @@ y_soft_instrum_status:
 y_soft_instrum_missing:
   resource: "@YSoftInstrumBundle/Resources/config/routing/missing.yml"
   prefix:   /missing
+
+y_soft_instrum_band:
+  resource: "@YSoftInstrumBundle/Resources/config/routing/band.yml"
+  prefix: /band
+
+y_soft_instrum_lending:
+  resource: "@YSoftInstrumBundle/Resources/config/routing/lending.yml"
+  prefix: /lending
 
 y_soft_instrum_piece:
   resource: "@YSoftInstrumBundle/Resources/config/routing/piece.yml"

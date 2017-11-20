@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ('ysoft.instrum.lending.show.title.' ~ (lending.ours ? 'to' : 'by'))|trans({'%band%': lending.band, '%date%': lending.start|date('Y-m-d')}) }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ ('ysoft.instrum.lending.show.heading.' ~ (lending.ours ? 'to' : 'by'))|trans({'%band%': lending.band, '%date%': lending.start|date('Y-m-d')}) }}</h1>
+
+	<table class="table table-sm">
+		<tbody>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.lending.contact'|trans }}</th>
+				<td>{{ lending.contact }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.lending.start'|trans }}</th>
+				<td>{{ lending.start|date('Y-m-d') }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.lending.end'|trans }}</th>
+				<td>{% if lending.end %}{{ lending.end|date('Y-m-d') }}{% else %}{{ 'ysoft.instrum.lending.show.not_ended'|trans }}{% endif %}</td>
+			</tr>
+			{% for piece in lending.pieces -%}
+			<tr>
+				<td colspan="2"><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
+			</tr>
+			{% endfor -%}
+		</tbody>
+	</table>
+
+	<ul class="list-inline float-right">
+		<li class="list-inline-item">
+			<a href="{{ path('lending_index') }}" class="btn btn-light"><i class="fa fa-list"></i></a>
+		</li>
+		<li class="list-inline-item">
+			<a href="{{ path('lending_edit', { 'id': lending.id }) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+		</li>
+		<li class="list-inline-item">
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}

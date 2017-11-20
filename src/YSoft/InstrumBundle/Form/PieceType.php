@@ -11,7 +11,7 @@ class PieceType extends AbstractType
 {
     private $urlGenerator;
 
-    public function __construct(\Symfony\Component\Routing\Generator\UrlGeneratorInterface$urlGenerator)
+    public function __construct(\Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
@@ -134,6 +134,4 @@ class PieceType extends AbstractType
     {
         return 'ysoft_instrumbundle_piece';
     }
-
-
 }

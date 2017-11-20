@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ysoft.instrum.lending.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ 'ysoft.instrum.lending.index.heading'|trans }}</h1>
+
+	<table class="table table-sm table-hover">
+		<thead>
+			<tr>
+				<th colspan="4">
+					{% set page = app.request.query.get('page', 1) %}
+					{% include '::pagination.html.twig' with {'page': page, 'nbPages': nbPages, 'objectName': 'lending'} %}
+				</th>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.lending.band'|trans }}
+					({{ 'ysoft.instrum.fields.lending.contact'|trans }})</th>
+				<th>{{ 'ysoft.instrum.fields.lending.start'|trans }}</th>
+				<th>{{ 'ysoft.instrum.fields.lending.end'|trans }}</th>
+				<th><a href="{{ path('lending_new') }}" class="btn btn-success"><i class="fa fa-plus"></i></a></th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th colspan="4">
+					{% include '::pagination.html.twig' with {'page': page, 'nbPages': nbPages, 'objectName': 'lending'} %}
+				</th>
+			</tr>
+		</tfoot>
+		<tbody>
+		{% for lending in lendings %}
+			<tr>
+				<td><a href="{{ path('lending_show', { 'id': lending.id }) }}">{{ ('ysoft.instrum.lending.ours.' ~ (lending.ours ? 'to' : 'by'))|trans ~ ' ' ~ lending.band }}</a>
+					({{ lending.contact }})</td>
+				<td>{{ lending.start|date('Y-m-d') }}</td>
+				<td>{% if lending.end %}{{ lending.end|date('Y-m-d') }}{% else %}{{ 'ysoft.instrum.lending.index.not_ended'|trans }}{% endif %}</a></td>
+				<td>
+					<a href="{{ path('lending_show', { 'id': lending.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
+					<a href="{{ path('band_show', { 'id': lending.band.id }) }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-users"></i></a>
+					<a href="{{ path('lending_edit', { 'id': lending.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
