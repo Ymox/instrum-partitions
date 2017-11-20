@@ -15,7 +15,7 @@ security:
             roles: ROLE_USER
           instrum_admin:
             password: "%admin_password%"
-            roles: ROLE_ADMIN
+            roles: ROLE_SUPER_ADMIN
 
   encoders:
     Symfony\Component\Security\Core\User\User:
@@ -49,6 +49,9 @@ security:
     - { path: /new, roles: ROLE_USER }
     - { path: /edit, roles: ROLE_USER }
     - { path: ^/publisher, roles: ROLE_USER }
+    - { path: ^/lending, roles: ROLE_USER }
+    - { path: ^/band, roles: ROLE_USER }
+#    - { path: ^/missing, roles: ROLE_USER }
 
     - { path: /delete, roles: ROLE_ADMIN }
     - { path: ^/instrumentation, roles: ROLE_ADMIN }
