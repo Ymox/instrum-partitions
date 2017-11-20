@@ -14,8 +14,10 @@ ysoft:
 
   menu:
     concerts: Concerts
-    partitions: Partitions
-    people: Personnes
+    partitions:
+      heading: Partitions
+      list: Lister
+    people: Compositeurs et arrangeurs
     missings: Manques
     statuses: Statuts
     types: Types
@@ -23,3 +25,7 @@ ysoft:
     instrumentations: Instrumentations
     publishers: Editeurs
     logout: Déconnexion
+    lendings:
+      heading: Prêts
+      list: Lister
+    bands: Ensembles 

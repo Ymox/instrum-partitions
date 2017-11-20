@@ -9,32 +9,32 @@
 			<li class="nav-item{% if 'concert' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link" href="{{ path('concert_index') }}">{{ 'ysoft.menu.concerts'|trans }}</a>
 			</li>
-			<li class="nav-item{% if 'piece' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('piece_index') }}">{{ 'ysoft.menu.partitions'|trans }}</a>
+			<li class="nav-item dropdown{% if 'piece' in app.request.get('_route') %} active{% endif %}">
+				<a class="nav-link dropdown-toggle" href="#" id="Pieces" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'ysoft.menu.partitions.heading'|trans }}</a>
+				<div class="dropdown-menu" aria-labelledby="Pieces">
+					<a class="dropdown-item{% if 'piece' in app.request.get('_route') %} active{% endif %}" href="{{ path('piece_index') }}">{{ 'ysoft.menu.partitions.list'|trans }}</a>
+					<a class="dropdown-item{% if 'person' in app.request.get('_route') %} active{% endif %}" href="{{ path('person_index') }}">{{ 'ysoft.menu.people'|trans }}</a>
+					{% if is_granted('ROLE_USER') -%}
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item{% if 'publisher' in app.request.get('_route') %} active{% endif %}" href="{{ path('publisher_index') }}">{{ 'ysoft.menu.publishers'|trans }}</a>
+					<a class="dropdown-item{% if 'missing' in app.request.get('_route') %} active{% endif %}" href="{{ path('missing_index') }}">{{ 'ysoft.menu.missings'|trans }}</a>
+					{% endif -%}
+					{% if is_granted('ROLE_ADMIN') -%}
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item{% if 'instrumentation' in app.request.get('_route') %} active{% endif %}" href="{{ path('instrumentation_index') }}">{{ 'ysoft.menu.instrumentations'|trans }}</a>
+					<a class="dropdown-item{% if 'status' in app.request.get('_route') %} active{% endif %}" href="{{ path('status_index') }}">{{ 'ysoft.menu.statuses'|trans }}</a>
+					<a class="dropdown-item{% if 'type' in app.request.get('_route') %} active{% endif %}" href="{{ path('type_index') }}">{{ 'ysoft.menu.types'|trans }}</a>
+					<a class="dropdown-item{% if 'size' in app.request.get('_route') %} active{% endif %}" href="{{ path('size_index') }}">{{ 'ysoft.menu.sizes'|trans }}</a>
+					{% endif %}
+				</div>
 			</li>
-			<li class="nav-item{% if 'person' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('person_index') }}">{{ 'ysoft.menu.people'|trans }}</a>
-			</li>
-			<li class="nav-item{% if 'missing' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('missing_index') }}">{{ 'ysoft.menu.missings'|trans }}</a>
-			</li>
-			{% if is_granted('ROLE_USER') %}
-			<li class="nav-item{% if 'publisher' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('publisher_index') }}">{{ 'ysoft.menu.publishers'|trans }}</a>
-			</li>
-			{% endif %}
 			{% if is_granted('ROLE_ADMIN') -%}
-			<li class="nav-item{% if 'status' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('status_index') }}">{{ 'ysoft.menu.statuses'|trans }}</a>
-			</li>
-			<li class="nav-item{% if 'instrumentation' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('instrumentation_index') }}">{{ 'ysoft.menu.instrumentations'|trans }}</a>
-			</li>
-			<li class="nav-item{% if 'type' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('type_index') }}">{{ 'ysoft.menu.types'|trans }}</a>
-			</li>
-			<li class="nav-item{% if 'size' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('size_index') }}">{{ 'ysoft.menu.sizes'|trans }}</a>
+			<li class="nav-item dropdown{% if 'lending' in app.request.get('_route') %} active{% endif %}">
+				<a class="nav-link dropdown-toggle" href="#" id="Lendings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'ysoft.menu.lendings.heading'|trans }}</a>
+				<div class="dropdown-menu" aria-labelledby="Lendings">
+					<a class="dropdown-item{% if 'lending' in app.request.get('_route') %} active{% endif %}" href="{{ path('lending_index') }}">{{ 'ysoft.menu.lendings.list'|trans }}</a>
+					<a class="dropdown-item{% if 'band' in app.request.get('_route') %} active{% endif %}" href="{{ path('band_index') }}">{{ 'ysoft.menu.bands'|trans }}</a>
+				</div>
 			</li>
 			{% endif %}
 		</ul>
