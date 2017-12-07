@@ -21,3 +21,5 @@ parameters:
     instrum_password: "This is a default password. Change it to a bcrypted one"
     
     admin_password: "This is a default password. Change it to a bcrypted one"
+
+    application_users: ~
