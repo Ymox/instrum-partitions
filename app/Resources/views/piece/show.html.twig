@@ -42,10 +42,18 @@
 				</td>
 				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
 				<td>{{ piece.status }}
+					{%- if piece.status in ['returned', 'lent'] %}
+					{{ piece.lendings.first }}
+					{%- endif %}
 					{%- if not piece.missings.empty %}
 					({% for missing in piece.missings -%}
 					<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
-					{% endfor -%})
+					{% endfor -%}
+					{% if not piece.lendings.empty and piece.lendings.first.ours %}
+					— {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', { 'id': piece.lendings.first.id }) }}">{% endif %}
+						{{- ('ysoft.instrum.lending.ours.' ~ (piece.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ piece.lendings.first.band }}
+					{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %}
+					{%- endif %})
 					{%- endif %}
 				</td>
 			</tr>
