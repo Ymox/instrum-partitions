@@ -87,6 +87,6 @@ A noter que si le statut est "Rangé" ou "Vérifié, non marqué" et qu'il y a d
 
 ## A venir
 
-### Prêts
+### Rapport SUISA
 
-Pour pouvoir conserver un historique des ensembles qui ont emprunté des partitions (et éventuellement savoir vers qui se tourner quand les retours ne sont pas complets) ainsi que les dates.
+L'idée est de lister les pièces jouées sur une période spécifique (ainsi que le nombre de fois) afin de pouvoir transmettre le rapport à la SUISA.
