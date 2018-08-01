@@ -6,8 +6,12 @@
 
 	<div class="collapse navbar-collapse" id="Menu">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item{% if 'concert' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link" href="{{ path('concert_index') }}">{{ 'ysoft.menu.concerts'|trans }}</a>
+			<li class="nav-item dropdown{% if 'concert' in app.request.get('_route') %} active{% endif %}">
+				<a class="nav-link dropdown-toggle" href="#" id="Concerts" role="button" data-toggle="dropdown" aria-haspopup=true" aria-expanded="false">{{ 'ysoft.menu.concerts.heading'|trans }}</a>
+				<div class="dropdown-menu" aria-labelledby="Concerts">
+					<a class="dropdown-item{% if 'concert' in app.request.get('_route') %} active{% endif %}" href="{{ path('concert_index') }}">{{ 'ysoft.menu.concerts.list'|trans }}</a>
+					<a class="dropdown-item{% if 'program' in app.request.get('_route') %} active{% endif %}" href="{{ path('program_index') }}">{{ 'ysoft.menu.programs'|trans }}</a>
+				</div>
 			</li>
 			<li class="nav-item dropdown{% if 'piece' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link dropdown-toggle" href="#" id="Pieces" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'ysoft.menu.partitions.heading'|trans }}</a>

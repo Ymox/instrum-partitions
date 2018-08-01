@@ -59,6 +59,10 @@ ysoft:
         end: Clos
         ours: C'est nous qui prêtons
         pieces: Partitions
+      program:
+        name: Nom
+        updated_at: Mise à jour
+        pieces: Pièces
 
     flash:
       success:
@@ -141,11 +145,11 @@ ysoft:
       
     concert:
       index:
-        title: &program_index Liste des concerts
-        heading: *program_index
+        title: &concert_index Liste des concerts
+        heading: *concert_index
       new:
-        title: &program_new Nouveau concert
-        heading: *program_new   
+        title: &concert_new Nouveau concert
+        heading: *concert_new   
       show:
         too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !   
 
@@ -183,3 +187,11 @@ ysoft:
         heading:
           by: *lending_show_by
           to: *lending_show_to
+
+    program:
+      index:
+        title: &program_index Liste des programmes
+        heading: *program_index
+      new:
+        title: &program_new Nouveau programme
+        heading: *program_new 

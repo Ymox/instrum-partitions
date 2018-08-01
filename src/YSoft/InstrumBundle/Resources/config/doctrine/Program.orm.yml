@@ -1,0 +1,31 @@
+YSoft\InstrumBundle\Entity\Program:
+  type: entity
+  table: null
+  repositoryClass: YSoft\InstrumBundle\Repository\ProgramRepository
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+
+  oneToMany:
+    pieces:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      mappedBy: publisher
+
+  lifecycleCallbacks: {  }

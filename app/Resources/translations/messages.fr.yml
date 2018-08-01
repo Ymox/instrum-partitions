@@ -13,7 +13,10 @@ ysoft:
     password: Mot de passe
 
   menu:
-    concerts: Concerts
+    concerts:
+      heading: Concerts
+      list: Concerts
+    programs: Programmes
     partitions:
       heading: Partitions
       list: Lister

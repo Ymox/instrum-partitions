@@ -1,0 +1,24 @@
+program_index:
+    path:     /
+    defaults: { _controller: "YSoftInstrumBundle:Program:index" }
+    methods:  GET
+
+program_show:
+    path:     /{id}/show
+    defaults: { _controller: "YSoftInstrumBundle:Program:show" }
+    methods:  GET
+
+program_new:
+    path:     /new
+    defaults: { _controller: "YSoftInstrumBundle:Program:new" }
+    methods:  [GET, POST]
+
+program_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YSoftInstrumBundle:Program:edit" }
+    methods:  [GET, POST]
+
+program_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YSoftInstrumBundle:Program:delete" }
+    methods:  DELETE
