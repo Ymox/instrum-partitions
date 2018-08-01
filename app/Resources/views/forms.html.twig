@@ -6,22 +6,20 @@
 {% endblock %}
 
 {% block _ysoft_instrumbundle_piece_missings_entry_row %}
-{% set attr = attr|merge({'class': 'card card-body'}) %}
+{% set attr = attr|merge({'class': 'card card-body' ~ (disabled ? ' bg-danger text-white' : '')}) %}
 {{ block('collection_widget') }}
 {% endblock %}
-
-{% block _ysoft_instrumbundle_piece_missings_entry_label %}{% endblock %}
 
 {# Errors #}
 
 {% block form_errors -%}
-    {% if errors|length > 0 -%}
-    {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
-    <ul class="list-unstyled">
-        {%- for error in errors -%}
-            <li><span class="fa fa-sign"></span> {{ error.message }}</li>
-        {%- endfor -%}
-    </ul>
-    {% if form.parent %}</span>{% else %}</div>{% endif %}
-    {%- endif %}
+	{% if errors|length > 0 -%}
+	{% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
+	<ul class="list-unstyled">
+		{%- for error in errors -%}
+			<li><span class="fa fa-sign"></span> {{ error.message }}</li>
+		{%- endfor -%}
+	</ul>
+	{% if form.parent %}</span>{% else %}</div>{% endif %}
+	{%- endif %}
 {%- endblock form_errors %}

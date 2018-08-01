@@ -27,7 +27,7 @@
 			</tr>
 			{% for field in duplicate_form if field.vars.block_prefixes[1] != 'hidden' -%}
 			<tr data-name="{{ field.vars.full_name }}">
-				<td class="duplicate">{{ form_row(field, {'disabled': true, 'options': {'disabled': 'disabled'}}) }}</td>
+				<td class="duplicate">{{ form_row(field, {'attr': {'disabled': 'disabled'}, 'options': {'attr': {'disabled': 'disabled'}}}) }}</td>
 				<td class="text-center">
 					{% if field.vars.multiple is defined and field.vars.multiple or field.vars.compound -%}
 					<button type="button" class="btn btn-sm btn-outline-warning action merge{% if field.vars.compound %} compound{% endif %}"><i class="fa fa-compress"></i></button>
