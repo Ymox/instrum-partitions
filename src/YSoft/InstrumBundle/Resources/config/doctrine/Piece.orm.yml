@@ -76,6 +76,10 @@ YSoft\InstrumBundle\Entity\Piece:
       inversedBy: pieces
       cascade:
         - persist
+    program:
+      targetEntity: YSoft\InstrumBundle\Entity\Program
+      inversedBy: pieces
+      orderBy: { "date": 'DESC' }
 
   manyToMany:
     composers:

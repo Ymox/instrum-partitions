@@ -26,6 +26,6 @@ YSoft\InstrumBundle\Entity\Program:
   oneToMany:
     pieces:
       targetEntity: YSoft\InstrumBundle\Entity\Piece
-      mappedBy: publisher
+      mappedBy: program
 
   lifecycleCallbacks: {  }

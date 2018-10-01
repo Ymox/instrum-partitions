@@ -80,6 +80,11 @@ class Piece
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
+    private $program;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
     private $composers;
 
     /**
@@ -91,7 +96,7 @@ class Piece
      * @var \Doctrine\Common\Collections\Collection
      */
     private $concerts;
-    
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -508,6 +513,30 @@ class Piece
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set program
+     *
+     * @param \YSoft\InstrumBundle\Entity\Program $program
+     *
+     * @return Piece
+     */
+    public function setProgram(\YSoft\InstrumBundle\Entity\Program $program)
+    {
+        $this->program = $program;
+
+        return $this;
+    }
+
+    /**
+     * Get program
+     *
+     * @return \YSoft\InstrumBundle\Entity\Program
+     */
+    public function getProgram()
+    {
+        return $this->program;
     }
 
     /**
