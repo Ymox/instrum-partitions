@@ -27,5 +27,6 @@ YSoft\InstrumBundle\Entity\Program:
     pieces:
       targetEntity: YSoft\InstrumBundle\Entity\Piece
       mappedBy: program
+      cascade: [ persist ]
 
   lifecycleCallbacks: {  }
