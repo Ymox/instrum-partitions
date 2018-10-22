@@ -522,7 +522,7 @@ class Piece
      *
      * @return Piece
      */
-    public function setProgram(\YSoft\InstrumBundle\Entity\Program $program)
+    public function setProgram(\YSoft\InstrumBundle\Entity\Program $program = null)
     {
         $this->program = $program;
 

@@ -79,7 +79,7 @@ YSoft\InstrumBundle\Entity\Piece:
     program:
       targetEntity: YSoft\InstrumBundle\Entity\Program
       inversedBy: pieces
-      orderBy: { "date": 'DESC' }
+      orderBy: { updatedAt: 'DESC' }
 
   manyToMany:
     composers:

@@ -22,6 +22,7 @@ class ProgramType extends AbstractType
                     $pieceAsString = $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                     return $pieceAsString;
                 },
+                'by_reference' => false,
                 'label_format' => 'ysoft.instrum.fields.program.%name%'
             ))
         ;

@@ -132,6 +132,7 @@ class Program
     public function addPiece(\YSoft\InstrumBundle\Entity\Piece $piece)
     {
         $this->pieces[] = $piece;
+        $piece->setProgram($this);
 
         return $this;
     }
@@ -144,6 +145,7 @@ class Program
     public function removePiece(\YSoft\InstrumBundle\Entity\Piece $piece)
     {
         $this->pieces->removeElement($piece);
+        $piece->setProgram(null);
     }
 
     /**
