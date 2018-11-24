@@ -72,6 +72,11 @@ ysoft:
           piece: Cette pièce est désormais <b>uniquement sous ce numéro</b>
 
     piece:
+      suisa:
+        title: &piece_suisa Rapport SUISA
+        heading: *piece_suisa
+        first_played: Première exécution
+        number_played: Nombre d'exécutions
       index:
         title: Partitions
         heading: Liste des partitions

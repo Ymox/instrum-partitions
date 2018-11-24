@@ -194,97 +194,27 @@ class PieceController extends Controller
         ));
     }
 
-    public function importAction(Request $request)
+    public function suisaAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $sizeRepository = $em->getRepository('YSoftInstrumBundle:Size');
-        $personRepository = $em->getRepository('YSoftInstrumBundle:Person');
-        $publisherRepository = $em->getRepository('YSoftInstrumBundle:Publisher');
-        if ($file = $request->files->get('file')) {
-
-            $file = $file->openFile();
-            $piece = new Piece();
-            $previousLineId = null;
-            ini_set('max_execution_time', 0);
-            while ($line = $file->fgetcsv(';')) {
-                if ($line[0] != $previousLineId) {
-                    if ($piece->getName()) {
-                        try {
-                            $em->persist($piece);
-                            $em->flush();
-                        } catch (\Exception $e) {
-                            dump($piece);
-                            throw $e;
-                        }
-                        $piece = new Piece();
-                    }
-                    $piece
-                        ->setName($line[4])
-                        ->setYear(ctype_digit($line[16]) ? $line[16] : null)
-                        ->setReference(in_array($line[17], ['-', '', ' ']) ? null : $line[17]);
-                    $previousLineId = $line[0];
-                    if (!preg_match('`^traduction :`i', $line[14])) {
-                        $piece->setNote($line[14]);
-                    }
-                    switch ($line[6]) {
-                        case 'A4':
-                        case 'A5':
-                            $size = $sizeRepository->find($line[6]);
-                            break;
-                        case 'Carnet de marche':
-                            $size = $sizeRepository->find('A5-');
-                            break;
-                        default:
-                            if (ctype_digit($line[7]) && ctype_digit($line[8])) {
-                                if ($line[7] > $line[8]) {
-                                    $size = $sizeRepository->findByDimension($line[8] * 10, $line[7] * 10);
-                                } else {
-                                    $size = $sizeRepository->findByDimension($line[7] * 10, $line[8] * 10);
-                                }
-                            } else {
-                                $size = null;
-                            }
-                            break;
-                    }
-                    $piece->setSize($size);
-                    if (!$publisher = $publisherRepository->findOneBy(array('name' => $line[15]))) {
-                        $publisher = (new Publisher())
-                            ->setName($line[15]);
-                        $em->persist($publisher);
-                        $em->flush();
-                    }
-                    $piece->setPublisher($publisher);
-                    $piece->setStatus();
-                } else if ($line[4] != $piece->getName()) {
-                    $piece->setTranslation($line[4]);
-                }
-                $composer = $personRepository->findOneBy(array('firstName' => $line[3], 'lastName' => $line[2]));
-                if (null == $composer && ($line[3] || $line[2])) {
-                    $composer = (new Person())
-                        ->setFirstName($line[3])
-                        ->setLastName($line[2]);
-                    $em->persist($composer);
-                    $em->flush();
-                }
-                if ($composer && !$piece->getComposers()->contains($composer)) {
-                    $piece->addComposer($composer);
-                }
-                $arranger = $personRepository->findOneBy(array('firstName' => '', 'lastName' => $line[5]));
-                if (null == $arranger && $line[5]) {
-                    $arranger = (new Person())
-                        ->setFirstName('')
-                        ->setLastName($line[5]);
-                    $em->persist($arranger);
-                    $em->flush();
-                }
-                if ($arranger && !$piece->getArrangers()->contains($arranger)) {
-                    $piece->addArranger($arranger);
-                }
+        if (!$request->query->get('start') || !$request->query()->get('end')) {
+            $today = new \DateTime();
+            if ($today->format('n') < 2) {
+                $start = new \DateTimeImmutable('last year January 1st');
+            } else {
+                $start = new \DateTimeImmutable('January 1st');
             }
-            $em->persist($piece);
-            $em->flush();
+            $end = $start->modify('+1 year -1 second');
+        } else {
+            $start = new \DateTimeImmutable($request->query->get('start'));
+            $end = new \DateTimeImmutable($request->query->get('end'));
         }
+        $pieces = $this->getDoctrine()->getManager()->getRepository('YSoftInstrumBundle:Piece')
+            ->findForSuisa($start, $end);
 
-        return $this->render('piece/import.html.twig');
+        return $this->render('piece/suisa.html.twig', array(
+            'pieces' => $pieces,
+            'start'  => $start,
+            'end'    => $end,
+        ));
     }
 }

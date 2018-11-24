@@ -14,7 +14,7 @@ Seulement :
 	- une ligne par compositeur
 	- plus une éventuelle ligne pour la traduction
 	
-    rendant peu pertinents les tris.
+	rendant peu pertinents les tris.
 
 - quelques doublons sont déjà présents vu que l'ID devait être choisi avant la saisie ;
 - c'est difficilement évolutif sans complexifier la recherche sur les nouvelles informations (programmes des concerts notamment — "quand a-t'on joué quoi") ;
@@ -38,7 +38,7 @@ Actuellement, le projet permet donc de saisir des partitions au niveau de :
 - la référence ;
 - d'éventuelles remarques.
 
-Le projet fonctionne avec Symfony 3 (3.3.11 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
+Le projet fonctionne avec Symfony 3 (3.4.18 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
 
 ## Statuts de partitions
 
@@ -83,10 +83,3 @@ A noter que si le statut est "Rangé" ou "Vérifié, non marqué" et qu'il y a d
 
 	1. Si on ne fait que prendre note du retour, le statut devient **Non vérifié (inconnu)**, en attendant qu'on ait le temps de vérifier. On ne range évidemment pas ces partitions dans les archives.
 	2. Si en revanche le temps de tout vérifier est pris, comme les originaux sont déjà marqués, on va juste relever les éventuels manques et mettre le statut **Rangé**.
-
-
-## A venir
-
-### Rapport SUISA
-
-L'idée est de lister les pièces jouées sur une période spécifique (ainsi que le nombre de fois) afin de pouvoir transmettre le rapport à la SUISA.

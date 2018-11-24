@@ -32,3 +32,8 @@ piece_import:
     path:     /import
     defaults: { _controller: "YSoftInstrumBundle:Piece:import" }
     methods: [GET, POST]
+
+piece_suisa:
+    path:    /suisa
+    defaults: { _controller: "YSoftInstrumBundle:Piece:suisa" }
+    methods: [GET, POST]

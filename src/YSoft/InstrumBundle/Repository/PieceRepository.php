@@ -56,6 +56,29 @@ class PieceRepository extends \Doctrine\ORM\EntityRepository
         return $paginator;
     }
 
+    /**
+     *
+     * @param \DateTimeInterface $start
+     * @param \DateTimeInterface $end
+     * @return array
+     */
+    public function findForSuisa(\DateTimeInterface $start, \DateTimeInterface $end)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb ->addSelect($qb->expr()->count('c.id'))
+            ->innerJoin('p.concerts', 'c')->addSelect('c')
+            ->innerJoin('p.composers', 'cp')->addSelect('cp')
+            ->innerJoin('p.arrangers', 'ar')->addSelect('ar')
+            ->where($qb->expr()->between('c.date', ':start', ':end'))
+            ->setParameter(':start', $start)
+            ->setParameter(':end', $end)
+            ->groupBy('p.id')
+            ->orderBy($qb->expr()->asc('c.date'))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function sanitizeField($field)
     {
         switch ($field) {
