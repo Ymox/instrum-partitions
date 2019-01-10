@@ -16,12 +16,13 @@
 			<li class="nav-item dropdown{% if 'piece' in app.request.get('_route') %} active{% endif %}">
 				<a class="nav-link dropdown-toggle" href="#" id="Pieces" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'ysoft.menu.partitions.heading'|trans }}</a>
 				<div class="dropdown-menu" aria-labelledby="Pieces">
-					<a class="dropdown-item{% if 'piece' in app.request.get('_route') %} active{% endif %}" href="{{ path('piece_index') }}">{{ 'ysoft.menu.partitions.list'|trans }}</a>
+					<a class="dropdown-item{% if 'piece_index' == app.request.get('_route') %} active{% endif %}" href="{{ path('piece_index') }}">{{ 'ysoft.menu.partitions.list'|trans }}</a>
 					<a class="dropdown-item{% if 'person' in app.request.get('_route') %} active{% endif %}" href="{{ path('person_index') }}">{{ 'ysoft.menu.people'|trans }}</a>
+					<a class="dropdown-item{% if 'missing' in app.request.get('_route') %} active{% endif %}" href="{{ path('missing_index') }}">{{ 'ysoft.menu.missings'|trans }}</a>
 					{% if is_granted('ROLE_USER') -%}
 					<div class="dropdown-divider"></div>
+					<a class="dropdown-item{% if 'suisa' in app.request.get('_route') %} active{% endif %}" href="{{ path('program_index') }}">{{ 'ysoft.menu.suisa'|trans }}</a>
 					<a class="dropdown-item{% if 'publisher' in app.request.get('_route') %} active{% endif %}" href="{{ path('publisher_index') }}">{{ 'ysoft.menu.publishers'|trans }}</a>
-					<a class="dropdown-item{% if 'missing' in app.request.get('_route') %} active{% endif %}" href="{{ path('missing_index') }}">{{ 'ysoft.menu.missings'|trans }}</a>
 					{% endif -%}
 					{% if is_granted('ROLE_ADMIN') -%}
 					<div class="dropdown-divider"></div>

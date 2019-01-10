@@ -20,6 +20,7 @@ ysoft:
     partitions:
       heading: Partitions
       list: Lister
+    suisa: Rapport SUISA
     people: Compositeurs et arrangeurs
     missings: Manques
     statuses: Statuts
