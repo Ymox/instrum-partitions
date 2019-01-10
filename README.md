@@ -38,7 +38,7 @@ Actuellement, le projet permet donc de saisir des partitions au niveau de :
 - la référence ;
 - d'éventuelles remarques.
 
-Le projet fonctionne avec Symfony 3 (3.4.18 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
+Le projet fonctionne avec Symfony 3 (3.4.21 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
 
 ## Statuts de partitions
 
