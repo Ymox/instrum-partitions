@@ -5,6 +5,7 @@ ysoft:
       piece:
         name: Nom
         translation: Traduction
+        movements: Mouvements
         composers: Compositeurs
         arrangers: Arrangeurs
         size: Taille

@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PieceType extends AbstractType
+class MovementType extends AbstractType
 {
     private $urlGenerator;
 
@@ -26,17 +26,6 @@ class PieceType extends AbstractType
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
             ))
             ->add('translation', null, array(
-                'label_format' => 'ysoft.instrum.fields.piece.%name%',
-            ))
-            ->add('movements', CollectionType::class, array(
-                'entry_type'   => MovementType::class,
-                'prototype'    => true,
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'entry_options' => array(
-                    'label' => false,
-                ),
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
             ))
             ->add('composers', null, array(
@@ -60,43 +49,9 @@ class PieceType extends AbstractType
                     'data-uri' => $this->urlGenerator->generate('person_new'),
                 ),
             ))
-            ->add('instrumentation', null, array(
-                'choice_label' => 'name',
-                'label_format' => 'ysoft.instrum.fields.piece.%name%',
-                'choice_attr'  => function ($instrumentation) {
-                    return [
-                        'title' => $instrumentation->getNote(),
-                    ];
-                },
-            ))
             ->add('type', null, array(
                 'choice_label' => 'name',
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
-            ))
-            ->add('size', null, array(
-                'required'      => true,
-                'choice_label'  => 'name',
-                'query_builder' => function (\YSoft\InstrumBundle\Repository\SizeRepository $repo) {
-                    return $repo->createQueryBuilder('s')
-                        ->orderBy('s.maxHeight', 'asc');
-                },
-                'choice_attr'   => function ($size) {
-                    $title = '';
-                    if ($size->getNote()) {
-                        $title .= $size->getNote() . ' ';
-                    }
-                    $max = $size->getMaxDimension();
-                    $min = $size->getMinDimension();
-                    if ($max == $min) {
-                        $title = $title ? ($title . '(' . $max . ')') : $max;
-                    } else {
-                        $title = $title ? ($title. '(' . $min . ' ⥤ ' . $max . ')') : $min . ' ⥤ ' . $max;
-                    }
-                    return [
-                         'title' => $title,
-                    ];
-                },
-                'label_format'  => 'ysoft.instrum.fields.piece.%name%',
             ))
             ->add('status', null, array(
                 'choice_label' => 'name',
@@ -111,21 +66,6 @@ class PieceType extends AbstractType
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label_format' => 'ysoft.instrum.fields.piece.%name%',
-                'entry_options' => array(
-                    'label' => false,
-                ),
-            ))
-            ->add('publisher', null, array(
-                'label_format' => 'ysoft.instrum.fields.piece.%name%',
-            ))
-            ->add('year', null, array(
-                'label_format' => 'ysoft.instrum.fields.piece.%name%',
-                'attr'         => array(
-                    'max' => date('Y'),
-                ),
-            ))
-            ->add('reference', null, array(
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
             ))
             ->add('note', null, array(

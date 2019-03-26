@@ -38,6 +38,11 @@ YSoft\InstrumBundle\Entity\Piece:
           on: create
 
   oneToMany:
+    movements:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      mappedBy: work
+      cascade:
+        - persist
     missings:
       targetEntity: YSoft\InstrumBundle\Entity\Missing
       mappedBy: piece
@@ -80,6 +85,10 @@ YSoft\InstrumBundle\Entity\Piece:
       targetEntity: YSoft\InstrumBundle\Entity\Program
       inversedBy: pieces
       orderBy: { updatedAt: 'DESC' }
+    work:
+      targetEntity: YSoft\InstrumBundle\Entity\Piece
+      inversedBy: movements
+      orderBy: { id: 'ASC' }
 
   manyToMany:
     composers:

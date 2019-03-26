@@ -78,6 +78,16 @@ class Piece
     private $status;
 
     /**
+     * @var \Ysoft\InstrumBundle\Entity\Piece
+     */
+    private $work;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $movements;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $program;
@@ -107,6 +117,7 @@ class Piece
      */
     public function __construct()
     {
+        $this->movements = new \Doctrine\Common\Collections\ArrayCollection();
         $this->missings = new \Doctrine\Common\Collections\ArrayCollection();
         $this->composers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->arrangers = new \Doctrine\Common\Collections\ArrayCollection();
@@ -245,6 +256,30 @@ class Piece
     }
 
     /**
+     * Set work
+     *
+     * @param \Ysoft\InstrumBundle\Entity\Piece $work
+     *
+     * @return Piece
+     */
+    public function setWork(\Ysoft\InstrumBundle\Entity\Piece $work = null)
+    {
+        $this->work = $work;
+
+        return $this;
+    }
+
+    /**
+     * Get work
+     *
+     * @return \Ysoft\InstrumBundle\Entity\Piece
+     */
+    public function getWork()
+    {
+        return $this->work;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -266,6 +301,42 @@ class Piece
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Add movement
+     *
+     * @param \YSoft\InstrumBundle\Entity\Piece $movement
+     *
+     * @return Piece
+     */
+    public function addMovement(\YSoft\InstrumBundle\Entity\Piece $movement)
+    {
+        $movement->setWork($this);
+        $this->movements[] = $movement;
+
+        return $this;
+    }
+
+    /**
+     * Remove movement
+     *
+     * @param \YSoft\InstrumBundle\Entity\Piece $movement
+     */
+    public function removeMovement(\YSoft\InstrumBundle\Entity\Piece $movement)
+    {
+        $movement->setWork(null);
+        $this->movements->removeElement($movement);
+    }
+
+    /**
+     * Get movements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMovements()
+    {
+        return $this->movements;
     }
 
     /**

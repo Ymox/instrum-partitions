@@ -23,10 +23,12 @@ class PieceRepository extends \Doctrine\ORM\EntityRepository
     public function searchBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $qb = $this->createQueryBuilder('p');
-        $qb ->leftJoin('p.composers', 'c')->addSelect('c')
+        $qb ->leftJoin('p.work', 'w')
+            ->leftJoin('p.composers', 'c')->addSelect('c')
             ->leftJoin('p.arrangers', 'a')->addSelect('a')
             ->leftJoin('p.publisher', 'pu')->addSelect('pu')
-            ->leftJoin('p.concerts', 's')->addSelect('s')->setMaxResults(1);
+            ->leftJoin('p.concerts', 's')->addSelect('s')->setMaxResults(1)
+            ->where($qb->expr()->isNull('w.id'));
 
         foreach ($criteria as $field => $value) {
             if (empty($value)) {

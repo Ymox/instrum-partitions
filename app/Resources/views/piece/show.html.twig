@@ -65,6 +65,53 @@
 				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
 				<td colspan="3">{{ piece.createdAt|date('Y-m-d à H:i:s') }}</td>
 			</tr>
+			{% for i, movement in piece.movements %}
+			<tr>
+				<th colspan="4"><h2>{{ movement.name }}
+					{%- if movement.translation %}<br /><small>{{ movement.translation }}</small>{% endif %}</h2></th>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.id'|trans }}</th>
+				<td>{{ movement.id }}</td>
+				<th>{{ 'ysoft.instrum.fields.piece.last_played'|trans }}</th>
+				<td>{% if not movement.concerts.isEmpty -%}
+					<a href="{{ path('concert_show', {'id': movement.concerts.first.id}) }}">{{ movement.concerts.first.name }}</a> ({{ movement.concerts.first.date|date('Y-m-d') }})
+					{%- else -%}
+					<i>{{ 'ysoft.instrum.piece.show.last_played.unknown'|trans }}</i>
+					{%- endif -%}
+				</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.composers'|trans }}</th>
+				<td colspan="3">{{ movement.composers|join(', ') }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.arrangers'|trans }}</th>
+				<td colspan="3">{{ movement.arrangers|join(', ') }}</td>
+			</tr>
+			</tr>
+				<th>{{ 'ysoft.instrum.fields.piece.status'|trans }}</th>
+				<td colspan="3">{{ movement.status }}
+					{%- if movement.status in ['returned', 'lent'] %}
+					{{ movement.lendings.first }}
+					{%- endif %}
+					{%- if not movement.missings.empty %}
+					({% for missing in movement.missings -%}
+					<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
+					{% endfor -%}
+					{% if not movement.lendings.empty and movement.lendings.first.ours %}
+					— {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', { 'id': movement.lendings.first.id }) }}">{% endif %}
+						{{- ('ysoft.instrum.lending.ours.' ~ (movement.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ movement.lendings.first.band }}
+					{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %}
+					{%- endif %})
+					{%- endif %}
+				</td>
+			</tr>
+			<tr>
+				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
+				<td colspan="3">{{ movement.note|nl2br }}</td>
+			</tr>
+			{% endfor %}
 		</tbody>
 	</table>
 

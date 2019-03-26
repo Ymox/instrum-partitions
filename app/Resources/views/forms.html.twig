@@ -1,5 +1,10 @@
 {% extends 'bootstrap_3_layout.html.twig' %}
 
+{% block _ysoft_instrumbundle_piece_movements_entry_row %}
+{% set attr = attr|merge({'class': 'card card-body' ~ (disabled ? ' bg-danger text-white' : '')}) %}
+{{ block('collection_widget') }}
+{% endblock %}
+
 {% block _ysoft_instrumbundle_piece_missings_widget %}
 {% set attr = attr|merge({'class': 'card-columns'}) %}
 {{ block('collection_widget') }}

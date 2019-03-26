@@ -7,7 +7,7 @@ $(document).ready( function() {
 	    }).css('position', 'relative').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;">✖</button>')
 	});
 	$('form').on('click', '.adder', function() {
-	    var $container = $(this).closest('div').find('[data-prototype]');
+	    var $container = $(this).closest('div').find('[data-prototype]').first();
 	    var prototype = $container.data('prototype');
 	    var index = $('>div, >tbody>tr', $container).length;
 	    prototype = prototype.replace(/__name__(label__)?/ig, index);
