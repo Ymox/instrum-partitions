@@ -47,9 +47,11 @@ class LendingType extends AbstractType
                 'label_format' => 'ysoft.instrum.fields.lending.%name%',
             ))
             ->add('start', null, array(
+                'widget'  => 'single_text',
                 'label_format' => 'ysoft.instrum.fields.lending.%name%',
             ))
             ->add('end', null, array(
+                'widget'  => 'single_text',
                 'label_format' => 'ysoft.instrum.fields.lending.%name%',
             ))
         ;
