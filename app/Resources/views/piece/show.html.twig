@@ -65,6 +65,26 @@
 				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
 				<td colspan="3">{{ piece.createdAt|date('Y-m-d à H:i:s') }}</td>
 			</tr>
+			{% if (not piece.parts.isEmpty) %}
+			<tr>
+				<td colspan="4"><h3>{{ 'ysoft.instrum.fields.piece.parts'|trans }}</h3>
+			</tr>
+			<tr>
+				{% for part in piece.parts %}
+				<td>{% if part.file %}<a href="{{ asset(part.downloadPath) }}" download="{{ part.instrument }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif -%}
+				    {{ part.instrument }}
+				    {% if part.file %}</a>{% endif -%}
+			    </td>
+					{% if (not loop.first and loop.index is divisible by(4)) %}
+			</tr>
+			<tr>
+					{% endif %}
+				{% endfor %}
+				{% if (piece.parts|length is not divisible by(4)) %}
+				<td colspan="{{ 4 - (piece.parts|length % 4) }}"></td>
+				{% endif %}
+			</tr>
+			{% endif %}
 			{% for i, movement in piece.movements %}
 			<tr>
 				<th colspan="4"><h2>{{ movement.name }}
@@ -111,6 +131,23 @@
 				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
 				<td colspan="3">{{ movement.note|nl2br }}</td>
 			</tr>
+			{% if (not movement.parts.isEmpty) %}
+			<tr>
+				<td colspan="4"><h3>{{ 'ysoft.instrum.fields.piece.parts'|trans }}</h3></td>	
+			</tr>
+			<tr>
+				{% for part in movement.parts %}
+				<td><a href="{{ asset(part.downloadPath) }}" download="{{ part.instrument }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{{ part.instrument }}</a></td>
+					{% if (not loop.first and loop.index is divisible by(4)) %}
+			</tr>
+			<tr>
+					{% endif %}
+				{% endfor %}
+				{% if (movement.parts|length is not divisible by(4)) %}
+				<td colspan="{{ 4 - (movement.parts|length % 4) }}"></td>
+				{% endif %}
+			</tr>
+			{% endif %}
 			{% endfor %}
 		</tbody>
 	</table>

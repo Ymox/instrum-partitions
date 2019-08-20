@@ -90,6 +90,11 @@ class Piece
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
+    private $parts;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
     private $program;
 
     /**
@@ -118,6 +123,7 @@ class Piece
     public function __construct()
     {
         $this->movements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->parts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->missings = new \Doctrine\Common\Collections\ArrayCollection();
         $this->composers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->arrangers = new \Doctrine\Common\Collections\ArrayCollection();
@@ -337,6 +343,42 @@ class Piece
     public function getMovements()
     {
         return $this->movements;
+    }
+
+    /**
+     * Add part
+     *
+     * @param \YSoft\InstrumBundle\Entity\Part $part
+     *
+     * @return Piece
+     */
+    public function addPart(\YSoft\InstrumBundle\Entity\Part $part)
+    {
+        $part->setPiece($this);
+        $this->parts[] = $part;
+
+        return $this;
+    }
+
+    /**
+     * Remove part
+     *
+     * @param \YSoft\InstrumBundle\Entity\Part $part
+     */
+    public function removePart(\YSoft\InstrumBundle\Entity\Part $part)
+    {
+        $part->sePiece(null);
+        $this->parts->removeElement($part);
+    }
+
+    /**
+     * Get parts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParts()
+    {
+        return $this->parts;
     }
 
     /**

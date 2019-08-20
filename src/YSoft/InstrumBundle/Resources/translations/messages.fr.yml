@@ -6,6 +6,7 @@ ysoft:
         name: Nom
         translation: Traduction
         movements: Mouvements
+        parts: Parties
         composers: Compositeurs
         arrangers: Arrangeurs
         size: Taille
@@ -64,6 +65,56 @@ ysoft:
         name: Nom
         updated_at: Mise à jour
         pieces: Pièces
+      part:
+        instrument:
+          label: Instrument
+          choices: "%instrument% en %key%"
+        clef:
+          label: Clef
+          choices:
+            short:
+              g: 𝄞
+              c: 𝄡
+              f: 𝄢
+            long:
+              g: clef de sol
+              c: clef d'ut
+              f: clef de fa
+        number: Numéro
+        solo: Soliste
+        upload: Fichier
+      instrument:
+        name: Nom
+        key:
+          label: Transposition
+          choices:
+            c:      Ut
+            c_flat: Do♭
+            b:      Si
+            b_flat: Si♭
+            a:      La
+            a_flat: La♭
+            g:      Sol
+            g_flat: Sol♭
+            f:      Fa
+            e:      Mi
+            e_flat: Mi♭
+            d:      Ré
+            d_flat: Ré♭
+        family:
+          label: Famille
+          choices:
+            wood: Bois
+            brass: Cuivre
+            string: Cordes
+            percussion: Percussion
+            voice: Voix
+        common: 
+          label: Courant
+          "true": Courant
+          "false": Peu courant
+    file:
+      download: Télécharger le fichier actuel
 
     flash:
       success:
@@ -124,6 +175,15 @@ ysoft:
       new:
         title: &size_new Nouvelle taille de partition
         heading: *size_new
+
+    instrument:
+      full_name: '%name% en %key%'
+      index:
+        title: Instruments
+        heading: Liste des instruments
+      new:
+        title: &piece_new Nouvel instrument
+        heading: *piece_new
 
     status:
       index:

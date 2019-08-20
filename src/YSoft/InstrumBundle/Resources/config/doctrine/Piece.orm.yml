@@ -43,6 +43,16 @@ YSoft\InstrumBundle\Entity\Piece:
       mappedBy: work
       cascade:
         - persist
+    parts:
+      targetEntity: YSoft\InstrumBundle\Entity\Part
+      mappedBy: piece
+      fetch: EXTRA_LAZY
+      orphanRemoval: true
+      cascade:
+        - persist
+      orderBy:
+        solo: DESC
+        instrument: ASC
     missings:
       targetEntity: YSoft\InstrumBundle\Entity\Missing
       mappedBy: piece

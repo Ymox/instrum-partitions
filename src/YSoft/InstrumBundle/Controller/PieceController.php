@@ -25,8 +25,12 @@ class PieceController extends Controller
     {
         $repo = $this->getDoctrine()->getManager()->getRepository('YSoftInstrumBundle:Piece');
 
-        if (@$request->query->get('q')['id'] && $repo->find($request->query->get('q')['id'])) {
-            return $this->redirectToRoute('piece_show', array('id' => $request->query->get('q')['id']));
+        if (@$request->query->get('q')['id'] && ($piece = $repo->find($request->query->get('q')['id']))) {
+            if ($piece->getWork()) {
+                return $this->redirectToRoute('piece_show', array('id' => $piece->getWork()->getId()));
+            } else {
+                return $this->redirectToRoute('piece_show', array('id' => $piece->getId()));
+            }
         }
 
         $pieces = $repo->searchBy(

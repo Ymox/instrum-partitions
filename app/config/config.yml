@@ -8,6 +8,8 @@ imports:
 parameters:
   locale: fr
   paginate.per_page: 30
+  download_path: "/parts"
+  upload_path: "%kernel.project_dir%/web/%download_path%"
 
 framework:
   #esi: ~
@@ -39,7 +41,7 @@ twig:
   debug: '%kernel.debug%'
   strict_variables: '%kernel.debug%'
   form_theme:
-    - bootstrap_3_layout.html.twig
+    - bootstrap_4_layout.html.twig
     - forms.html.twig
 
 # Doctrine Configuration
@@ -52,6 +54,9 @@ doctrine:
     user: '%database_user%'
     password: '%database_password%'
     charset: utf8mb4
+    default_table_options:
+        charset: utf8mb4
+        collate: utf8mb4_unicode_ci
     # if using pdo_sqlite as your database driver:
     #   1. add the path in parameters.yml
     #   e.g. database_path: "%kernel.project_dir%/var/data/data.sqlite"

@@ -1,7 +1,20 @@
-{% extends 'bootstrap_3_layout.html.twig' %}
+{% block _ysoft_instrumbundle_piece_movements_widget %}
+{% set attr = attr|merge({'class': 'card-columns'}) %}
+{{ block('collection_widget') }}
+{% endblock %}
 
 {% block _ysoft_instrumbundle_piece_movements_entry_row %}
 {% set attr = attr|merge({'class': 'card card-body' ~ (disabled ? ' bg-danger text-white' : '')}) %}
+{{ block('collection_widget') }}
+{% endblock %}
+
+{% block _ysoft_instrumbundle_piece_parts_widget %}
+{% set attr = attr|merge({'class': 'card-columns dropzone', 'data-upload-uri': path('y_soft_instrum_ajax_upload', {'target': id})}) %}
+{{ block('collection_widget') }}
+{% endblock %}
+
+{% block _ysoft_instrumbundle_piece_parts_entry_row %}
+{% set attr = attr|merge({'class': 'card card-body dropzone' ~ (disabled ? ' bg-danger text-white' : '')}) %}
 {{ block('collection_widget') }}
 {% endblock %}
 
@@ -14,6 +27,38 @@
 {% set attr = attr|merge({'class': 'card card-body' ~ (disabled ? ' bg-danger text-white' : '')}) %}
 {{ block('collection_widget') }}
 {% endblock %}
+
+{% block file_widget %}
+	{% spaceless %}
+
+	<div class="input-group file-link" role="group">
+		<div id="{{ id }}_filled" class="input-group-prepend downloadable" style="{% if file_url is null %}display: none;{% endif %}">
+			<a href="{{ asset(file_url) }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'ysoft.instrum.file.download'|trans }}"><i class="fa fa-floppy-o"></i></a>
+			<button type="button" class="btn btn-danger cleaner" title="{{ 'ysoft.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fa fa-times"></i></button>
+			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" readonly="readonly" />
+		</div>
+    	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control downloadable')|trim, 'data-upload-uri': path('y_soft_instrum_ajax_upload', {'target': form.parent.vars.id})}) %}
+    	{% if file_url is not null %}
+    	    {%- set attr = attr|merge({'style': (attr.style|default('') ~ ' display: none;')|trim}) -%}
+    	{% endif%}
+    	{{ block('form_widget') }}
+	</div>
+
+	{% endspaceless %}
+{% endblock %}
+
+{%- block choice_widget_options -%}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ group_label|trans }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice.attr %}{% with { 'attr': choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock choice_widget_options -%}
 
 {# Errors #}
 

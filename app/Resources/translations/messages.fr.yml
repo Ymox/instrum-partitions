@@ -32,4 +32,7 @@ ysoft:
     lendings:
       heading: Prêts
       list: Lister
-    bands: Ensembles 
+    bands: Ensembles
+
+  file:
+    delete: Supprimer le fichier

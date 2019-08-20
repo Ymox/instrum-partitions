@@ -1,0 +1,525 @@
+Piccolo
+Piccolo en Ré♭
+Accordéon
+Almglocken
+Alto
+Alto (clef d'ut)
+Altos
+Anche libre
+Archiluth
+Aulochrome
+Balalaïka
+Balalaïka Alto
+Balalaïka Basse
+Balalaïka Contrebasse
+Balalaïka Piccolo
+Balalaïka Prima
+Balalaïka Secunda
+Bandonéon
+Banjo
+Banjo Irlandais Ténor
+Banjo ténor
+Baryton
+Baryton (clef d'ut)
+Basse
+Basse acoustique
+Basse électrique
+Basse électrique fretless
+Basse électrique à 5 cordes
+Basse électrique à 5 cordes (Tenor)
+Basse électrique à 6 cordes
+Basson
+Batterie
+Berda
+Bols chantants
+Bongos
+Bouzouki
+Bouzouki (3 chœurs)
+Bouzouki (4 chœurs)
+Bugarija
+Cabasa
+Caisse claire
+Caisse claire de concert
+Carillon en bambou
+Carillon en bois
+Carillon en coquillages
+Carillon en métal
+Carillon en verre
+Carillons
+Castagnettes
+Castagnettes métalliques
+Cavaquinho
+Cervelas
+Chalemie Alto
+Chalemie Grande Basse
+Chalemie Sopranino
+Chalemie Soprano
+Chalemie Ténor
+Chalumeau
+Chalumeau Alto
+Chalumeau Basse
+Chalumeau Sopranino
+Chalumeau Soprano
+Chalumeau Ténor
+Charleston
+Chaînes
+Chofar
+Chorale
+Chœurs
+Cimbasso
+Clairon
+Clairon Alto
+Clairon Contrebasse
+Clairon Euphonium
+Clairon Mellophone
+Clairon Soprano
+Claquement de mains
+Claquement de doigts
+Clarinette
+Clarinette Alto
+Clarinette Basse
+Clarinette Basse en La
+Clarinette Basse en La (clef de fa)
+Clarinette Basse en Si♭ (clef de fa)
+Clarinette Contre-Alto
+Clarinette Contrebasse
+Clarinette de basset
+Clarinette en Do
+Clarinette en Mi♭
+Clarinette en Ré
+Clarinette en Si♭
+Clarinette en Sol
+Clarinette piccolo
+Clarinette soprano
+Clarinette-Heckelphone
+Clavecin
+Claves
+Clavicorde
+Clavinet
+Cloche
+Cloche plaque
+Cloches à mains
+Cloches tubulaires
+Clochettes
+Concertina
+Conque
+Contrabass
+Contre-alto
+Contre-ténor
+Contrebasse
+Contrebasses
+Contrebasson
+Cor anglais
+Cor baryton
+Cor baryton (clef de sol)
+Cor de basset
+Cor des Alpes
+Cor en Do
+Cor en Do aigu
+Cor en Fa
+Cor en La
+Cor en La♭
+Cor en Mi
+Cor en Mi♭
+Cor en Ré
+Cor en Si♭
+Cor en Si♭ grave
+Cor en Sol
+Cor postal
+Cor viennois
+Cornemuse
+Cornemuse Alto
+Cornemuse Basse
+Cornemuse Soprano
+Cornemuse Ténor
+Cornet
+Cornet Alto
+Cornet Soprano
+Cornet Ténor
+Cornet en Do
+Cornet en La
+Cornet en Mi♭
+Cornet en Si♭
+Cornettino
+Cromorne
+Crotales
+Crécelle
+Cuica
+Cymbale
+Cymbale chinoise
+Cymbale crash
+Cymbale ride
+Cymbale splash
+Cymbales
+Cymbales à doigts
+Célesta
+Danso
+Dessus de viole
+Didgeridoo
+Dizi
+Dizi en Do
+Dizi en Fa
+Dizi en La
+Dizi en Mi
+Dizi en Sol
+Doudouk
+Doudouk Basse en La
+Doudouk en Do
+Doudouk en Fa
+Doudouk en La
+Doudouk en Mi
+Doudouk en Si
+Doudouk en Si♭
+Douçaine
+Dulcimer
+Dungchen
+Enclume
+Erhu
+Euphonium
+Euphonium en Si♭ (clef de sol)
+Femmes
+Fifre en Si♭
+Fiscorn
+Flageolet
+Flageolet anglais
+Flageolet français
+Flexatone
+Flûte
+Flûte aiguë
+Flûte soprano
+Flûte sub-contralto
+Flûte alto
+Flûte basse
+Flûte contre-alto
+Flûte contrebasse
+Flûte octobasse
+Flûte hyperbasse
+Flûte Sopranino en Do
+Flûte de Pan
+Flûte irlandaise
+Flûte à bec
+Flûte à bec Contrebasse
+Flûte à bec Soubasse
+Flûte à bec Ténor
+Flûte à bec alto
+Flûte à bec basse
+Flûte à bec sopranino en Fa
+Flûte à bec soprano
+Fouet
+Garçon soprano
+Gemshorn
+Gemshorn Alto
+Gemshorn Basse
+Gemshorn Soprano
+Gemshorn Ténor
+Glockenspiel
+Gong
+Gongs accordés
+Grosse caisse de concert
+Guitare
+Guitare (clef de sol)
+Guitare Alto
+Guitare Alto à 11 cordes
+Guitare Soprano
+Guitare acoustique
+Guitare acoustique (clef de sol)
+Guitare baryton
+Guitare basse
+Guitare classique
+Guitare contra
+Guitare à 12 cordes
+Guitare à 7 cordes
+Guitare électrique
+Guitare électrique (clef de sol)
+Güiro
+Harmonica
+Harmonica Basse
+Harmonica Basse Hohner
+Harmonica Basse Huang
+Harmonica Chordet 20 trous
+Harmonica chromatique en Do 12 trous
+Harmonica chromatique en Do 14 trous
+Harmonica chromatique en Do Ténor 12 trous
+Harmonica chromatique en Sol 12 trous
+Harmonica chromatique en Sol 16 trous
+Harmonica de verre
+Harmonica diatonique en Do 10 trous
+Harmonica diatonique en Fa 10 trous
+Harmonica diatonique en La 10 trous
+Harmonica diatonique en Ré 10 trous
+Harmonica diatonique en Ré grave 10 trous
+Harmonica diatonique en Sol 10 trous
+Harmonica diatonique en Sol aigu 10 trous
+Harmonium
+Harpe
+Hautbois
+Hautbois Baryton
+Hautbois Piccolo
+Hautbois baroque
+Hautbois d'amour
+Hautbois de chasse
+Heckelphone
+Heckelphone Piccolo
+Hommes
+Horagai
+Hélicon
+Kalimba
+Kalimba Alto
+Kalimba aigue
+Kazoo
+Kelhorn Alto
+Kelhorn Basse
+Kelhorn Soprano
+Kelhorn Soubasse
+Kelhorn Ténor
+Klaxon accordés
+Koto
+Kuhlohorn
+Lupophone
+Luth
+Luth à 10 chœurs
+Luth à 13 chœurs
+Luth à 5 chœurs
+Luth à 6 chœurs
+Luth à 7 chœurs
+Luth à 8 chœurs
+Luth à 9 chœurs
+Mandocello
+Mandole
+Mandole Alto
+Mandole Ténor
+Mandoline
+Mandoline Octave
+Mandoloncelle
+Marimba
+Marimba (double portée)Marimba (Grand Staff)
+Marimba (simple portée)
+Marimba Contrebasse
+Marimba basse
+Mellophone
+Mezzo-soprano
+Mezzo-soprano (clef d'ut)
+Mélodica
+Métallophone
+Nyckelharpa
+Ocarina
+Ocarina Alto en Do
+Ocarina Alto en Fa
+Ocarina Alto en Si♭
+Ocarina Alto en Sol
+Ocarina Basse en Do
+Ocarina Soprano en Do
+Ocarina Soprano en Fa
+Ocarina Soprano en Si♭
+Ocarina Soprano en Sol
+Octavin
+Ondes Martenot
+Ophicléide
+Ophicléide Alto en Fa
+Ophicléide Alto en Mi♭
+Ophicléide Alto en Si♭
+Ophicléide Basse en Do
+Ophicléide Contrebasse en Mi♭
+Orgue
+Orgue Hammond
+Orgue percussif
+Orgue rotatif
+Orgue à anches
+Orgue à tuyaux
+Oud
+Papiers sablés
+Pardessus de viole
+Percussion
+Percussions corporelles
+Percussions de défilé
+Piano
+Piano Honky Tonk
+Piano droit
+Piano jouet
+Piano à queue
+Piano électrique
+Pierres
+Quena
+Quena en Do
+Quena en Fa
+Quena en Sol
+Quijada
+Rauschpfeife
+Rauschpfeife Sopranino
+Rauschpfeife Soprano
+Roto
+Rototoms
+Saqueboute alto
+Saqueboute basse
+Saqueboute ténor
+Sarrussophone
+Sarrussophone Alto
+Sarrussophone Baryton
+Sarrussophone Basse
+Sarrussophone Contrebasse
+Sarrussophone Sopranino
+Sarrussophone Soprano
+Sarrussophone Ténor
+Saxhorn
+Saxhorn alto en Fa
+Saxhorn alto en Mi♭
+Saxophone
+Saxophone Alto
+Saxophone Baryton
+Saxophone Basse
+Saxophone C-Melody
+Saxophone Contrebasse
+Saxophone Sopranino
+Saxophone Sopranissimo
+Saxophone Soprano
+Saxophone Sub-Contrabasse
+Saxophone Ténor
+Saxophone mezzo-soprano
+Scie musicale
+Serpent
+Shaker
+Shamisen
+Shehnai
+Sheng
+Sheng Alto
+Sheng Basse
+Sheng Soprano
+Sheng Ténor
+Sifflet à coulisse
+Sitar
+Soprano
+Soprano (clef d'ut)
+Sousaphone
+Sousaphone en Si♭
+Steeldrum
+Steeldrum Alto
+Steeldrum Basse
+Steeldrum Cello
+Steeldrum Guitar
+Steeldrum Soprano
+Steeldrum Ténor
+Synthétiseur
+Synthétiseur Goblins
+Synthétiseur New Age
+Synthétiseur Pad
+Synthétiseur Polyphonique
+Synthétiseur Sci-fi
+Synthétiseur brillant
+Synthétiseur chand
+Synthétiseur cristalin
+Synthétiseur d'atmosphère
+Synthétiseur d'effets
+Synthétiseur d'instruments à cordes
+Synthétiseur d'échos
+Synthétiseur de Sweep
+Synthétiseur de bande-son
+Synthétiseur de basses
+Synthétiseur de chœurs
+Synthétiseur de cordes frottées
+Synthétiseur de créneaux
+Synthétiseur de cuivres
+Synthétiseur de halo
+Synthétiseur de maillets
+Synthétiseur de percussions
+Synthétiseur de pluie
+Synthétiseur de sinusoïdes
+Synthétiseur de triangles
+Synthétiseur métallique
+Tablas
+Tam
+Tam-Tam
+Tambour de freins automobiles
+Tambour militaire
+Tambour sur cadre
+Tambour à fente
+Tambourin
+Tambours ténor
+Taragote
+Temple Blocks
+Théorbe
+Thérémine
+Timbales
+Timbales latines
+Timbre
+Tin Whistle en Ré
+Tin whistle
+Tin whistle en Si♭
+Toms chinois
+Toms de concert
+Tonnerre en feuille
+Tournebout
+Tournebout Alto
+Tournebout Basse
+Tournebout Grande basse
+Tournebout Soprano
+Tournebout Ténor
+Traverso
+Triangle
+Trombone
+Trombone alto
+Trombone basse
+Trombone contrebasse
+Trombone en Si♭ (clef de sol)
+Trombone soprano
+Trombone ténor
+Trompette
+Trompette baroque
+Trompette baroque en Do
+Trompette baroque en Fa
+Trompette baroque en Mi♭
+Trompette baroque en Ré
+Trompette baroque en Si♭
+Trompette basse
+Trompette basse en Do
+Trompette basse en Mi♭
+Trompette basse en Si♭
+Trompette de poche
+Trompette en Do
+Trompette en Fa
+Trompette en La
+Trompette en Mi
+Trompette en Mi♭
+Trompette en Ré
+Trompette en Si♭
+Trompette piccolo
+Trompette piccolo en La
+Trompette piccolo en Si♭
+Trompette ténor
+Trompette à coulisse
+Tuba
+Tuba Basse en Fa
+Tuba Basse en Mi♭
+Tuba en Do
+Tuba en Fa
+Tuba en Mi♭
+Tuba en Mi♭ (clef de sol)
+Tuba en Si♭
+Tuba en Si♭ (clef de sol)
+Tuba sous-contrebasse
+Tuba wagnérien
+Tuba wagnérien en Fa
+Tuba wagnérien en Si♭
+Tubaphone
+Tubes d'acier
+Ténor
+Ténor (clef d'ut)
+Ukulélé
+Ukulélé (Sol grave)
+Ukulélé baryton
+Ukulélé ténor
+Verres musicaux
+Vibraphone
+Vibraphone
+Viole de gambe
+Viole de gambe alto
+Viole de gambe ténor
+Violoncelle
+Violoncelles
+Violone
+Violone en Ré
+Violons
+Virginal
+Vuvuzela
+Wood Blocks
+Xylomarimba
+Xylophone

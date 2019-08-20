@@ -39,6 +39,17 @@ class PieceType extends AbstractType
                 ),
                 'label_format' => 'ysoft.instrum.fields.piece.%name%',
             ))
+            ->add('parts', CollectionType::class, array(
+                'entry_type'   => PartType::class,
+                'prototype'    => true,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'entry_options' => array(
+                    'label' => false,
+                ),
+                'label_format' => 'ysoft.instrum.fields.piece.%name%',
+            ))
             ->add('composers', null, array(
                 'required'      => true,
                 'label_format'  => 'ysoft.instrum.fields.piece.%name%',

@@ -44,3 +44,18 @@ y_soft_instrum_lending:
 
 y_soft_instrum_piece:
   resource: "@YSoftInstrumBundle/Resources/config/routing/piece.yml"
+
+y_soft_instrum_instrument:
+  resource: "@YSoftInstrumBundle/Resources/config/routing/instrument.yml"
+  prefix:   /instrument
+
+#y_soft_instrum_upload:
+#  path: /upload
+#  defaults: { _controller: "YSoftInstrumBundle:File:upload" }
+#  methods: [POST]
+
+y_soft_instrum_ajax_upload:
+  path: /upload
+  defaults: { _controller: "YSoftInstrumBundle:File:ajaxUpload" }
+  methods: [POST]
+  condition: "request.isxmlHttpRequest()"
