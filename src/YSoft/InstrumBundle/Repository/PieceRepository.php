@@ -67,10 +67,10 @@ class PieceRepository extends \Doctrine\ORM\EntityRepository
     public function findForSuisa(\DateTimeInterface $start, \DateTimeInterface $end)
     {
         $qb = $this->createQueryBuilder('p');
-        $qb ->addSelect($qb->expr()->count('c.id'))
+        $qb ->addSelect($qb->expr()->countDistinct('c.id'))
             ->innerJoin('p.concerts', 'c')->addSelect('c')
             ->innerJoin('p.composers', 'cp')->addSelect('cp')
-            ->innerJoin('p.arrangers', 'ar')->addSelect('ar')
+            ->leftJoin('p.arrangers', 'ar')->addSelect('ar')
             ->where($qb->expr()->between('c.date', ':start', ':end'))
             ->setParameter(':start', $start)
             ->setParameter(':end', $end)
