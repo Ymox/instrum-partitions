@@ -5,14 +5,18 @@
 {% if nbPages > 5 and page > 3 %}
 	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': 1})) }}" class="page-link">1</a></li>
 {% endif %}
-{% if page > 4 %}
+{% if page == 5 %}
+	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': 2})) }}" class="page-link">2</a></li>
+{% elseif page > 5 %}
 	<li class="page-item"><a class="page-link">…</a></li>
 {% endif %}
 {% for i in max(1, page - 2)..min(nbPages, page + 2) %}
 	<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
 {% endfor %}
-{% if page < nbPages - 3 %}
+{% if page < nbPages - 4 %}
 	<li class="page-item"><a class="page-link">…</a></li>
+{% elseif page == nbPages - 4 %}
+	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': nbPages - 1})) }}" class="page-link">{{ nbPages - 1 }}</a></li>
 {% endif %}
 {% if nbPages > 5 and page < nbPages - 2 %}
 	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ nbPages }}</a></li>
