@@ -30,10 +30,10 @@
 			<tr>
 				<td>
 				{%- if not instrument.key -%}
-				    {{ instrument.name }}
-			    {%- else -%}
-			    	{{ 'ysoft.instrum.instrument.full_name'|trans({'%name%': instrument.name, '%key%': ('ysoft.instrum.fields.instrument.key.choices.' ~ instrument.key)|trans}) }}
-			    {%- endif %}</td>
+					{{ instrument.name }}
+				{%- else -%}
+					{{ 'ysoft.instrum.instrument.full_name'|trans({'%name%': instrument.name, '%key%': ('ysoft.instrum.fields.instrument.key.choices.' ~ instrument.key)|trans}) }}
+				{%- endif %}</td>
 				<td>
 					<a href="{{ path('instrument_edit', { 'id': instrument.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
 				</td>

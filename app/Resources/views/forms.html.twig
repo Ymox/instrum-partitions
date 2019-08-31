@@ -37,27 +37,27 @@
 			<button type="button" class="btn btn-danger cleaner" title="{{ 'ysoft.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fa fa-times"></i></button>
 			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" readonly="readonly" />
 		</div>
-    	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control downloadable')|trim, 'data-upload-uri': path('y_soft_instrum_ajax_upload', {'target': form.parent.vars.id})}) %}
-    	{% if file_url is not null %}
-    	    {%- set attr = attr|merge({'style': (attr.style|default('') ~ ' display: none;')|trim}) -%}
-    	{% endif%}
-    	{{ block('form_widget') }}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control downloadable')|trim, 'data-upload-uri': path('y_soft_instrum_ajax_upload', {'target': form.parent.vars.id})}) %}
+		{% if file_url is not null %}
+			{%- set attr = attr|merge({'style': (attr.style|default('') ~ ' display: none;')|trim}) -%}
+		{% endif%}
+		{{ block('form_widget') }}
 	</div>
 
 	{% endspaceless %}
 {% endblock %}
 
 {%- block choice_widget_options -%}
-    {% for group_label, choice in options %}
-        {%- if choice is iterable -%}
-            <optgroup label="{{ group_label|trans }}">
-                {% set options = choice %}
-                {{- block('choice_widget_options') -}}
-            </optgroup>
-        {%- else -%}
-            <option value="{{ choice.value }}"{% if choice.attr %}{% with { 'attr': choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</option>
-        {%- endif -%}
-    {% endfor %}
+	{% for group_label, choice in options %}
+		{%- if choice is iterable -%}
+			<optgroup label="{{ group_label|trans }}">
+				{% set options = choice %}
+				{{- block('choice_widget_options') -}}
+			</optgroup>
+		{%- else -%}
+			<option value="{{ choice.value }}"{% if choice.attr %}{% with { 'attr': choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</option>
+		{%- endif -%}
+	{% endfor %}
 {%- endblock choice_widget_options -%}
 
 {# Errors #}
