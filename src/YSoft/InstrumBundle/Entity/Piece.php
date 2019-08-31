@@ -78,7 +78,7 @@ class Piece
     private $status;
 
     /**
-     * @var \Ysoft\InstrumBundle\Entity\Piece
+     * @var \YSoft\InstrumBundle\Entity\Piece
      */
     private $work;
 
@@ -264,11 +264,11 @@ class Piece
     /**
      * Set work
      *
-     * @param \Ysoft\InstrumBundle\Entity\Piece $work
+     * @param \YSoft\InstrumBundle\Entity\Piece $work
      *
      * @return Piece
      */
-    public function setWork(\Ysoft\InstrumBundle\Entity\Piece $work = null)
+    public function setWork(\YSoft\InstrumBundle\Entity\Piece $work = null)
     {
         $this->work = $work;
 
@@ -278,7 +278,7 @@ class Piece
     /**
      * Get work
      *
-     * @return \Ysoft\InstrumBundle\Entity\Piece
+     * @return \YSoft\InstrumBundle\Entity\Piece
      */
     public function getWork()
     {

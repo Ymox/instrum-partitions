@@ -23,7 +23,7 @@ class Missing
     private $createdAt;
 
     /**
-     * @var \Ysoft\InstrumBundle\Entity\Piece
+     * @var \YSoft\InstrumBundle\Entity\Piece
      */
     private $piece;
 

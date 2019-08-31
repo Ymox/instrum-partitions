@@ -54,7 +54,7 @@ class PartTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if (isset($options['file_property'])) {
-            /** @var \Ysoft\InstrumBundle\Entity\Part $part */
+            /** @var \YSoft\InstrumBundle\Entity\Part $part */
             $part = $form->getParent()->getData();
 
             $fileUrl = null;

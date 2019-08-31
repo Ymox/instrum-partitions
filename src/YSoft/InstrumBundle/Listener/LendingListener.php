@@ -15,7 +15,7 @@ class LendingListener
         }
         $status = $eventArgs->getObjectManager()->getRepository('YSoftInstrumBundle:Status')->find($statusId);
 
-        /** @var $piece \Ysoft\InstrumBundle\Entity\Piece */
+        /** @var $piece \YSoft\InstrumBundle\Entity\Piece */
         foreach ($lending->getPieces() as &$piece) {
             $piece->setStatus($status);
         }
