@@ -35,12 +35,12 @@ class Part
     /**
      * @var \YSoft\InstrumBundle\Entity\Piece
      */
-    public $piece;
+    private $piece;
 
     /**
      * @var \YSoft\InstrumBundle\Entity\instrument
      */
-    public $instrument;
+    private $instrument;
 
     /**
      * NOT A PERSISTED PROPERTY

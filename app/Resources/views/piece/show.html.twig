@@ -65,16 +65,22 @@
 				<th>{{ 'ysoft.instrum.fields.piece.created_at'|trans }}</th>
 				<td colspan="3">{{ piece.createdAt|date('Y-m-d à H:i:s') }}</td>
 			</tr>
-			{% if (not piece.parts.isEmpty) %}
+			{% if (not piece.parts.isEmpty and is_granted('ROLE_USER')) %}
 			<tr>
 				<td colspan="4"><h3>{{ 'ysoft.instrum.fields.piece.parts'|trans }}</h3>
 			</tr>
 			<tr>
 				{% for part in piece.parts %}
-				<td>{% if part.file %}<a href="{{ asset(part.downloadPath) }}" download="{{ part.instrument }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif -%}
-				    {{ part.instrument }}
+				{% set display = (part.instrument.key
+				    ? 'ysoft.instrum.fields.part.instrument.choices'|trans({
+							'%instrument%': part.instrument,
+							'%key%': ('ysoft.instrum.fields.instrument.key.choices.' ~ part.instrument.key)|trans
+						})
+					: part.instrument) %}
+				<td>{% if part.file %}<a href="{{ path('y_soft_instrum_part_download', {'id': part.id}) }}" download="{{ piece.id ~ ' - ' ~ display }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif %}
+					{{ display }}
 				    {% if part.file %}</a>{% endif -%}
-			    </td>
+				</td>
 					{% if (not loop.first and loop.index is divisible by(4)) %}
 			</tr>
 			<tr>
@@ -131,13 +137,22 @@
 				<th>{{ 'ysoft.instrum.fields.piece.note'|trans }}</th>
 				<td colspan="3">{{ movement.note|nl2br }}</td>
 			</tr>
-			{% if (not movement.parts.isEmpty) %}
+			{% if (not movement.parts.isEmpty and is_granted('ROLE_USER')) %}
 			<tr>
 				<td colspan="4"><h3>{{ 'ysoft.instrum.fields.piece.parts'|trans }}</h3></td>	
 			</tr>
 			<tr>
 				{% for part in movement.parts %}
-				<td><a href="{{ asset(part.downloadPath) }}" download="{{ part.instrument }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{{ part.instrument }}</a></td>
+				{% set display = (part.instrument.key
+				    ? 'ysoft.instrum.fields.part.instrument.choices'|trans({
+							'%instrument%': part.instrument,
+							'%key%': ('ysoft.instrum.fields.instrument.key.choices.' ~ part.instrument.key)|trans
+						})
+					: part.instrument) %}
+				<td>{% if part.file %}<a href="{{ path('y_soft_instrum_part_download', {'id': part.id}) }}" download="{{ piece.id ~ ' - ' ~ display }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif %}
+					{{ display }}
+					{% if part.file %}</a>{% endif -%}
+				</td>
 					{% if (not loop.first and loop.index is divisible by(4)) %}
 			</tr>
 			<tr>

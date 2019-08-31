@@ -49,6 +49,10 @@ y_soft_instrum_instrument:
   resource: "@YSoftInstrumBundle/Resources/config/routing/instrument.yml"
   prefix:   /instrument
 
+y_soft_instrum_part:
+  resource: "@YSoftInstrumBundle/Resources/config/routing/part.yml"
+  prefix:   /part
+
 #y_soft_instrum_upload:
 #  path: /upload
 #  defaults: { _controller: "YSoftInstrumBundle:File:upload" }

@@ -46,6 +46,7 @@ security:
     - { path: ^/lending, roles: ROLE_USER }
     - { path: ^/band, roles: ROLE_USER }
     - { path: ^/suisa, roles: ROLE_USER }
+    - { path: ^/part, roles: ROLE_USER }
 #    - { path: ^/missing, roles: ROLE_USER }
 
     - { path: /delete, roles: ROLE_ADMIN }
