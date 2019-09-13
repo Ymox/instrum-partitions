@@ -38,6 +38,12 @@ class Instrument
     private $parts;
 
     /**
+     * NOT A PERSISTED PROPERTY
+     * @var string
+     */
+    private $display = '';
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -189,6 +195,20 @@ class Instrument
 
     public function __toString()
     {
-        return $this->name;
+        return $this->display;
+    }
+
+    /**
+     * Set display
+     *
+     * @param string $display
+     *
+     * @return self
+     */
+    public function setDisplay(string $display)
+    {
+        $this->display = $display;
+
+        return $this;
     }
 }

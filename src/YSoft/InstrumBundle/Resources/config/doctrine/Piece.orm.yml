@@ -53,6 +53,7 @@ YSoft\InstrumBundle\Entity\Piece:
       orderBy:
         solo: DESC
         instrument: ASC
+        number: ASC
     missings:
       targetEntity: YSoft\InstrumBundle\Entity\Missing
       mappedBy: piece

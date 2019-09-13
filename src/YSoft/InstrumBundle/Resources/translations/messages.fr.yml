@@ -147,6 +147,19 @@ ysoft:
         master: Enregistrement maître
         duplicate: Enregistrement à supprimer
 
+    part: &part
+      solo:
+        numbered:
+          with_clef: %instrument% Solo %number% (%clef%)
+          without_clef:  %instrument% Solo %number%
+        with_clef: %instrument% Solo (%clef%)
+        without_clef:  %instrument% Solo
+      numbered:
+        with_clef:  %instrument% %number% (%clef%)
+        without_clef: %instrument% %number%
+      with_clef: %instrument% (%clef%)
+      without_clef: %instrument%
+
     person:
       new:
         title: &person_new Nouvelle personne

@@ -7,6 +7,10 @@ namespace YSoft\InstrumBundle\Entity;
  */
 class Part
 {
+    const TRANSLATE_DISPLAY = 'display';
+
+    const TRANSLATE_DOWNLOAD = 'download';
+
     /**
      * @var int
      */
@@ -53,6 +57,18 @@ class Part
      * @var string
      */
     private $downloadFolder;
+
+    /**
+     * NOT A PERSISTED PROPERTY
+     * @var string
+     */
+    private $display = '';
+
+    /**
+     * NOT A PERSISTED PROPERTY
+     * @var string
+     */
+    private $downloadName = '';
 
 
     /**
@@ -209,6 +225,11 @@ class Part
         return $this->instrument;
     }
 
+    public function __toString()
+    {
+        return $this->display;
+    }
+
     /**
      * Set upload
      *
@@ -265,5 +286,43 @@ class Part
     public function getDownloadPath()
     {
         return $this->downloadFolder . '/' . $this->file;
+    }
+
+    /**
+     * Set display
+     *
+     * @param string $display
+     *
+     * @return self
+     */
+    public function setDisplay(string $display)
+    {
+        $this->display = $display;
+
+        return $this;
+    }
+
+    /**
+     * Set download name
+     *
+     * @param string $downloadName
+     *
+     * @return self
+     */
+    public function setDownloadName(string $downloadName)
+    {
+        $this->downloadName = $downloadName;
+
+        return $this;
+    }
+
+    /**
+     * Get download name
+     *
+     * @return string
+     */
+    public function getDownloadName()
+    {
+        return $this->downloadName;
     }
 }

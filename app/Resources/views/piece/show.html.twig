@@ -70,16 +70,10 @@
 				<td colspan="4"><h3>{{ 'ysoft.instrum.fields.piece.parts'|trans }}</h3>
 			</tr>
 			<tr>
-				{% for part in piece.parts %}
-				{% set display = (part.instrument.key
-					? 'ysoft.instrum.fields.part.instrument.choices'|trans({
-							'%instrument%': part.instrument,
-							'%key%': ('ysoft.instrum.fields.instrument.key.choices.' ~ part.instrument.key)|trans
-						})
-					: part.instrument) %}
-				<td>{% if part.file %}<a href="{{ path('y_soft_instrum_part_download', {'id': part.id}) }}" download="{{ piece.id ~ ' - ' ~ display }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif %}
-					{{ display }}
-					{% if part.file %}</a>{% endif -%}
+				{% for order, part in piece.parts %}
+				<td>{% if part.file %}<a href="{{ path('y_soft_instrum_part_download', {'id': part.id}) }}" download="{{ piece.id ~ '-' ~ order ~ ' - ' ~ part.downloadName }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif %}
+					{{ part }}
+					{%- if part.file %}</a>{% endif -%}
 				</td>
 					{% if (not loop.first and loop.index is divisible by(4)) %}
 			</tr>
@@ -142,16 +136,10 @@
 				<td colspan="4"><h3>{{ 'ysoft.instrum.fields.piece.parts'|trans }}</h3></td>	
 			</tr>
 			<tr>
-				{% for part in movement.parts %}
-				{% set display = (part.instrument.key
-					? 'ysoft.instrum.fields.part.instrument.choices'|trans({
-							'%instrument%': part.instrument,
-							'%key%': ('ysoft.instrum.fields.instrument.key.choices.' ~ part.instrument.key)|trans
-						})
-					: part.instrument) %}
-				<td>{% if part.file %}<a href="{{ path('y_soft_instrum_part_download', {'id': part.id}) }}" download="{{ piece.id ~ ' - ' ~ display }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif %}
-					{{ display }}
-					{% if part.file %}</a>{% endif -%}
+				{% for order, part in movement.parts %}
+				<td>{% if part.file %}<a href="{{ path('y_soft_instrum_part_download', {'id': part.id}) }}" download="{{ piece.id ~ '-' ~ order ~ ' - ' ~ part.downloadName }}" title="{{ 'ysoft.instrum.file.download'|trans }}">{% endif %}
+					{{ part }}
+					{%- if part.file %}</a>{% endif -%}
 				</td>
 					{% if (not loop.first and loop.index is divisible by(4)) %}
 			</tr>

@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use YSoft\InstrumBundle\Entity\Part;
-use YSoft\InstrumBundle\Service\FileUploader;
 
 class PartListener
 {
@@ -15,6 +14,11 @@ class PartListener
      * @var \YSoft\InstrumBundle\Service\FileUploader
      */
     private $uploader;
+
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
 
     /**
      * @var string
@@ -26,9 +30,10 @@ class PartListener
      */
     private $downloadPath;
 
-    public function __construct(FileUploader $uploader, $uploadPath, $downloadPath)
+    public function __construct(\YSoft\InstrumBundle\Service\FileUploader $uploader, \Symfony\Component\Translation\TranslatorInterface $translator, $uploadPath, $downloadPath)
     {
         $this->uploader = $uploader;
+        $this->translator = $translator;
         $this->uploadPath = $uploadPath;
         $this->downloadPath = $downloadPath;
     }
@@ -52,6 +57,8 @@ class PartListener
             $entity->setUpload(new File(ltrim($this->uploadPath, '/') . '/' . $fileName));
             $entity->setDownloadFolder($this->downloadPath);
         }
+
+        $this->setTranslatedStrings($entity);
     }
 
     public function preUpdate(PreUpdateEventArgs $args)
@@ -59,6 +66,7 @@ class PartListener
         $entity = $args->getEntity();
 
         $this->uploadFile($entity);
+        $this->setTranslatedStrings($entity);
     }
 
     private function uploadFile($entity)
@@ -81,5 +89,45 @@ class PartListener
             // as the path is set on the postLoad listener
             $entity->setFile($file->getFilename());
         }
+    }
+
+    private function setTranslatedStrings($entity)
+    {
+        // Download and display names
+        $translationString = 'ysoft.instrum.part';
+        if ($entity->isSolo()) {
+            $translationString .= '.solo';
+        }
+        if ($entity->getNumber()) {
+            $translationString .= '.numbered';
+        }
+        if ($entity->getClef()) {
+            $translationString .= '.with_clef';
+        } else {
+            $translationString .= '.without_clef';
+        }
+
+        $parameters = array(
+            '%instrument%' => (string) $entity->getInstrument(),
+            '%number%'     => $entity->getNumber(),
+        );
+
+        $display = $this->translator->trans($translationString, array_merge(
+            $parameters,
+            array(
+                '%clef%' => $entity->getClef() ? $this->translator->trans('ysoft.instrum.fields.part.clef.choices.short.' . $entity->getClef()) : '',
+            )
+        ));
+        $downloadName = preg_replace('`♭`' , 'b', $this->translator->trans($translationString, array_merge(
+            $parameters,
+            array(
+                '%clef%' => $entity->getClef() ? $this->translator->trans('ysoft.instrum.fields.part.clef.choices.long.' . $entity->getClef()) : '',
+            )
+        )));
+
+        $entity
+            ->setDisplay($display)
+            ->setDownloadName($downloadName)
+        ;
     }
 }

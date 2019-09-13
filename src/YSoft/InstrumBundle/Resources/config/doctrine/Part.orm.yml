@@ -26,6 +26,7 @@ YSoft\InstrumBundle\Entity\Part:
     instrument:
       targetEntity: YSoft\InstrumBundle\Entity\Instrument
       inversedBy: parts
+      #fetch: EAGER
     piece:
       targetEntity: YSoft\InstrumBundle\Entity\Piece
       inversedBy: parts
