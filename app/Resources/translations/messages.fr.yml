@@ -36,4 +36,6 @@ ysoft:
     bands: Ensembles
 
   file:
+    download: Télécharger le fichier actuel
     delete: Supprimer le fichier
+    download_selected: Télécharger la sélection
