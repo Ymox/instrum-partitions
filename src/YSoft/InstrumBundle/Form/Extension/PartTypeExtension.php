@@ -65,28 +65,14 @@ class PartTypeExtension extends AbstractTypeExtension
                 if (!empty($options['download_name'])) {
                     $downloadName = $options['download_name'];
                 } else {
-                    $downloadName =
-                        ($part->isSolo() ? 'Solo ' : '')
-                        . $part->getInstrument()->getName()
-                        . ($part->getNumber() ? ' ' . $part->getNumber() : '');
-                    if ($part->getInstrument()->getKey() || $part->getClef()) {
-                        $downloadName .= ' (';
-                    }
-                    if ($part->getInstrument()->getKey()) {
-                        $downloadName .= $this->translator->trans('ysoft.instrum.fields.instrument.key.choices.long.' . $part->getInstrument()->getKey());
-                    }
-                    if ($part->getClef()) {
-                        $downloadName .= $this->translator->trans('ysoft.instrum.fields.part.clef.choices.long.' . $part->getClef());
-                    }
-                    if ($part->getInstrument()->getKey() || $part->getClef()) {
-                        $downloadName .= ')';
-                    }
+                    $downloadName = $part->getDownloadName();
                 }
             }
 
             // sets a "file_url" variable that will be available when rendering this field
             $view->vars['file_url'] = $fileUrl;
             $view->vars['download_name'] = $downloadName;
+            $view->vars['part_id'] = $part ? $part->getId() : '__id__';
         }
     }
 }

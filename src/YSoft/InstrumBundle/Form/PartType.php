@@ -37,16 +37,6 @@ class PartType extends AbstractType
                         return 'ysoft.instrum.fields.instrument.common.false';
                     }
                 },
-                'choice_label' => function ($value, $key, $index) use ($translator) {
-                    if ($value->getKey()) {
-                        return $translator->trans('ysoft.instrum.fields.part.instrument.choices', array(
-                            '%instrument%' => $value,
-                            '%key%' => $translator->trans('ysoft.instrum.fields.instrument.key.choices.' . $value->getKey()))
-                        );
-                    } else {
-                        return $value;
-                    }
-                },
                 'label_format' => 'ysoft.instrum.fields.part.%name%.label',
             ))
             ->add('clef', ChoiceType::class, array(

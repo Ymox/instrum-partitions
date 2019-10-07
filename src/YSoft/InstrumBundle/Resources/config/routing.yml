@@ -63,3 +63,10 @@ y_soft_instrum_ajax_upload:
   defaults: { _controller: "YSoftInstrumBundle:File:ajaxUpload" }
   methods: [POST]
   condition: "request.isxmlHttpRequest()"
+
+y_soft_instrum_file_download:
+  path: /download/{file}
+  defaults: { _controller: "YSoftInstrumBundle:File:download" }
+  methods: [GET]
+  requirements:
+    file: .+

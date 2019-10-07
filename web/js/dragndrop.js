@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 $(document).ready( function() {
 	$('form').on('dragover dragenter',
 		'.dropzone',

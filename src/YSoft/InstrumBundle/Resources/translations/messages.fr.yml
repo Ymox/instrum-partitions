@@ -113,8 +113,6 @@ ysoft:
           label: Courant
           "true": Courant
           "false": Peu courant
-    file:
-      download: Télécharger le fichier actuel
 
     flash:
       success:

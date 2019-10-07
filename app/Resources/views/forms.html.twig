@@ -32,10 +32,10 @@
 	{% spaceless %}
 
 	<div class="input-group file-link" role="group">
-		<div id="{{ id }}_filled" class="input-group-prepend downloadable" style="{% if file_url is null %}display: none;{% endif %}">
-			<a href="{{ asset(file_url) }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'ysoft.instrum.file.download'|trans }}"><i class="fa fa-floppy-o"></i></a>
+		<div id="{{ id }}_filled" class="input-group-prepend input-group downloadable" style="{% if file_url is null %}display: none;{% endif %}">
+			<a href="{{ path('y_soft_instrum_part_download', {'id': part_id}) }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'ysoft.file.download'|trans }}"><i class="fa fa-floppy-o"></i></a>
 			<button type="button" class="btn btn-danger cleaner" title="{{ 'ysoft.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fa fa-times"></i></button>
-			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" readonly="readonly" />
+			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" title="{{ download_name }}" readonly="readonly" />
 		</div>
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control downloadable')|trim, 'data-upload-uri': path('y_soft_instrum_ajax_upload', {'target': form.parent.vars.id})}) %}
 		{% if file_url is not null %}

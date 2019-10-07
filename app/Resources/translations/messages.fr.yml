@@ -4,6 +4,7 @@ global:
     new: Nouveau
     show: Détails
     edit: Editer
+    check_all: Sélectionner tout
 
 ysoft:
   login:
