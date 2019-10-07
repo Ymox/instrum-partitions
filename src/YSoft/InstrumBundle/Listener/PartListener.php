@@ -93,6 +93,10 @@ class PartListener
 
     private function setTranslatedStrings($entity)
     {
+        if (!$entity instanceof Part) {
+            return;
+        }
+
         // Download and display names
         $translationString = 'ysoft.instrum.part';
         if ($entity->isSolo()) {
