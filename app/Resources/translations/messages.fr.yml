@@ -28,6 +28,7 @@ ysoft:
     sizes: Tailles
     instrumentations: Instrumentations
     publishers: Editeurs
+    login: Connexion
     logout: Déconnexion
     lendings:
       heading: Prêts
