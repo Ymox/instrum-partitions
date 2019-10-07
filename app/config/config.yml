@@ -9,7 +9,7 @@ parameters:
   locale: fr
   paginate.per_page: 30
   download_path: "/parts"
-  upload_path: "%kernel.project_dir%/web/%download_path%"
+  upload_path: "%kernel.project_dir%/web%download_path%"
 
 framework:
   #esi: ~

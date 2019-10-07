@@ -54,7 +54,7 @@ class PartListener
         }
 
         if ($fileName = $entity->getFile()) {
-            $entity->setUpload(new File(ltrim($this->uploadPath, '/') . '/' . $fileName));
+            $entity->setUpload(new File(rtrim($this->uploadPath, '/') . '/' . $fileName));
             $entity->setDownloadFolder($this->downloadPath);
         }
 
@@ -66,7 +66,6 @@ class PartListener
         $entity = $args->getEntity();
 
         $this->uploadFile($entity);
-        $this->setTranslatedStrings($entity);
     }
 
     private function uploadFile($entity)
