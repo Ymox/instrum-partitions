@@ -1,14 +1,14 @@
 # Instrum partitions
 
-L'[Union Instrumentale de Bex](http://www.instrumbex.ch) fête ses 150 ans en 2019. On peut imaginer la quantité de partitions qui ont été jouées depuis… et cela représente une grande quantité de données d'archives qui sont répertoriées sous différents formats. Le plus vieux à ce jour est un système de "cartes de visites" pour chaque partition, ce qui rend fastidieux la recherche. Heureusement, ce système a été saisi dans un fichier Excel, et c'est la liste la plus à jour officiellement à l'heure actuelle.  
+L'[Union Instrumentale de Bex](http://www.instrumbex.ch) fête ses 150 ans en 2019. On peut imaginer la quantité de partitions qui ont été jouées depuis… et cela représente une grande quantité de données d'archives qui sont répertoriées sous différents formats. Le plus vieux à ce jour est un système de "cartes de visites" pour chaque partition, ce qui rend fastidieux la recherche. Heureusement, ce système a été saisi dans un fichier Excel, ce qui a grandement facilité la migration vers cette solution.  
 L'archivage physique se base sur un format numérique, les partitions étant tamponnées d'un numéro qui les identifie.
 
 Seulement :
  
-- ça prend une place conséquente ;
+- les cartes, ça prend une place conséquente ;
 - la gestion des accès n'est pas tres aisée ;
 - le partage non-plus ;
-- la synchronisation quand plusieurs personnes ont travaillé dessus est un casse-tête ;
+- la synchronisation du fichier Excel quand plusieurs personnes ont travaillé dessus est un casse-tête ;
 - la normalisation des données laisse à désirer :
 
 	- une ligne par compositeur
@@ -16,13 +16,13 @@ Seulement :
 	
 	rendant peu pertinents les tris.
 
-- quelques doublons sont déjà présents vu que l'ID devait être choisi avant la saisie ;
-- c'est difficilement évolutif sans complexifier la recherche sur les nouvelles informations (programmes des concerts notamment — "quand a-t'on joué quoi") ;
-- c'est difficilement compatible avec une GED qui à terme semble inévitable.
+- quelques doublons étaient déjà présents vu que l'ID devait être choisi avant la saisie ;
+- c'était difficilement évolutif sans complexifier la recherche sur les nouvelles informations (programmes des concerts notamment — "quand a-t'on joué quoi") ;
+- c'était difficilement compatible avec une GED qui à terme semble inévitable.
 
 Du coup, ce projet est là pour faire un pont entre les précédentes solutions et celles qui probablement viendront un jour, tout en permettant de rapidement collecter les informations pour la SUISA.
 
-Actuellement, le projet permet donc de saisir des partitions au niveau de :
+Actuellement, le projet permet donc de saisir des partitions en renseignant :
 
 - leur titre ;
 - une éventuelle traduction ;
@@ -32,13 +32,15 @@ Actuellement, le projet permet donc de saisir des partitions au niveau de :
 - le type de pièce ;
 - la taille des partitions (pour les marches de concert ou les marches de défilé, c'est souvent du A4 respectivement A5), pour les copies… de sécurité ;
 - l'état (complet, prêté, etc.) ;
+- les mouvements (qui reprennent les propriétés "de base" des partitions) ;
+- les voix, avec les fichiers électroniques si besoin ;
 - le niveau ;
 - l'éditeur ;
 - l'année d'édition ;
 - la référence ;
 - d'éventuelles remarques.
 
-Le projet fonctionne avec Symfony 3 (3.4.21 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
+Le projet fonctionne avec Symfony 3 (3.4.32 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
 
 ## Statuts de partitions
 
