@@ -19,8 +19,8 @@ $(document).ready( function() {
 		}
 	};
 	
-	$('select.addable').each( function(e) {
-		addButton($(e.relatedTarget));
+	$('select.addable').each( function() {
+		addButton($(this));
 	});
 	
 	$('[data-prototype]').each( function() {

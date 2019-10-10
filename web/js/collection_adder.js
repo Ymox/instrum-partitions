@@ -1,13 +1,13 @@
 $(document).ready( function() {
-	const addButton = function(where) {
-		var prototype = $(where).data('prototype');
-		$(where).prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
-		$('>div, >tbody>tr', where).filter(function() {
-			return $('>.remover', where).length === 0;
+	const addButton = function($where) {
+		var prototype = $where.data('prototype');
+		$where.prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
+		$('>div, >tbody>tr', $where).filter(function() {
+			return $('>.remover', $where).length === 0;
 		}).css('position', 'relative').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;"><i class="fa fa-times"></i></button>')
 	}
 	$('[data-prototype]').each( function() {
-		addButton(this);
+		addButton($(this));
 		const observer = new MutationObserver( function(mutations) {
 			mutations.forEach( function(mutation) {
 				addButton($(mutation.addedNodes[0]).find('[data-prototype]'));
