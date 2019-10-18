@@ -24,7 +24,7 @@ class ConcertType extends AbstractType
             ))
             ->add('pieces', null, array(
                 'choice_label' => function($piece) {
-                    $pieceAsString = $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
+                    $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                     return $pieceAsString;
                 },
                 'label_format' => 'ysoft.instrum.fields.concert.%name%'

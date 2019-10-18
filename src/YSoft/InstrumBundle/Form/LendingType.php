@@ -52,7 +52,7 @@ class LendingType extends AbstractType
 
                 $form->add('pieces', null, array(
                     'choice_label'  => function($piece) use ($lending) {
-                        $pieceAsString = $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
+                        $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                         return $pieceAsString;
                     },
                     'query_builder' => function (\YSoft\InstrumBundle\Repository\PieceRepository $repo) use ($lending) {

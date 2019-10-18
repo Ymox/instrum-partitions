@@ -19,7 +19,7 @@ class ProgramType extends AbstractType
             ))
             ->add('pieces', null, array(
                 'choice_label' => function($piece) {
-                    $pieceAsString = $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
+                    $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                     return $pieceAsString;
                 },
                 'by_reference' => false,
