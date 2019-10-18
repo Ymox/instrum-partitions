@@ -228,7 +228,10 @@ ysoft:
         title: &concert_new Nouveau concert
         heading: *concert_new   
       show:
-        too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !   
+        too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !
+        arrangers:
+          short: "arr."
+          long: "[0,1]arrangeur|]1,+Inf[arrangeurs"
 
     band:
       index:
