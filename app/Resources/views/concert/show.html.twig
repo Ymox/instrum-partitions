@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ concert.name }} | {{ parent() }}{% endblock %}
+
 {% block body %}
 	<h1>{{ concert.name }}</h1>
 

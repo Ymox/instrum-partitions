@@ -45,6 +45,7 @@ security:
 
     - { path: /new, roles: ROLE_USER }
     - { path: /edit, roles: ROLE_USER }
+    - { path: /upload, roles: ROLE_USER }
     - { path: ^/publisher, roles: ROLE_USER }
     - { path: ^/lending, roles: ROLE_USER }
     - { path: ^/band, roles: ROLE_USER }
