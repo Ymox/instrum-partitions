@@ -1,0 +1,39 @@
+piece_index:
+  path:   /
+  controller: 'App\Controller\PieceController::index'
+  methods: GET
+
+piece_show:
+  path:   /piece/{id}/show
+  controller: 'App\Controller\PieceController::show'
+  methods: GET
+
+piece_new:
+  path:   /piece/new
+  controller: 'App\Controller\PieceController::new'
+  methods: [GET, POST]
+
+piece_edit:
+  path:   /piece/{id}/edit
+  controller: 'App\Controller\PieceController::edit'
+  methods: [GET, POST]
+
+piece_delete:
+  path:   /piece/{id}/delete
+  controller: 'App\Controller\PieceController::delete'
+  methods: DELETE
+
+piece_duplicates:
+  path:   /piece/duplicates/{master}/{duplicate}
+  controller: 'App\Controller\PieceController::duplicates'
+  methods: [GET, POST]
+
+piece_import:
+  path:   /import
+  controller: 'App\Controller\PieceController::import'
+  methods: [GET, POST]
+
+piece_suisa:
+  path:  /suisa
+  controller: 'App\Controller\PieceController::suisa'
+  methods: [GET, POST]

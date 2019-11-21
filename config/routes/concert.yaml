@@ -1,0 +1,24 @@
+concert_index:
+  path:   /concert/
+  controller: 'App\Controller\ConcertController::index'
+  methods: GET
+
+concert_show:
+  path:   /concert/{id}/show
+  controller: 'App\Controller\ConcertController::show'
+  methods: GET
+
+concert_new:
+  path:   /concert/new
+  controller: 'App\Controller\ConcertController::new'
+  methods: [GET, POST]
+
+concert_edit:
+  path:   /concert/{id}/edit
+  controller: 'App\Controller\ConcertController::edit'
+  methods: [GET, POST]
+
+concert_delete:
+  path:   /concert/{id}/delete
+  controller: 'App\Controller\ConcertController::delete'
+  methods: DELETE

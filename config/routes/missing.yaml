@@ -1,0 +1,9 @@
+missing_index:
+  path:   /missing/
+  controller: 'App\Controller\MissingController::index'
+  methods: GET
+  
+missing_delete:
+  path:   /missing/{id}/delete
+  controller: 'App\Controller\MissingController::delete'
+  methods: DELETE

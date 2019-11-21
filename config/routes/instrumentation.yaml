@@ -1,0 +1,19 @@
+instrumentation_index:
+  path:   /instrumentation/
+  controller: 'App\Controller\InstrumentationController::index'
+  methods: GET
+
+instrumentation_new:
+  path:   /instrumentation/new
+  controller: 'App\Controller\InstrumentationController::new'
+  methods: [GET, POST]
+
+instrumentation_edit:
+  path:   /instrumentation/{id}/edit
+  controller: 'App\Controller\InstrumentationController::edit'
+  methods: [GET, POST]
+
+instrumentation_delete:
+  path:   /instrumentation/{id}/delete
+  controller: 'App\Controller\InstrumentationController::delete'
+  methods: DELETE

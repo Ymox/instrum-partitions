@@ -1,0 +1,61 @@
+security:
+  role_hierarchy:
+    ROLE_USER: ROLE_DOWNLOAD
+    ROLE_ADMIN: ROLE_USER
+    ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    in_memory:
+      memory:
+        users: "%application_users%"
+
+  encoders:
+    Symfony\Component\Security\Core\User\User:
+      algorithm: bcrypt
+      cost: 12
+
+  firewalls:
+    # disables authentication for assets and the profiler, adapt it according to your needs
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      anonymous: lazy
+
+      # activate different ways to authenticate
+      # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+      # https://symfony.com/doc/current/security/impersonating_user.html
+      # switch_user: true
+
+      # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+      form_login:
+        login_path: login
+        check_path: login
+        csrf_token_generator: security.csrf.token_manager
+
+      logout:
+        path: /logout
+        target: /
+
+  access_control:
+    - { path: /download, roles: ROLE_DOWNLOAD }
+    - { path: /new, roles: ROLE_USER }
+    - { path: /edit, roles: ROLE_USER }
+    - { path: /upload, roles: ROLE_USER }
+    - { path: ^/publisher, roles: ROLE_USER }
+    - { path: ^/lending, roles: ROLE_USER }
+    - { path: ^/band, roles: ROLE_USER }
+    - { path: ^/suisa, roles: ROLE_USER }
+    - { path: ^/part, roles: ROLE_USER }
+#   - { path: ^/missing, roles: ROLE_USER }
+
+    - { path: /delete, roles: ROLE_ADMIN }
+    - { path: ^/instrumentation, roles: ROLE_ADMIN }
+    - { path: ^/status, roles: ROLE_ADMIN }
+    - { path: ^/size, roles: ROLE_ADMIN }
+    - { path: ^/type, roles: ROLE_ADMIN }
+    - { path: ^/piece/duplicates, roles: ROLE_ADMIN }
+
+    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app.size.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ 'app.size.index.heading'|trans }}</h1>
+
+	<table class="table table-sm table-hover">
+		<thead>
+			<tr>
+				<th>{{ 'app.fields.size.name'|trans }}</th>
+				<th>{{ 'app.fields.size.note'|trans }}</th>
+				<th><a href="{{ path('size_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for size in sizes %}
+			<tr>
+				<td><a href="{{ path('size_show', { 'name': size.name }) }}">{{ size.name }}</a></td>
+				<td>{{ size.note }}</td>
+				<td>
+					<a href="{{ path('size_show', { 'name': size.name }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
+					<a href="{{ path('size_edit', { 'name': size.name }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

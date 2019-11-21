@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app.instrumentation.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ 'app.instrumentation.index.heading'|trans }}</h1>
+
+	<table class="table table-sm table-hover">
+		<thead>
+			<tr>
+				<th>{{ 'app.fields.instrumentation.name'|trans }}</th>
+				<th>{{ 'app.fields.instrumentation.note'|trans }}</th>
+				<th><a href="{{ path('instrumentation_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for instrumentation in instrumentations %}
+			<tr>
+				<td>{{ instrumentation.name }}</td>
+				<td>{{ instrumentation.note }}</td>
+				<td>
+					<a href="{{ path('instrumentation_edit', { 'id': instrumentation.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

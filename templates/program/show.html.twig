@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{ program.name }}</h1>
+
+	<table class="table table-sm">
+		<tbody>
+			<tr>
+				<th>{{ 'app.fields.program.updated_at'|trans }}</th>
+				<td>{{ program.updatedAt|date('Y-m-d à H:i') }}</td>
+			</tr>
+			<tr>
+				<th colspan="2">{{ 'app.fields.program.pieces'|trans }}</th>
+			</tr>
+			{% for piece in program.pieces -%}
+			<tr>
+				<td colspan="2"><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
+			</tr>
+			{% endfor -%}
+		</tbody>
+	</table>
+
+	<ul class="list-inline float-right">
+		<li class="list-inline-item">
+			<a href="{{ path('program_index') }}" class="btn btn-light"><i class="fa fa-list"></i></a>
+		</li>
+		<li class="list-inline-item">
+			<a href="{{ path('program_edit', { 'id': program.id }) }}" class="btn btn-warning" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+		</li>
+		<li class="list-inline-item">
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}

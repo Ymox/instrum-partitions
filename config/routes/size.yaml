@@ -1,0 +1,24 @@
+size_index:
+  path:   /size/
+  controller: 'App\Controller\SizeController::index'
+  methods: GET
+
+size_show:
+  path:   /size/{name}/show
+  controller: 'App\Controller\SizeController::show'
+  methods: GET
+
+size_new:
+  path:   /size/new
+  controller: 'App\Controller\SizeController::new'
+  methods: [GET, POST]
+
+size_edit:
+  path:   /size/{name}/edit
+  controller: 'App\Controller\SizeController::edit'
+  methods: [GET, POST]
+
+size_delete:
+  path:   /size/{name}/delete
+  controller: 'App\Controller\SizeController::delete'
+  methods: DELETE

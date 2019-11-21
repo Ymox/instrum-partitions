@@ -1,0 +1,24 @@
+lending_index:
+  path:   /lending/
+  controller: 'App\Controller\LendingController::index'
+  methods: GET
+
+lending_show:
+  path:   /lending/{id}/show
+  controller: 'App\Controller\LendingController::show'
+  methods: GET
+
+lending_new:
+  path:   /lending/new
+  controller: 'App\Controller\LendingController::new'
+  methods: [GET, POST]
+
+lending_edit:
+  path:   /lending/{id}/edit
+  controller: 'App\Controller\LendingController::edit'
+  methods: [GET, POST]
+
+lending_delete:
+  path:   /lending/{id}/delete
+  controller: 'App\Controller\LendingController::delete'
+  methods: DELETE

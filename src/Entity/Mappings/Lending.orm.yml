@@ -1,0 +1,41 @@
+App\Entity\Lending:
+  type: entity
+  table: null
+  repositoryClass: App\Repository\LendingRepository
+  entityListeners:
+    App\Listener\LendingListener:
+      prePersist: [ changeLendingPiecesStatus ]
+      preUpdate: [ changeLendingPiecesStatus ]
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    contact:
+      type: string
+      length: 255
+    start:
+      type: date
+    end:
+      type: date
+      nullable: true
+    ours:
+      type: boolean
+
+  manyToOne:
+    band:
+      targetEntity: App\Entity\Band
+      inversedBy: lendings
+
+  manyToMany:
+    pieces:
+      targetEntity: App\Entity\Piece
+      inversedBy: lendings
+      cascade:
+        - persist
+      joinTable:
+        name: piece_move
+      
+  lifecycleCallbacks: {  }

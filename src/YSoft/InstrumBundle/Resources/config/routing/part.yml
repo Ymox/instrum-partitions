@@ -1,4 +1,0 @@
-y_soft_instrum_part_download:
-  path: /download
-  defaults: { _controller: "YSoftInstrumBundle:Part:download" }
-  methods: [GET]
