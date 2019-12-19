@@ -1,9 +1,7 @@
 {
-	"name" : "symfony/website-skeleton",
+	"name" : "ysoft/instrum-partitions",
+	"license" : "proprietary",
 	"type" : "project",
-	"license" : "MIT",
-	"description" : "A skeleton to start a new Symfony website",
-	"minimum-stability" : "stable",
 	"require" : {
 		"php": "^7.2.9",
 		"ext-ctype": "*",

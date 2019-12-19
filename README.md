@@ -1,6 +1,6 @@
 # Instrum partitions
 
-L'[Union Instrumentale de Bex](http://www.instrumbex.ch) fête ses 150 ans en 2019. On peut imaginer la quantité de partitions qui ont été jouées depuis… et cela représente une grande quantité de données d'archives qui sont répertoriées sous différents formats. Le plus vieux à ce jour est un système de "cartes de visites" pour chaque partition, ce qui rend fastidieux la recherche. Heureusement, ce système a été saisi dans un fichier Excel, ce qui a grandement facilité la migration vers cette solution.  
+L'[Union Instrumentale de Bex](http://www.instrumbex.ch) a fêté ses 150 ans en 2019. On peut imaginer la quantité de partitions qui ont été jouées depuis… et cela représente une grande quantité de données d'archives qui sont répertoriées sous différents formats. Le plus vieux à ce jour est un système de "cartes de visites" pour chaque partition, ce qui rend fastidieux la recherche. Heureusement, ce système a été saisi dans un fichier Excel, ce qui a grandement facilité la migration vers cette solution.  
 L'archivage physique se base sur un format numérique, les partitions étant tamponnées d'un numéro qui les identifie.
 
 Seulement :
@@ -40,7 +40,7 @@ Actuellement, le projet permet donc de saisir des partitions en renseignant :
 - la référence ;
 - d'éventuelles remarques.
 
-Le projet fonctionne avec Symfony 5 (5.0.0 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
+Le projet fonctionne avec Symfony 5 (5.0.2 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
 
 ## Statuts de partitions
 
