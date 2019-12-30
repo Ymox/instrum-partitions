@@ -1,0 +1,26 @@
+App\Entity\Missing:
+  type: entity
+  table: null
+  repositoryClass: App\Repository\MissingRepository
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    voice:
+      type: string
+      length: 255
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+
+  manyToOne:
+    piece:
+      targetEntity: App\Entity\Piece
+      inversedBy: missings
+      
+  lifecycleCallbacks: {  }

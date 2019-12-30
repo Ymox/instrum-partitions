@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ person }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ person }}</h1>
+
+	<table class="table table-sm">
+		<tbody>
+			<tr>
+				<th>{{ 'app.fields.person.firstName'|trans }}</th>
+				<td colspan="3">{{ person.firstName }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'app.fields.person.lastName'|trans }}</th>
+				<td colspan="3">{{ person.lastName }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'app.fields.person.compositions'|trans }}</th>
+				<td>{{ person.compositions.count }}{% if person.compositions.count %} <a href="{{ path('piece_index', {'q': {'composer': person.lastName}}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-list"></i></a>{% endif %}</th>
+				<th>{{ 'app.fields.person.arrangements'|trans }}</th>
+				<td>{{ person.arrangements.count }}{% if person.arrangements.count %} <a href="{{ path('piece_index', {'q': {'arranger': person.lastName}}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-list"></i></a>{% endif %}</th>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul class="list-inline float-right">
+		<li class="list-inline-item">
+			<a href="{{ path('person_index') }}" class="btn btn-light"><i class="fa fa-list"></i></a>
+		</li>
+		<li class="list-inline-item">
+			<a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+		</li>
+		<li class="list-inline-item">
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}

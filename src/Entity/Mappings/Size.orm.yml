@@ -1,0 +1,32 @@
+App\Entity\Size:
+  type: entity
+  table: null
+  repositoryClass: App\Repository\SizeRepository
+  id:
+    name:
+      type: string
+      length: 127
+      id: true
+      generator: ~
+  fields:
+    minWidth:
+      type: smallint
+      nullable: true
+    maxWidth:
+      type: smallint
+    minHeight:
+      type: smallint
+      nullable: true
+    maxHeight:
+      type: smallint
+    note:
+      type: string
+      length: 255
+      nullable: true
+
+  oneToMany:
+    pieces:
+      targetEntity: App\Entity\Piece
+      mappedBy: size
+
+  lifecycleCallbacks: {  }

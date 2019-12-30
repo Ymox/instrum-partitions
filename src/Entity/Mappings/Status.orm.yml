@@ -1,0 +1,20 @@
+App\Entity\Status:
+  type: entity
+  table: null
+  repositoryClass: App\Repository\StatusRepository
+  id:
+    id:
+      type: string
+      id: true
+      generator: ~
+  fields:
+    name:
+      type: string
+      length: 255
+
+  oneToMany:
+    pieces:
+      targetEntity: App\Entity\Piece
+      mappedBy: status
+      
+  lifecycleCallbacks: {  }

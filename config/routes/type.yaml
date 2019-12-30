@@ -1,0 +1,24 @@
+type_index:
+  path:   /type/
+  controller: 'App\Controller\TypeController::index'
+  methods: GET
+
+type_show:
+  path:   /type/{id}/show
+  controller: 'App\Controller\TypeController::show'
+  methods: GET
+
+type_new:
+  path:   /type/new
+  controller: 'App\Controller\TypeController::new'
+  methods: [GET, POST]
+
+type_edit:
+  path:   /type/{id}/edit
+  controller: 'App\Controller\TypeController::edit'
+  methods: [GET, POST]
+
+type_delete:
+  path:   /type/{id}/delete
+  controller: 'App\Controller\TypeController::delete'
+  methods: DELETE

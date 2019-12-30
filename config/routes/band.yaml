@@ -1,0 +1,24 @@
+band_index:
+  path:   /band/
+  controller: 'App\Controller\BandController::index'
+  methods: GET
+
+band_show:
+  path:   /band/{id}/show
+  controller: 'App\Controller\BandController::show'
+  methods: GET
+
+band_new:
+  path:   /band/new
+  controller: 'App\Controller\BandController::new'
+  methods: [GET, POST]
+
+band_edit:
+  path:   /band/{id}/edit
+  controller: 'App\Controller\BandController::edit'
+  methods: [GET, POST]
+
+band_delete:
+  path:   /band/{id}/delete
+  controller: 'App\Controller\BandController::delete'
+  methods: DELETE

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ size.name }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+	<h1>{{ size.name }}</h1>
+
+	<table class="table table-sm">
+		<tbody>
+			<tr>
+				<th>{{ 'app.fields.size.minWidth'|trans }}</th>
+				<td>{{ size.minWidth }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'app.fields.size.maxWidth'|trans }}</th>
+				<td>{{ size.maxWidth }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'app.fields.size.minHeight'|trans }}</th>
+				<td>{{ size.minHeight }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'app.fields.size.maxHeight'|trans }}</th>
+				<td>{{ size.maxHeight }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'app.fields.size.note'|trans }}</th>
+				<td>{{ size.note }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul class="list-inline">
+		<li class="list-inline-item">
+			<a href="{{ path('size_index') }}" class="btn btn-light"><i class="fa fa-list"></i></a>
+		</li>
+		<li class="list-inline-item">
+			<a href="{{ path('size_edit', { 'name': size.name }) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+		</li>
+		<li class="list-inline-item">
+			{{ form_start(delete_form) }}
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+			{{ form_end(delete_form) }}
+		</li>
+	</ul>
+{% endblock %}

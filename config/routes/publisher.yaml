@@ -1,0 +1,24 @@
+publisher_index:
+  path:   /publisher/
+  controller: 'App\Controller\PublisherController::index'
+  methods: GET
+
+publisher_show:
+  path:   /publisher/{id}/show
+  controller: 'App\Controller\PublisherController::show'
+  methods: GET
+
+publisher_new:
+  path:   /publisher/new
+  controller: 'App\Controller\PublisherController::new'
+  methods: [GET, POST]
+
+publisher_edit:
+  path:   /publisher/{id}/edit
+  controller: 'App\Controller\PublisherController::edit'
+  methods: [GET, POST]
+
+publisher_delete:
+  path:   /publisher/{id}/delete
+  controller: 'App\Controller\PublisherController::delete'
+  methods: DELETE

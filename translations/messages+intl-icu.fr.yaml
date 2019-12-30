@@ -1,0 +1,322 @@
+global:
+  site_name: Partitiothèque Instrum
+  action:
+    new: Nouveau
+    show: Détails
+    edit: Editer
+    check_all: Sélectionner tout
+
+app:
+  login:
+    title: &title Authentification
+    heading: *title
+    user: Utilisateur
+    password: Mot de passe
+
+  menu:
+    concerts:
+      heading: Concerts
+      list: Concerts
+    programs: Programmes
+    partitions:
+      heading: Partitions
+      list: Lister
+    suisa: Rapport SUISA
+    people: Compositeurs et arrangeurs
+    missings: Manques
+    statuses: Statuts
+    types: Types
+    sizes: Tailles
+    instrumentations: Instrumentations
+    publishers: Editeurs
+    login: Connexion
+    logout: Déconnexion
+    lendings:
+      heading: Prêts
+      list: Lister
+    bands: Ensembles
+
+  file:
+    download: Télécharger le fichier actuel
+    delete: Supprimer le fichier
+    download_selected: Télécharger la sélection
+
+  fields:
+    id: Numéro
+    piece:
+      name: Nom
+      translation: Traduction
+      movements: Mouvements
+      parts: Parties
+      composers: Compositeurs
+      arrangers: Arrangeurs
+      size: Taille
+      instrumentation: Instrumentation
+      type: Type
+      status: Etat
+      missings: Manques
+      publisher: Editeur
+      year: Année
+      reference: Référence
+      note: Remarques
+      created_at: Date de saisie
+      last_played: Dernière interprétation
+    missing:
+      piece: Pièce
+      voice: Voix
+      created_at: Date de saisie
+    person:
+      firstName: Prénom
+      lastName: Nom de famille
+      compositions: Compositions
+      arrangements: Arrangements
+    size:
+      maxHeight: Hauteur maximale
+      maxWidth: Largeur maximale 
+      minHeight: Hauteur minimale
+      minWidth: Hauteur minimale
+      name: Nom
+      note: Notes
+    status:
+      id: Identifiant machine
+      name: Nom
+    instrumentation:
+      name: Nom
+      note: Notes
+    publisher:
+      name: Nom
+      note: Notes
+    type:
+      name: Nom
+    concert:
+      name: Nom
+      date: Date
+      pieces: Pièces
+    band:
+      name: Nom
+      lendings: Prêts
+    lending:
+      band: Ensemble
+      contact: Personne de contact
+      start: Commencé 
+      end: Clos
+      ours: C'est nous qui prêtons
+      pieces: Partitions
+    program:
+      name: Nom
+      updated_at: Mise à jour
+      pieces: Pièces
+    part:
+      instrument:
+        label: Instrument
+        choices: '{instrument} en {key}'
+      clef:
+        label: Clef
+        choices:
+          short:
+            g: 𝄞
+            c: 𝄡
+            f: 𝄢
+          long:
+            g: clef de sol
+            c: clef d'ut
+            f: clef de fa
+      number: Numéro
+      solo: Soliste
+      upload: Fichier
+    instrument:
+      name: Nom
+      key:
+        label: Transposition
+        choices:
+          c:      Ut
+          c_flat: Do♭
+          b:      Si
+          b_flat: Si♭
+          a:      La
+          a_flat: La♭
+          g:      Sol
+          g_flat: Sol♭
+          f:      Fa
+          e:      Mi
+          e_flat: Mi♭
+          d:      Ré
+          d_flat: Ré♭
+      family:
+        label: Famille
+        choices:
+          wood: Bois
+          brass: Cuivre
+          string: Cordes
+          percussion: Percussion
+          voice: Voix
+      common: 
+        label: Courant
+        "true": Courant
+        "false": Peu courant
+
+  flash:
+    success:
+      creation:
+        piece: La pièce <i>{name}</i> a bien été enregistrée avec le N° <b>{id}</b>
+      duplicates:
+        piece: Cette pièce est désormais <b>uniquement sous ce numéro</b>
+
+  piece:
+    suisa:
+      title: &piece_suisa Rapport SUISA
+      heading: *piece_suisa
+      first_played: Première exécution
+      number_played: Nombre d'exécutions
+    index:
+      title: Partitions
+      heading: Liste des partitions
+      last_played:
+        unknown: &unknown Inconnue
+      modal:
+        title: Signification des couleurs
+        status_incomplete: Rangé, mais partitions manquantes
+    new:
+      title: &piece_new Nouvelle partition
+      heading: *piece_new
+    show:
+      last_played:
+        unknown: *unknown
+    duplicates:
+      master: Enregistrement maître
+      duplicate: Enregistrement à supprimer
+
+  part: &part
+    solo:
+      numbered:
+        with_clef: '{instrument} Solo {number} ({clef})'
+        without_clef: '{instrument} Solo {number}'
+      with_clef: '{instrument} Solo ({clef})'
+      without_clef: '{instrument} Solo'
+    numbered:
+      with_clef: '{instrument} {number} ({clef})'
+      without_clef: '{instrument} {number}'
+    with_clef: '{instrument} ({clef})'
+    without_clef: '{instrument}'
+
+  person:
+    new:
+      title: &person_new Nouvelle personne
+      heading: *person_new
+    index:
+      title: &person_index Compositeurs et arrangeurs
+      heading: *person_index
+    
+  missing:
+    index:
+      title: &missing_index Voix manquantes
+      heading: Liste des voix manquantes
+
+  instrumentation:
+    index:
+      title: &instrumentation_index Liste des instrumentations
+      heading: *instrumentation_index
+    new:
+      title: &instrumentation_new Nouvelle instrumentation
+      heading: *instrumentation_new
+
+  size:
+    index:
+      title: &size_index Tailles de partitions
+      heading: *size_index
+    new:
+      title: &size_new Nouvelle taille de partition
+      heading: *size_new
+
+  instrument:
+    full_name: '{name} en {key}'
+    index:
+      title: Instruments
+      heading: Liste des instruments
+    new:
+      title: &piece_new Nouvel instrument
+      heading: *piece_new
+
+  status:
+    index:
+      title: &status_index Statuts
+      heading: *status_index
+    new:
+      title: &status_new Nouveau statut
+      heading: *status_new
+
+  publisher:
+    index:
+      title: &publisher_index Editeurs
+      heading: Liste des éditeurs
+    new:
+      title: &publisher_new Nouvel éditeur
+      heading: *publisher_new
+
+  type:
+    index:
+      title: &type_index Liste des types
+      heading: *type_index
+    new:
+      title: &type_new Nouveau type
+      heading: *type_new
+      
+  concert:
+    index:
+      title: &concert_index Liste des concerts
+      heading: *concert_index
+    new:
+      title: &concert_new Nouveau concert
+      heading: *concert_new   
+    show:
+      too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !
+      arrangers:
+        short: 'arr.'
+        long: >-
+          {arrangers, plural,
+              one   {arrangeur}
+              other {arrangeurs}
+          }
+
+  band:
+    index:
+      title: &band_index Liste des ensembles
+      heading: *band_index
+    new:
+      title: &band_new Nouvel ensemble
+      heading: *band_new
+
+  lending:
+    ours:
+      by: Par
+      to: A
+    index:
+      title: &lending_index Liste des prêts
+      heading: *lending_index
+      not_ended: &not_ended Pas clos
+    new:
+      title: &lending_new Nouveau prêt
+      heading: *lending_new
+    show:
+      title:
+        by: &lending_show_by Prêt par {band} du {date}
+        to: &lending_show_to Prêt à {band} du {date}
+      heading:
+        by: *lending_show_by
+        to: *lending_show_to
+      not_ended: *not_ended
+    edit:
+      title:
+        by: *lending_show_by
+        to: *lending_show_to
+      heading:
+        by: *lending_show_by
+        to: *lending_show_to
+
+  program:
+    index:
+      title: &program_index Liste des programmes
+      heading: *program_index
+    new:
+      title: &program_new Nouveau programme
+      heading: *program_new 
