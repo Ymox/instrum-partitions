@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Concert;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Piece controller.
@@ -50,7 +51,7 @@ class PieceController extends AbstractController
      * Creates a new piece entity.
      *
      */
-    public function new(Request $request)
+    public function new(Request $request, TranslatorInterface $translator)
     {
         $piece = new Piece();
         $form = $this->createForm('App\Form\PieceType', $piece);
@@ -63,7 +64,7 @@ class PieceController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $this->get('translator')->trans(
+                $translator->trans(
                     'app.flash.success.creation.piece',
                     array(
                         'id'   => $piece->getId(),
@@ -158,7 +159,7 @@ class PieceController extends AbstractController
      * @param Piece $master The piece that will be kept
      * @param Piece $duplicate The piece that will be deleted
      */
-    public function duplicates(Request $request, Piece $master, Piece $duplicate)
+    public function duplicates(Request $request, Piece $master, Piece $duplicate, TranslatorInterface $translator)
     {
         $masterForm = $this->createForm('App\Form\PieceType', $master);
         $masterForm->add('concerts', EntityType::class, array(
@@ -174,7 +175,7 @@ class PieceController extends AbstractController
             $em->flush();
             $this->addFlash(
                 'success',
-                $this->get('translator')->trans(
+                $translator->trans(
                     'app.flash.success.duplicates.piece'
                 )
             );
