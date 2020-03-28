@@ -1,0 +1,17 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  locale: fr
+  paginate.per_page: 30
+  download_path: '/parts'
+  upload_path: '%kernel.project_dir%/public/%download_path%'
+  application_users:
+    partitions:
+      password: '%env(PARTITIONS_PASSWORD)%'
+      roles: ROLE_DOWNLOAD
+    instrum:
+      password: '%env(INSTRUM_PASSWORD)%'
+      roles: ROLE_USER
+    instrum_admin:
+      password: '%env(ADMIN_PASSWORD)%'
+      roles: ROLE_SUPER_ADMIN
