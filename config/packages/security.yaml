@@ -21,7 +21,8 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
     main:
-      anonymous: lazy
+      anonymous: true
+      lazy: true
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -29,7 +30,7 @@ security:
       # https://symfony.com/doc/current/security/impersonating_user.html
       # switch_user: true
 
-      # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+      # http://symfony.com/doc/current/security/form_login_setup.html
       form_login:
         login_path: login
         check_path: login
