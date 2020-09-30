@@ -35,6 +35,7 @@ app:
       heading: Prêts
       list: Lister
     bands: Ensembles
+    instructions: Instructions d'archivage
 
   file:
     download: Télécharger le fichier actuel
@@ -42,7 +43,7 @@ app:
     download_selected: Télécharger la sélection
 
   fields:
-    id: Numéro
+    id: N°
     piece:
       name: Nom
       translation: Traduction

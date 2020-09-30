@@ -7,7 +7,7 @@
 	<div class="collapse navbar-collapse" id="Menu">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item dropdown{% if 'concert' in app.request.get('_route') %} active{% endif %}">
-				<a class="nav-link dropdown-toggle" href="#" id="Concerts" role="button" data-toggle="dropdown" aria-haspopup=true" aria-expanded="false">{{ 'app.menu.concerts.heading'|trans }}</a>
+				<a class="nav-link dropdown-toggle" href="#" id="Concerts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.concerts.heading'|trans }}</a>
 				<div class="dropdown-menu" aria-labelledby="Concerts">
 					<a class="dropdown-item{% if 'concert' in app.request.get('_route') %} active{% endif %}" href="{{ path('concert_index') }}">{{ 'app.menu.concerts.list'|trans }}</a>
 					<a class="dropdown-item{% if 'program' in app.request.get('_route') %} active{% endif %}" href="{{ path('program_index') }}">{{ 'app.menu.programs'|trans }}</a>
@@ -42,6 +42,9 @@
 				</div>
 			</li>
 			{% endif %}
+			<li class="nav-item {% if 'instructions' in app.request.get('_route') %} active{% endif %}">
+				<a class="nav-link" href="{{ path('instructions') }}" id="Instructions">{{ 'app.menu.instructions'|trans }}</a>
+			</li>
 		</ul>
 		{%- if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 		<ul class="navbar-nav">
