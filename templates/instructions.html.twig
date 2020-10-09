@@ -3,38 +3,38 @@
 {% block title %}Instruction d’archivage | {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-    <style type="text/css">
-    .container {
-    	counter-reset: titles2;
-    }
-    h2 {
-    	counter-reset: titles3;
-    }
-    h2::before {
-    	counter-increment: titles2;
-    	content: counter(titles2) ".  ";
-    	width: 2em;
-    	display: inline-block;
-    	text-align: right;
-    }
-    h3::before {
-    	counter-increment: titles3;
-    	content: counter(titles3, upper-roman) ".  ";
-    	width: 2em;
-    	display: inline-block;
-    	text-align: right;
-    }
-    tbody {
-    	counter-reset: lines;
-    }
-    tbody>tr>td:first-child::before {
-    	counter-increment: lines;
-    	content: counter(lines) ".  ";
-    	width: 2em;
-    	display: inline-block;
-    	text-align: right;
-    }
-    </style>
+	<style type="text/css">
+	.container {
+		counter-reset: titles2;
+	}
+	h2 {
+		counter-reset: titles3;
+	}
+	h2::before {
+		counter-increment: titles2;
+		content: counter(titles2) ".  ";
+		width: 2em;
+		display: inline-block;
+		text-align: right;
+	}
+	h3::before {
+		counter-increment: titles3;
+		content: counter(titles3, upper-roman) ".  ";
+		width: 2em;
+		display: inline-block;
+		text-align: right;
+	}
+	tbody {
+		counter-reset: lines;
+	}
+	tbody>tr>td:first-child::before {
+		counter-increment: lines;
+		content: counter(lines) ".  ";
+		width: 2em;
+		display: inline-block;
+		text-align: right;
+	}
+	</style>
 {% endblock %}
 
 {% block body %}
@@ -79,6 +79,7 @@
 <ul>
 	<li>Si la partition comporte des transpositions recto-verso (instruments B♭ clef de sol d’un côté et ut clef de fa de l’autre par exemple), on marque les deux côtés.</li>
 	<li>Si la partition est sur plusieurs feuilles séparées, marquer chacune d’entre elles.</li>
+	<li>Si le jeu ne comprenait pas certaines transpositions qui ont dû être refaites (notamment les voix de basses mi♭ et si♭ dans les jeux américains), il faut prévoir deux copies supplémentaires qui rejoindront les originaux.</li>
 </ul>
 <p class="alert alert-info">ℹ️ Les notations en si♭ (B♭) clef de fa ne nous servent à rien. Attention cependant à ne pas jeter quand la partition est recto-verso et que l’un des côtés est à conserver.</p>
 <h3>Ordre de classement</h3>
