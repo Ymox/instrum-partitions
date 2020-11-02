@@ -75,9 +75,6 @@
     "doctrine/persistence": {
         "version": "1.2.x-dev"
     },
-    "doctrine/reflection": {
-        "version": "1.0.x-dev"
-    },
     "doctrine/sql-formatter": {
         "version": "1.1.0"
     },
