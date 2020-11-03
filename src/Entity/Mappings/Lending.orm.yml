@@ -2,10 +2,6 @@ App\Entity\Lending:
   type: entity
   table: null
   repositoryClass: App\Repository\LendingRepository
-  entityListeners:
-    App\Listener\LendingListener:
-      prePersist: [ changeLendingPiecesStatus ]
-      preUpdate: [ changeLendingPiecesStatus ]
   id:
     id:
       type: integer

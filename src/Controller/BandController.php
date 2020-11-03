@@ -35,7 +35,7 @@ class BandController extends AbstractController
     public function new(Request $request)
     {
         $band = new Band();
-        $form = $this->createForm('App\Form\BandType', $band, array(
+        $form = $this->createForm(\App\Form\BandType::class, $band, array(
             'action' => $this->generateUrl('band_new'),
         ));
         $form->handleRequest($request);
@@ -83,7 +83,7 @@ class BandController extends AbstractController
     public function edit(Request $request, Band $band)
     {
         $deleteForm = $this->createDeleteForm($band);
-        $editForm = $this->createForm('App\Form\BandType', $band);
+        $editForm = $this->createForm(\App\Form\BandType::class, $band);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

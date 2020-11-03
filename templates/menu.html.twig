@@ -27,14 +27,13 @@
 					{% if is_granted('ROLE_ADMIN') -%}
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item{% if 'instrumentation' in app.request.get('_route') %} active{% endif %}" href="{{ path('instrumentation_index') }}">{{ 'app.menu.instrumentations'|trans }}</a>
-					<a class="dropdown-item{% if 'status' in app.request.get('_route') %} active{% endif %}" href="{{ path('status_index') }}">{{ 'app.menu.statuses'|trans }}</a>
 					<a class="dropdown-item{% if 'type' in app.request.get('_route') %} active{% endif %}" href="{{ path('type_index') }}">{{ 'app.menu.types'|trans }}</a>
 					<a class="dropdown-item{% if 'size' in app.request.get('_route') %} active{% endif %}" href="{{ path('size_index') }}">{{ 'app.menu.sizes'|trans }}</a>
 					{% endif %}
 				</div>
 			</li>
 			{% if is_granted('ROLE_ADMIN') -%}
-			<li class="nav-item dropdown{% if 'lending' in app.request.get('_route') %} active{% endif %}">
+			<li class="nav-item dropdown{% if ('lending' in app.request.get('_route')) or ('band' in app.request.get('_route')) %} active{% endif %}">
 				<a class="nav-link dropdown-toggle" href="#" id="Lendings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.lendings.heading'|trans }}</a>
 				<div class="dropdown-menu" aria-labelledby="Lendings">
 					<a class="dropdown-item{% if 'lending' in app.request.get('_route') %} active{% endif %}" href="{{ path('lending_index') }}">{{ 'app.menu.lendings.list'|trans }}</a>

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Instruction d’archivage | {{ parent() }}{% endblock %}
+{% block title %}Instructions d’archivage | {{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-	<style type="text/css">
+{% block stylesheets -%}
+	<style>
 	.container {
 		counter-reset: titles2;
 	}
@@ -34,60 +34,41 @@
 		display: inline-block;
 		text-align: right;
 	}
+	q {
+		font-weight: 600;
+	}
+	[lang="fr"] q::before {
+		content: "« ";
+		font-weight: normal;
+	}
+	[lang="fr"] q::after {
+		content: " »";
+		font-weight: normal;
+	}
 	</style>
 {% endblock %}
 
-{% block body %}
-<h1>Instructions d’archivage</h1>
+{% block body %}<h1>Instructions d’archivage</h1>
+<p class="lead alert alert-danger">🛑 Toute opération demandant (ou ayant demandé) le support de cette page implique soit que vous avez les informations pour effectuer vous-même les modifications dans le système, soit que vous notifiez l’archiviste des manipulations effectuées au plus tôt. Dans ce dernier cas, soyez exhaustif dans les changements apportés.</p>
 <p>Voici les instructions pour gérer les partitions à archiver et conserver les archives en ordre.</p>
 <ol>
-	<li><a href="#Statuts-et-cycle-de-vie-dune-piece">Statuts et cycle de vie d’une pièce</a></li>
-	<li><a href="#Conservation-des-originaux">Conservation des originaux</a></li>
-	<li><a href="#Exemple-dordre-de-classement">Exemple d’ordre de classement</a></li>
+	<li><a href="#Etats-des-partitions">Etats des partitions</a></li>
+	<li><a href="#Emplacements">Emplacements</a></li>
+	<li><a href="#Que-faire-avec-des-partitions">Que faire avec des partitions qui…</a></li>
 </ol>
-<h2 id="Statuts-et-cycle-de-vie-dune-piece">Statuts et cycle de vie d’une pièce</h2>
-<h3>Nouvelle pièce</h3>
-<p>A la réception, la pièce doit être au minimum saisie, ce qui attribue d’office un numéro unique à la pièce.<br />
-	Les informations obligatoires sont le <strong>titre</strong> et le(s) <strong>compositeur(s)</strong>. Le statut est <strong>Non vérifié (inconnu)</strong>.</p>
-<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : avant toute saisie, vérifier scrupuleusement que la pièce ne figure pas déjà dans le catalogue. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
-<p>Ces partitions vont très probablement attendre qu’on n’ait plus besoin d’elles dans un lieu à portée de main.</p>
-<h3>Pièces plus jouées</h3>
-	<p>Après un concert (ou la dernière exécution d’un programme, ou au changement d’un programme), les pièces plus jouées doivent être vérifiées, c’est-à-dire qu’on va s’assurer d’avoir tous les originaux qui permettent son exécution. Normalement, le statut de ces pièces est <em>Non vérifié (inconnu)</em>.</p>
-	<ol>
-		<li>Si le temps le permet, chaque partition originale est estampillée du numéro qui a été attribué à la pièce lors de sa réception. Les partitions manquantes sont saisies comme telles. Les informations qui n’avaient pas été saisies lors de la réception sont complétées, et la pièce rangée parmi les archives.<br> Le statut devient alors <strong>Rangé</strong>.<br />
-			Ces partitions attendront un certain temps dans les boîtes à archives.</li>
-		<li>Si le temps n’a été pris que pour vérifier si elles étaient complètes, mais que le numéro n’a pas été apposé sur toutes les partitions (dans le cas de partitions achetées pour le programme qui vient d’être remplacé), le statut devient <strong>Vérifié, non marqué</strong>.<br/>
-			Ces pièces attendront qu’on leur appose le numéro avant d’être <em>Rangé</em>es.</li>
-	</ol>
-</li>
-<h3>Prêt à d’autres sociétés</h3>
-<p>Les directeurs aiment bien pouvoir emprunter des partitions quelque part pour les jouer jouer autre part, et il faut dire que les comptes des sociétés s’en trouvent moins grêlés de frais. Il y a un statut prévu pour ça : <strong>Prêté à une autre société</strong>.</p></li>
-<h3>Retour de prêt</h3>
-<ol>
-	<li>Si on ne fait que prendre note du retour, le statut devient <strong>Non vérifié (inconnu)</strong>, en attendant qu’on ait le temps de vérifier. On ne range évidemment pas ces partitions dans les archives.</li>
-	<li>Si en revanche le temps de tout vérifier est pris, comme les originaux sont déjà marqués, on va juste relever les éventuels manques et mettre le statut <strong>Rangé</strong>.</li>
-</ol>
-<h2 id="Conservation-des-originaux">Conservation des originaux</h2>
-<p>Une fois que les pièces sont enregistrées, elles reçoivent un numéro. Ce numéro est à tamponner sur les originaux.</p>
-<p>Nous conservons les originaux selon les règles suivantes :</p>
-<ul>
-	<li>deux par voix autant que possible ;</li>
-	<li>marqués au tampon du numéro système sur la première page à droite du titre ;</li>
-	<li>marqués avec une couleur quelconque sur la première page au niveau du nom de l’instrument ;</li>
-	<li>pour les conducteurs uniquement, marqués en plus avec le tampon de la fanfare.</li>
-</ul>
-<ul>
-	<li>Si la partition comporte des transpositions recto-verso (instruments B♭ clef de sol d’un côté et ut clef de fa de l’autre par exemple), on marque les deux côtés.</li>
-	<li>Si la partition est sur plusieurs feuilles séparées, marquer chacune d’entre elles.</li>
-	<li>Si le jeu ne comprenait pas certaines transpositions qui ont dû être refaites (notamment les voix de basses mi♭ et si♭ dans les jeux américains), il faut prévoir deux copies supplémentaires qui rejoindront les originaux.</li>
-</ul>
-<p class="alert alert-info">ℹ️ Les notations en si♭ (B♭) clef de fa ne nous servent à rien. Attention cependant à ne pas jeter quand la partition est recto-verso et que l’un des côtés est à conserver.</p>
-<h3>Ordre de classement</h3>
-<p>Les partitions originales doivent être dans l’ordre des instruments utilisé par le conducteur, regroupées par voix puis transposition (1 ut (C), 1 B♭, 2 ut (C), 2 B♭ au lieu de 1 ut (C), 2 ut (C), 1 B♭, 2 B♭) — les transpositions sont la même voix. Certaines éditions listent exactement les partitions dans le conducteur, conserver l’ordre de cette liste.</p>
-<p>De manière générale :</p>
+<h2 id="Etats-des-partitions">Etats des partitions</h2>
+<p>Lorsqu’on change de programme et donc qu’on range des partitions, ou que celles-ci changent d’emplacement, il y a trois états à vérifier. Tous ont leur importance pour diverses raisons présentées ci-dessous.</p>
+<h3>{{ 'app.fields.piece.states.1'|trans }}</h3>
+<p>Implique que toutes les voix listées sur le conducteur (soit sur une liste explicite, soit selon l’ordre sur les systèmes) soit présentes dans le jeu au moins une fois (pour qu’il soit possible de refaire des copies lorsqu’on reprendra la pièce pour un programme) ou/et que les manques éventuels (absence totale d’une voix présente sur la liste de référence) aient été relevés.<br />
+	C’est l’occasion de remettre les partitions dans l’ordre, ne serait-ce que pour faciliter le travail de recherche et de marquage.</p>
+<h4>Ordre de classement pour vérification</h4>
+<p>Les partitions originales doivent être dans l’ordre des instruments utilisé par le conducteur, regroupées par voix puis transposition (1 ut (C), 1 B♭, 2 ut (C), 2 B♭ au lieu de 1 ut (C), 2 ut (C), 1 B♭, 2 B♭) — les transpositions sont la même voix.</p>
+<p class="alert alert-info">ℹ️ Certaines éditions listent exactement les partitions normalement disponibles dans le conducteur, conserver l’ordre de cette liste.</p>
+<p>De manière générale, on retrouve cette logique :</p>
 <ol>
 	<li>directeur en premier ;
-	<li>parties solistiques de la pièce ;</li>
+	<li>parties solistiques de la pièce.<br />
+		A ne pas confondre avec les parties solistiques d’orchestre, pensées pour pallier un manque d’effectif, et qui sont des "voix zéro" pour l’instrument ;</li>
 	<li>puis on regroupe par famille. Dans l’ordre :
 		<ol style="list-style-type: lower-roman;">
 			<li>bois ;</li>
@@ -104,7 +85,7 @@
 		</ol>
 	</li>
 	<li>du plus aigu au plus grave ;</li>
-	<li>selon les numéros de voix () ;</li>
+	<li>selon les numéros de voix ;</li>
 	<li>les voix selon notre utilisation des transpositions :
 		<ul>
 			<li>cors : F, E♭ ;</li>
@@ -112,191 +93,302 @@
 			<li>trombones : ut (C) clef de fa, B♭ clef de sol, ut (C) clef d’ut 4 ;</li>
 			<li>basses : E♭, B♭, ut (C).<br />
 				Nota : il arrive que la partition de basse en ut comprenne deux voix, alors elle vient en premier.</li>
-		</ol>
+		</ul>
 	</li>
 </ol>
-<p>Les partitions surnuméraires restent après les originaux de leurs voix respectives. Les éventuelles copies conservées sont à séparer complètement des originaux, cependant elles doivent être rangées dans le même ordre. Le tas de copies vient avant le tas d’originaux.</p>
-<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : avant tout marquage, vérifier scrupuleusement que vous allez mettre le bon numéro. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
-<h2 id="Exemple-dordre-de-classement">Exemple d’ordre de classement<br />
-	<small>Pour deux flûtes, saxophone et trombone, grand orchestre symphonique et chœur</small></h2>
-<p>Voici un exemple d’ordre quand le conducteur n’en fournit pas, mais surtout quelques traductions de noms d’instruments courants. Survoler les lignes permet de voir quelles règles ont été appliquées.</p>
-<table class="table table-condensed">
-	<thead>
-		<tr>
-			<th style="padding-left: 2.75rem">Français</th>
-			<th>Anglais</th>
-			<th>Allemand</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr title="1 – permet de se donner rapidement une idée des pièces quand on les ressort des archives">
-			<td>Directeur</td><td>Conductor, (Full) score</td><td>Partitur</td>
-		</tr>
-		<tr title="Soliste (2), bois (3.i), instrument le plus aigu (4), première voix (5 - 1)">
-			<td>Flûte solo 1</td><td>Solo 1st (Concert/Traverse) Flute</td><td>Solo Flöte 1</td>
-		</tr>
-		<tr title="Soliste (2), bois (3.i), instrument le plus aigu (4), deuxième voix (5 - 2)">
-			<td>Flûte solo 2</td><td>Solo 2nd (Concert/Traverse) Flute</td><td>Solo Flöte 2</td>
-		</tr>
-		<tr title="Soliste (2), bois (3.i), instrument le plus grave des bois (4 – parmi les solistes)">
-			<td>Saxophone solo</td><td>Solo saxophone</td><td>Solo Saxophon</td>
-		</tr>
-		<tr title="Soliste (2), cuivre (3.ii)">
-			<td>Trombone solo</td><td>Solo trombone</td><td>Solo Posaune</td>
-		</tr>
-		<tr title="Bois (3.i), instrument le plus aigu (4)">
-			<td colspan="3">Piccolo</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que le piccolo (4), première voix (5 - 1)">
-			<td>Flûte 1</td><td>1st (Concert/Traverse) Flute</td><td>1. Flöte</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que le piccolo (4), seconde voix (5 - 2)">
-			<td>Flûte 2</td><td>2nd (Concert/Traverse) Flute</td><td>2. Flöte</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que les flûtes (4)">
-			<td>Hautbois</td><td colspan="2">Oboe</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que le hautbois (4), première voix (5 - 1)">
-			<td>Clarinette 1</td><td>1st Clarinet</td><td>1. Klarinette</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que le hautbois (4), seconde voix (5 - 2)">
-			<td>Clarinette 2</td><td>2nd Clarinet</td><td>2. Klarinette</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que les clarinettes alto (4)">
-			<td>Basson</td><td>Bassoon</td><td>Fagott</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que le basson (4)">
-			<td>Clarinette basse</td><td>Bass clarinet</td><td>Bassklarinette</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que les clarinettes (4 – on prend ici selon les &quot;espèces&quot; saxophones et clarinettes), première voix (5 - 1)">
-			<td>Saxophone 1</td><td>1st Saxophone</td><td>1. Saxophon</td>
-		</tr>
-		<tr title="Bois (3.i), moins aigu que les clarinettes (4), deuxième voix (5 - 2)">
-			<td>Saxophone 2</td><td>2nd Saxophone</td><td>2. Saxophon</td>
-		</tr>
-		<tr title="Cuivre (3.ii), le plus aigu des cuivres (4), première voix (5 - 1)">
-			<td>Bugle 1</td><td>1st Bugle</td><td>1. Flügelhorn</td>
-		</tr>
-		<tr title="Cuivre (3.ii), le plus aigu des cuivres (4), deuxième voix (5 - 2)">
-			<td>Bugle 2</td><td>2nd Bugle</td><td>2. Flügelhorn</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le bugle (4 – pris par rapport au petit bugle mi♭ qui était plus courant que les bucles actuels lors de la fixation de l’ordre des voix), voix solistique d’orchestre (5 – noter la différence entre partie solistique de pièce, qui viendrait dans les premières places, et d’instrument pour palier un manque d’effectif, qui vient avant la première voix)">
-			<td>Trompette solo</td><td>Solo trumpet</td><td>Solo Trompete</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le bugle (4), deuxième voix (5 - 2)">
-			<td>Trompette 1</td><td>1st Trumpet</td><td>1. Trompete</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le bugle (4), deuxième voix (5 - 2)">
-			<td>Trompette 2</td><td>2nd Trumpet</td><td>2. Trompete</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que la trompette (4), première voix (5 - 1)">
-			<td>Cor 1 (fa)</td><td>1st F (French) Horn</td><td>1. F Horn</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que la trompette (4), première voix (5 - 1), transposition moins utilisée chez nous (6)">
-			<td>Cor 1 (mi♭), alto mi♭ 1</td><td>1st E♭ (French) Horn</td><td>1. E♭ Horn</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que la trompette (4), deuxième voix (5 - 2)">
-			<td>Cor 2 (fa)</td><td>2nd F (French) Horn</td><td>2. F Horn</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que la trompette (4), première voix (5 - 2), transposition moins utilisée chez nous (6)">
-			<td>Cor 2 (mi♭), alto mi♭ 2</td><td>2nd E♭ (French) Horn</td><td>2. E♭ Horn</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le cor (4), première voix (5 - 1)">
-			<td>Trombone 1 (ut, clef de fa)</td><td>1st Trombone (C, <abbr title="Bass Clef">B.C.</abbr>)</td><td>1. Posaune (C, Bassschüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le cor (4), première voix (5 - 1), transposition moins utilisée chez nous (6)">
-			<td>Trombone 1 (si♭, clef de sol)</td><td>1st Trombone (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>1. Posaune (B♭, Violinschlüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le cor (4), première voix (5 - 1), transposition encore moins utilisée chez nous (6)">
-			<td>Trombone 1 (ut, clef d’ut 4e)</td><td>1st Trombone (C, tenor clef)</td><td>1. Posaune (C, Tenorschlüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le cor (4), deuxième voix (5 - 2)">
-			<td>Trombone 2 (ut, clef de fa)</td><td>2nd Trombone (C, <abbr title="Bass Clef">B.C.</abbr>)</td><td>2. Posaune (C, Bassschüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le cor (4), deuxième voix (5 - 2), transposition moins utilisée chez nous (6)">
-			<td>Trombone 2 (si♭, clef de sol)</td><td>2nd Trombone (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>2. Posaune (B♭, Violinschlüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le cor (4) et moins aiguë que les autres trombones par définition, sinon troisième voix (5 - 3)">
-			<td>Trombone 3, trombone basse</td><td>3rd Trombone, Bass trombone</td><td>3. Posaune, Bassposaune</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le trombone (4)">
-			<td>Euphonium (si♭, clef de sol)</td><td>Euphonium (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>Euphonium (B♭, Violinschlüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le trombone (4), transposition moins utilisée chez nous (6)">
-			<td>Euphonium (ut, clef de fa)</td><td>Euphonium (C, <abbr title="Bass Clef">B.C.</abbr>)</td><td>Euphonium (C, Bassschüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), moins aigu que le trombone (4), aujourd’hui souvent la même voix que l’euphonium si♭">
-			<td>Baryton (si♭, clef de sol)</td><td>Barytone (horn) (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>Baryton (-horn) (B♭, Violinschlüssel)</td>
-		</tr>
-		<tr title="Cuivre (3.ii), plus grave que l’euphonium (4), deux voix sur la même partition (6)">
-			<td>Basses en ut (clef de fa)</td><td>C Bass, Tubas</td><td>Tubas</td>
-		</tr>
-		<tr title="Cuivre (3.ii), plus grave que le tuba en ut (4)">
-			<td>Basse mi♭</td><td>E♭ Bass</td><td>E♭ Tuba</td>
-		</tr>
-		<tr title="Cuivre (3.ii), plus grave que la basse mi♭ (4)">
-			<td>Basse si♭</td><td>B♭ Bass</td><td>B♭ Tuba</td>
-		</tr>
-		<tr title="Cuivre (3.ii), correspondant à une transposition de la basse mi♭ pas utilisée chez nous (6)">
-			<td>Basse en ut 1(clef de fa)</td><td>C Bass, Tuba</td><td>Tuba</td>
-		</tr>
-		<tr title="Cuivre (3.ii), correspondant à une transposition de la basse si♭ pas utilisée chez nous (6)">
-			<td>Basse en ut 2 (clef de fa)</td><td>C Bass, Tuba</td><td>Tuba</td>
-		</tr>
-		<tr title="Percussion mélodique (3.ii.a) la plus aiguë (4)">
-			<td>Glockenspiel</td><td>Bells</td><td>Glockenspiel</td>
-		</tr>
-		<tr title="Percussion mélodique (3.ii.a) moins aiguë que le glockenspiel (4)">
-			<td colspan="3">Vibraphone</td>
-		</tr>
-		<tr title="Percussion mélodique (3.ii.a) plus grave que le vibraphone (4)">
-			<td colspan="3">Xylophone</td>
-		</tr>
-		<tr title="Percussion mélodique (3.ii.a) plus grave que le xylophone (4)">
-			<td colspan="3">Marimba</td>
-		</tr>
-		<tr title="Percussion mélodique (3.ii.a) plus grave que le marimba (4)">
-			<td>Cloches tubulaires</td><td>Chimes, Tubular bells</td><td>Röhrenglocken</td>
-		</tr>
-		<tr title="Percussion mélodique (3.ii.a) la plus grave (4)">
-			<td>Timbales</td><td>Timpani</td><td>Pauken</td>
-		</tr>
-		<tr title="Percussion rythmique (3.ii.b) ayant l’ambitus le plus grand (4)">
-			<td>Batterie</td><td>Drums</td><td>Schlagzeug</td>
-		</tr>
-		<tr title="Percussion rythmique (3.ii.b) spécifiques">
-			<td>Percussion auxiliaire</td><td>Auxilliary percussion</td><td>Hilfspercussion</td>
-		</tr>
-		<tr title="Clavier (3.iv)">
-			<td colspan="2">Piano</td><td>Klavier</td>
-		</tr>
-		<tr title="Corde (3.v), le plus aigu de la famille (4), première voix (5 - 1)">
-			<td>Violon 1</td><td>1st Violin</td><td>1. Violine</td>
-		</tr>
-		<tr title="Corde (3.v), le plus aigu de la famille (4), deuxième voix (5 - 2)">
-			<td>Violon 2</td><td>1st Violin</td><td>1. Violine</td>
-		</tr>
-		<tr title="Corde (3.v), moins aigu que le violon par définition (4)">
-			<td>Violon Alto</td><td>Viola</td><td>Viola</td>
-		</tr>
-		<tr title="Corde (3.v), plus grave que le violon alto (4)">
-			<td>Violoncelle</td><td colspan="2">Cello</td>
-		</tr>
-		<tr title="Corde (3.v), le plus grave de la famille (4)">
-			<td>Contrebasse</td><td>String bass, Double bass</td><td>Contrabass</td>
-		</tr>
-		<tr title="Voix humaine (3.vi), la plus aiguë (4)">
-			<td colspan=3">Sopranos</td>
-		</tr>
-		<tr title="Voix humaine (3.vi), moins aiguë que soprano (4)">
-			<td colspan=3">Altos</td>
-		</tr>
-		<tr title="Voix humaine (3.vi), plus grave qu’alto (4)">
-			<td colspan=3">Ténors</td>
-		</tr>
-		<tr title="Voix humaine (3.vi), plus grave que ténor (4)">
-			<td colspan=3">Basses</td>
-		</tr>
-	</tbody>
-</table>
+<p class="alert alert-info">ℹ️ Les notations en si♭ (B♭) clef de fa ne nous servent à rien. Attention cependant à ne pas jeter quand la partition est recto-verso et que l’un des côtés est à conserver.</p>
+<p>Les partitions surnuméraires restent après les originaux de leurs voix respectives, sauf s’il y a des photocopies conservées. Les
+	éventuelles photocopies conservées (et ainsi les partitions surnuméraires) sont à séparer complètement des originaux, cependant elles doivent être rangées dans le même ordre. Le tas de copies vient avant le tas d’originaux, avant même le conducteur.</p>
+<h5>Exemple d’ordre de classement quand le conducteur n’en fournit pas<br />
+	<small>Pour deux flûtes, saxophone et trombone, grand orchestre symphonique et chœur</small></h5>
+<p>Voici <a href="#Exemple-dordre-de-classement" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="Exemple-dordre-de-classement">un exemple d’ordre</a>, mais surtout quelques traductions de noms d’instruments courants.</p>
+<div class="collapse" id="Exemple-dordre-de-classement">
+	<p>Survoler les lignes permet de voir quelles règles ont été appliquées.</p>
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th style="padding-left: 2.75rem">Français</th>
+				<th>Anglais</th>
+				<th>Allemand</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr title="1 – permet de se donner rapidement une idée des pièces quand on les ressort des archives">
+				<td>Directeur</td><td>Conductor, (Full) score</td><td>Partitur</td>
+			</tr>
+			<tr title="Soliste (2), bois (3.i), instrument le plus aigu (4), première voix (5 - 1)">
+				<td>Flûte solo 1</td><td>Solo 1st (Concert/Traverse) Flute</td><td>Solo Flöte 1</td>
+			</tr>
+			<tr title="Soliste (2), bois (3.i), instrument le plus aigu (4), deuxième voix (5 - 2)">
+				<td>Flûte solo 2</td><td>Solo 2nd (Concert/Traverse) Flute</td><td>Solo Flöte 2</td>
+			</tr>
+			<tr title="Soliste (2), bois (3.i), instrument le plus grave des bois (4 – parmi les solistes)">
+				<td>Saxophone (alto) solo</td><td>Solo alto saxophone</td><td>Solo Alto Saxophon</td>
+			</tr>
+			<tr title="Soliste (2), cuivre (3.ii)">
+				<td>Trombone solo</td><td>Solo trombone</td><td>Solo Posaune</td>
+			</tr>
+			<tr title="Bois (3.i), instrument le plus aigu (4)">
+				<td colspan="3">Piccolo</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le piccolo (4), première voix (5 - 1)">
+				<td>Flûte 1</td><td>1st (Concert/Traverse) Flute</td><td>1. Flöte</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le piccolo (4), seconde voix (5 - 2)">
+				<td>Flûte 2</td><td>2nd (Concert/Traverse) Flute</td><td>2. Flöte</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que les flûtes (4)">
+				<td>Hautbois</td><td colspan="2">Oboe</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le hautbois (4), première voix (5 - 1)">
+				<td>Clarinette 1</td><td>1st Clarinet</td><td>1. Klarinette</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le hautbois (4), seconde voix (5 - 2)">
+				<td>Clarinette 2</td><td>2nd Clarinet</td><td>2. Klarinette</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que les clarinettes alto (4)">
+				<td>Basson</td><td>Bassoon</td><td>Fagott</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le basson (4)">
+				<td>Clarinette basse</td><td>Bass clarinet</td><td>Bassklarinette</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que les clarinettes (4 – on prend ici selon les &quot;espèces&quot; saxophones et clarinettes)">
+				<td>Saxophone soprano</td><td>1st Soprano Saxophone</td><td>1. Sopransaxophon</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le saxophone alto (4), première voix (5 - 1)">
+				<td>Saxophone (alto) 1</td><td>1st (Alto) Saxophone</td><td>1. (Alt-)Saxophon</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que les clarinettes (4), deuxième voix (5 - 2)">
+				<td>Saxophone (alto) 2</td><td>2nd (Alto) Saxophone</td><td>2. (Alt-)Saxophon</td>
+			</tr>
+			<tr title="Bois (3.i), moins aigu que le saxophone alto (4)">
+				<td>Saxophone ténor</td><td>Tenor Saxophone</td><td>Tenorsaxophon</td>
+			</tr>
+			<tr title="Bois (3.i), plus grave que le saxophone ténor (4)">
+				<td>Saxophone baryton</td><td>Baritone Saxophone</td><td>Baritonsaxophon</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que la trompette (4), première voix (5 - 1)">
+				<td>Cor 1 (fa)</td><td>1st F (French) Horn</td><td>1. F Horn</td>
+			</tr>
+			<tr title="Cuivre (3.ii), le plus aigu des cuivres (4), première voix (5 - 1), transposition moins utilisée chez nous (6)">
+				<td>Cor 1 (mi♭), alto mi♭ 1</td><td>1st E♭ (French) Horn</td><td>1. E♭ Horn</td>
+			</tr>
+			<tr title="Cuivre (3.ii), le plus aigu des cuivres (4), deuxième voix (5 - 2)">
+				<td>Cor 2 (fa)</td><td>2nd F (French) Horn</td><td>2. F Horn</td>
+			</tr>
+			<tr title="Cuivre (3.ii), le plus aigu des cuivres (4), première voix (5 - 2), transposition moins utilisée chez nous (6)">
+				<td>Cor 2 (mi♭), alto mi♭ 2</td><td>2nd E♭ (French) Horn</td><td>2. E♭ Horn</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le cor (4), voix solistique d’orchestre (5 – noter la différence entre partie solistique de pièce, qui viendrait dans les premières places, et d’instrument pour palier un manque d’effectif, qui vient avant la première voix)">
+				<td>Trompette solo</td><td>Solo trumpet</td><td>Solo Trompete</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le cor (4), deuxième voix (5 - 2)">
+				<td>Trompette 1</td><td>1st Trumpet</td><td>1. Trompete</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le cor (4), deuxième voix (5 - 2)">
+				<td>Trompette 2</td><td>2nd Trumpet</td><td>2. Trompete</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que la trompette (4), première voix (5 - 1)">
+				<td>Bugle 1</td><td>1st Bugle</td><td>1. Flügelhorn</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que la trompette (4), deuxième voix (5 - 2)">
+				<td>Bugle 2</td><td>2nd Bugle</td><td>2. Flügelhorn</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le bugle (4), première voix (5 - 1)">
+				<td>Trombone 1 (ut, clef de fa)</td><td>1st Trombone (C, <abbr title="Bass Clef">B.C.</abbr>)</td><td>1. Posaune (C, Bassschüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le bugle (4), première voix (5 - 1), transposition moins utilisée chez nous (6)">
+				<td>Trombone 1 (si♭, clef de sol)</td><td>1st Trombone (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>1. Posaune (B♭, Violinschlüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le bugle (4), première voix (5 - 1), transposition encore moins utilisée chez nous (6)">
+				<td>Trombone 1 (ut, clef d’ut 4e)</td><td>1st Trombone (C, tenor clef)</td><td>1. Posaune (C, Tenorschlüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le bugle (4), deuxième voix (5 - 2)">
+				<td>Trombone 2 (ut, clef de fa)</td><td>2nd Trombone (C, <abbr title="Bass Clef">B.C.</abbr>)</td><td>2. Posaune (C, Bassschüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le bugle (4), deuxième voix (5 - 2), transposition moins utilisée chez nous (6)">
+				<td>Trombone 2 (si♭, clef de sol)</td><td>2nd Trombone (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>2. Posaune (B♭, Violinschlüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le bugle (4) et moins aiguë que les autres trombones par définition, sinon troisième voix (5 - 3)">
+				<td>Trombone 3, trombone basse</td><td>3rd Trombone, Bass trombone</td><td>3. Posaune, Bassposaune</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le trombone (4)">
+				<td>Euphonium (si♭, clef de sol)</td><td>Euphonium (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>Euphonium (B♭, Violinschlüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le trombone (4), transposition moins utilisée chez nous (6)">
+				<td>Euphonium (ut, clef de fa)</td><td>Euphonium (C, <abbr title="Bass Clef">B.C.</abbr>)</td><td>Euphonium (C, Bassschüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), moins aigu que le trombone (4), aujourd’hui souvent la même voix que l’euphonium si♭">
+				<td>Baryton (si♭, clef de sol)</td><td>Barytone (horn) (B♭, <abbr title="Treble Clef">T.C.</abbr>)</td><td>Baryton (-horn) (B♭, Violinschlüssel)</td>
+			</tr>
+			<tr title="Cuivre (3.ii), plus grave que l’euphonium (4), deux voix sur la même partition (6)">
+				<td>Basses en ut (clef de fa)</td><td>C Bass, Tubas</td><td>Tubas</td>
+			</tr>
+			<tr title="Cuivre (3.ii), plus grave que le tuba en ut (4)">
+				<td>Basse mi♭</td><td>E♭ Bass</td><td>E♭ Tuba</td>
+			</tr>
+			<tr title="Cuivre (3.ii), plus grave que la basse mi♭ (4)">
+				<td>Basse si♭</td><td>B♭ Bass</td><td>B♭ Tuba</td>
+			</tr>
+			<tr title="Cuivre (3.ii), correspondant à une transposition de la basse mi♭ pas utilisée chez nous (6)">
+				<td>Basse en ut 1(clef de fa)</td><td>C Bass, Tuba</td><td>Tuba</td>
+			</tr>
+			<tr title="Cuivre (3.ii), correspondant à une transposition de la basse si♭ pas utilisée chez nous (6)">
+				<td>Basse en ut 2 (clef de fa)</td><td>C Bass, Tuba</td><td>Tuba</td>
+			</tr>
+			<tr title="Percussion mélodique (3.ii.a) la plus aiguë (4)">
+				<td>Glockenspiel</td><td>Bells</td><td>Glockenspiel</td>
+			</tr>
+			<tr title="Percussion mélodique (3.ii.a) moins aiguë que le glockenspiel (4)">
+				<td colspan="2">Vibraphone</td><td>Vibraphon</td>
+			</tr>
+			<tr title="Percussion mélodique (3.ii.a) plus grave que le vibraphone (4)">
+				<td colspan="2">Xylophone</td><td>Xylophon</td>
+			</tr>
+			<tr title="Percussion mélodique (3.ii.a) plus grave que le xylophone (4)">
+				<td colspan="3">Marimba</td>
+			</tr>
+			<tr title="Percussion mélodique (3.ii.a) plus grave que le marimba (4)">
+				<td>Cloches tubulaires</td><td>Chimes, Tubular bells</td><td>Röhrenglocken</td>
+			</tr>
+			<tr title="Percussion mélodique (3.ii.a) la plus grave (4)">
+				<td>Timbales</td><td>Timpani</td><td>Pauken</td>
+			</tr>
+			<tr title="Percussion rythmique (3.ii.b) ayant l’ambitus le plus grand (4)">
+				<td>Batterie</td><td>Drums</td><td>Schlagzeug</td>
+			</tr>
+			<tr title="Percussion rythmique (3.ii.b) spécifiques">
+				<td>Percussion auxiliaire</td><td>Auxilliary percussion</td><td>Hilfspercussion</td>
+			</tr>
+			<tr title="Clavier (3.iv)">
+				<td colspan="2">Piano</td><td>Klavier</td>
+			</tr>
+			<tr title="Corde (3.v), le plus aigu de la famille (4), première voix (5 - 1)">
+				<td>Violon 1</td><td>1st Violin</td><td>1. Violine</td>
+			</tr>
+			<tr title="Corde (3.v), le plus aigu de la famille (4), deuxième voix (5 - 2)">
+				<td>Violon 2</td><td>1st Violin</td><td>1. Violine</td>
+			</tr>
+			<tr title="Corde (3.v), moins aigu que le violon par définition (4)">
+				<td>Violon Alto</td><td>Viola</td><td>Viola</td>
+			</tr>
+			<tr title="Corde (3.v), plus grave que le violon alto (4)">
+				<td>Violoncelle</td><td colspan="2">Cello</td>
+			</tr>
+			<tr title="Corde (3.v), le plus grave de la famille (4)">
+				<td>Contrebasse</td><td>String bass, Double bass</td><td>Contrabass</td>
+			</tr>
+			<tr title="Voix humaine (3.vi), la plus aiguë (4)">
+				<td colspan="3">Sopranos</td>
+			</tr>
+			<tr title="Voix humaine (3.vi), moins aiguë que soprano (4)">
+				<td colspan="3">Altos</td>
+			</tr>
+			<tr title="Voix humaine (3.vi), plus grave qu’alto (4)">
+				<td colspan="3">Ténors</td>
+			</tr>
+			<tr title="Voix humaine (3.vi), plus grave que ténor (4)">
+				<td colspan="3">Basses</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<h3>Marquage</h3>
+<p>Toutes les partitions originales à conserver sont idéalement marquées avec un élément de couleur et au tampon encreur pour le numéro de partition dans le système. Comme ce sont les mêmes règles qui s’appliquent pour ces deux états, il peut être intéressant d’appliquer l’un puis l’autre permettant au second de ne marquer que ceux marqués par le premier passage.</p>
+<p>On marque ainsi au maximum deux partitions pour une même voix/transposition. Certains instruments comme le piccolo ou les clarinettes mi♭ (E♭), n’ont quasiment jamais deux originaux fournis, on n’en marquera évidemment qu’une. Pour des instruments plus courants comme la flûte, il peut y avoir plusieurs copies fournies dans le jeu d’origine, on n’en marquera donc maximum deux d’entre elles. Pour les instruments transpositeurs comme le cor, l’euphonium ou le trombonne, il peut y avoir des partitions en fa (F) ou en mi♭ (E♭), en ut (C) clef de fa ou en si♭ (B♭) clef de sol, ou encore en ut (C) clef de fa, ut (C) clef d’ut 4, si♭ (B♭) clef de sol : on colore alors au maximum deux de chaque voix et chaque transposition pour le même instrument.</p>
+<ul>
+	<li>Si la partition comporte des transpositions recto-verso
+		(instruments si♭ (B♭) clef de sol d’un côté et ut (C) clef de fa de l’autre par exemple), on marque les deux côtés.</li>
+	<li>Si la partition est sur plusieurs feuilles séparées, on marque chacune de ces feuilles.</li>
+</ul>
+<h4>{{ 'app.fields.piece.states.2'|trans }}</h4>
+<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : avant tout marquage au tampon encreur, vérifier scrupuleusement que vous allez mettre le bon numéro. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
+<p> Toutes les partitions originales à conserver sont idéalement marquées au tampon encreur du numéro qui peur a été attribué, permettant de regrouper et retrouver les partitions rapidement et d’identifier les feuilles volantes sur lesquelles le titre ne figureraient pas. Le marquage du numéro se fait <strong>en haut à droite du titre</strong> de la partition. Pour la jaquette de la partition de direction, à un endroit où cela restera visible.</p>
+<p class="alert alert-info">ℹ️ La partition de direction doit être en plus tamponnée du sceau de la société.</p>
+<h4>{{ 'app.fields.piece.states.4'|trans }}</h4>
+<p> Toutes les partitions originales à conserver sont idéalement marquées avec un élément de couleur (trait de marqueur fluo, gommette unie – mais pas de simple post-it qui n’adhère pas sur toute sa surface et est donc plus susceptible de tomber) L’utilité ce ce marquage est simplement pour les départager des copies que nous faisons en noir et blanc.<br />
+	Le marquage de couleur se fait <strong>sur le nom de l’instrument</strong> (évidemment pas pour les marquages qui masqueraient l’information), en général en haut à gauche de la partition.</p>
+<h2 id="Emplacements">Emplacements</h2>
+<p>Il y a plusieurs emplacements possibles pour les partitions, certains impliquent des états particuliers, d’autres n’ont pas besoin d’états particuliers.</p>
+<h3>{{ 'app.fields.piece.location.stowed'|trans }}<br />
+	<small>{{ 'app.fields.piece.states.1'|trans }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}, {{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.not.4'|trans|lower }}, {{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.not.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}</small></h3>
+<p>Le lieu de prédilection des partitions au repos. Pour y être déplacé, il faut au moins que la partition ait été marquée comme vérifiée et donc les éventuels manques saisis.<br />
+	Les partitions qui s’y trouvent sont soit dans une fourre plastique suffisamment grande, soit cerclées par un ruban de papier. Dans la fourre sur un papier, ou sur le ruban papier directement, doivent se trouver :</p>
+<ul>
+	<li>le numéro d’archive de la partition ;</li>
+	<li>la date de vérification ;</li>
+	<li>la griffe de la personne qui a vérifié ;</li>
+	<li>la liste des voix manquantes.</li>
+</ul>
+<p>Pour le ruban papier, le numéro doit aussi être appliqué sur la tranche, lisible quand le titre de la partition est en haut, à gauche, et contre la personne.</p>
+<p>Cette indication de vérification sera jetée quand la partition sera reprise.</p>
+<h3>{{ 'app.fields.piece.location.shelf'|trans }}<br />
+	<small>Toutes combinaisons d’états possibles</small></h3>
+<p>Ce lieu est pour les partitions qui font actuellement partie d’un programme. Que ce soient des partitions qui étaient auparavant archivées ou des jeux flambants neufs, les états ici ne sont pas importants : les nouvelles partitions ou celles en retour de prêt ne sont même pas encore (re-)vérifiées, celles ressorties des archives peuvent être tamponnées ou simplement marquées.</p>
+<p class="alert alert-info">ℹ️ Les partitions des carnets de marche et de défilé ne sont pas nécessairement dans les tiroirs en face de la porte, mais aussi dans un bac d’archives en plastique à droite en entrant, sous les cartons d’archives.</p>
+<h3>{{ 'app.fields.piece.location.lent'|trans }}<br />
+	<small>{{ 'app.fields.piece.states.1'|trans }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}, {{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.not.4'|trans|lower }}, {{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.not.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}</small></h3>
+<p>Pour prêter une partition à une société amie, il faut au moins que la partition soit complète et qu’on puisse s’en assurer aisément au retour, donc il faut au moins qu’elle ait été vérifiée et colorée.</p>
+<h3>{{ 'app.fields.piece.location.returned'|trans }}<br />
+	<small>{{ 'app.fields.piece.states.1'|trans }}, les autres statuts selon les usages de la société qui a prêté</small></h3>
+<p>Là, c’est nous qui avons bénéficié d’un prêt. La partition figure donc dans notre catalogue uniquement pour des raisons d’historique des pièces jouées, mais peut-être qu’elle sera achetée ?<br />
+	En général, on vérifie qu’il y ait tout quand on rend la pièce. Rien d’autre n’est effectué sans demande expresse de la société qui nous a prêté le jeu de partitions.</p>
+<h3>{{ 'app.fields.piece.location.lost'|trans }}<br />
+	<small>Toutes combinaisons d’états possibles</small></h3>
+<p>Pour cet emplacement, les états importent peu, étant donné qu’on sait qu’on ne l’a et ne l’aura plus (cas de vieilles partitions parties en poussière et dont l’arrangement n’existe plus).</p>
+<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : ce n’est pas la même chose qu’un emplacement inconnu, qui lui n’est pas définitif.</p>
+<h3>{{ 'app.fields.piece.location.placeholder'|trans }}<br />
+	<small>Toutes combinaisons d’états possibles</small></h3>
+<p>L’emplacement le plus problématique, surtout si on a noté que la pièce était vérifiée ou/et colorée ou/et tamponnée. Cet état n’est pas définitif, il faudra à un moment décider ce qu’il en est réellement.</p>
+<h3>{{ 'app.fields.piece.location.server'|trans }}<br />
+	<small>Toutes combinaisons d’états possibles</small></h3>
+<p>Ce n’est pas à proprement parler un emplacement, mais comme ce n’est pas l’un de ceux mentionnés ci-avant et qu’il est défini, il est listé comme tel. Pour l’instant, il n’y a guère que <a href="{{ path('piece_show', {'id': 0}) }}">la diane</a> qui soit à cet emplacement. Mais si on imagine à terme soit scanner les partitions reçues au format physique, soit opter pour des commandes au format électronique, l’évolution est prête. Les états ne sont pour l’instant pas nécessaires à cet emplacement, ils ne sont donc pas affichés.</p>
+<h2 id="Que-faire-avec-des-partitions">Que faire avec des partitions qui…</h2>
+<h3>… sont toutes nouvelles</h3>
+<p>A la réception, la pièce doit être au minimum entrée dans le système, ce qui attribue d’office un numéro unique à la pièce. Soit vous avez les accès et les connaissances pour le faire, soit vous transmettez à l’archiviste.</p>
+<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : avant toute saisie, vérifier scrupuleusement que la pièce ne figure pas déjà dans le catalogue. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
+<ul>
+	<li><strong class="text-danger">Titre</strong></li>
+	<li><strong class="text-danger">Compositeur(s)</strong></li>
+	<li>Arrangeur(s)</li>
+	<li>Editeur</li>
+	<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.shelf'|trans }}</q></i></li>
+</ul>
+<h3>… ne sont plus jouées</h3>
+<p>Après un concert, ou la dernière exécution d’un programme, ou au changement d’un programme, l’état du jeu de partitions doit être mis à jour pour pouvoir au moins avoir le premier état <q>{{ 'app.fields.piece.states.1'|trans }}</q> – voir <a href="#Etats-des-partitions">la section <q>Etats des partitions</q></a> pour plus d’informations.</p>
+<ol>
+	<li>Si le temps n’a été pris que pour vérifier si elles étaient complètes et les éventuels manques relevés.
+		<ul>
+			<li><strong class="text-warning">Le plus d’informations possible</strong></li>
+			<li><i>Etat : <q class="text-danger">{{ 'app.fields.piece.states.1'|trans }}</q> et <strong class="text-danger">manques</strong></i></li>
+			<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.shelf'|trans }}</q></i></li>
+		</ul>
+	</li>
+	<li>Si le temps le permet, chaque partition originale est estampillée du numéro qui a été attribué à la pièce lors de sa réception (<q>{{ 'app.fields.piece.states.2'|trans }}</q>). Les informations qui n’avaient pas été saisies lors de la réception sont complétées.<br />
+		Dans la foulée idéale, le marquage au tampon peut être accompagné du marquage de couleur (<q>{{ 'app.fields.piece.states.4'|trans }}</q>).<br />
+		Une fois que le statut <q>{{ 'app.fields.piece.states.1'|trans }}</q> ainsi qu'un des autres (<q>{{ 'app.fields.piece.states.2'|trans }}</q> ou <q>{{ 'app.fields.piece.states.4'|trans }}</q>) sont réunis, la partition peut être mise en carton.
+		<ul>
+			<li><strong class="text-danger">Toutes les informations possibles</strong></li>
+			<li><i>Etats : <q class="text-danger">{{ 'app.fields.piece.states.1'|trans }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}</q>, <q class="text-danger">{{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.not.4'|trans|lower }}</q>, <q class="text-danger">{{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.not.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}</q></i></li>
+			<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.stowed'|trans }}</q></i></li>
+		</ul>
+	</li>
+</ol>
+<h3>… partent en prêt à une autre société, ou sont rendues à une autre société</h3>
+<p>Les directeurs aiment bien pouvoir emprunter des partitions quelque part pour les jouer jouer autre part, et il faut dire que les comptes des sociétés s’en trouvent moins grêlés de frais.</p>
+<ul>
+	<li><i>Etats : <q class="text-danger">{{ 'app.fields.piece.states.1'|trans }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}</q></i></li>
+	<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.lent'|trans }}</q> ou <q class="text-danger">{{ 'app.fields.piece.location.returned'|trans }}</q></i></li>
+</ul>
+<h3>… reviennent de prêt à une autre société</h3>
+<p>Sont automatiquement appliqués lors de retour de prêt :</p>
+<ul>
+	<li><i>Etat : <q class="text-danger">{{ 'app.fields.piece.states.not.1'|trans }}</q></i></li>
+	<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.shelf'|trans }}</q></i></li>
+</ul>
+<p>Si en revanche le temps de tout vérifier est pris, comme les originaux sont censés être déjà marqués, on va juste relever les éventuels manques.</p>
+<ul>
+	<li><i>Etat : <q class="text-danger">{{ 'app.fields.piece.states.1'|trans }}</q></i></li>
+	<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.stowed'|trans }}</q></i></li>
+</ul>
 {% endblock %}

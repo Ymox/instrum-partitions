@@ -42,8 +42,7 @@ class PieceController extends AbstractController
 
         return $this->render('piece/index.html.twig', array(
             'pieces' => $pieces,
-            'nbPages' => max(ceil($pieces->count() / $this->getParameter('paginate.per_page')), 1),
-            'statuses' => $this->getDoctrine()->getManager()->getRepository(\App\Entity\Status::class)->findAll(),
+            'nbPages' => max(ceil($pieces->count() / $this->getParameter('paginate.per_page')), 1)
         ));
     }
 
@@ -54,7 +53,11 @@ class PieceController extends AbstractController
     public function new(Request $request, TranslatorInterface $translator)
     {
         $piece = new Piece();
-        $form = $this->createForm('App\Form\PieceType', $piece);
+        $piece
+            ->setLocation(Piece::LOCATION_SHELF)
+            ->setStates(0)
+        ;
+        $form = $this->createForm(\App\Form\PieceType::class, $piece);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,7 +105,7 @@ class PieceController extends AbstractController
     public function edit(Request $request, Piece $piece)
     {
         $deleteForm = $this->createDeleteForm($piece);
-        $editForm = $this->createForm('App\Form\PieceType', $piece);
+        $editForm = $this->createForm(\App\Form\PieceType::class, $piece);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -161,7 +164,7 @@ class PieceController extends AbstractController
      */
     public function duplicates(Request $request, Piece $master, Piece $duplicate, TranslatorInterface $translator)
     {
-        $masterForm = $this->createForm('App\Form\PieceType', $master);
+        $masterForm = $this->createForm(\App\Form\PieceType::class, $master);
         $masterForm->add('concerts', EntityType::class, array(
             'class' => Concert::class,
             'choice_label' => 'name',
@@ -182,7 +185,7 @@ class PieceController extends AbstractController
             return $this->redirectToRoute('piece_show', array('id' => $master->getId()));
         }
 
-        $duplicateForm = $this->createForm('App\Form\PieceType', $duplicate);
+        $duplicateForm = $this->createForm(\App\Form\PieceType::class, $duplicate);
         $duplicateForm->add('concerts', EntityType::class, array(
             'class' => Concert::class,
             'choice_label' => 'name',

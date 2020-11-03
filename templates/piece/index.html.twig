@@ -57,11 +57,13 @@
 			</tfoot>
 			<tbody>
 			{% for piece in pieces %}
-				<tr{% if piece.status.id in ['stowed', 'unstamped'] and piece.missings|length %} class="table-warning text-warning"
-					{%- elseif piece.status.id in ['lent', 'returned'] %} class="text-muted"
-					{%- elseif piece.status.id == 'unstamped' %} class="table-success text-success"
-					{%- elseif piece.status.id == 'unverified' %} class="table-info text-info"
-					{%- elseif piece.status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
+				<tr{% if not piece.hasState(constant('STATE_VERIFIED', piece)) %} class="table-danger text-danger"
+					{%- elseif piece.location in [constant('LOCATION_LOST', piece), constant('LOCATION_RETURNED', piece)] %} class="table-secondary text-muted"
+					{%- elseif piece.location == constant('LOCATION_LENT', piece) %} class="text-muted"
+					{%- elseif piece.missings|length or piece.states > 1 and piece.states < 7 %} class="table-warning text-warning"
+					{%- elseif piece.location is null %} class="table-info text-info"
+					{%- elseif piece.location == constant('LOCATION_SHELF', piece) %} class="table-success text-success"
+					{%- endif %}>
 					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.id }}</a></td>
 					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.name }}</a>
 						{%- if piece.translation %}<br />
@@ -96,16 +98,44 @@
 				</div>
 				<div class="modal-body">
 					<table class="table table-sm table-hover">
-						{% for status in statuses -%}
-						<tr{% if status.id in ['lent', 'returned'] %} class="text-muted"
-							{%- elseif status.id == 'unstamped' %} class="table-success text-success"
-							{%- elseif status.id == 'unverified' %} class="table-info text-info"
-							{%- elseif status.id == 'lost' %} class="table-danger text-danger"{% endif %}>
-							<td>{{ status }}</td>
+						<tr class="table-secondary text-muted">
+							<td>
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_LOST'))|trans }}<br />
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_RETURNED'))|trans }}
+							</td>
 						</tr>
-						{% endfor %}
-						<tr class="table-warning text-warning">
-							<td>{{ 'app.piece.index.modal.status_incomplete'|trans }}</td>
+						<tr class="text-muted">
+							<td class="text-muted">
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_LENT'))|trans }}
+							</td>
+						</tr>
+						<tr>
+							<td class="table-danger text-danger">
+								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_VERIFIED'))|trans }}
+							</td>
+						</tr>
+						<tr>
+							<td class="table-warning text-warning">
+								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_COLOURED'))|trans }}<br />
+								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_STAMPED'))|trans }}<br />
+								{{ 'app.piece.index.modal.status_incomplete'|trans }}
+							</td>
+						</tr>
+						<tr>
+							<td class="table-info text-info">
+								{{ 'app.fields.piece.location.placeholder'|trans }}
+							</td>
+						</tr>
+						<tr>
+							<td class="table-success text-success">
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SHELF'))|trans }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SERVER'))|trans }}<br />
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_STOWED'))|trans }}
+							</td>
 						</tr>
 					</table>
 				</div>

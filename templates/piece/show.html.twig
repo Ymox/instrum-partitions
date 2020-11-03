@@ -60,20 +60,21 @@
 						{%- else -%}>
 						{%- endif -%}
 					</td>
-					<th>{{ 'app.fields.piece.status'|trans }}</th>
-					<td>{{ piece.status }}
-						{%- if piece.status in ['returned', 'lent'] %}
-						{{ piece.lendings.first }}
+					<th>{{ 'app.fields.piece.location.label'|trans }}</th>
+					<td>{{ ('app.fields.piece.location.' ~ piece.location|default('placeholder'))|trans }}
+						{%- if piece.states != 0 and piece.location != constant('LOCATION_SERVER', piece) %}
+						({% for state in static('STATES_LIST', piece) -%}
+						    {{ ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+						    {% if not loop.last %}, {% endif -%}
+						{%- endfor %})
+						{%- endif %}
+						{%- if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] %}
+						{{- ('app.lending.ours.' ~ (piece.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ piece.lendings.first.band }}
 						{%- endif %}
 						{%- if not piece.missings.empty %}
 						({% for missing in piece.missings -%}
 						<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
-						{% endfor -%}
-						{% if not piece.lendings.empty and piece.lendings.first.ours %}
-						— {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', { 'id': piece.lendings.first.id }) }}">{% endif %}
-							{{- ('app.lending.ours.' ~ (piece.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ piece.lendings.first.band }}
-						{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %}
-						{%- endif %})
+						{% endfor -%})
 						{%- endif %}
 					</td>
 				</tr>
@@ -132,20 +133,21 @@
 					<td colspan="3">{{ movement.arrangers|join(', ') }}</td>
 				</tr>
 				</tr>
-					<th>{{ 'app.fields.piece.status'|trans }}</th>
-					<td colspan="3">{{ movement.status }}
-						{%- if movement.status in ['returned', 'lent'] %}
-						{{ movement.lendings.first }}
+					<th>{{ 'app.fields.piece.location.label'|trans }}</th>
+					<td>{{ ('app.fields.piece.location.' ~ movement.location|default('placeholder'))|trans }}
+						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) %}
+						({% for state in static('STATES_LIST', movement) -%}
+						    {{ ('app.fields.piece.states.' ~ (movement.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+						    {% if not loop.last %}, {% endif -%}
+						{%- endfor %})
+						{%- endif %}
+						{%- if movement.location in [constant('LOCATION_LENT', movement), constant('LOCATION_RETURNED', movement)] %}
+						{{ ('app.lending.ours.' ~ (movement.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ movement.lendings.first.band }}
 						{%- endif %}
 						{%- if not movement.missings.empty %}
 						({% for missing in movement.missings -%}
 						<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
-						{% endfor -%}
-						{% if not movement.lendings.empty and movement.lendings.first.ours %}
-						— {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', { 'id': movement.lendings.first.id }) }}">{% endif %}
-							{{- ('app.lending.ours.' ~ (movement.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ movement.lendings.first.band }}
-						{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %}
-						{%- endif %})
+						{% endfor -%})
 						{%- endif %}
 					</td>
 				</tr>

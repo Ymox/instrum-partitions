@@ -7,6 +7,24 @@ namespace App\Entity;
  */
 class Piece
 {
+    const LOCATION_STOWED = 'stowed';
+
+    const LOCATION_SERVER = 'server';
+
+    const LOCATION_LENT = 'lent';
+
+    const LOCATION_RETURNED = 'returned';
+
+    const LOCATION_SHELF = 'shelf';
+
+    const LOCATION_LOST = 'lost';
+
+    const STATE_VERIFIED = 1;
+
+    const STATE_STAMPED = 2;
+
+    const STATE_COLOURED = 4;
+
     /**
      * @var float
      */
@@ -21,6 +39,21 @@ class Piece
      * @var string
      */
     private $translation;
+
+    /**
+     * @var int
+     */
+    private $location;
+
+    /**
+     * @var integer
+     */
+    private $states;
+
+    /**
+     * @var float
+     */
+    private $level;
 
     /**
      * @var integer
@@ -43,9 +76,14 @@ class Piece
     private $createdAt;
 
     /**
-     * @var float
+     * @var \App\Entity\Publisher
      */
-    private $level;
+    private $publisher;
+
+    /**
+     * @var \App\Entity\Size
+     */
+    private $size;
 
     /**
      * @var \App\Entity\Instrumentation
@@ -60,22 +98,7 @@ class Piece
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $missings;
-
-    /**
-     * @var \App\Entity\Publisher
-     */
-    private $publisher;
-
-    /**
-     * @var \App\Entity\Size
-     */
-    private $size;
-
-    /**
-     * @var \App\Entity\Status
-     */
-    private $status;
+    private $program;
 
     /**
      * @var \App\Entity\Piece
@@ -95,7 +118,7 @@ class Piece
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $program;
+    private $missings;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -116,6 +139,21 @@ class Piece
      * @var \Doctrine\Common\Collections\Collection
      */
     private $lendings;
+
+    public static $STATES_LIST = [
+        self::STATE_VERIFIED,
+        self::STATE_STAMPED,
+        self::STATE_COLOURED,
+    ];
+
+    public static $LOCATIONS_LIST = [
+        self::LOCATION_SERVER,
+        self::LOCATION_STOWED,
+        self::LOCATION_SHELF,
+        self::LOCATION_LENT,
+        self::LOCATION_RETURNED,
+        self::LOCATION_LOST,
+    ];
 
     /**
      * Constructor
@@ -190,6 +228,131 @@ class Piece
     }
 
     /**
+     * Set location
+     *
+     * @param string $location
+     *
+     * @return Piece
+     */
+    public function setLocation(string $location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Set states
+     *
+     * @param integer $state
+     *
+     * @return Piece
+     */
+    public function setStates(int $states = null)
+    {
+        $this->states = $states;
+
+        return $this;
+    }
+
+    /**
+     * Has state
+     *
+     * @param integer $state
+     *
+     * @return Piece
+     */
+    public function hasState(int $state = null)
+    {
+        return ($this->states & $state) === $state;
+    }
+
+    /**
+     * Has any state
+     *
+     * @param integer $states
+     * @param bool $partial
+     *
+     * @return Piece
+     */
+    public function hasAnyState(int $states = null)
+    {
+        return ($this->states & $state) != 0;
+    }
+
+    /**
+     * Add state
+     *
+     * @param integer $state
+     *
+     * @return Piece
+     */
+    public function addState(int $state = null)
+    {
+        $this->states |= $state;
+
+        return $this;
+    }
+
+    /**
+     * Add state
+     *
+     * @param integer $state
+     *
+     * @return Piece
+     */
+    public function removeState(int $state = null)
+    {
+        $this->states &= ~$state;
+
+        return $this;
+    }
+
+    /**
+     * Get states
+     *
+     * @return integer
+     */
+    public function getStates()
+    {
+        return $this->states;
+    }
+
+    /**
+     * Set level
+     *
+     * @param float $level
+     *
+     * @return Piece
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return float
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
      * Set year
      *
      * @param integer $year
@@ -259,54 +422,6 @@ class Piece
     public function getNote()
     {
         return $this->note;
-    }
-
-    /**
-     * Set work
-     *
-     * @param \App\Entity\Piece $work
-     *
-     * @return Piece
-     */
-    public function setWork(\App\Entity\Piece $work = null)
-    {
-        $this->work = $work;
-
-        return $this;
-    }
-
-    /**
-     * Get work
-     *
-     * @return \App\Entity\Piece
-     */
-    public function getWork()
-    {
-        return $this->work;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Piece
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**
@@ -465,122 +580,6 @@ class Piece
     }
 
     /**
-     * Set status
-     *
-     * @param \App\Entity\Status $status
-     *
-     * @return Piece
-     */
-    public function setStatus(\App\Entity\Status $status = null)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return \App\Entity\Status
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Add composer
-     *
-     * @param \App\Entity\Person $composer
-     *
-     * @return Piece
-     */
-    public function addComposer(\App\Entity\Person $composer)
-    {
-        $this->composers[] = $composer;
-
-        return $this;
-    }
-
-    /**
-     * Remove composer
-     *
-     * @param \App\Entity\Person $composer
-     */
-    public function removeComposer(\App\Entity\Person $composer)
-    {
-        $this->composers->removeElement($composer);
-    }
-
-    /**
-     * Get composers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComposers()
-    {
-        return $this->composers;
-    }
-
-    /**
-     * Add arranger
-     *
-     * @param \App\Entity\Person $arranger
-     *
-     * @return Piece
-     */
-    public function addArranger(\App\Entity\Person $arranger)
-    {
-        $this->arrangers[] = $arranger;
-
-        return $this;
-    }
-
-    /**
-     * Remove arranger
-     *
-     * @param \App\Entity\Person $arranger
-     */
-    public function removeArranger(\App\Entity\Person $arranger)
-    {
-        $this->arrangers->removeElement($arranger);
-    }
-
-    /**
-     * Get arrangers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArrangers()
-    {
-        return $this->arrangers;
-    }
-
-    /**
-     * Set level
-     *
-     * @param float $level
-     *
-     * @return Piece
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return float
-     */
-    public function getLevel()
-    {
-        return $this->level;
-    }
-
-    /**
      * Set instrumentation
      *
      * @param \App\Entity\Instrumentation $instrumentation
@@ -653,6 +652,98 @@ class Piece
     }
 
     /**
+     * Set work
+     *
+     * @param \App\Entity\Piece $work
+     *
+     * @return Piece
+     */
+    public function setWork(\App\Entity\Piece $work = null)
+    {
+        $this->work = $work;
+
+        return $this;
+    }
+
+    /**
+     * Get work
+     *
+     * @return \App\Entity\Piece
+     */
+    public function getWork()
+    {
+        return $this->work;
+    }
+
+    /**
+     * Add composer
+     *
+     * @param \App\Entity\Person $composer
+     *
+     * @return Piece
+     */
+    public function addComposer(\App\Entity\Person $composer)
+    {
+        $this->composers[] = $composer;
+
+        return $this;
+    }
+
+    /**
+     * Remove composer
+     *
+     * @param \App\Entity\Person $composer
+     */
+    public function removeComposer(\App\Entity\Person $composer)
+    {
+        $this->composers->removeElement($composer);
+    }
+
+    /**
+     * Get composers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComposers()
+    {
+        return $this->composers;
+    }
+
+    /**
+     * Add arranger
+     *
+     * @param \App\Entity\Person $arranger
+     *
+     * @return Piece
+     */
+    public function addArranger(\App\Entity\Person $arranger)
+    {
+        $this->arrangers[] = $arranger;
+
+        return $this;
+    }
+
+    /**
+     * Remove arranger
+     *
+     * @param \App\Entity\Person $arranger
+     */
+    public function removeArranger(\App\Entity\Person $arranger)
+    {
+        $this->arrangers->removeElement($arranger);
+    }
+
+    /**
+     * Get arrangers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArrangers()
+    {
+        return $this->arrangers;
+    }
+
+    /**
      * Add concert
      *
      * @param \App\Entity\Concert $concert
@@ -718,5 +809,29 @@ class Piece
     public function getLendings()
     {
         return $this->lendings;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Piece
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

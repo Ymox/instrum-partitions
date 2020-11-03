@@ -35,7 +35,7 @@ class InstrumentController extends AbstractController
     public function new(Request $request)
     {
         $instrument = new Instrument();
-        $form = $this->createForm('App\Form\InstrumentType', $instrument);
+        $form = $this->createForm(\App\Form\InstrumentType::class, $instrument);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class InstrumentController extends AbstractController
     public function edit(Request $request, Instrument $instrument)
     {
         $deleteForm = $this->createDeleteForm($instrument);
-        $editForm = $this->createForm('App\Form\InstrumentType', $instrument);
+        $editForm = $this->createForm(\App\Form\InstrumentType::class, $instrument);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

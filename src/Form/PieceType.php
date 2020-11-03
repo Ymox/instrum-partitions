@@ -104,17 +104,28 @@ class PieceType extends AbstractType
                         $title = $title ? ($title. '(' . $min . ' ⥤ ' . $max . ')') : $min . ' ⥤ ' . $max;
                     }
                     return [
-                         'title' => $title,
+                        'title' => $title,
                     ];
                 },
                 'label_format'  => 'app.fields.piece.%name%',
             ))
-            ->add('status', null, array(
-                'choice_label' => 'name',
-                'label_format' => 'app.fields.piece.%name%',
+            ->add('location', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, array(
+                'choices'      => \App\Entity\Piece::$LOCATIONS_LIST,
+                'label_format' => 'app.fields.piece.%name%.label',
+                'placeholder'  => 'app.fields.piece.location.placeholder',
+                'choice_label' => function ($choice, $key, $value) {
+                    return 'app.fields.piece.location.' . $value;
+                },
                 'attr'         => array(
                     'required' => 'required',
                 ),
+            ))
+            ->add('states', \App\Form\Type\BinaryMaskChoiceType::class, array(
+                'choices'      => \App\Entity\Piece::$STATES_LIST,
+                'label_format' => 'app.fields.piece.%name%.label',
+                'choice_label' => function ($choice, $key, $value) {
+                    return 'app.fields.piece.states.' . $value;
+                },
             ))
             ->add('missings', CollectionType::class, array(
                 'entry_type'   => MissingType::class,
@@ -151,7 +162,7 @@ class PieceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Piece'
+            'data_class' => \App\Entity\Piece::class
         ));
     }
 

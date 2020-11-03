@@ -34,7 +34,7 @@ class PublisherController extends AbstractController
     public function new(Request $request)
     {
         $publisher = new Publisher();
-        $form = $this->createForm('App\Form\PublisherType', $publisher);
+        $form = $this->createForm(\App\Form\PublisherType::class, $publisher);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,7 +58,7 @@ class PublisherController extends AbstractController
     public function edit(Request $request, Publisher $publisher)
     {
         $deleteForm = $this->createDeleteForm($publisher);
-        $editForm = $this->createForm('App\Form\PublisherType', $publisher);
+        $editForm = $this->createForm(\App\Form\PublisherType::class, $publisher);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

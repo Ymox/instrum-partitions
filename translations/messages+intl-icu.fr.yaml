@@ -24,7 +24,6 @@ app:
     suisa: Rapport SUISA
     people: Compositeurs et arrangeurs
     missings: Manques
-    statuses: Statuts
     types: Types
     sizes: Tailles
     instrumentations: Instrumentations
@@ -54,7 +53,24 @@ app:
       size: Taille
       instrumentation: Instrumentation
       type: Type
-      status: Etat
+      location:
+        label: Emplacement
+        placeholder: Emplacement inconnu / à confirmer
+        stowed: Dans un carton d'archives
+        server: Version électronique
+        lent: En prêt à une autre société
+        returned: Rendue à une autre société
+        shelf: Quelque part dans les archives
+        lost: Perdue
+      states:
+        label: Etats
+        1: Vérifié
+        2: Tamponné
+        4: Coloré
+        not: 
+          1: Non vérifié
+          2: Non tamponné
+          4: Non coloré
       missings: Manques
       publisher: Editeur
       year: Année
@@ -75,7 +91,7 @@ app:
       maxHeight: Hauteur maximale
       maxWidth: Largeur maximale 
       minHeight: Hauteur minimale
-      minWidth: Hauteur minimale
+      minWidth: Largeur minimale
       name: Nom
       note: Notes
     status:
@@ -176,7 +192,7 @@ app:
         unknown: &unknown Inconnue
       modal:
         title: Signification des couleurs
-        status_incomplete: Rangé, mais partitions manquantes
+        status_incomplete: Partitions manquantes
     new:
       title: &piece_new Nouvelle partition
       heading: *piece_new

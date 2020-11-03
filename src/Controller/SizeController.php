@@ -20,7 +20,7 @@ class SizeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sizes = $em->getRepository(Size::class)->findAll();
+        $sizes = $em->getRepository(Size::class)->findBy([], ['minHeight' => 'asc']);
 
         return $this->render('size/index.html.twig', array(
             'sizes' => $sizes,
@@ -34,7 +34,7 @@ class SizeController extends AbstractController
     public function new(Request $request)
     {
         $size = new Size();
-        $form = $this->createForm('App\Form\SizeType', $size);
+        $form = $this->createForm(\App\Form\SizeType::class, $size);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,7 +72,7 @@ class SizeController extends AbstractController
     public function edit(Request $request, Size $size)
     {
         $deleteForm = $this->createDeleteForm($size);
-        $editForm = $this->createForm('App\Form\SizeType', $size);
+        $editForm = $this->createForm(\App\Form\SizeType::class, $size);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

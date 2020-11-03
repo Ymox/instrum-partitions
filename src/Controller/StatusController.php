@@ -34,7 +34,7 @@ class StatusController extends AbstractController
     public function new(Request $request)
     {
         $status = new Status();
-        $form = $this->createForm('App\Form\StatusType', $status);
+        $form = $this->createForm(\App\Form\StatusType::class, $status);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,7 +58,7 @@ class StatusController extends AbstractController
     public function edit(Request $request, Status $status)
     {
         $deleteForm = $this->createDeleteForm($status);
-        $editForm = $this->createForm('App\Form\StatusType', $status);
+        $editForm = $this->createForm(\App\Form\StatusType::class, $status);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

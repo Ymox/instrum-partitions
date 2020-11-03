@@ -38,7 +38,7 @@ class ConcertType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Concert'
+            'data_class' => \App\Entity\Concert::class
         ));
     }
 

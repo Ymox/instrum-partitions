@@ -29,7 +29,7 @@ class PersonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Person'
+            'data_class' => \App\Entity\Person::class
         ));
     }
 

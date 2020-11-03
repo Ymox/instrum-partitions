@@ -34,7 +34,7 @@ class TypeController extends AbstractController
     public function new(Request $request)
     {
         $type = new Type();
-        $form = $this->createForm('App\Form\TypeType', $type);
+        $form = $this->createForm(\App\Form\TypeType::class, $type);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,7 +58,7 @@ class TypeController extends AbstractController
     public function edit(Request $request, Type $type)
     {
         $deleteForm = $this->createDeleteForm($type);
-        $editForm = $this->createForm('App\Form\TypeType', $type);
+        $editForm = $this->createForm(\App\Form\TypeType::class, $type);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

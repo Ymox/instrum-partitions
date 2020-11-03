@@ -35,7 +35,7 @@ class PersonController extends AbstractController
     public function new(Request $request)
     {
         $person = new Person();
-        $form = $this->createForm('App\Form\PersonType', $person, array(
+        $form = $this->createForm(\App\Form\PersonType::class, $person, array(
             'action' => $this->generateUrl('person_new'),
         ));
         $form->handleRequest($request);
@@ -83,7 +83,7 @@ class PersonController extends AbstractController
     public function edit(Request $request, Person $person)
     {
         $deleteForm = $this->createDeleteForm($person);
-        $editForm = $this->createForm('App\Form\PersonType', $person);
+        $editForm = $this->createForm(\App\Form\PersonType::class, $person);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

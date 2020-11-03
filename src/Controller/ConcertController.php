@@ -41,7 +41,7 @@ class ConcertController extends AbstractController
     public function new(Request $request)
     {
         $concert = new Concert();
-        $form = $this->createForm('App\Form\ConcertType', $concert);
+        $form = $this->createForm(\App\Form\ConcertType::class, $concert);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +79,7 @@ class ConcertController extends AbstractController
     public function edit(Request $request, Concert $concert)
     {
         $deleteForm = $this->createDeleteForm($concert);
-        $editForm = $this->createForm('App\Form\ConcertType', $concert);
+        $editForm = $this->createForm(\App\Form\ConcertType::class, $concert);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

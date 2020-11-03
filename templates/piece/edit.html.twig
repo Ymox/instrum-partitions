@@ -8,12 +8,10 @@
 
 {% block body %}
 	<h1>{{ piece.name }}
-		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
+		{%- if piece.translation %}<br />
+		<small>{{ piece.translation }}</small>{% endif %}</h1>
 
-	{{ form_start(edit_form) }}
-		{{ form_widget(edit_form) }}
-		<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check"></i></button>
-	{{ form_end(edit_form) }}
+	{{ include('piece/_form.html.twig', {'form': edit_form}) }}
 
 	<ul class="list-inline float-right">
 		<li class="list-inline-item">
@@ -28,7 +26,7 @@
 {% endblock %}
 
 {% block javascripts %}
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 		<script src="{{ asset('js/entity_adder.js') }}"></script>
 		<script src="{{ asset('js/collection_adder.js') }}"></script>
 		<script src="{{ asset('js/dragndrop.js') }}"></script>

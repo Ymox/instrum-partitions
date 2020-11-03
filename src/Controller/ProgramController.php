@@ -41,7 +41,7 @@ class ProgramController extends AbstractController
     public function new(Request $request)
     {
         $program = new Program();
-        $form = $this->createForm('App\Form\ProgramType', $program);
+        $form = $this->createForm(\App\Form\ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +79,7 @@ class ProgramController extends AbstractController
     public function edit(Request $request, Program $program)
     {
         $deleteForm = $this->createDeleteForm($program);
-        $editForm = $this->createForm('App\Form\ProgramType', $program);
+        $editForm = $this->createForm(\App\Form\ProgramType::class, $program);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

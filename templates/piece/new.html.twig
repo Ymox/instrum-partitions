@@ -9,16 +9,13 @@
 {% block body %}
 	<h1>{{ 'app.piece.new.heading'|trans }}</h1>
 
-	{{ form_start(form) }}
-		{{ form_widget(form) }}
-		<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check"></i></button>
-	{{ form_end(form) }}
+	{{ include('piece/_form.html.twig', {'form': form}) }}
 
 	<a href="{{ path('piece_index') }}" class="btn btn-light float-right"><i class="fa fa-list"></i></a>
 {% endblock %}
 
 {% block javascripts %}
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 		<script src="{{ asset('js/entity_adder.js') }}"></script>
 		<script src="{{ asset('js/collection_adder.js') }}"></script>
 		<script src="{{ asset('js/dragndrop.js') }}"></script>

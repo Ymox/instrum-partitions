@@ -53,13 +53,6 @@ class MovementType extends AbstractType
                 'choice_label' => 'name',
                 'label_format' => 'app.fields.piece.%name%',
             ))
-            ->add('status', null, array(
-                'choice_label' => 'name',
-                'label_format' => 'app.fields.piece.%name%',
-                'attr'         => array(
-                    'required' => 'required',
-                ),
-            ))
             ->add('missings', CollectionType::class, array(
                 'entry_type'   => MissingType::class,
                 'prototype'    => true,
@@ -80,7 +73,7 @@ class MovementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Piece'
+            'data_class' => \App\Entity\Piece::class
         ));
     }
 

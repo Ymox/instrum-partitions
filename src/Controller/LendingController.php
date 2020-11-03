@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lending;
+use App\Entity\Piece;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,10 +45,11 @@ class LendingController extends AbstractController
     public function new(Request $request)
     {
         $lending = new Lending();
-        $form = $this->createForm('App\Form\LendingType', $lending);
+        $form = $this->createForm(\App\Form\LendingType::class, $lending);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->handlePiecesInLending($lending);
             $em = $this->getDoctrine()->getManager();
             $em->persist($lending);
             $em->flush();
@@ -82,10 +84,11 @@ class LendingController extends AbstractController
     public function edit(Request $request, Lending $lending)
     {
         $deleteForm = $this->createDeleteForm($lending);
-        $editForm = $this->createForm('App\Form\LendingType', $lending);
+        $editForm = $this->createForm(\App\Form\LendingType::class, $lending);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->handlePiecesInLending($lending);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('lending_edit', array('id' => $lending->getId()));
@@ -130,5 +133,22 @@ class LendingController extends AbstractController
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Applies location and state(s) to lent or returned pieces
+     */
+    private function handlePiecesInLending(\App\Entity\Lending &$lending)
+    {
+        if ($lending->isOurs()) {
+            $location = $lending->getEnd() ? Piece::LOCATION_SHELF : Piece::LOCATION_LENT;
+        } else {
+            $location = $lending->getEnd() ? Piece::LOCATION_RETURNED : Piece::LOCATION_SHELF;
+        }
+
+        foreach ($lending->getPieces() as &$piece) {
+            $piece->setLocation($location);
+            $piece->removeState(Piece::STATE_VERIFIED);
+        }
     }
 }

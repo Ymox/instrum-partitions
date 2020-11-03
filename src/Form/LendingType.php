@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Piece;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -57,14 +58,17 @@ class LendingType extends AbstractType
                     },
                     'query_builder' => function (\App\Repository\PieceRepository $repo) use ($lending) {
                         $qb = $repo->createQueryBuilder('p');
-                        $qb ->innerJoin('p.status', 's')
-                            ->leftJoin('p.lendings', 'l')
+                        $qb ->leftJoin('p.lendings', 'l')
                             ->where($qb->expr()->orX(
-                                $qb->expr()->notIn('s.id', ':statuses'),
+                                $qb->expr()->andX(
+                                    $qb->expr()->in('p.location', ':locations'),
+                                    $qb->expr()->eq(new \Doctrine\ORM\Query\Expr\Func('BIT_AND', ['p.states', ':state']), ':state')
+                                ),
                                 $qb->expr()->eq('l.id', ':lendingId')
                             ))
-                            ->setParameter(':statuses', array('lent', 'returned'))
+                            ->setParameter(':locations', array(Piece::LOCATION_SHELF, Piece::LOCATION_STOWED))
                             ->setParameter(':lendingId', $lending->getId())
+                            ->setParameter(':state', Piece::STATE_VERIFIED)
                         ;
 
                         return $qb;
@@ -81,7 +85,7 @@ class LendingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Lending'
+            'data_class' => \App\Entity\Lending::class
         ));
     }
 

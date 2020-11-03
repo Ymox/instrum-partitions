@@ -17,6 +17,12 @@ App\Entity\Piece:
       type: string
       length: 255
       nullable: true
+    location:
+      type: string
+      length: 255
+      nullable: true
+    states:
+      type: integer
     level:
       type: float
       nullable: true
@@ -77,11 +83,6 @@ App\Entity\Piece:
       joinColumn:
         name: size
         referencedColumnName: name
-    status:
-      targetEntity: App\Entity\Status
-      inversedBy: pieces
-      cascade:
-        - persist
     instrumentation:
       targetEntity: App\Entity\Instrumentation
       inversedBy: pieces
