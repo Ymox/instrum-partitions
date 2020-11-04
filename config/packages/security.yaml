@@ -44,6 +44,7 @@ security:
     - { path: /download, roles: ROLE_DOWNLOAD }
     - { path: /new, roles: ROLE_USER }
     - { path: /edit, roles: ROLE_USER }
+    - { path: /update, roles: ROLE_USER }
     - { path: /upload, roles: ROLE_USER }
     - { path: ^/publisher, roles: ROLE_USER }
     - { path: ^/lending, roles: ROLE_USER }

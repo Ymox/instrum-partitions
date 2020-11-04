@@ -18,6 +18,11 @@ piece_edit:
   controller: 'App\Controller\PieceController::edit'
   methods: [GET, POST]
 
+piece_update:
+  path:   /piece/{id}/update
+  controller: 'App\Controller\PieceController::update'
+  methods: [GET]
+
 piece_delete:
   path:   /piece/{id}/delete
   controller: 'App\Controller\PieceController::delete'

@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Piece;
+use App\Entity\Concert;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Concert;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -119,6 +120,31 @@ class PieceController extends AbstractController
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Quick update for pieces (states or location)
+     */
+    public function update(Request $request, Piece $piece)
+    {
+        foreach ($request->query->get('states', array()) as $state => $action) {
+            if ($action == -1) {
+                $piece->removeState($state);
+            } else {
+                $piece->addState($state);
+            }
+        }
+        if ($location = $request->query->get('location')) {
+            $piece->setLocation($location);
+        }
+        $this->getDoctrine()->getManager()->flush();
+
+        if ($return_path = $request->query->get('return_path')) {
+            return $this->redirect($return_path);
+        } else {
+            return new Response(null, Response::HTTP_NO_CONTENT);
+        }
+
     }
 
     /**

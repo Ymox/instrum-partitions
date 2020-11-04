@@ -34,7 +34,7 @@ app:
       heading: Prêts
       list: Lister
     bands: Ensembles
-    instructions: Instructions d'archivage
+    instructions: Instructions d’archivage
 
   file:
     download: Télécharger le fichier actuel
@@ -56,7 +56,7 @@ app:
       location:
         label: Emplacement
         placeholder: Emplacement inconnu / à confirmer
-        stowed: Dans un carton d'archives
+        stowed: Dans un carton d’archives
         server: Version électronique
         lent: En prêt à une autre société
         returned: Rendue à une autre société
@@ -117,7 +117,7 @@ app:
       contact: Personne de contact
       start: Commencé 
       end: Clos
-      ours: C'est nous qui prêtons
+      ours: C’est nous qui prêtons
       pieces: Partitions
     program:
       name: Nom
@@ -136,7 +136,7 @@ app:
             f: 𝄢
           long:
             g: clef de sol
-            c: clef d'ut
+            c: clef d’ut
             f: clef de fa
       number: Numéro
       solo: Soliste
@@ -184,7 +184,7 @@ app:
       title: &piece_suisa Rapport SUISA
       heading: *piece_suisa
       first_played: Première exécution
-      number_played: Nombre d'exécutions
+      number_played: Nombre d’exécutions
     index:
       title: Partitions
       heading: Liste des partitions
@@ -286,7 +286,7 @@ app:
       title: &concert_new Nouveau concert
       heading: *concert_new   
     show:
-      too_early: Désolé, mais cette information n'est pas disponible pour le moment. Rendez-vous au concert !
+      too_early: Désolé, mais cette information n’est pas disponible pour le moment. Rendez-vous au concert !
       arrangers:
         short: 'arr.'
         long: >-

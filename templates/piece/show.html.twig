@@ -22,7 +22,6 @@
 						<a href="{{ path('concert_show', {'id': piece.concerts.first.id}) }}"{{ link_class|raw }}>{{ piece.concerts.first.name }}
 							({{ piece.concerts.first.date|date('Y-m-d') }})</a>
 							{% if piece.concerts.count() > 1 -%}
-							</span>
 							<a href="#" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="sr-only">Toggle Dropdown</span>
 							</a>
@@ -53,7 +52,7 @@
 					<th>{{ 'app.fields.piece.reference'|trans }}</th>
 					<td>{{ piece.reference }}</td>
 				</tr>
-				</tr>
+				<tr>
 					<th>{{ 'app.fields.piece.instrumentation'|trans }}</th>
 					<td{%- if piece.instrumentation %} title="{{ piece.instrumentation.note }}">
 						{{ piece.instrumentation.name }}
@@ -61,27 +60,61 @@
 						{%- endif -%}
 					</td>
 					<th>{{ 'app.fields.piece.location.label'|trans }}</th>
-					<td>{{ ('app.fields.piece.location.' ~ piece.location|default('placeholder'))|trans }}
+					<td>
+						{% if is_granted('ROLE_USER') -%}
+						<div class="btn-group btn-group-sm">
+							<span class="btn btn-link">
+						{%- endif -%}
+
+						{{ ('app.fields.piece.location.' ~ piece.location|default('placeholder'))|trans -}}
+
+						{%- if is_granted('ROLE_USER') -%}</span>
+							<a href="#" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="sr-only">Déplacer</span>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('piece_update', {'id': piece.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
+								{% for location in static('LOCATIONS_LIST', piece) %}
+								<a class="dropdown-item" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+								{% endfor %}
+							</div>
+						</div>
+						{% endif -%}
+					
+						{%- if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] and not piece.lendings.isEmpty %}
+							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': piece.lendings.first.id}) }}">{% endif %}
+							{{- piece.lendings.first.band -}}
+							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
+						{% endif -%}
+
 						{%- if piece.states != 0 and piece.location != constant('LOCATION_SERVER', piece) %}
-						({% for state in static('STATES_LIST', piece) -%}
-						    {{ ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
-						    {% if not loop.last %}, {% endif -%}
-						{%- endfor %})
-						{%- endif %}
-						{%- if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] %}
-						{{- ('app.lending.ours.' ~ (piece.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ piece.lendings.first.band }}
-						{%- endif %}
-						{%- if not piece.missings.empty %}
-						({% for missing in piece.missings -%}
-						<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
-						{% endfor -%})
+						{%- set style = (not piece.hasState(constant('STATE_VERIFIED', piece)) ? 'danger' : (piece.states != 7 ? 'warning' : 'success')) -%}
+						{%- if is_granted('ROLE_USER') %} <span class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">{% else %} ({% endif -%}
+						{%- for state in static('STATES_LIST', piece) -%}
+							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state): piece.hasState(state) ? -1 : 1}}) }}" class="{{ piece.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
+							{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+							{%- if is_granted('ROLE_USER') %}</a>{%- elseif not loop.last and not is_granted('ROLE_USER') %}</span>, {% endif -%}
+						{%- endfor %}
+						{%- if is_granted('ROLE_USER') %}</span>{% else %}){% endif -%}
 						{%- endif %}
 					</td>
 				</tr>
+				{%- if not piece.missings.empty %}
+				<tr>
+					<th>{{ 'app.fields.piece.missings'|trans }}</th>
+					<td colspan="3">
+						{% for missing in piece.missings -%}
+						<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
+						{% endfor -%}
+					</td>
+				</tr>
+				{%- endif %}
+				{%- if piece.note is not empty %}
 				<tr>
 					<th>{{ 'app.fields.piece.note'|trans }}</th>
 					<td colspan="3">{{ piece.note|nl2br }}</td>
 				</tr>
+				{%- endif %}
 				<tr>
 					<th>{{ 'app.fields.piece.created_at'|trans }}</th>
 					<td colspan="3">{{ piece.createdAt|date('Y-m-d à H:i:s') }}</td>
@@ -134,20 +167,42 @@
 				</tr>
 				</tr>
 					<th>{{ 'app.fields.piece.location.label'|trans }}</th>
-					<td>{{ ('app.fields.piece.location.' ~ movement.location|default('placeholder'))|trans }}
-						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) %}
-						({% for state in static('STATES_LIST', movement) -%}
-						    {{ ('app.fields.piece.states.' ~ (movement.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
-						    {% if not loop.last %}, {% endif -%}
-						{%- endfor %})
-						{%- endif %}
+					<td>
+						{% if is_granted('ROLE_USER') -%}
+						<div class="btn-group btn-group-sm">
+							<span class="btn btn-link">
+						{%- endif -%}
+
+						{{ ('app.fields.piece.location.' ~ movement.location|default('placeholder'))|trans -}}
+
+						{%- if is_granted('ROLE_USER') -%}</span>
+							<a href="#" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="sr-only">Déplacer</span>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('piece_update', {'id': movement.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
+								{% for location in static('LOCATIONS_LIST', movement) %}
+								<a class="dropdown-item" href="{{ path('piece_update', {'id': movement.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+								{% endfor %}
+							</div>
+						</div>
+						{% endif -%}
+					
 						{%- if movement.location in [constant('LOCATION_LENT', movement), constant('LOCATION_RETURNED', movement)] %}
-						{{ ('app.lending.ours.' ~ (movement.lendings.first.ours ? 'to' : 'by'))|trans ~ ' ' ~ movement.lendings.first.band }}
-						{%- endif %}
-						{%- if not movement.missings.empty %}
-						({% for missing in movement.missings -%}
-						<span class="text-danger">{{ missing.voice }}</span>{% if not loop.last %}, {% endif -%}
-						{% endfor -%})
+							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': movement.lendings.first.id}) }}">{% endif %}
+							{{- movement.lendings.first.band -}}
+							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
+						{% endif -%}
+
+						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) %}
+						{%- set style = (not movement.hasState(constant('STATE_VERIFIED', movement)) ? 'danger' : (movement.states != 7 ? 'warning' : 'success')) -%}
+						{%- if is_granted('ROLE_USER') %}<span class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">{% else %}({% endif -%}
+						{%- for state in static('STATES_LIST', piece) -%}
+							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': movement.id, 'states': {(state): movement.hasState(state) ? -1 : 1}}) }}" class="{{ movement.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
+							{{- ('app.fields.piece.states.' ~ (movement.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+							{%- if is_granted('ROLE_USER') %}</a>{%- elseif not loop.last and not is_granted('ROLE_USER') %}</span>, {% endif -%}
+						{%- endfor %}
+						{%- if is_granted('ROLE_USER') %}</span>{% else %}){% endif -%}
 						{%- endif %}
 					</td>
 				</tr>
