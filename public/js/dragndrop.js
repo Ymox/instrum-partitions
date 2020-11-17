@@ -1,7 +1,7 @@
 /**
  * 
  */
-$(document).ready( function() {
+$(function() {
 	$('form').on('dragover dragenter',
 		'.dropzone',
 		function(e) {

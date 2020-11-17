@@ -1,7 +1,7 @@
 /**
  * 
  */
-$(document).ready( function() {
+$(function() {
 	const addButton = function($addable) {
 		const uri = $addable.data('uri');
 		const $label = $addable.prev(); 

@@ -1,4 +1,4 @@
-$(document).ready( function() {
+$(function() {
 	$(document).on('click', 'a.ajaxify', function(e) {
 		$(this.dataset.loadTarget).load(this.href, null, function() {
 			$(document).trigger('ajaxComplete.pulse');
@@ -22,22 +22,9 @@ $(document).ready( function() {
 				postData,
 				function(data) {
 					$(this.dataset.loadTarget).html(data);
-					$(document).trigger('ajaxComplete.pulse');
 				}
 			);
 		}
 		e.preventDefault();
-	});
-	$(document).on('ajaxComplete.pulse', function(e) {
-		if (e.namespace == 'pulse') {
-			$('.wysiwyg').each( function() {
-				$(this).wysihtml5();
-			});
-			$('.datepicker').datepicker({
-				autoclose : true,
-				todayHighlight : true
-			});
-		}
-		return false;
 	});
 });

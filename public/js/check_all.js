@@ -1,7 +1,7 @@
 /**
  *
  */
-$(document).ready( function() {
+$(function() {
 	$('.check-all').change( function() {
 		const target = $(this).data('target');
 		$(target).prop('checked', $(this).prop('checked'));

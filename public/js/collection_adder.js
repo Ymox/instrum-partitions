@@ -1,4 +1,4 @@
-$(document).ready( function() {
+$(function() {
 	const addButton = function($where) {
 		var prototype = $where.data('prototype');
 		$where.prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
