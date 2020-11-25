@@ -7,16 +7,16 @@
 
 	{{ form_start(edit_form) }}
 		{{ form_widget(edit_form) }}
-		<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-left"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(edit_form) }}
 
 	<ul class="list-inline float-right">
 		<li class="list-inline-item">
-			<a href="{{ path('publisher_index') }}" class="btn btn-light"><i class="fa fa-list"></i></a>
+			<a href="{{ path('publisher_index') }}" class="btn btn-light"><i class="fa fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
 			{{ form_start(delete_form) }}
-				<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+				<button type="submit" class="btn btn-danger"><i class="fa fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.delete'|trans }}</span></button>
 			{{ form_end(delete_form) }}
 		</li>
 	</ul>

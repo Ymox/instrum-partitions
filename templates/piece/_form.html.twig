@@ -30,5 +30,5 @@
 			{{ form_row(form.reference, {'row_attr': {'class': 'col-md-4 col-sm-12'}}) }}
 		</div>
 		{{ form_row(form.note) }}
-		<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-left"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}

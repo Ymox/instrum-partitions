@@ -31,14 +31,14 @@
 		<tbody>
 		{% for lending in lendings %}
 			<tr>
-				<td><a href="{{ path('lending_show', { 'id': lending.id }) }}">{{ ('app.lending.ours.' ~ (lending.ours ? 'to' : 'by'))|trans ~ ' ' ~ lending.band }}</a>
+				<td><a href="{{ path('lending_show', {'id': lending.id}) }}">{{ ('app.lending.ours.' ~ (lending.ours ? 'to' : 'by'))|trans ~ ' ' ~ lending.band }}</a>
 					({{ lending.contact }})</td>
 				<td>{{ lending.start|date('Y-m-d') }}</td>
 				<td>{% if lending.end %}{{ lending.end|date('Y-m-d') }}{% else %}{{ 'app.lending.index.not_ended'|trans }}{% endif %}</a></td>
 				<td>
-					<a href="{{ path('lending_show', { 'id': lending.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
-					<a href="{{ path('band_show', { 'id': lending.band.id }) }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-users"></i></a>
-					<a href="{{ path('lending_edit', { 'id': lending.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+					<a href="{{ path('lending_show', {'id': lending.id}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+					<a href="{{ path('band_show', {'id': lending.band.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-users"></i></a>
+					<a href="{{ path('lending_edit', {'id': lending.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 				</td>
 			</tr>
 		{% endfor %}

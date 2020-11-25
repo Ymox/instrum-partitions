@@ -16,7 +16,7 @@
 			<tr>
 				<th>{{ 'app.fields.concert.name'|trans }}</th>
 				<th>{{ 'app.fields.concert.date'|trans }}</th>
-				<th><a href="{{ path('concert_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+				<th><a href="{{ path('concert_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -29,11 +29,11 @@
 		<tbody>
 		{% for concert in concerts %}
 			<tr>
-				<td><a href="{{ path('concert_show', { 'id': concert.id }) }}">{{ concert.name }}</a></td>
+				<td><a href="{{ path('concert_show', {'id': concert.id}) }}">{{ concert.name }}</a></td>
 				<td>{{ concert.date|date('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ path('concert_show', { 'id': concert.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
-					<a href="{{ path('concert_edit', { 'id': concert.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+					<a href="{{ path('concert_show', {'id': concert.id}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+					<a href="{{ path('concert_edit', {'id': concert.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 				</td>
 			</tr>
 		{% endfor %}

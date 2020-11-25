@@ -35,7 +35,7 @@
 					{{ 'app.instrument.full_name'|trans({'name': instrument.name, 'key': ('app.fields.instrument.key.choices.' ~ instrument.key)|trans}) }}
 				{%- endif %}</td>
 				<td>
-					<a href="{{ path('instrument_edit', { 'id': instrument.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+					<a href="{{ path('instrument_edit', {'id': instrument.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 				</td>
 			</tr>
 		{% endfor %}

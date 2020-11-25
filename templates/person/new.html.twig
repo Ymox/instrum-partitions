@@ -6,9 +6,9 @@
 	{% if app.request.xmlHttpRequest %}
 	<div class="modal-header">
 		<h2 class="modal-title">{{ 'app.person.new.heading'|trans }}</h2>
-		<button type="button" class="close" data-dismiss="modal" aria-label="{{ 'global.action.close' }}">
-		  <span aria-hidden="true">×</span>
-		</button>
+		<a href="#" role="button" class="close" data-dismiss="modal" aria-label="{{ 'global.action.close'|trans }}">
+			<span title="{{ 'global.action.close'|trans }}" aria-hidden="true">×</span>
+		</a>
 	</div>
 	<div class="modal-body">
 	{% else %}
@@ -17,7 +17,7 @@
 
 	{{ form_start(form, {'attr': {'class': app.request.xmlHttpRequest ? 'ajaxify' : null}}) }}
 		{{ form_widget(form) }}
-		<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-left"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}
 	{% if not app.request.isXmlHttpRequest() %}
 	<a href="{{ path('person_index') }}" class="btn btn-light float-right"><i class="fa fa-list"></i></a>

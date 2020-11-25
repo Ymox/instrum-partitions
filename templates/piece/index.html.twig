@@ -15,26 +15,33 @@
 					</th>
 				</tr>
 				<tr>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') in ['id', null]) %}-{{ app.request.query.get('direction', 'asc') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'id', 'direction': ((not app.request.query.get('field') == 'id' or app.request.query.get('field') == 'id' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.id'|trans }}</a></th>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'name') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'name', 'direction': ((app.request.query.get('field') == 'name' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.piece.name'|trans }}</a>
-						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'translation') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'translation', 'direction': ((app.request.query.get('field') == 'translation' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.piece.translation'|trans }}</a>)</th>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'composer') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'composer', 'direction': ((app.request.query.get('field') == 'composer' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.piece.composers'|trans }}</a></th>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'arranger') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'arranger', 'direction': ((app.request.query.get('field') == 'arranger' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.piece.arrangers'|trans }}</a></th>
-					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.piece.publisher'|trans }}</a><br />
-						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}"></i> <a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}">{{ 'app.fields.piece.year'|trans }}</a>)</th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') in ['id', null]) %}-{{ app.request.query.get('direction', 'asc') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ app.request.query.get('direction', 'asc'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'id', 'direction': ((not app.request.query.get('field') == 'id' or app.request.query.get('field') == 'id' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') in ['asc', null]) ? 'desc' : 'asc'))|trans({'field': ('app.fields.id'|trans|lower)}) }}">{{ 'app.fields.id'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'name') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'name') ? app.request.query.get('direction') : 'none'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'name', 'direction': ((app.request.query.get('field') == 'name' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.name'|trans|lower)}) }}">{{ 'app.fields.piece.name'|trans }}</a>
+						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'translation') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'translation') ? app.request.query.get('direction') : 'none'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'translation', 'direction': ((app.request.query.get('field') == 'translation' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.translation'|trans|lower)}) }}">{{ 'app.fields.piece.translation'|trans }}</a>)</th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'composer') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'composer') ? app.request.query.get('direction') : 'none'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'composer', 'direction': ((app.request.query.get('field') == 'composer' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.composers'|trans|lower)}) }}">{{ 'app.fields.piece.composers'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'arranger') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'arranger') ? app.request.query.get('direction') : 'none'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'arranger', 'direction': ((app.request.query.get('field') == 'arranger' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.arrangers'|trans|lower)}) }}">{{ 'app.fields.piece.arrangers'|trans }}</a></th>
+					<th><i class="fa fa-sort{% if (app.request.query.get('field') == 'publisher') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'publisher') ? app.request.query.get('direction') : 'none'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'publisher', 'direction': ((app.request.query.get('field') == 'publisher' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.publisher'|trans|lower)}) }}">{{ 'app.fields.piece.publisher'|trans }}</a><br />
+						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'year') ? app.request.query.get('direction') : 'none'))|trans }}</span>
+						<a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.year'|trans|lower)}) }}">{{ 'app.fields.piece.year'|trans }}</a>)</th>
 					<th>{{ 'app.fields.piece.last_played'|trans }}</th>
-					<th class="text-center"><a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#Help"><i class="fa fa-info-circle"></i></a>
-						<a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+					<th class="text-center"><a href="#" role="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#Help"><i class="fa fa-info-circle" title="{{ 'global.info.help'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.info.help'|trans }}</span></a>
+						<a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 				</tr>
 				<tr>
-					<th><input type="number" name="q[id]" class="form-control" placeholder="{{ 'app.fields.id'|trans }}"{% if app.request.get('q')['id'] is defined %} value="{{ app.request.get('q')['id'] }}"{% endif %} maxlength="4" min="1" style="width: 4em; padding: inherit" /></th>
-					<th><input type="text" name="q[name]" class="form-control" placeholder="{{ 'app.fields.piece.name'|trans }}"{% if app.request.get('q')['name'] is defined %} value="{{ app.request.get('q')['name'] }}"{% endif %} /></th>
-					<th><input type="text" name="q[composer]" class="form-control" placeholder="{{ 'app.fields.piece.composers'|trans }}"{% if app.request.get('q')['composer'] is defined %} value="{{ app.request.get('q')['composer'] }}"{% endif %} /></th>
-					<th><input type="text" name="q[arranger]" class="form-control" placeholder="{{ 'app.fields.piece.arrangers'|trans }}"{% if app.request.get('q')['arranger'] is defined %} value="{{ app.request.get('q')['arranger'] }}"{% endif %} /></th>
+					<th><label for="SearchId" class="sr-only">{{ 'app.fields.id'|trans }}</label><input type="number" name="q[id]" id="SearchId" class="form-control" placeholder="{{ 'app.fields.id'|trans }}"{% if app.request.get('q')['id'] is defined %} value="{{ app.request.get('q')['id'] }}"{% endif %} maxlength="4" min="1" style="width: 4em; padding: inherit" /></th>
+					<th><label for="SearchName" class="sr-only">{{ 'app.fields.piece.name'|trans }}</label><input type="text" name="q[name]" id="SearchName" class="form-control" placeholder="{{ 'app.fields.piece.name'|trans }}"{% if app.request.get('q')['name'] is defined %} value="{{ app.request.get('q')['name'] }}"{% endif %} /></th>
+					<th><label for="SearchComposer" class="sr-only">{{ 'app.fields.piece.composers'|trans }}</label><input type="text" name="q[composer]" id="SearchComposer" class="form-control" placeholder="{{ 'app.fields.piece.composers'|trans }}"{% if app.request.get('q')['composer'] is defined %} value="{{ app.request.get('q')['composer'] }}"{% endif %} /></th>
+					<th><label for="SearchArranger" class="sr-only">{{ 'app.fields.piece.arrangers'|trans }}</label><input type="text" name="q[arranger]" id="SearchArranger" class="form-control" placeholder="{{ 'app.fields.piece.arrangers'|trans }}"{% if app.request.get('q')['arranger'] is defined %} value="{{ app.request.get('q')['arranger'] }}"{% endif %} /></th>
 					<th></th>
 					<th></th>
-					<th class="text-center"><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-filter"></i></button>
-					 	<a href="{{ path('piece_index') }}" class="btn btn-sm btn-light"><i class="fa fa-refresh"></i></a></th>
+					<th class="text-center"><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-filter" title="{{ 'global.action.filter'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.filter'|trans }}</span></button>
+						<a href="{{ path('piece_index') }}" class="btn btn-sm btn-light"><i class="fa fa-refresh" title="{{ 'global.action.reset'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.reset'|trans }}</span></a></th>
 				</tr>
 			</thead>
 			<tfoot>
@@ -47,7 +54,7 @@
 					<th>{{ 'app.fields.piece.publisher'|trans }}<br />
 						({{ 'app.fields.piece.year'|trans }})</th>
 					<th>{{ 'app.fields.piece.last_played'|trans }}</th>
-					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
+					<th class="text-center"><a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 				</tr>
 				<tr>
 					<th colspan="8">
@@ -66,8 +73,13 @@
 					{%- elseif piece.states == 3 or piece.states == 5 %} class="table-primary text-primary"
 					{%- elseif piece.states == 7 %} class="table-success text-success"
 					{%- endif %}>
-					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.id }}</a></td>
-					<td><a href="{{ path('piece_show', { 'id': piece.id }) }}">{{ piece.name }}</a>
+					<td><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.id }}</a>
+						{%- if piece.location == constant('LOCATION_SERVER', piece) -%}
+						<br />
+						<a href="{{ path('piece_show', {'id': piece.id, '_fragment': 'Parts'}) }}" class="btn btn-sm btn-light"><i class="fa fa-laptop" title="{{ ('global.action.' ~ (is_granted('ROLE_DOWNLOAD') ? 'download' : 'show_parts'))|trans }}" aria-hidden="true"></i><span class="sr-only"> title="{{ ('global.action.' ~ (is_granted('ROLE_DOWNLOAD') ? 'download' : 'show_parts'))|trans }}"</span></a>
+						{%- endif -%}
+						</td>
+					<td><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a>
 						{%- if piece.translation %}<br />
 						({{ piece.translation }})
 						{%- endif -%}
@@ -76,37 +88,38 @@
 					<td>{{ piece.arrangers|join(', ') }}</td>
 					<td>{{ piece.publisher }}{% if piece.year %} ({{ piece.year }}){% endif %}</td>
 					<td{% if not piece.concerts.isEmpty %} title="{{ piece.concerts.first.date|date('Y-m-d') }}">
-							{{- piece.concerts.first.date|date('Y') }}
-							{%- else -%}>
-							<i>{{ 'app.piece.index.last_played.unknown'|trans }}</i>
-							{%- endif %}</td>
+						{{- piece.concerts.first.date|date('Y') }}
+						{%- else -%}>
+						<i>{{ 'app.piece.index.last_played.unknown'|trans }}</i>
+						{%- endif -%}
+						</td>
 					<td class="text-center">
-						<a href="{{ path('piece_show', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+						<a href="{{ path('piece_show', {'id': piece.id}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
 						
 						{% if is_granted('ROLE_USER') %}
 						<div class="btn-group btn-group-sm">
 							<div class="btn-group btn-group-sm dropleft" role="group">
-								<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								  	<span class="sr-only">Actions rapides</span>
-								</button>
+								<a href="#" role="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="sr-only">{{ 'global.action.quick'|trans }}</span>
+								</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item{{ piece.location is null ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': ''}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 									{% for location in static('LOCATIONS_LIST', piece) %}
 									<a class="dropdown-item{{ piece.location == location ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
 									{% endfor %}
+									<a class="dropdown-item{{ piece.location is null ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': ''}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 									<div class="dropdown-divider"></div>
 									{%- for state in static('STATES_LIST', piece) -%}
-									<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state): piece.hasState(state) ? -1 : 1}}) }}" class="dropdown-item {{ piece.hasState(state) ? ' active' }}">
-									{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+									<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state): piece.hasState(state) ? -1 : 1}}) }}" class="dropdown-item{{ piece.hasState(state) ? ' active' }}">
+									{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans -}}
 									</a>
 									{% endfor %}
 								</div>
-						  	</div>
-				  		{% endif -%}
-							<a href="{{ path('piece_edit', { 'id': piece.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+							</div>
+						{% endif -%}
+							<a href="{{ path('piece_edit', {'id': piece.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 						{% if is_granted('ROLE_USER') %}
 						</div>
-				  		{% endif -%}
+						{% endif -%}
 					</td>
 				</tr>
 			{% endfor %}
@@ -118,9 +131,9 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">{{ 'app.piece.index.modal.title'|trans }}</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
+					<a href="#" role="button" class="close" data-dismiss="modal" aria-label="{{ 'global.action.close'|trans }}">
+						<span title="{{ 'global.action.close'|trans }}" aria-hidden="true">×</span>
+					</a>
 				</div>
 				<div class="modal-body">
 					<table class="table table-sm table-hover">

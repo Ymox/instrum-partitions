@@ -1,19 +1,30 @@
 <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light bg-faded">
 	<a class="navbar-brand" href="{{ path('piece_index') }}">{{ 'global.site_name'|trans }}</a>
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#Menu">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+	<a href="#" role="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#Menu">
+		<span class="navbar-toggler-icon" title="{{ 'global.action.expand.menu'|trans }}" aria-hidden="true"></span><span class="sr-only">{{ 'global.action.expand.menu'|trans }}</span>
+	</a>
 
 	<div class="collapse navbar-collapse" id="Menu">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item dropdown{% if 'concert' in app.request.get('_route') %} active{% endif %}">
+			<li class="nav-item dropdown{% if
+						('concert' in app.request.get('_route'))
+					or	('program' in app.request.get('_route'))
+				%} active{% endif %}">
 				<a class="nav-link dropdown-toggle" href="#" id="Concerts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.concerts.heading'|trans }}</a>
 				<div class="dropdown-menu" aria-labelledby="Concerts">
 					<a class="dropdown-item{% if 'concert' in app.request.get('_route') %} active{% endif %}" href="{{ path('concert_index') }}">{{ 'app.menu.concerts.list'|trans }}</a>
 					<a class="dropdown-item{% if 'program' in app.request.get('_route') %} active{% endif %}" href="{{ path('program_index') }}">{{ 'app.menu.programs'|trans }}</a>
 				</div>
 			</li>
-			<li class="nav-item dropdown{% if 'piece' in app.request.get('_route') %} active{% endif %}">
+			<li class="nav-item dropdown{% if
+						('piece' in app.request.get('_route'))
+					or	('person' in app.request.get('_route'))
+					or	('missing' in app.request.get('_route'))
+					or	('publisher' in app.request.get('_route'))
+					or	('instrumentation' in app.request.get('_route'))
+					or	('size' in app.request.get('_route'))
+					or	('type' in app.request.get('_route'))
+				%} active{% endif %}">
 				<a class="nav-link dropdown-toggle" href="#" id="Pieces" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.partitions.heading'|trans }}</a>
 				<div class="dropdown-menu" aria-labelledby="Pieces">
 					<a class="dropdown-item{% if 'piece_index' == app.request.get('_route') %} active{% endif %}" href="{{ path('piece_index') }}">{{ 'app.menu.partitions.list'|trans }}</a>
@@ -33,7 +44,10 @@
 				</div>
 			</li>
 			{% if is_granted('ROLE_ADMIN') -%}
-			<li class="nav-item dropdown{% if ('lending' in app.request.get('_route')) or ('band' in app.request.get('_route')) %} active{% endif %}">
+			<li class="nav-item dropdown{% if
+						('lending' in app.request.get('_route'))
+					or	('band' in app.request.get('_route'))
+				%} active{% endif %}">
 				<a class="nav-link dropdown-toggle" href="#" id="Lendings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.lendings.heading'|trans }}</a>
 				<div class="dropdown-menu" aria-labelledby="Lendings">
 					<a class="dropdown-item{% if 'lending' in app.request.get('_route') %} active{% endif %}" href="{{ path('lending_index') }}">{{ 'app.menu.lendings.list'|trans }}</a>
@@ -48,13 +62,13 @@
 		{%- if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a href="{{ path('logout') }}" class="nav-link"><i class="fa fa-power-off text-danger"></i> {{ 'app.menu.logout'|trans }}</a>
+				<a href="{{ path('logout') }}" class="nav-link"><i class="fa fa-power-off text-danger" aria-hidden="true"></i> {{ 'app.menu.logout'|trans }}</a>
 			</li>
 		</ul>
 		{% else -%}
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in"></i> {{ 'app.menu.login'|trans }}</a>
+				<a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'app.menu.login'|trans }}</a>
 			</li>
 		</ul>
 		{% endif -%}

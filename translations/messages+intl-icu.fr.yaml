@@ -4,7 +4,32 @@ global:
     new: Nouveau
     show: Détails
     edit: Editer
+    validate: Valider
+    list: Retour à la liste
+    delete: Supprimer
+    sort:
+      asc: Trier par {field} ascendant
+      desc: Trier par {field} descendant
+    filter: Filtrer
+    reset: Réinitialiser
+    download: Télécharger
+    show_parts: Voir les voix disponibles
+    quick: Actions rapides
     check_all: Sélectionner tout
+    expand:
+      menu: Dérouler le menu
+      list: Dérouler la liste
+    close: Fermer
+    page:
+      prev: Page précédente
+      next: Page suivante
+  info:
+    help: Informations
+    loading: Chargement
+    sorted:
+      none: Aucun tri appliqué
+      asc: Tri ascendant appliqué
+      desc: Tri descendant appliqué
 
 app:
   login:
@@ -67,7 +92,7 @@ app:
         1: Vérifié
         2: Tamponné
         4: Coloré
-        not: 
+        not:
           1: Non vérifié
           2: Non tamponné
           4: Non coloré

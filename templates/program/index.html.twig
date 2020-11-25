@@ -16,7 +16,7 @@
 			<tr>
 				<th>{{ 'app.fields.program.name'|trans }}</th>
 				<th>{{ 'app.fields.program.updated_at'|trans }}</th>
-				<th><a href="{{ path('program_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></th>
+				<th><a href="{{ path('program_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -29,11 +29,11 @@
 		<tbody>
 		{% for program in programs %}
 			<tr>
-				<td><a href="{{ path('program_show', { 'id': program.id }) }}">{{ program.name }}</a></td>
+				<td><a href="{{ path('program_show', {'id': program.id}) }}">{{ program.name }}</a></td>
 				<td>{{ program.updatedAt|date('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ path('program_show', { 'id': program.id }) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
-					<a href="{{ path('program_edit', { 'id': program.id }) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil"></i></a>
+					<a href="{{ path('program_show', {'id': program.id}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+					<a href="{{ path('program_edit', {'id': program.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 				</td>
 			</tr>
 		{% endfor %}
