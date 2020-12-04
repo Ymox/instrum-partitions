@@ -287,7 +287,7 @@ class Piece
      */
     public function hasAnyState(int $states = null)
     {
-        return ($this->states & $state) != 0;
+        return ($this->states & $states) != 0;
     }
 
     /**

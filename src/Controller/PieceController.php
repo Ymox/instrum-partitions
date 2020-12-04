@@ -227,7 +227,7 @@ class PieceController extends AbstractController
 
     public function suisa(Request $request)
     {
-        if (!$request->query->get('start') || !$request->query()->get('end')) {
+        if (!$request->query->get('start') || !$request->query->get('end')) {
             $today = new \DateTime();
             if ($today->format('n') < 2) {
                 $start = new \DateTimeImmutable('last year January 1st');
