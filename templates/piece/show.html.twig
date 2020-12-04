@@ -75,7 +75,7 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('piece_update', {'id': piece.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 								{% for location in static('LOCATIONS_LIST', piece) %}
-								<a class="dropdown-item" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+								<a class="dropdown-item{% if piece.location == location %} active{% endif %}" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
 								{% endfor %}
 							</div>
 						</div>
@@ -182,7 +182,7 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('piece_update', {'id': movement.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 								{% for location in static('LOCATIONS_LIST', movement) %}
-								<a class="dropdown-item" href="{{ path('piece_update', {'id': movement.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+								<a class="dropdown-item{% if movement.location == location %} active{% endif %}" href="{{ path('piece_update', {'id': movement.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
 								{% endfor %}
 							</div>
 						</div>
