@@ -68,10 +68,9 @@
 					{%- elseif piece.location == constant('LOCATION_LOST', piece) %} class="table-dark"
 					{%- elseif piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] %} class="text-muted"
 					{%- elseif not piece.hasState(constant('STATE_VERIFIED', piece)) %} class="table-danger text-danger"
-					{%- elseif piece.location in [constant('LOCATION_SERVER', piece), constant('LOCATION_STOWED', piece)] -%}
 					{%- elseif piece.missings|length %} class="table-warning text-warning"
-					{%- elseif piece.states == 3 or piece.states == 5 %} class="table-primary text-primary"
-					{%- elseif piece.states == 7 %} class="table-success text-success"
+					{%- elseif piece.location == constant('LOCATION_SHELF', piece) and piece.hasAnyState(constant('STATE_STAMPED', piece) b-and constant('STATE_COLOURED', piece)) %} class="table-primary text-primary"
+					{%- elseif piece.location == constant('LOCATION_SHELF', piece) and piece.states == 7 %} class="table-success text-success"
 					{%- endif %}>
 					<td><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.id }}</a>
 						{%- if piece.location == constant('LOCATION_SERVER', piece) -%}
@@ -170,9 +169,9 @@
 							</td>
 						</tr>
 						<tr class="table-primary text-primary">
-							<td class="text-right">
-								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_COLOURED'))|trans }}<br />
-								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_STAMPED'))|trans }}
+							<td class="text-center">
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SHELF'))|trans }} {{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_COLOURED'))|trans|lower }}<br />
+								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SHELF'))|trans }} {{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_STAMPED'))|trans|lower }}
 							</td>
 						</tr>
 						<tr class="table-success text-success">
