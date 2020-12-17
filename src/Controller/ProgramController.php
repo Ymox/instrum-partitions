@@ -81,8 +81,9 @@ class ProgramController extends AbstractController
         $deleteForm = $this->createDeleteForm($program);
         $editForm = $this->createForm(\App\Form\ProgramType::class, $program);
         $editForm->handleRequest($request);
-
+        
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $program->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('program_edit', array('id' => $program->getId()));
