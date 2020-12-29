@@ -339,6 +339,9 @@
     "symfony/property-info": {
         "version": "5.0-dev"
     },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.2.1"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -478,9 +481,9 @@
         "version": "1.5.0"
     },
     "zendframework/zend-code": {
-        "version": "3.5.x-dev"
+        "version": "3.4.1"
     },
     "zendframework/zend-eventmanager": {
-        "version": "3.3-dev"
+        "version": "3.2.1"
     }
 }

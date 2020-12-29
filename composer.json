@@ -1,5 +1,6 @@
 {
 	"name": "ysoft/instrum-partitions",
+	"description": "Score and sheet music manager for band",
 	"license": "proprietary",
 	"type": "project",
 	"require": {
@@ -66,7 +67,7 @@
 	"extra": {
 		"symfony": {
 			"allow-contrib": false,
-			"require": "5.1.*"
+			"require": "5.2.*"
 		}
 	}
 }
