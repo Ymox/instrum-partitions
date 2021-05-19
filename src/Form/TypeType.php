@@ -29,14 +29,4 @@ class TypeType extends AbstractType
             'data_class' => \App\Entity\Type::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_type';
-    }
-
-
 }

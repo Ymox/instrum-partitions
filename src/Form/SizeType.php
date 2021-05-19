@@ -44,14 +44,4 @@ class SizeType extends AbstractType
             'data_class' => \App\Entity\Size::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_size';
-    }
-
-
 }

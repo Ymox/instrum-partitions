@@ -53,26 +53,24 @@ class PartTypeExtension extends AbstractTypeExtension
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (isset($options['file_property'])) {
-            /** @var \App\Entity\Part $part */
-            $part = $form->getParent()->getData();
+        /** @var \App\Entity\Part $part */
+        $part = $form->getParent()->getData();
 
-            $fileUrl = null;
-            $downloadName = null;
-            if ($part && $part->getFile()) {
-                $accessor = PropertyAccess::createPropertyAccessor();
-                $fileUrl = $accessor->getValue($part, $options['file_property']);
-                if (!empty($options['download_name'])) {
-                    $downloadName = $options['download_name'];
-                } else {
-                    $downloadName = $part->getDownloadName();
-                }
+        $fileUrl = null;
+        $downloadName = null;
+        if ($part && $part->getFile()) {
+            $accessor = PropertyAccess::createPropertyAccessor();
+            $fileUrl = $accessor->getValue($part, $options['file_property']);
+            if (!empty($options['download_name'])) {
+                $downloadName = $options['download_name'];
+            } else {
+                $downloadName = $part->getDownloadName();
             }
-
-            // sets a "file_url" variable that will be available when rendering this field
-            $view->vars['file_url'] = $fileUrl;
-            $view->vars['download_name'] = $downloadName;
-            $view->vars['part_id'] = $part ? $part->getId() : '__id__';
         }
+
+        // sets a "file_url" variable that will be available when rendering this field
+        $view->vars['file_url'] = $fileUrl;
+        $view->vars['download_name'] = $downloadName;
+        $view->vars['part_id'] = $part ? $part->getId() : '__id__';
     }
 }

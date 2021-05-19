@@ -29,14 +29,4 @@ class BandType extends AbstractType
             'data_class' => \App\Entity\Band::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_band';
-    }
-
-
 }

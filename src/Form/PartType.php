@@ -70,12 +70,4 @@ class PartType extends AbstractType
             'data_class' => \App\Entity\Part::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_part';
-    }
 }

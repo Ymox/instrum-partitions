@@ -71,11 +71,5 @@ class InstrumentType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_instrument';
-    }
+
 }

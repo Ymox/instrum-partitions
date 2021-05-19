@@ -29,14 +29,4 @@ class MissingType extends AbstractType
             'data_class' => \App\Entity\Missing::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_status';
-    }
-
-
 }

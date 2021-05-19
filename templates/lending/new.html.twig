@@ -11,9 +11,9 @@
 	
 	{{ form_start(form) }}
 		{{ form_widget(form) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-left"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}
-	<a href="{{ path('lending_index') }}" class="btn btn-light float-right"><i class="fa fa-list"></i></a>
+	<a href="{{ path('lending_index') }}" class="btn btn-light float-end"><i class="fa fa-list"></i></a>
 {% endblock %}
 
 {% block javascripts %}

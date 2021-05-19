@@ -2,8 +2,13 @@
 
 {% block title %}{{ piece.name }} | {{ parent() }}{% endblock %}
 
-{% block body %}
+{% block body -%}
 	<h1>{{ piece.name }}
+		{% if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] -%}
+		<small><span class="badge bg-light text-muted">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span></small>
+		{%- elseif piece.location == constant('LOCATION_LOST', piece) -%}
+		<span class="badge bg-dark">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span>
+		{%- endif %}
 		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
 	
 	<form action="{{ path('part_download') }}" class="table-responsive">
@@ -22,9 +27,9 @@
 						<a href="{{ path('concert_show', {'id': piece.concerts.first.id}) }}"{{ link_class|raw }}>{{ piece.concerts.first.name }}
 							({{ piece.concerts.first.date|date('Y-m-d') }})</a>
 							{% if piece.concerts.count() > 1 -%}
-							<a href="#" role="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.expand.list'|trans }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.expand.list'|trans }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="sr-only">{{ 'global.action.expand.list'|trans }}</span>
-							</a>
+							</button>
 							<div class="dropdown-menu">
 								{% for concert in piece.concerts[1:] %}
 								<a class="dropdown-item" href="{{ path('concert_show', {'id': concert.id}) }}">{{ concert.name }}
@@ -69,9 +74,9 @@
 						{{ ('app.fields.piece.location.' ~ piece.location|default('placeholder'))|trans -}}
 
 						{%- if is_granted('ROLE_USER') -%}</span>
-							<a href="#" role="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="sr-only">{{ 'global.action.quick'|trans }}</span>
-							</a>
+							</button>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('piece_update', {'id': piece.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 								{% for location in static('LOCATIONS_LIST', piece) %}
@@ -87,9 +92,9 @@
 							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
 						{% endif -%}
 
-						{%- if piece.states != 0 and piece.location != constant('LOCATION_SERVER', piece) %}
+						{%- if piece.states != 0 and not (piece.location in [constant('LOCATION_SERVER', piece), constant('LOCATION_RETURNED', piece), constant('LOCATION_LOST', piece)]) %}
 						{%- set style = (not piece.hasState(constant('STATE_VERIFIED', piece)) ? 'danger' : (piece.states != 7 ? 'warning' : 'success')) -%}
-						{%- if is_granted('ROLE_USER') %} <span class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">{% else %} ({% endif -%}
+						{%- if is_granted('ROLE_USER') %} <span class="btn-group btn-group-sm btn-group-toggle" data-bs-toggle="buttons">{% else %} ({% endif -%}
 						{%- for state in static('STATES_LIST', piece) -%}
 							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state): piece.hasState(state) ? -1 : 1}}) }}" class="{{ piece.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
 							{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
@@ -173,12 +178,12 @@
 							<span class="btn btn-link">
 						{%- endif -%}
 
-						{{ ('app.fields.piece.location.' ~ movement.location|default('placeholder'))|trans -}}
+							{{ ('app.fields.piece.location.' ~ movement.location|default('placeholder'))|trans -}}
 
 						{%- if is_granted('ROLE_USER') -%}</span>
-							<a href="#" role="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="sr-only">Déplacer</span>
-							</a>
+							</button>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('piece_update', {'id': movement.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 								{% for location in static('LOCATIONS_LIST', movement) %}
@@ -196,7 +201,7 @@
 
 						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) %}
 						{%- set style = (not movement.hasState(constant('STATE_VERIFIED', movement)) ? 'danger' : (movement.states != 7 ? 'warning' : 'success')) -%}
-						{%- if is_granted('ROLE_USER') %}<span class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">{% else %}({% endif -%}
+						{%- if is_granted('ROLE_USER') %}<span class="btn-group btn-group-sm">{% else %}({% endif -%}
 						{%- for state in static('STATES_LIST', piece) -%}
 							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': movement.id, 'states': {(state): movement.hasState(state) ? -1 : 1}}) }}" class="{{ movement.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
 							{{- ('app.fields.piece.states.' ~ (movement.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
@@ -237,9 +242,9 @@
 		</table>
 	</form>
 
-	<ul class="list-inline float-right">
+	<ul class="list-inline float-end">
 		<li class="list-inline-item">
-			<a href="{{ path('piece_index') }}" class="btn btn-light"><i class="fa fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+			<a href="{{ path('piece_index') }}" class="btn btn-light"><i class="fa fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.list'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
 			<a href="{{ path('piece_edit', {'id': piece.id}) }}" class="btn btn-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>

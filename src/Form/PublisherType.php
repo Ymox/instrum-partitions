@@ -32,14 +32,4 @@ class PublisherType extends AbstractType
             'data_class' => \App\Entity\Publisher::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_publisher';
-    }
-
-
 }

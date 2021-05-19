@@ -37,14 +37,4 @@ class ProgramType extends AbstractType
             'data_class' => \App\Entity\Program::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_program';
-    }
-
-
 }

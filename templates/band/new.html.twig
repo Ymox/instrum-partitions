@@ -1,29 +1,17 @@
-{% extends app.request.isXmlHttpRequest() ? 'base_ajax.html.twig': 'base.html.twig' %}
+{% extends app.request.isXmlHttpRequest() ? 'base_modal.html.twig': 'base.html.twig' %}
 
-{% block title %}{{ 'app.band.new.title'|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'app.band.new.title'|trans }}{% if not app.request.xmlHttpRequest %} | {{ parent() }}{% endif %}{% endblock %}
 
 {% block body %}
-	{% if app.request.xmlHttpRequest %}
-	<div class="modal-header">
-		<h2 class="modal-title">{{ 'app.band.new.heading'|trans }}</h2>
-		<a href="#" role="button" class="close" data-dismiss="modal" aria-label="{{ 'global.action.close'|trans }}">
-			<span title="{{ 'global.action.close'|trans }}" aria-hidden="true">×</span>
-		</a>
-	</div>
-	<div class="modal-body">
-	{% else %}
+	{% if not app.request.xmlHttpRequest %}
 	<h1>{{ 'app.band.new.heading'|trans }}</h1>
 	{% endif %}
 
 	{{ form_start(form, {'attr': {'class': app.request.xmlHttpRequest ? 'ajaxify' : null}}) }}
 		{{ form_widget(form) }}
-		<button type="submit" class="btn btn-primary float-left"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.validate'|trans }}</span></button>
+		<button type="submit" class="btn btn-primary float-start"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.validate'|trans }}</span></button>
 	{{ form_end(form) }}
 	{% if not app.request.isXmlHttpRequest() %}
-	<a href="{{ path('band_index') }}" class="btn btn-light float-right"><i class="fa fa-list"></i></a>
-	{% endif %}
-	
-	{% if app.request.isXmlHttpRequest() %}
-	</div>
+	<a href="{{ path('band_index') }}" class="btn btn-light float-end"><i class="fa fa-list"></i></a>
 	{% endif %}
 {% endblock %}

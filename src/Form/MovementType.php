@@ -77,11 +77,5 @@ class MovementType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_piece';
-    }
+
 }

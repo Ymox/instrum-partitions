@@ -30,7 +30,7 @@
 						(<i class="fa fa-sort{% if (app.request.query.get('field') == 'year') %}-{{ app.request.query.get('direction') }}{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ ('global.info.sorted.' ~ ((app.request.query.get('field') == 'year') ? app.request.query.get('direction') : 'none'))|trans }}</span>
 						<a href="{{ path('piece_index', app.request.query|merge({'field': 'year', 'direction': ((app.request.query.get('field') == 'year' and app.request.query.get('direction') == 'asc') ? 'desc' : 'asc')})) }}" title="{{ ('global.action.sort.' ~ ((app.request.query.get('direction') == 'asc') ? 'desc' : 'asc'))|trans({'field': ('app.fields.piece.year'|trans|lower)}) }}">{{ 'app.fields.piece.year'|trans }}</a>)</th>
 					<th>{{ 'app.fields.piece.last_played'|trans }}</th>
-					<th class="text-center"><a href="#" role="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#Help"><i class="fa fa-info-circle" title="{{ 'global.info.help'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.info.help'|trans }}</span></a>
+					<th class="text-center"><button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#Help"><i class="fa fa-question-circle" title="{{ 'global.info.help'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.info.help'|trans }}</span></button>
 						<a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 				</tr>
 				<tr>
@@ -65,7 +65,7 @@
 			<tbody>
 			{% for piece in pieces %}
 				<tr{% if piece.location is null %} class="table-info text-info"
-					{%- elseif piece.location == constant('LOCATION_LOST', piece) %} class="table-dark"
+					{%- elseif piece.location == constant('LOCATION_LOST', piece) %} class="table-secondary"
 					{%- elseif piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] %} class="text-muted"
 					{%- elseif not piece.hasState(constant('STATE_VERIFIED', piece)) %} class="table-danger text-danger"
 					{%- elseif piece.missings|length %} class="table-warning text-warning"
@@ -97,10 +97,10 @@
 						
 						{% if is_granted('ROLE_USER') %}
 						<div class="btn-group btn-group-sm">
-							<div class="btn-group btn-group-sm dropleft" role="group">
-								<a href="#" role="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="btn-group btn-group-sm  dropstart" role="group">
+								<button role="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="sr-only">{{ 'global.action.quick'|trans }}</span>
-								</a>
+								</button>
 								<div class="dropdown-menu">
 									{% for location in static('LOCATIONS_LIST', piece) %}
 									<a class="dropdown-item{{ piece.location == location ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
@@ -130,13 +130,11 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">{{ 'app.piece.index.modal.title'|trans }}</h5>
-					<a href="#" role="button" class="close" data-dismiss="modal" aria-label="{{ 'global.action.close'|trans }}">
-						<span title="{{ 'global.action.close'|trans }}" aria-hidden="true">×</span>
-					</a>
+					<button role="button" class="btn-close" title="{{ 'global.action.close'|trans }}" data-bs-dismiss="modal" aria-label="{{ 'global.action.close'|trans }}"></button>
 				</div>
 				<div class="modal-body">
 					<table class="table table-sm table-hover">
-						<tr class="table-dark">
+						<tr class="table-secondary">
 							<td>
 								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_LOST'))|trans }}
 							</td>

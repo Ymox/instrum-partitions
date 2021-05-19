@@ -66,7 +66,7 @@ class PieceType extends AbstractType
                 'query_builder' => function (\App\Repository\PersonRepository $repo) {
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
-                'attr'         => array(
+                'attr'          => array(
                     'class'    => 'addable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
                 ),
@@ -115,10 +115,7 @@ class PieceType extends AbstractType
                 'placeholder'  => 'app.fields.piece.location.placeholder',
                 'choice_label' => function ($choice, $key, $value) {
                     return 'app.fields.piece.location.' . $value;
-                },
-                'attr'         => array(
-                    'required' => 'required',
-                ),
+                }
             ))
             ->add('states', \App\Form\Type\BinaryMaskChoiceType::class, array(
                 'choices'      => \App\Entity\Piece::$STATES_LIST,
@@ -164,13 +161,5 @@ class PieceType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => \App\Entity\Piece::class
         ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_piece';
     }
 }

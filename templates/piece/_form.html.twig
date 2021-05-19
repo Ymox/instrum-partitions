@@ -3,20 +3,20 @@
 		{{ form_row(form.translation) }}
 		{{ form_row(form.movements) }}
 		{{ form_row(form.parts) }}
-		<div class="form-row">
+		<div class="row">
 			{{ form_row(form.composers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
 			{{ form_row(form.arrangers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
 		</div>
-		<div class="form-row">
+		<div class="row">
 			{{ form_row(form.instrumentation, {'row_attr': {'class': 'col-md-4 col-sm-12'}}) }}
 			{{ form_row(form.type, {'row_attr': {'class': 'col-md-5 col-sm-12'}}) }}
 			{{ form_row(form.size, {'row_attr': {'class': 'col-md-3 col-sm-12'}}) }}
 		</div>
-		<div class="form-row">
+		<div class="row">
 			{{ form_row(form.location, {'row_attr': {'class': 'col-lg-4 col-md-6 col-sm-12'}}) }}
 			<fieldset class="col-lg-8 col-md-6 col-sm-12 form-group">
 				{{ form_label(form.states) }}
-				<div id="{{ form.states.vars.id }}" class="form-check-inline{#}btn-group btn-group-toggle" data-toggle="buttons{#}">
+				<div id="{{ form.states.vars.id }}" class="form-check-inline{#}btn-group btn-group-toggle" data-bs-toggle="buttons{#}">
 					{% for i,choice in form.states %}
 					{{ form_widget(choice) }}
 					{% endfor %}
@@ -24,11 +24,11 @@
 			</fieldset>
 		</div>
 		{{ form_row(form.missings) }}
-		<div class="form-row">
+		<div class="row">
 			{{ form_row(form.publisher, {'row_attr': {'class': 'col-md-5 col-sm-12'}}) }}
 			{{ form_row(form.year, {'row_attr': {'class': 'col-md-3 col-sm-12'}}) }}
 			{{ form_row(form.reference, {'row_attr': {'class': 'col-md-4 col-sm-12'}}) }}
 		</div>
 		{{ form_row(form.note) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-left"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}

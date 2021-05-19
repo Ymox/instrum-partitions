@@ -33,12 +33,6 @@ class InstrumentationType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_instrumentation';
-    }
+
 
 }

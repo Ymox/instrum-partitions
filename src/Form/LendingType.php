@@ -88,14 +88,4 @@ class LendingType extends AbstractType
             'data_class' => \App\Entity\Lending::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_lending';
-    }
-
-
 }

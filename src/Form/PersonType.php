@@ -32,14 +32,4 @@ class PersonType extends AbstractType
             'data_class' => \App\Entity\Person::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_person';
-    }
-
-
 }

@@ -41,14 +41,4 @@ class ConcertType extends AbstractType
             'data_class' => \App\Entity\Concert::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_concert';
-    }
-
-
 }

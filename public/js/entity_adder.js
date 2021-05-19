@@ -9,8 +9,8 @@ $(function() {
 			$label.append(' ').append(
 			$('<a>', {
 				href: uri || '#',
-				'data-target': '#Modal',
-				'data-toggle': 'modal',
+				'data-bs-target': '#Modal',
+				'data-bs-toggle': 'modal',
 				'html': '<i class="fa fa-plus-circle"></i>',
 				target: '_blank',
 				'class': 'btn btn-sm btn-outline-success'
