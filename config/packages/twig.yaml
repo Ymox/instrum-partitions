@@ -1,4 +1,4 @@
 twig:
- form_themes:
-  - bootstrap_4_layout.html.twig
-  - forms.html.twig
+  form_themes:
+    - bootstrap_4_layout.html.twig
+    - forms.html.twig
