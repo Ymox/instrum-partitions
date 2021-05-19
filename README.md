@@ -42,7 +42,7 @@ Actuellement, le projet permet donc de saisir des partitions en renseignant :
 - la référence ;
 - _d'éventuelles remarques_.
 
-Le projet fonctionne avec Symfony 5 (5.1.8 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
+Le projet fonctionne avec Symfony 5 (5.2.9 en date de modification), et ne nécessite donc qu'un serveur remplissant les prérequis de cette version de Symfony pour le faire fonctionner.
 
 ## Statuts de partitions
 
@@ -50,7 +50,7 @@ L'application est livrée avec 7 emplacements et 3 états indépendants qui sont
 
 Dénomination                                           | Couleur                           | Utilisation
 -------------------------------------------------------|-----------------------------------|---
-Perdue                                                 | Texte blanc sur fond gris foncé   | Pièces qui sont présentes dans la base de données, mais dont la partition physique n'est plus du tout disponible (trop de manques donc jetées, jamais revenu de prêt, partitions qui ont subi trop d'outrages du temps, trop de mauvais souvenirs…)
+Perdue                                                 | Texte noir sur fond gris          | Pièces qui sont présentes dans la base de données, mais dont la partition physique n'est plus du tout disponible (trop de manques donc jetées, jamais revenu de prêt, partitions qui ont subi trop d'outrages du temps, trop de mauvais souvenirs…)
 Rendue à une autre société                             | Texte gris sur fond blanc         | Pièces qui sont en prêt chez d'autres sociétés
 En prêt à une autre société                            | Texte gris sur fond blanc         | Pièces qui étaient prêtées par d'autres sociétés. Elles sont dans la base de données pour l'historique de ce qui a été joué
 Emplacement inconnu / à confirmer                      | Bleu clair                        | Nouvelles pièces qui viennent d'être reçues<br />Pièces ressorties des archives<br />Pièces de retour de prêt<br />Pièces dont le statut réel est bel et bien inconnu
