@@ -15,7 +15,7 @@ class SizeRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('s');
         $qb ->where($qb->expr()->between(':width', 's.minWidth', 's.maxWidth'))
             ->andWhere($qb->expr()->between(':height', 's.minHeight', 's.maxHeight'))
-            ->setParameters(array('width' => $width, 'height' => $height));
+            ->setParameters(['width' => $width, 'height' => $height]);
 
         return $qb->getQuery()->getOneOrNullResult();
     }

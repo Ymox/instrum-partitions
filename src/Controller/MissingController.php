@@ -23,9 +23,9 @@ class MissingController extends AbstractController
 
         $missings = $em->getRepository(Missing::class)->findAll();
 
-        return $this->render('missing/index.html.twig', array(
+        return $this->render('missing/index.html.twig', [
             'missings' => $missings,
-        ));
+        ]);
     }
 
     /**
@@ -56,7 +56,7 @@ class MissingController extends AbstractController
     private function createDeleteForm(Missing $missing)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('missing_delete', array('id' => $missing->getId())))
+            ->setAction($this->generateUrl('missing_delete', ['id' => $missing->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

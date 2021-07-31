@@ -14,21 +14,21 @@ class ConcertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.concert.%name%'
-            ))
-            ->add('date', null, array(
+            ])
+            ->add('date', null, [
                 'date_widget'  => 'single_text',
                 'time_widget'  => 'single_text',
                 'label_format' => 'app.fields.concert.%name%',
-            ))
-            ->add('pieces', null, array(
+            ])
+            ->add('pieces', null, [
                 'choice_label' => function($piece) {
                     $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                     return $pieceAsString;
                 },
                 'label_format' => 'app.fields.concert.%name%'
-            ))
+            ])
         ;
     }
 
@@ -37,8 +37,8 @@ class ConcertType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Concert::class
-        ));
+        ]);
     }
 }

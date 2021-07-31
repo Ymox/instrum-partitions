@@ -19,10 +19,10 @@ class InstrumentListener
     public function postLoad(\App\Entity\Instrument $entity)
     {
         if ($entity->getKey()) {
-            $displayName = $this->translator->trans('app.fields.part.instrument.choices', array(
+            $displayName = $this->translator->trans('app.fields.part.instrument.choices', [
                 'instrument' => $entity->getName(),
                 'key' => $this->translator->trans('app.fields.instrument.key.choices.' . $entity->getKey())
-            ));
+            ]);
         } else {
             $displayName = $entity->getName();
         }

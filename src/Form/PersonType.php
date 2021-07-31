@@ -14,12 +14,12 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', null, array(
+            ->add('firstName', null, [
                 'label_format' => 'app.fields.person.%name%',
-            ))
-            ->add('lastName', null, array(
+            ])
+            ->add('lastName', null, [
                 'label_format' => 'app.fields.person.%name%',
-            ))
+            ])
         ;
     }
 
@@ -28,8 +28,8 @@ class PersonType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Person::class
-        ));
+        ]);
     }
 }

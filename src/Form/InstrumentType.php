@@ -16,12 +16,12 @@ class InstrumentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
+            ->add('name', TextType::class, [
                 'label_format' => 'app.fields.part.%name%',
-            ))
-            ->add('key', ChoiceType::class, array(
+            ])
+            ->add('key', ChoiceType::class, [
                 'required' => false,
-                'choices' => array(
+                'choices' => [
                     'c',
                     'c_flat',
                     'b',
@@ -35,29 +35,29 @@ class InstrumentType extends AbstractType
                     'e_flat',
                     'd',
                     'd_flat',
-                ),
+                ],
                 'choice_label' => function ($value, $key, $index) {
                     return 'app.fields.instrument.key.choices.' . $value;
                 },
                 'label_format' => 'app.fields.instrument.key.label',
-            ))
-            ->add('family', ChoiceType::class, array(
+            ])
+            ->add('family', ChoiceType::class, [
                 'required' => false,
-                'choices' => array(
+                'choices' => [
                     'wood',
                     'brass',
                     'string',
                     'percussion',
                     'voice',
-                ),
+                ],
                 'choice_label' => function ($value, $key, $index) {
                     return 'app.fields.instrument.family.choices.' . $value;
                 },
                 'label_format' => 'app.fields.instrument.family.label',
-            ))
-            ->add('common', null, array(
+            ])
+            ->add('common', null, [
                 'label_format' => 'app.fields.instrument.%name%.label',
-            ))
+            ])
         ;
     }
 
@@ -66,9 +66,9 @@ class InstrumentType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Instrument::class,
-        ));
+        ]);
     }
 
 

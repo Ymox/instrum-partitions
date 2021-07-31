@@ -20,12 +20,12 @@ class BandController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $bands = $em->getRepository(Band::class)->paginateBy(array(), array('name' => 'ASC'), $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
+        $bands = $em->getRepository(Band::class)->paginateBy([], ['name' => 'ASC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
 
-        return $this->render('band/index.html.twig', array(
+        return $this->render('band/index.html.twig', [
             'bands' => $bands,
             'nbPages' => max(ceil($bands->count() / $this->getParameter('paginate.per_page')), 1),
-        ));
+        ]);
     }
 
     /**
@@ -35,9 +35,9 @@ class BandController extends AbstractController
     public function new(Request $request)
     {
         $band = new Band();
-        $form = $this->createForm(\App\Form\BandType::class, $band, array(
+        $form = $this->createForm(\App\Form\BandType::class, $band, [
             'action' => $this->generateUrl('band_new'),
-        ));
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,20 +46,20 @@ class BandController extends AbstractController
             $em->flush();
 
             if ($request->isXmlHttpRequest()) {
-                return $this->json(array(
+                return $this->json([
                     'value' => $band->getId(),
                     'name' => $band->getName(),
                     'text' => (string)$band,
-                ));
+                ]);
             }
 
-            return $this->redirectToRoute('band_show', array('id' => $band->getId()));
+            return $this->redirectToRoute('band_show', ['id' => $band->getId()]);
         }
 
-        return $this->render('band/new.html.twig', array(
+        return $this->render('band/new.html.twig', [
             'band' => $band,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -70,10 +70,10 @@ class BandController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($band);
 
-        return $this->render('band/show.html.twig', array(
+        return $this->render('band/show.html.twig', [
             'band' => $band,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -89,14 +89,14 @@ class BandController extends AbstractController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('band_edit', array('id' => $band->getId()));
+            return $this->redirectToRoute('band_edit', ['id' => $band->getId()]);
         }
 
-        return $this->render('band/edit.html.twig', array(
+        return $this->render('band/edit.html.twig', [
             'band' => $band,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -127,7 +127,7 @@ class BandController extends AbstractController
     private function createDeleteForm(Band $band)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('band_delete', array('id' => $band->getId())))
+            ->setAction($this->generateUrl('band_delete', ['id' => $band->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

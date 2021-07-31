@@ -22,9 +22,9 @@ class PublisherController extends AbstractController
 
         $publishers = $em->getRepository(Publisher::class)->findAll();
 
-        return $this->render('publisher/index.html.twig', array(
+        return $this->render('publisher/index.html.twig', [
             'publishers' => $publishers,
-        ));
+        ]);
     }
 
     /**
@@ -45,10 +45,10 @@ class PublisherController extends AbstractController
             return $this->redirectToRoute('publisher_index');
         }
 
-        return $this->render('publisher/new.html.twig', array(
+        return $this->render('publisher/new.html.twig', [
             'publisher' => $publisher,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -67,11 +67,11 @@ class PublisherController extends AbstractController
             return $this->redirectToRoute('publisher_index');
         }
 
-        return $this->render('publisher/edit.html.twig', array(
+        return $this->render('publisher/edit.html.twig', [
             'publisher' => $publisher,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -102,7 +102,7 @@ class PublisherController extends AbstractController
     private function createDeleteForm(Publisher $publisher)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('publisher_delete', array('id' => $publisher->getId())))
+            ->setAction($this->generateUrl('publisher_delete', ['id' => $publisher->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

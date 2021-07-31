@@ -14,12 +14,12 @@ class InstrumentationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.instrumentation.%name%',
-            ))
-            ->add('note', null, array(
+            ])
+            ->add('note', null, [
                 'label_format' => 'app.fields.instrumentation.%name%',
-            ))
+            ])
         ;
     }
 
@@ -28,9 +28,9 @@ class InstrumentationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Instrumentation::class
-        ));
+        ]);
     }
 
 

@@ -22,9 +22,9 @@ class InstrumentationController extends AbstractController
 
         $instrumentations = $em->getRepository(Instrumentation::class)->findAll();
 
-        return $this->render('instrumentation/index.html.twig', array(
+        return $this->render('instrumentation/index.html.twig', [
             'instrumentations' => $instrumentations,
-        ));
+        ]);
     }
 
     /**
@@ -45,10 +45,10 @@ class InstrumentationController extends AbstractController
             return $this->redirectToRoute('instrumentation_index');
         }
 
-        return $this->render('instrumentation/new.html.twig', array(
+        return $this->render('instrumentation/new.html.twig', [
             'instrumentation' => $instrumentation,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -67,11 +67,11 @@ class InstrumentationController extends AbstractController
             return $this->redirectToRoute('instrumentation_index');
         }
 
-        return $this->render('instrumentation/edit.html.twig', array(
+        return $this->render('instrumentation/edit.html.twig', [
             'instrumentation' => $instrumentation,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -102,7 +102,7 @@ class InstrumentationController extends AbstractController
     private function createDeleteForm(Instrumentation $instrumentation)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('instrumentation_delete', array('id' => $instrumentation->getId())))
+            ->setAction($this->generateUrl('instrumentation_delete', ['id' => $instrumentation->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -96,22 +96,22 @@ class PartListener
             $translationString .= '.without_clef';
         }
 
-        $parameters = array(
+        $parameters = [
             'instrument' => (string) $entity->getInstrument(),
             'number'     => $entity->getNumber(),
-        );
+        ];
 
         $display = $this->translator->trans($translationString, array_merge(
             $parameters,
-            array(
+            [
                 'clef' => $entity->getClef() ? $this->translator->trans('app.fields.part.clef.choices.short.' . $entity->getClef()) : '',
-            )
+            ]
         ));
         $downloadName = preg_replace('`♭`' , 'b', $this->translator->trans($translationString, array_merge(
             $parameters,
-            array(
+            [
                 'clef' => $entity->getClef() ? $this->translator->trans('app.fields.part.clef.choices.long.' . $entity->getClef()) : '',
-            )
+            ]
         )));
 
         $entity

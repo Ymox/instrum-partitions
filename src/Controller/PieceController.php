@@ -26,25 +26,25 @@ class PieceController extends AbstractController
 
         if (@$request->query->get('q')['id'] && ($piece = $repo->find($request->query->get('q')['id']))) {
             if ($piece->getWork()) {
-                return $this->redirectToRoute('piece_show', array('id' => $piece->getWork()->getId()));
+                return $this->redirectToRoute('piece_show', ['id' => $piece->getWork()->getId()]);
             } else {
-                return $this->redirectToRoute('piece_show', array('id' => $piece->getId()));
+                return $this->redirectToRoute('piece_show', ['id' => $piece->getId()]);
             }
         }
 
         $pieces = $repo->searchBy(
-            $request->query->get('q', array()),
-            array(
+            $request->query->get('q', []),
+            [
                 $request->query->get('field', 'id') => $request->query->get('direction', 'asc'),
-            ),
+            ],
             $this->getParameter('paginate.per_page'),
             ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
         );
 
-        return $this->render('piece/index.html.twig', array(
+        return $this->render('piece/index.html.twig', [
             'pieces' => $pieces,
             'nbPages' => max(ceil($pieces->count() / $this->getParameter('paginate.per_page')), 1)
-        ));
+        ]);
     }
 
     /**
@@ -70,19 +70,19 @@ class PieceController extends AbstractController
                 'success',
                 $translator->trans(
                     'app.flash.success.creation.piece',
-                    array(
+                    [
                         'id'   => $piece->getId(),
                         'name' => $piece->getName(),
-                    )
+                    ]
                 )
             );
             return $this->redirectToRoute('piece_new');
         }
 
-        return $this->render('piece/new.html.twig', array(
+        return $this->render('piece/new.html.twig', [
             'piece' => $piece,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -93,10 +93,10 @@ class PieceController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($piece);
 
-        return $this->render('piece/show.html.twig', array(
+        return $this->render('piece/show.html.twig', [
             'piece' => $piece,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -112,14 +112,14 @@ class PieceController extends AbstractController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('piece_show', array('id' => $piece->getId()));
+            return $this->redirectToRoute('piece_show', ['id' => $piece->getId()]);
         }
 
-        return $this->render('piece/edit.html.twig', array(
+        return $this->render('piece/edit.html.twig', [
             'piece' => $piece,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -127,7 +127,7 @@ class PieceController extends AbstractController
      */
     public function update(Request $request, Piece $piece)
     {
-        foreach ($request->query->get('states', array()) as $state => $action) {
+        foreach ($request->query->get('states', []) as $state => $action) {
             if ($action == -1) {
                 $piece->removeState($state);
             } else {
@@ -175,7 +175,7 @@ class PieceController extends AbstractController
     private function createDeleteForm(Piece $piece)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('piece_delete', array('id' => $piece->getId())))
+            ->setAction($this->generateUrl('piece_delete', ['id' => $piece->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;
@@ -191,11 +191,11 @@ class PieceController extends AbstractController
     public function duplicates(Request $request, Piece $master, Piece $duplicate, TranslatorInterface $translator)
     {
         $masterForm = $this->createForm(\App\Form\PieceType::class, $master);
-        $masterForm->add('concerts', EntityType::class, array(
+        $masterForm->add('concerts', EntityType::class, [
             'class' => Concert::class,
             'choice_label' => 'name',
             'multiple' => true,
-        ));
+        ]);
         $masterForm->handleRequest($request);
 
         if ($masterForm->isSubmitted() && $masterForm->isValid()) {
@@ -208,21 +208,21 @@ class PieceController extends AbstractController
                     'app.flash.success.duplicates.piece'
                 )
             );
-            return $this->redirectToRoute('piece_show', array('id' => $master->getId()));
+            return $this->redirectToRoute('piece_show', ['id' => $master->getId()]);
         }
 
         $duplicateForm = $this->createForm(\App\Form\PieceType::class, $duplicate);
-        $duplicateForm->add('concerts', EntityType::class, array(
+        $duplicateForm->add('concerts', EntityType::class, [
             'class' => Concert::class,
             'choice_label' => 'name',
             'multiple' => true,
-        ));
+        ]);
 
-        return $this->render('piece/duplicates.html.twig', array(
+        return $this->render('piece/duplicates.html.twig', [
             'piece' => $master,
             'master_form' => $masterForm->createView(),
             'duplicate_form' => $duplicateForm->createView(),
-        ));
+        ]);
     }
 
     public function suisa(Request $request)
@@ -242,10 +242,10 @@ class PieceController extends AbstractController
         $pieces = $this->getDoctrine()->getManager()->getRepository(Piece::class)
             ->findForSuisa($start, $end);
 
-        return $this->render('piece/suisa.html.twig', array(
+        return $this->render('piece/suisa.html.twig', [
             'pieces' => $pieces,
             'start'  => $start,
             'end'    => $end,
-        ));
+        ]);
     }
 }

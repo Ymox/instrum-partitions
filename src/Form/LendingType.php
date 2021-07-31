@@ -24,34 +24,34 @@ class LendingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('band', null, array(
+            ->add('band', null, [
                 'choice_label' => 'name',
                 'label_format' => 'app.fields.lending.%name%',
-                'attr'         => array(
+                'attr'         => [
                     'class'    => 'addable',
                     'data-uri' => $this->urlGenerator->generate('band_new'),
-                ),
-            ))
-            ->add('contact', null, array(
+                ],
+            ])
+            ->add('contact', null, [
                 'label_format' => 'app.fields.lending.%name%',
-            ))
-            ->add('ours', null, array(
+            ])
+            ->add('ours', null, [
                 'label_format' => 'app.fields.lending.%name%',
-            ))
-            ->add('start', null, array(
+            ])
+            ->add('start', null, [
                 'widget'  => 'single_text',
                 'label_format' => 'app.fields.lending.%name%',
-            ))
-            ->add('end', null, array(
+            ])
+            ->add('end', null, [
                 'widget'  => 'single_text',
                 'label_format' => 'app.fields.lending.%name%',
-            ))
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
                 $form = $event->getForm();
                 $lending = $event->getData();
 
 
-                $form->add('pieces', null, array(
+                $form->add('pieces', null, [
                     'choice_label'  => function($piece) use ($lending) {
                         $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                         return $pieceAsString;
@@ -66,7 +66,7 @@ class LendingType extends AbstractType
                                 ),
                                 $qb->expr()->eq('l.id', ':lendingId')
                             ))
-                            ->setParameter(':locations', array(Piece::LOCATION_SHELF, Piece::LOCATION_STOWED))
+                            ->setParameter(':locations', [Piece::LOCATION_SHELF, Piece::LOCATION_STOWED])
                             ->setParameter(':lendingId', $lending->getId())
                             ->setParameter(':state', Piece::STATE_VERIFIED)
                         ;
@@ -74,7 +74,7 @@ class LendingType extends AbstractType
                         return $qb;
                     },
                     'label_format'  => 'app.fields.lending.%name%',
-                ));
+                ]);
             })
         ;
     }
@@ -84,8 +84,8 @@ class LendingType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Lending::class
-        ));
+        ]);
     }
 }

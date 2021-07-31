@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType;
 
 class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterface
 {
-    private $choices = array();
+    private $choices = [];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,7 +37,7 @@ class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterf
     public function transform($modelData)
     {
         if ($modelData === null) {
-            return array();
+            return [];
         } else if (!is_int($modelData)) {
             throw new \UnexpectedTypeException($modelData, 'integer');
         }

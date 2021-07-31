@@ -24,18 +24,18 @@ class LendingController extends AbstractController
         $repo = $em->getRepository(Lending::class);
 
         $lendings = $repo->searchBy(
-            $request->query->get('q', array()),
-            array(
+            $request->query->get('q', []),
+            [
                 $request->query->get('field', 'id') => $request->query->get('direction', 'asc'),
-            ),
+            ],
             $this->getParameter('paginate.per_page'),
             ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
         );
 
-        return $this->render('lending/index.html.twig', array(
+        return $this->render('lending/index.html.twig', [
             'lendings' => $lendings,
             'nbPages'  => max(ceil($lendings->count() / $this->getParameter('paginate.per_page')), 1)
-        ));
+        ]);
     }
 
     /**
@@ -54,13 +54,13 @@ class LendingController extends AbstractController
             $em->persist($lending);
             $em->flush();
 
-            return $this->redirectToRoute('lending_show', array('id' => $lending->getId()));
+            return $this->redirectToRoute('lending_show', ['id' => $lending->getId()]);
         }
 
-        return $this->render('lending/new.html.twig', array(
+        return $this->render('lending/new.html.twig', [
             'lending' => $lending,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -71,10 +71,10 @@ class LendingController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($lending);
 
-        return $this->render('lending/show.html.twig', array(
+        return $this->render('lending/show.html.twig', [
             'lending' => $lending,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -91,14 +91,14 @@ class LendingController extends AbstractController
             $this->handlePiecesInLending($lending);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('lending_edit', array('id' => $lending->getId()));
+            return $this->redirectToRoute('lending_edit', ['id' => $lending->getId()]);
         }
 
-        return $this->render('lending/edit.html.twig', array(
+        return $this->render('lending/edit.html.twig', [
             'lending' => $lending,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -129,7 +129,7 @@ class LendingController extends AbstractController
     private function createDeleteForm(Lending $lending)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('lending_delete', array('id' => $lending->getId())))
+            ->setAction($this->generateUrl('lending_delete', ['id' => $lending->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -22,9 +22,9 @@ class TypeController extends AbstractController
 
         $types = $em->getRepository(Type::class)->findAll();
 
-        return $this->render('type/index.html.twig', array(
+        return $this->render('type/index.html.twig', [
             'types' => $types,
-        ));
+        ]);
     }
 
     /**
@@ -45,10 +45,10 @@ class TypeController extends AbstractController
             return $this->redirectToRoute('type_index');
         }
 
-        return $this->render('type/new.html.twig', array(
+        return $this->render('type/new.html.twig', [
             'type' => $type,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -67,11 +67,11 @@ class TypeController extends AbstractController
             return $this->redirectToRoute('type_index');
         }
 
-        return $this->render('type/edit.html.twig', array(
+        return $this->render('type/edit.html.twig', [
             'type' => $type,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -102,7 +102,7 @@ class TypeController extends AbstractController
     private function createDeleteForm(Type $type)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('type_delete', array('id' => $type->getId())))
+            ->setAction($this->generateUrl('type_delete', ['id' => $type->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -18,7 +18,7 @@ class FileController extends AbstractController
         $result = [
             'originalName' => $file->getClientOriginalName(),
             'fileName' => $fileName,
-            'filePath' => $this->generateUrl('file_download', array('file' => ltrim($this->getParameter('download_path') . '/' . $fileName, '/'))),
+            'filePath' => $this->generateUrl('file_download', ['file' => ltrim($this->getParameter('download_path') . '/' . $fileName, '/')]),
             'target' => $request->get('target'),
         ];
         return $this->json($result);

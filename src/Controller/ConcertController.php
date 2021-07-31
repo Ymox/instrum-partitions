@@ -21,17 +21,17 @@ class ConcertController extends AbstractController
         $repository = $this->getDoctrine()->getManager()->getRepository(Concert::class);
 
         $concerts = $repository->findBy(
-            array(),
-            array('date' => 'DESC'),
+            [],
+            ['date' => 'DESC'],
             $this->getParameter('paginate.per_page'),
             ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
         );
         $nbConcerts = $repository->countAll();
 
-        return $this->render('concert/index.html.twig', array(
+        return $this->render('concert/index.html.twig', [
             'concerts' => $concerts,
             'nbPages' => max(ceil($nbConcerts / $this->getParameter('paginate.per_page')), 1),
-        ));
+        ]);
     }
 
     /**
@@ -49,13 +49,13 @@ class ConcertController extends AbstractController
             $em->persist($concert);
             $em->flush();
 
-            return $this->redirectToRoute('concert_show', array('id' => $concert->getId()));
+            return $this->redirectToRoute('concert_show', ['id' => $concert->getId()]);
         }
 
-        return $this->render('concert/new.html.twig', array(
+        return $this->render('concert/new.html.twig', [
             'concert' => $concert,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -66,10 +66,10 @@ class ConcertController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($concert);
 
-        return $this->render('concert/show.html.twig', array(
+        return $this->render('concert/show.html.twig', [
             'concert' => $concert,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -85,14 +85,14 @@ class ConcertController extends AbstractController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('concert_edit', array('id' => $concert->getId()));
+            return $this->redirectToRoute('concert_edit', ['id' => $concert->getId()]);
         }
 
-        return $this->render('concert/edit.html.twig', array(
+        return $this->render('concert/edit.html.twig', [
             'concert' => $concert,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -123,7 +123,7 @@ class ConcertController extends AbstractController
     private function createDeleteForm(Concert $concert)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('concert_delete', array('id' => $concert->getId())))
+            ->setAction($this->generateUrl('concert_delete', ['id' => $concert->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

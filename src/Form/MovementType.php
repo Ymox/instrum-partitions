@@ -22,48 +22,48 @@ class MovementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.piece.%name%',
-            ))
-            ->add('translation', null, array(
+            ])
+            ->add('translation', null, [
                 'label_format' => 'app.fields.piece.%name%',
-            ))
-            ->add('composers', null, array(
+            ])
+            ->add('composers', null, [
                 'required'      => true,
                 'label_format'  => 'app.fields.piece.%name%',
                 'query_builder' => function (\App\Repository\PersonRepository $repo) {
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
-                'attr'          => array(
+                'attr'          => [
                     'class'    => 'addable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
-                ),
-            ))
-            ->add('arrangers', null, array(
+                ],
+            ])
+            ->add('arrangers', null, [
                 'label_format'  => 'app.fields.piece.%name%',
                 'query_builder' => function (\App\Repository\PersonRepository $repo) {
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
-                'attr'         => array(
+                'attr'         => [
                     'class'    => 'addable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
-                ),
-            ))
-            ->add('type', null, array(
+                ],
+            ])
+            ->add('type', null, [
                 'choice_label' => 'name',
                 'label_format' => 'app.fields.piece.%name%',
-            ))
-            ->add('missings', CollectionType::class, array(
+            ])
+            ->add('missings', CollectionType::class, [
                 'entry_type'   => MissingType::class,
                 'prototype'    => true,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label_format' => 'app.fields.piece.%name%',
-            ))
-            ->add('note', null, array(
+            ])
+            ->add('note', null, [
                 'label_format' => 'app.fields.piece.%name%',
-            ))
+            ])
         ;
     }
 
@@ -72,9 +72,9 @@ class MovementType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Piece::class
-        ));
+        ]);
     }
 
 

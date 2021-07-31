@@ -14,9 +14,9 @@ class MissingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('voice', null, array(
+            ->add('voice', null, [
                 'label_format' => 'app.fields.missing.voice',
-            ))
+            ])
         ;
     }
 
@@ -25,8 +25,8 @@ class MissingType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Missing::class
-        ));
+        ]);
     }
 }

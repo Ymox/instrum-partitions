@@ -14,24 +14,24 @@ class SizeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.size.%name%',
-            ))
-            ->add('minWidth', null, array(
+            ])
+            ->add('minWidth', null, [
                 'label_format' => 'app.fields.size.%name%',
-            ))
-            ->add('maxWidth', null, array(
+            ])
+            ->add('maxWidth', null, [
                 'label_format' => 'app.fields.size.%name%',
-            ))
-            ->add('minHeight', null, array(
+            ])
+            ->add('minHeight', null, [
                 'label_format' => 'app.fields.size.%name%',
-            ))
-            ->add('maxHeight', null, array(
+            ])
+            ->add('maxHeight', null, [
                 'label_format' => 'app.fields.size.%name%',
-            ))
-            ->add('note', null, array(
+            ])
+            ->add('note', null, [
                 'label_format' => 'app.fields.size.%name%',
-            ))
+            ])
         ;
     }
 
@@ -40,8 +40,8 @@ class SizeType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Size::class
-        ));
+        ]);
     }
 }

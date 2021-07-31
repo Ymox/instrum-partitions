@@ -22,9 +22,9 @@ class SizeController extends AbstractController
 
         $sizes = $em->getRepository(Size::class)->findBy([], ['minHeight' => 'asc']);
 
-        return $this->render('size/index.html.twig', array(
+        return $this->render('size/index.html.twig', [
             'sizes' => $sizes,
-        ));
+        ]);
     }
 
     /**
@@ -45,10 +45,10 @@ class SizeController extends AbstractController
             return $this->redirectToRoute('size_index');
         }
 
-        return $this->render('size/new.html.twig', array(
+        return $this->render('size/new.html.twig', [
             'size' => $size,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -59,10 +59,10 @@ class SizeController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($size);
 
-        return $this->render('size/show.html.twig', array(
+        return $this->render('size/show.html.twig', [
             'size' => $size,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -81,11 +81,11 @@ class SizeController extends AbstractController
             return $this->redirectToRoute('size_index');
         }
 
-        return $this->render('size/edit.html.twig', array(
+        return $this->render('size/edit.html.twig', [
             'size' => $size,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -116,7 +116,7 @@ class SizeController extends AbstractController
     private function createDeleteForm(Size $size)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('size_delete', array('name' => $size->getName())))
+            ->setAction($this->generateUrl('size_delete', ['name' => $size->getName()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

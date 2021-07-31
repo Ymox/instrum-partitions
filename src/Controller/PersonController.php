@@ -20,12 +20,12 @@ class PersonController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $people = $em->getRepository(Person::class)->paginateBy(array(), array('lastName' => 'ASC'), $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
+        $people = $em->getRepository(Person::class)->paginateBy([], ['lastName' => 'ASC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
 
-        return $this->render('person/index.html.twig', array(
+        return $this->render('person/index.html.twig', [
             'people'  => $people,
             'nbPages' => max(ceil($people->count() / $this->getParameter('paginate.per_page')), 1),
-        ));
+        ]);
     }
 
     /**
@@ -35,9 +35,9 @@ class PersonController extends AbstractController
     public function new(Request $request)
     {
         $person = new Person();
-        $form = $this->createForm(\App\Form\PersonType::class, $person, array(
+        $form = $this->createForm(\App\Form\PersonType::class, $person, [
             'action' => $this->generateUrl('person_new'),
-        ));
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,20 +46,20 @@ class PersonController extends AbstractController
             $em->flush();
 
             if ($request->isXmlHttpRequest()) {
-                return $this->json(array(
+                return $this->json([
                     'value' => $person->getId(),
                     'firstName' => $person->getFirstName(),
                     'lastName' => $person->getLastName(),
                     'text' => (string)$person,
-                ));
+                ]);
             }
-            return $this->redirectToRoute('person_show', array('id' => $person->getId()));
+            return $this->redirectToRoute('person_show', ['id' => $person->getId()]);
         }
 
-        return $this->render('person/new.html.twig', array(
+        return $this->render('person/new.html.twig', [
             'person' => $person,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -70,10 +70,10 @@ class PersonController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($person);
 
-        return $this->render('person/show.html.twig', array(
+        return $this->render('person/show.html.twig', [
             'person' => $person,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -89,14 +89,14 @@ class PersonController extends AbstractController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('person_show', array('id' => $person->getId()));
+            return $this->redirectToRoute('person_show', ['id' => $person->getId()]);
         }
 
-        return $this->render('person/edit.html.twig', array(
+        return $this->render('person/edit.html.twig', [
             'person' => $person,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -127,7 +127,7 @@ class PersonController extends AbstractController
     private function createDeleteForm(Person $person)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', array('id' => $person->getId())))
+            ->setAction($this->generateUrl('person_delete', ['id' => $person->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

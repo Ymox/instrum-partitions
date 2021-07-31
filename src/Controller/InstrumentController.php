@@ -20,12 +20,12 @@ class InstrumentController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $instruments = $em->getRepository(Instrument::class)->paginateBy(array(), array('common' => 'DESC'), $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
+        $instruments = $em->getRepository(Instrument::class)->paginateBy([], ['common' => 'DESC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
 
-        return $this->render('instrument/index.html.twig', array(
+        return $this->render('instrument/index.html.twig', [
             'instruments' => $instruments,
             'nbPages' => max(ceil($instruments->count() / $this->getParameter('paginate.per_page')), 1),
-        ));
+        ]);
     }
 
     /**
@@ -46,10 +46,10 @@ class InstrumentController extends AbstractController
             return $this->redirectToRoute('instrument_index');
         }
 
-        return $this->render('instrument/new.html.twig', array(
+        return $this->render('instrument/new.html.twig', [
             'instrument' => $instrument,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -65,14 +65,14 @@ class InstrumentController extends AbstractController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('instrument_edit', array('id' => $instrument->getId()));
+            return $this->redirectToRoute('instrument_edit', ['id' => $instrument->getId()]);
         }
 
-        return $this->render('instrument/edit.html.twig', array(
+        return $this->render('instrument/edit.html.twig', [
             'instrument' => $instrument,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -103,7 +103,7 @@ class InstrumentController extends AbstractController
     private function createDeleteForm(Instrument $instrument)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('instrument_delete', array('id' => $instrument->getId())))
+            ->setAction($this->generateUrl('instrument_delete', ['id' => $instrument->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

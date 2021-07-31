@@ -14,17 +14,17 @@ class ProgramType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.program.%name%'
-            ))
-            ->add('pieces', null, array(
+            ])
+            ->add('pieces', null, [
                 'choice_label' => function($piece) {
                     $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                     return $pieceAsString;
                 },
                 'by_reference' => false,
                 'label_format' => 'app.fields.program.%name%'
-            ))
+            ])
         ;
     }
 
@@ -33,8 +33,8 @@ class ProgramType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Program::class
-        ));
+        ]);
     }
 }

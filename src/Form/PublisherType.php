@@ -14,12 +14,12 @@ class PublisherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.publisher.%name%'
-            ))
-            ->add('note', null, array(
+            ])
+            ->add('note', null, [
                 'label_format' => 'app.fields.publisher.%name%'
-            ))
+            ])
         ;
     }
 
@@ -28,8 +28,8 @@ class PublisherType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Publisher::class
-        ));
+        ]);
     }
 }

@@ -14,9 +14,9 @@ class TypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label_format' => 'app.fields.type.%name%',
-            ))
+            ])
         ;
     }
 
@@ -25,8 +25,8 @@ class TypeType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => \App\Entity\Type::class
-        ));
+        ]);
     }
 }

@@ -21,17 +21,20 @@ class ProgramController extends AbstractController
         $repository = $this->getDoctrine()->getManager()->getRepository(Program::class);
 
         $programs = $repository->findBy(
-            array(),
-            array('updatedAt' => 'DESC', 'createdAt' => 'DESC'),
+            [],
+            [
+                'updatedAt' => 'DESC',
+                'createdAt' => 'DESC'
+            ],
             $this->getParameter('paginate.per_page'),
             ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
         );
         $nbPrograms = $repository->countAll();
 
-        return $this->render('program/index.html.twig', array(
+        return $this->render('program/index.html.twig', [
             'programs' => $programs,
             'nbPages' => max(ceil($nbPrograms / $this->getParameter('paginate.per_page')), 1),
-        ));
+        ]);
     }
 
     /**
@@ -49,13 +52,13 @@ class ProgramController extends AbstractController
             $em->persist($program);
             $em->flush();
 
-            return $this->redirectToRoute('program_show', array('id' => $program->getId()));
+            return $this->redirectToRoute('program_show', ['id' => $program->getId()]);
         }
 
-        return $this->render('program/new.html.twig', array(
+        return $this->render('program/new.html.twig', [
             'program' => $program,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -66,10 +69,10 @@ class ProgramController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($program);
 
-        return $this->render('program/show.html.twig', array(
+        return $this->render('program/show.html.twig', [
             'program' => $program,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -86,14 +89,14 @@ class ProgramController extends AbstractController
             $program->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('program_edit', array('id' => $program->getId()));
+            return $this->redirectToRoute('program_edit', ['id' => $program->getId()]);
         }
 
-        return $this->render('program/edit.html.twig', array(
+        return $this->render('program/edit.html.twig', [
             'program' => $program,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -124,7 +127,7 @@ class ProgramController extends AbstractController
     private function createDeleteForm(Program $program)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('program_delete', array('id' => $program->getId())))
+            ->setAction($this->generateUrl('program_delete', ['id' => $program->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;
