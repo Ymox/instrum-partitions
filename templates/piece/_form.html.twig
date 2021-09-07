@@ -14,11 +14,15 @@
 		</div>
 		<div class="row">
 			{{ form_row(form.location, {'row_attr': {'class': 'col-lg-4 col-md-6 col-sm-12'}}) }}
-			<fieldset class="col-lg-8 col-md-6 col-sm-12 form-group">
+			<fieldset class="col-lg-8 col-md-6 col-sm-12">
 				{{ form_label(form.states) }}
-				<div id="{{ form.states.vars.id }}" class="form-check-inline{#}btn-group btn-group-toggle" data-bs-toggle="buttons{#}">
+				{%- set style = (not piece.hasState(constant('STATE_VERIFIED', piece)) ? 'danger' : (piece.states != 7 ? 'warning' : 'success')) -%}
+				{% do form.states.setRendered %}
+				<div id="{{ form.states.vars.id }}" class="btn-group" role="group">
 					{% for i,choice in form.states %}
-					{{ form_widget(choice) }}
+					<input type="checkbox" name="{{ choice.vars.full_name }}" value="{{ choice.vars.value }}" id="{{ choice.vars.id }}" class="btn-check"{% if choice.vars.checked is same as true %} checked="checked"{% endif %} />
+					<label for="{{ choice.vars.id }}" class="btn btn-outline-{{ style }}">{{ choice.vars.label|trans }}</label>
+					{#{{ form_widget(choice, {'attr': {'class': 'btn-check'}, 'label_attr': {'class': 'btn btn-outline-primary'}}) }}#}
 					{% endfor %}
 				</div>
 			</fieldset>

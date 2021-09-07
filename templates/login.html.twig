@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<title>{{ 'app.login.title'|trans }} | {{ 'global.site_name'|trans }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 	</head>
@@ -15,19 +15,20 @@
 				<div class="text-error text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}
 			<form method="post" class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 mx-auto text-center">
-				<div class="form-group">
-					<label for="username" class="sr-only">{{ 'app.login.user'|trans }}</label>
+				<div class="mb-3 form-floating">
 					<input type="text" name="_username" id="username" class="form-control" placeholder="{{ 'app.login.user'|trans }}" value="{{ lastUsername }}" />
+					<label for="username">{{ 'app.login.user'|trans }}</label>
 				</div>
 
-				<div class="form-group">			
-					<label for="password" class="sr-only">{{ 'app.login.password'|trans }}</label>
+				<div class="mb-3 form-floating">			
 					<input type="password" name="_password" id="password" class="form-control" placeholder="{{ 'app.login.password'|trans }}" />
+					<label for="password">{{ 'app.login.password'|trans }}</label>
 				</div>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 			
 				<button type="submit" class="btn btn-primary"><i class="fa fa-unlock" aria-hidden="true"></i></button>
 			</form>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>
