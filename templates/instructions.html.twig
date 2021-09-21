@@ -45,11 +45,21 @@
 		content: " »";
 		font-weight: normal;
 	}
+	.alert.alert-danger::before {
+		content: "🛑 ";
+	}
+	.alert.alert-warning::before {
+		content: "⚠ ";
+		font-weight: bold;
+	}
+	.alert.alert-info::before {
+		content: "ℹ️ ";
+	}
 	</style>
 {% endblock %}
 
 {% block body %}<h1>Instructions d’archivage</h1>
-<p class="lead alert alert-danger">🛑 Toute opération demandant (ou ayant demandé) le support de cette page implique soit que vous avez les informations pour effectuer vous-même les modifications dans le système, soit que vous notifiez l’archiviste des manipulations effectuées au plus tôt. Dans ce dernier cas, soyez exhaustif dans les changements apportés.</p>
+<p class="lead alert alert-danger">Toute opération demandant (ou ayant demandé) le support de cette page implique soit que vous avez les informations pour effectuer vous-même les modifications dans le système, soit que vous notifiez l’archiviste des manipulations effectuées au plus tôt. Dans ce dernier cas, soyez exhaustif dans les changements apportés.</p>
 <p>Voici les instructions pour gérer les partitions à archiver et conserver les archives en ordre.</p>
 <ol>
 	<li><a href="#Etats-des-partitions">Etats des partitions</a></li>
@@ -63,7 +73,7 @@
 	C’est l’occasion de remettre les partitions dans l’ordre, ne serait-ce que pour faciliter le travail de recherche et de marquage.</p>
 <h4>Ordre de classement pour vérification</h4>
 <p>Les partitions originales doivent être dans l’ordre des instruments utilisé par le conducteur, regroupées par voix puis transposition (1 ut (C), 1 B♭, 2 ut (C), 2 B♭ au lieu de 1 ut (C), 2 ut (C), 1 B♭, 2 B♭) — les transpositions sont la même voix.</p>
-<p class="alert alert-info">ℹ️ Certaines éditions listent exactement les partitions normalement disponibles dans le conducteur, conserver l’ordre de cette liste.</p>
+<p class="alert alert-info">Certaines éditions listent exactement les partitions normalement disponibles dans le conducteur, conserver l’ordre de cette liste.</p>
 <p>De manière générale, on retrouve cette logique :</p>
 <ol>
 	<li>directeur en premier ;
@@ -96,7 +106,7 @@
 		</ul>
 	</li>
 </ol>
-<p class="alert alert-info">ℹ️ Les notations en si♭ (B♭) clef de fa ne nous servent à rien. Attention cependant à ne pas jeter quand la partition est recto-verso et que l’un des côtés est à conserver.</p>
+<p class="alert alert-info">Les notations en si♭ (B♭) clef de fa ne nous servent à rien. Attention cependant à ne pas jeter quand la partition est recto-verso et que l’un des côtés est à conserver.</p>
 <p>Les partitions surnuméraires restent après les originaux de leurs voix respectives, sauf s’il y a des photocopies conservées. Les
 	éventuelles photocopies conservées (et ainsi les partitions surnuméraires) sont à séparer complètement des originaux, cependant elles doivent être rangées dans le même ordre. Le tas de copies vient avant le tas d’originaux, avant même le conducteur.</p>
 <h5>Exemple d’ordre de classement quand le conducteur n’en fournit pas<br />
@@ -302,9 +312,9 @@
 	<li>Si la partition est sur plusieurs feuilles séparées, on marque chacune de ces feuilles.</li>
 </ul>
 <h4>{{ 'app.fields.piece.states.2'|trans }}</h4>
-<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : avant tout marquage au tampon encreur, vérifier scrupuleusement que vous allez mettre le bon numéro. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
+<p class="alert alert-warning">Avant tout marquage au tampon encreur, vérifier scrupuleusement que vous allez mettre le bon numéro. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
 <p> Toutes les partitions originales à conserver sont idéalement marquées au tampon encreur du numéro qui peur a été attribué, permettant de regrouper et retrouver les partitions rapidement et d’identifier les feuilles volantes sur lesquelles le titre ne figureraient pas. Le marquage du numéro se fait <strong>en haut à droite du titre</strong> de la partition. Pour la jaquette de la partition de direction, à un endroit où cela restera visible.</p>
-<p class="alert alert-info">ℹ️ La partition de direction doit être en plus tamponnée du sceau de la société.</p>
+<p class="alert alert-info">La partition de direction doit être en plus tamponnée du sceau de la société.</p>
 <h4>{{ 'app.fields.piece.states.4'|trans }}</h4>
 <p> Toutes les partitions originales à conserver sont idéalement marquées avec un élément de couleur (trait de marqueur fluo, gommette unie – mais pas de simple post-it qui n’adhère pas sur toute sa surface et est donc plus susceptible de tomber) L’utilité ce ce marquage est simplement pour les départager des copies que nous faisons en noir et blanc.<br />
 	Le marquage de couleur se fait <strong>sur le nom de l’instrument</strong> (évidemment pas pour les marquages qui masqueraient l’information), en général en haut à gauche de la partition.</p>
@@ -325,7 +335,7 @@
 <h3>{{ 'app.fields.piece.location.shelf'|trans }}<br />
 	<small>Toutes combinaisons d’états possibles</small></h3>
 <p>Ce lieu est pour les partitions qui font actuellement partie d’un programme. Que ce soient des partitions qui étaient auparavant archivées ou des jeux flambants neufs, les états ici ne sont pas importants : les nouvelles partitions ou celles en retour de prêt ne sont même pas encore (re-)vérifiées, celles ressorties des archives peuvent être tamponnées ou simplement marquées.</p>
-<p class="alert alert-info">ℹ️ Les partitions des carnets de marche et de défilé ne sont pas nécessairement dans les tiroirs en face de la porte, mais aussi dans un bac d’archives en plastique à droite en entrant, sous les cartons d’archives.</p>
+<p class="alert alert-info">Les partitions des carnets de marche et de défilé ne sont pas nécessairement dans les tiroirs en face de la porte, mais aussi dans un bac d’archives en plastique à droite en entrant, sous les cartons d’archives.</p>
 <h3>{{ 'app.fields.piece.location.lent'|trans }}<br />
 	<small>{{ 'app.fields.piece.states.1'|trans }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}, {{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.2'|trans|lower }} {{ 'app.fields.piece.states.not.4'|trans|lower }}, {{ 'app.fields.piece.states.1'|trans|lower }} {{ 'app.fields.piece.states.not.2'|trans|lower }} {{ 'app.fields.piece.states.4'|trans|lower }}</small></h3>
 <p>Pour prêter une partition à une société amie, il faut au moins que la partition soit complète et qu’on puisse s’en assurer aisément au retour, donc il faut au moins qu’elle ait été vérifiée et colorée.</p>
@@ -336,7 +346,7 @@
 <h3>{{ 'app.fields.piece.location.lost'|trans }}<br />
 	<small>Toutes combinaisons d’états possibles</small></h3>
 <p>Pour cet emplacement, les états importent peu, étant donné qu’on sait qu’on ne l’a et ne l’aura plus (cas de vieilles partitions parties en poussière et dont l’arrangement n’existe plus).</p>
-<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : ce n’est pas la même chose qu’un emplacement inconnu, qui lui n’est pas définitif.</p>
+<p class="alert alert-warning">Ce n’est pas la même chose qu’un emplacement inconnu, qui lui n’est pas définitif.</p>
 <h3>{{ 'app.fields.piece.location.placeholder'|trans }}<br />
 	<small>Toutes combinaisons d’états possibles</small></h3>
 <p>L’emplacement le plus problématique, surtout si on a noté que la pièce était vérifiée ou/et colorée ou/et tamponnée. Cet état n’est pas définitif, il faudra à un moment décider ce qu’il en est réellement.</p>
@@ -346,7 +356,7 @@
 <h2 id="Que-faire-avec-des-partitions">Que faire avec des partitions qui…</h2>
 <h3>… sont toutes nouvelles</h3>
 <p>A la réception, la pièce doit être au minimum entrée dans le système, ce qui attribue d’office un numéro unique à la pièce. Soit vous avez les accès et les connaissances pour le faire, soit vous transmettez à l’archiviste.</p>
-<p class="alert alert-warning">⚠ <strong>ATTENTION</strong> : avant toute saisie, vérifier scrupuleusement que la pièce ne figure pas déjà dans le catalogue. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
+<p class="alert alert-warning">Avant toute saisie, vérifier scrupuleusement que la pièce ne figure pas déjà dans le catalogue. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
 <ul>
 	<li><strong class="text-danger">Titre</strong></li>
 	<li><strong class="text-danger">Compositeur(s)</strong></li>
