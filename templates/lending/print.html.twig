@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partitions en prêt — {{ lending.band }} | {{ parent() }}{% endblock %}
+
+{% block stylesheets -%}
+	<style>
+	@media print {
+		h1 {
+			margin-top: 1em;
+		}
+		nav, nav * {
+			display: none !important;
+		}
+	}
+	</style>
+{% endblock %}
+
+{% block body %}<h1>Partitions en prêt — {{ lending.band }}</h1>
+<p>L’Union Instrumentale de Bex vous a prêté les partitions suivantes.</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>{{ 'app.fields.piece.name'|trans }}</th>
+			<th>{{ 'app.fields.id'|trans }}</th>
+			<th>{{ 'app.fields.piece.states.label'|trans }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			{% for piece in lending.pieces ~%}
+			<td>{{ piece.name }}</td>
+			<td>{{ piece.id }}</td>
+			<td>{% if not piece.hasState(constant('STATE_COLOURED', piece)) %}<strong class="text-danger">{% endif %}
+				{{ ('app.fields.piece.states.' ~ (piece.hasState(constant('STATE_COLOURED', piece)) ? '' : 'not.') ~ '4')|trans }}
+				{%- if not piece.hasState(constant('STATE_COLOURED', piece)) %}</strong>{% endif %}, 
+				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}<strong class="text-danger">{% endif -%}
+				{{ ('app.fields.piece.states.' ~ (piece.hasState(constant('STATE_STAMPED', piece)) ? '' : 'not.') ~ '2')|trans|lower }} du numéro
+				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}</strong>{% endif %}</td>
+			{% endfor %}
+		</tr>
+	</tbody>
+</table>
+<p>Sauf entente préalable, il n’est pas accordé de nouveau prêt tant que d’autres partitions sont déjà prêtées à la même société.</p>
+<p>Le prêt a été formalisé par le biais de {{ lending.contact }} en date du {{ lending.start|date('d.m.Y') }}. Cette personne est responsable de rendre les partitions prêtées en bons ordre et état. Ceci implique :
+	<ul>
+		<li>des partitions originales <strong>exemptes de toute annotation</strong> ;</li>
+		<li>rendues en <strong>2</strong> exemplaires de <strong>chaque</strong> partition du jeu fourni pour une pièce <small>(excepté celles qui sont toujours uniques, comme par exemple la clarinette mi♭)</small> ;</li>
+		<li>dans l’état mentionné au tableau ci-dessus pour chaque pièce ;</li>
+		<li>dans l’ordre indiqué sur le conducteur <small>(ou l’ordre habituel en cas de conducteur condensé)</small>.</li>
+	</ul>
+	Sauf indication contraire selon le tableau, les originaux prêtés sont tous tamponnés d’un numéro et marqués avec un élément de couleur, que ce soit une gomette ou un trait de stabilo. Cela devrait aider à rendre des partitions dans un état acceptable.</p>
+<p>Vous pouvez en revanche distribuer à vos musiciens des partitions fournies avec les originaux parmi les éventuelles copies marquées comme telles ou les partitions originales surnuméraires.</p>
+<p>L’Union Instrumentale de Bex se réserve le droit de demander réparation en cas de jeu(x) retourné(s) dans un état empêchant une utilisation future comme en cas de non-retour d’un jeu de partition.</p>
+<p>Pour toute question, l’archiviste de l'union Instrumentale de Bex est à votre disposition.</p>
+{% endblock %}

@@ -8,6 +8,11 @@ lending_show:
   controller: 'App\Controller\LendingController::show'
   methods: GET
 
+lending_print:
+  path:   /lending/{id}/print
+  controller: 'App\Controller\LendingController::print'
+  methods: GET
+
 lending_new:
   path:   /lending/new
   controller: 'App\Controller\LendingController::new'

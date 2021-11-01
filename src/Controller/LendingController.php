@@ -151,4 +151,11 @@ class LendingController extends AbstractController
             $piece->removeState(Piece::STATE_VERIFIED);
         }
     }
+
+    public function print(Lending $lending)
+    {
+        return $this->render('lending/print.html.twig', [
+            'lending' => $lending,
+        ]);
+    }
 }
