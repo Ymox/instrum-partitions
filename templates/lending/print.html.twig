@@ -26,8 +26,8 @@
 		</tr>
 	</thead>
 	<tbody>
+		{% for piece in lending.pieces ~%}
 		<tr>
-			{% for piece in lending.pieces ~%}
 			<td>{{ piece.name }}</td>
 			<td>{{ piece.id }}</td>
 			<td>{% if not piece.hasState(constant('STATE_COLOURED', piece)) %}<strong class="text-danger">{% endif %}
@@ -36,8 +36,8 @@
 				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}<strong class="text-danger">{% endif -%}
 				{{ ('app.fields.piece.states.' ~ (piece.hasState(constant('STATE_STAMPED', piece)) ? '' : 'not.') ~ '2')|trans|lower }} du numéro
 				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}</strong>{% endif %}</td>
-			{% endfor %}
 		</tr>
+		{%~ endfor %}
 	</tbody>
 </table>
 <p>Sauf entente préalable, il n’est pas accordé de nouveau prêt tant que d’autres partitions sont déjà prêtées à la même société.</p>
