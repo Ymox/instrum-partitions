@@ -1,6 +1,5 @@
 $(function() {
 	const addButton = function($where) {
-		var prototype = $where.data('prototype');
 		$where.prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
 		$('>div, >tbody>tr', $where).filter(function() {
 			return $('>.remover', $where).length === 0;
@@ -18,7 +17,7 @@ $(function() {
 	});
 	$('form').on('click', '.adder', function() {
 		const $container = $(this).closest('fieldset').find('[data-prototype]').first();
-		var prototype = $container.data('prototype');
+		let prototype = $container.data('prototype');
 		const index = new Date().getTime() % (10 * 60 * 1000);
 		prototype = prototype.replace(/__name__(label__)?/ig, index);
 		$container.append(prototype);
