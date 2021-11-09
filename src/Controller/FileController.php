@@ -27,7 +27,7 @@ class FileController extends AbstractController
     public function download(Request $request, string $file)
     {
         $file = preg_replace('`(\.\./?)+`', '', $file);
-        $filePath = $this->getParameter('kernel.project_dir') . '/web/' . $file;
+        $filePath = $this->getParameter('kernel.project_dir') . '/public/' . $file;
         if (file_exists($filePath)) {
             return $this->file($filePath);
         } else {

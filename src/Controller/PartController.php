@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Ajax upload controller.
- *
+ * Part controller
  */
 class PartController extends AbstractController
 {
@@ -25,15 +24,14 @@ class PartController extends AbstractController
             $downloadName = $part->getPiece()->getId() . '-' . $part->getDownloadName();
         } else {
             $ids = array_unique($ids);
-            sort($ids);
             $parts = $repository->findById($ids);
             if (!empty($parts)) {
                 $downloadName = $parts[0]->getPiece()->getId() .' - ' . $parts[0]->getPiece()->getName();
-                $zipTempPath = $this->getParameter('kernel.project_dir') . '/web/' . uniqid() . '.zip';
+                $zipTempPath = $this->getParameter('kernel.project_dir') . '/public/' . uniqid() . '.zip';
                 $zip = new \ZipArchive();
                 if ($zip->open($zipTempPath, \ZipArchive::CREATE) == true) {
                     foreach ($parts as $part) {
-                        $zip->addFile($this->getParameter('kernel.project_dir') . '/web' .  $part->getDownloadPath(), $part->getPiece()->getId() . '-' . $part->getDownloadName());
+                        $zip->addFile($this->getParameter('kernel.project_dir') . '/public' .  $part->getDownloadPath(), $part->getPiece()->getId() . '-' . $part->getDownloadName());
                         $downloadName .= '-' . $part->getInstrument();
                     }
                     $zip->close();
