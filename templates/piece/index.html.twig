@@ -97,7 +97,7 @@
 						
 						{% if is_granted('ROLE_USER') %}
 						<div class="btn-group btn-group-sm">
-							<div class="btn-group btn-group-sm  dropstart" role="group">
+							<div class="btn-group btn-group-sm dropstart" role="group">
 								<button role="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="sr-only">{{ 'global.action.quick'|trans }}</span>
 								</button>
@@ -157,12 +157,12 @@
 							</td>
 						</tr>
 						<tr class="table-danger text-danger">
-							<td class="text-right">
+							<td class="text-end">
 								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_VERIFIED'))|trans }}
 							</td>
 						</tr>
 						<tr class="table-warning text-warning">
-							<td class="text-right">
+							<td class="text-end">
 								{{ 'app.piece.index.modal.status_incomplete'|trans }}
 							</td>
 						</tr>
