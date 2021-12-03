@@ -10,9 +10,17 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PartType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -23,10 +31,11 @@ class PartType extends AbstractType
                 'required' => true,
                 'group_by' => function ($value, $key, $index) {
                     if ($value->isCommon()) {
-                        return 'app.fields.instrument.common.true';
+                        $message = 'app.fields.instrument.common.true';
                     } else {
-                        return 'app.fields.instrument.common.false';
+                        $message = 'app.fields.instrument.common.false';
                     }
+                    return $this->translator->trans($message);
                 },
                 'label_format' => 'app.fields.part.%name%.label',
             ])
