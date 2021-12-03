@@ -26,7 +26,7 @@ class LendingController extends AbstractController
         $lendings = $repo->searchBy(
             $request->query->get('q', []),
             [
-                $request->query->get('field', 'id') => $request->query->get('direction', 'asc'),
+                $request->query->get('field', 'l.start') => $request->query->get('direction', 'desc'),
             ],
             $this->getParameter('paginate.per_page'),
             ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')

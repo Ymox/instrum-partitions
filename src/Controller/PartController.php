@@ -41,7 +41,7 @@ class PartController extends AbstractController
         }
 
         if ($result) {
-            return $this->file($result, $downloadName);
+            return $this->file($result, preg_replace('`♭`' , 'b', $downloadName));
         } else {
             return new \Symfony\Component\HttpFoundation\Response($result, \Symfony\Component\HttpFoundation\Response::HTTP_NO_CONTENT);
         }
