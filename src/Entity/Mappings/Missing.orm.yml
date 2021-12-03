@@ -22,5 +22,5 @@ App\Entity\Missing:
     piece:
       targetEntity: App\Entity\Piece
       inversedBy: missings
-      
+
   lifecycleCallbacks: {  }

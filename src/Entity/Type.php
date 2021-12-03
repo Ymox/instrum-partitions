@@ -16,12 +16,12 @@ class Type
      * @var string
      */
     private $name;
-    
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $pieces;
-    
+
     /**
      * Constructor
      */

@@ -20,7 +20,7 @@ App\Entity\Person:
     compositions:
       targetEntity: App\Entity\Piece
       mappedBy: composers
-    
+
     arrangements:
       targetEntity: App\Entity\Piece
       mappedBy: arrangers

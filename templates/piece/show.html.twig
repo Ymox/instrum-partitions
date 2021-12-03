@@ -10,7 +10,7 @@
 		<span class="badge bg-dark">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span>
 		{%- endif %}
 		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
-	
+
 	<form action="{{ path('part_download') }}" class="table-responsive">
 		<table class="table">
 			<tbody>
@@ -85,7 +85,7 @@
 							</div>
 						</div>
 						{% endif -%}
-					
+
 						{%- if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] and not piece.lendings.isEmpty %}
 							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': piece.lendings.first.id}) }}">{% endif %}
 							{{- piece.lendings.first.band -}}
@@ -192,7 +192,7 @@
 							</div>
 						</div>
 						{% endif -%}
-					
+
 						{%- if movement.location in [constant('LOCATION_LENT', movement), constant('LOCATION_RETURNED', movement)] %}
 							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': movement.lendings.first.id}) }}">{% endif %}
 							{{- movement.lendings.first.band -}}
@@ -218,7 +218,7 @@
 				{% if (not movement.parts.isEmpty) %}
 				<tr>
 					<td colspan="4"><h3>{{ 'app.fields.piece.parts'|trans }}
-						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="pull-right"><input type="checkbox" id="CheckAll{{ movement.id }}" class="check-all" data-target=".check-all-{{ movement.id }}" /> <label for="CheckAll{{ movement.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fa fa-download"></i></button></small>{% endif %}</h3></td>	
+						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="pull-right"><input type="checkbox" id="CheckAll{{ movement.id }}" class="check-all" data-target=".check-all-{{ movement.id }}" /> <label for="CheckAll{{ movement.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fa fa-download"></i></button></small>{% endif %}</h3></td>
 				</tr>
 				<tr>
 					{% for order, part in movement.parts %}

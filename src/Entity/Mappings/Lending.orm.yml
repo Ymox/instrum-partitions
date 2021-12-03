@@ -33,5 +33,5 @@ App\Entity\Lending:
         - persist
       joinTable:
         name: piece_move
-      
+
   lifecycleCallbacks: {  }

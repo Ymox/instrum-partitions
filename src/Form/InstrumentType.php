@@ -70,6 +70,4 @@ class InstrumentType extends AbstractType
             'data_class' => \App\Entity\Instrument::class,
         ]);
     }
-
-
 }

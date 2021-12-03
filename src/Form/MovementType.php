@@ -76,6 +76,4 @@ class MovementType extends AbstractType
             'data_class' => \App\Entity\Piece::class
         ]);
     }
-
-
 }

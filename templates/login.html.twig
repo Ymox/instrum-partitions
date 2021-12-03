@@ -20,12 +20,12 @@
 					<label for="username">{{ 'app.login.user'|trans }}</label>
 				</div>
 
-				<div class="mb-3 form-floating">			
+				<div class="mb-3 form-floating">
 					<input type="password" name="_password" id="password" class="form-control" placeholder="{{ 'app.login.password'|trans }}" />
 					<label for="password">{{ 'app.login.password'|trans }}</label>
 				</div>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-			
+
 				<button type="submit" class="btn btn-primary"><i class="fa fa-unlock" aria-hidden="true"></i></button>
 			</form>
 		</div>
