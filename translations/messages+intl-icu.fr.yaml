@@ -23,6 +23,7 @@ global:
     page:
       prev: Page précédente
       next: Page suivante
+    print: Version imprimable
   info:
     help: Informations
     loading: Chargement
