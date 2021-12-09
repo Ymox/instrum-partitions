@@ -35,12 +35,21 @@
 				{%- if not piece.hasState(constant('STATE_COLOURED', piece)) %}</strong>{% endif %}, 
 				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}<strong class="text-danger">{% endif -%}
 				{{ ('app.fields.piece.states.' ~ (piece.hasState(constant('STATE_STAMPED', piece)) ? '' : 'not.') ~ '2')|trans|lower }} du numéro
-				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}</strong>{% endif %}</td>
+				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}</strong>{% endif %}
+				{%- if piece.missings.empty -%}
+					, jeu complet
+				{%- else -%}
+					<br /><del>
+					{%- for missing in piece.missings -%}
+						{{ missing.voice }}
+						{%- if not loop.last -%}, {% endif %}
+					{%- endfor -%}</del>
+				{% endif %}</td>
 		</tr>
 		{%~ endfor %}
 	</tbody>
 </table>
-<p>Les partitions ont été vérifiées, les éventuels problèmes relevés et devraient vous avoir été communiqués. Dans le cas contraire, les jeux sont considérés en ordre. <strong>Si l’état des partitions ne concordait pas avec ce qui précède, veuillez en informer l’archiviste de l’Union Instrumentale de Bex au plus tôt, dans tous les cas avant que le jeu de partition ne soit rendu.</strong></p>
+<p>Les jeux de partitions sont considérés en accord avec l’état mentionné ci-dessus. <strong>Si ce n’était pas le cas, veuillez en informer l’archiviste de l’Union Instrumentale de Bex au plus tôt, dans tous les cas avant que le jeu de partition ne soit rendu.</strong></p>
 <p>Sauf entente préalable, il n’est pas accordé de nouveau prêt tant que d’autres partitions sont déjà prêtées à la même société.</p>
 <p>Le prêt a été formalisé par le biais de {{ lending.contact }} en date du {{ lending.start|date('d.m.Y') }}. Cette personne est responsable de rendre les partitions prêtées en bons ordre et état. Ceci implique :
 	<ul>
@@ -52,5 +61,5 @@
 	Sauf indication contraire selon le tableau, les originaux prêtés sont tous tamponnés d’un numéro et marqués avec un élément de couleur, que ce soit une gomette ou un trait de stabilo. Cela devrait aider à rendre des partitions dans un état acceptable.<br />
 	S’il y a des copies clairement signalées ou des originaux surnuméraires, vous pouvez sans autre les distribuer à vos musiciens.</p>
 <p>L’Union Instrumentale de Bex se réserve le droit de demander réparation en cas de jeu(x) retourné(s) dans un état empêchant une utilisation future comme en cas de non-retour d’un jeu de partition.</p>
-<p>Pour toute question, l’archiviste de l'union Instrumentale de Bex est à votre disposition.</p>
+<p>Pour toute question, l’archiviste de l’union Instrumentale de Bex est à votre disposition.</p>
 {% endblock %}
