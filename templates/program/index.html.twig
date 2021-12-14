@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'app.program.index.title'|trans }}{% endblock %}
+{% block title %}{{ 'app.program.index.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 	<h1>{{ 'app.program.index.heading'|trans }}</h1>

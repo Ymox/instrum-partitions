@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'app.publisher.new.title'|trans }}{% endblock %}
+{% block title %}{{ 'app.publisher.new.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 	<h1>{{ 'app.publisher.new.heading'|trans }}</h1>
