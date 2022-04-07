@@ -10,7 +10,7 @@ $(function() {
 		const observer = new MutationObserver( function(mutations) {
 			mutations.forEach( function(mutation) {
 				addButton($(mutation.addedNodes[0]).find('[data-prototype]'));
-				$('select', mutation.addedNodes[0]).select2();
+				$('select', mutation.addedNodes[0]).select2({theme: "bootstrap-5"});
 			});
 		});
 		observer.observe(this, { childList: true });
@@ -20,7 +20,7 @@ $(function() {
 		let prototype = $container.data('prototype');
 		const index = new Date().getTime() % (10 * 60 * 1000);
 		prototype = prototype.replace(/__name__(label__)?/ig, index);
-		$container.append(prototype);
+		$container.prepend(prototype);
 		$('>div, >tbody>tr', $container).filter(function() {
 			return $('>.remover', this).length === 0;
 		}).css('position', 'relative').find('.card').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;"><i class="fa fa-times"></i></button>');
