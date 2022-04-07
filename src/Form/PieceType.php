@@ -101,7 +101,7 @@ class PieceType extends AbstractType
                     if ($max == $min) {
                         $title = $title ? ($title . '(' . $max . ')') : $max;
                     } else {
-                        $title = $title ? ($title. '(' . $min . ' ⥤ ' . $max . ')') : $min . ' ⥤ ' . $max;
+                        $title = $title ? ($title . '(' . $min . ' ⥤ ' . $max . ')') : $min . ' ⥤ ' . $max;
                     }
                     return [
                         'title' => $title,

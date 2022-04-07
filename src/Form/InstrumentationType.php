@@ -32,7 +32,4 @@ class InstrumentationType extends AbstractType
             'data_class' => \App\Entity\Instrumentation::class
         ]);
     }
-
-
-
 }

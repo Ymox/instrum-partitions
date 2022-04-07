@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Instrument
  */
@@ -48,7 +51,7 @@ class Instrument
      */
     public function __construct()
     {
-        $this->parts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->parts = new ArrayCollection();
     }
 
     /**
@@ -200,12 +203,8 @@ class Instrument
 
     /**
      * Set display
-     *
-     * @param string $display
-     *
-     * @return self
      */
-    public function setDisplay(string $display)
+    public function setDisplay(string $display): self
     {
         $this->display = $display;
 
