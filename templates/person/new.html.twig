@@ -9,9 +9,9 @@
 
 	{{ form_start(form, {'attr': {'class': app.request.xmlHttpRequest ? 'ajaxify' : null}}) }}
 		{{ form_widget(form) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fas fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}
 	{% if not app.request.isXmlHttpRequest() %}
-	<a href="{{ path('person_index') }}" class="btn btn-light float-end"><i class="fa fa-list"></i></a>
+	<a href="{{ path('person_index') }}" class="btn btn-light float-end"><i class="fas fa-list"></i></a>
 	{% endif %}
 {% endblock %}

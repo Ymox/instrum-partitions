@@ -3,7 +3,8 @@
 {% block title %}{{ 'app.lending.new.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.2.0/select2-bootstrap-5-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -11,9 +12,9 @@
 
 	{{ form_start(form) }}
 		{{ form_widget(form) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fas fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}
-	<a href="{{ path('lending_index') }}" class="btn btn-light float-end"><i class="fa fa-list"></i></a>
+	<a href="{{ path('lending_index') }}" class="btn btn-light float-end"><i class="fas fa-list"></i></a>
 {% endblock %}
 
 {% block javascripts %}
@@ -23,7 +24,9 @@
 		<script src="{{ asset('js/ajaxify.js') }}"></script>
 		<script>/*<[CDATA[*/
 		$(function() {
-			$('select').select2();
+			$('select').select2({
+				theme: "bootstrap-5"
+			});
 		});
 		/*]]>*/
 		</script>

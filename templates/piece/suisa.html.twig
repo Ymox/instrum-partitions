@@ -15,8 +15,8 @@
 					<th></th>
 					<th></th>
 					<th></th>
-					<th class="text-center"><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></button>
-						<a href="{{ path('piece_suisa') }}" class="btn btn-sm btn-light"><i class="fa fa-refresh" title="{{ 'global.action.reset'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.reset'|trans }}</span></a></th>
+					<th class="text-center"><button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-eye" title="{{ 'global.action.show'|trans }}"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></button>
+						<a href="{{ path('piece_suisa') }}" class="btn btn-sm btn-light"><i class="fas fa-refresh" title="{{ 'global.action.reset'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.reset'|trans }}</span></a></th>
 				</tr>
 				<tr>
 					<th>{{ 'app.fields.piece.name'|trans }}
@@ -25,7 +25,7 @@
 					<th>{{ 'app.fields.piece.arrangers'|trans }}</th>
 					<th>{{ 'app.fields.piece.publisher'|trans }}<br />
 						({{ 'app.fields.piece.year'|trans }})</th>
-					<th><i class="fa fa-sort-asc"></i> {{ 'app.piece.suisa.first_played'|trans }}</th>
+					<th><i class="fas fa-sort-asc"></i> {{ 'app.piece.suisa.first_played'|trans }}</th>
 					<th>{{ 'app.piece.suisa.number_played'|trans }}</th>
 					<th></th>
 				</tr>
@@ -61,8 +61,8 @@
 							{%- endif %}</td>
 					<td>{{ piece[1] }}</td>
 					<td class="text-center">
-						<a href="{{ path('piece_show', {'id': piece[0].id}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
-						<a href="{{ path('piece_edit', {'id': piece[0].id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}" class="btn btn-warning</span><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+						<a href="{{ path('piece_show', {'id': piece[0].id}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+						<a href="{{ path('piece_edit', {'id': piece[0].id}) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}" class="btn btn-warning</span><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 					</td>
 				</tr>
 			{% endfor %}

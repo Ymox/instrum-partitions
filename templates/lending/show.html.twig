@@ -23,7 +23,7 @@
 			<tr>
 				<td><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
 				<td class="text-center">
-					<a href="{{ path('piece_show', {'id': piece.id}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+					<a href="{{ path('piece_show', {'id': piece.id}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
 
 					{% if is_granted('ROLE_USER') %}
 					<div class="btn-group btn-group-sm">
@@ -45,7 +45,7 @@
 							</div>
 						</div>
 					{% endif -%}
-						<a href="{{ path('piece_edit', {'id': piece.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+						<a href="{{ path('piece_edit', {'id': piece.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 					{% if is_granted('ROLE_USER') %}
 					</div>
 					{% endif -%}
@@ -57,17 +57,17 @@
 
 	<ul class="list-inline float-end">
 		<li class="list-inline-item">
-			<a href="{{ path('lending_index') }}" class="btn btn-light"><i class="fa fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.list'|trans }}</span></a>
+			<a href="{{ path('lending_index') }}" class="btn btn-light"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.list'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
-			<a href="{{ path('lending_print', {'id': lending.id}) }}" target="_blank" class="btn btn-info"><i class="fa fa-file-pdf-o" title="{{ 'global.action.print'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.print'|trans }}</span></a>
+			<a href="{{ path('lending_print', {'id': lending.id}) }}" target="_blank" class="btn btn-info"><i class="fas fa-file-pdf-o" title="{{ 'global.action.print'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.print'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
-			<a href="{{ path('lending_edit', {'id': lending.id}) }}" class="btn btn-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+			<a href="{{ path('lending_edit', {'id': lending.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
 			{{ form_start(delete_form) }}
-				<button type="submit" class="btn btn-danger"><i class="fa fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.delete'|trans }}</span></button>
+				<button type="submit" class="btn btn-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.delete'|trans }}</span></button>
 			{{ form_end(delete_form) }}
 		</li>
 	</ul>

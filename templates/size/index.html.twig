@@ -10,7 +10,7 @@
 			<tr>
 				<th>{{ 'app.fields.size.name'|trans }}</th>
 				<th>{{ 'app.fields.size.note'|trans }}</th>
-				<th><a href="{{ path('size_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
+				<th><a href="{{ path('size_new') }}" class="btn btn-sm btn-success"><i class="fas fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,8 +19,8 @@
 				<td><a href="{{ path('size_show', {'name': size.name}) }}">{{ size.name }}</a></td>
 				<td>{{ size.note }}</td>
 				<td>
-					<a href="{{ path('size_show', {'name': size.name}) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
-					<a href="{{ path('size_edit', {'name': size.name}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+					<a href="{{ path('size_show', {'name': size.name}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-eye" title="{{ 'global.action.show'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.show'|trans }}</span></a>
+					<a href="{{ path('size_edit', {'name': size.name}) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 				</td>
 			</tr>
 		{% endfor %}

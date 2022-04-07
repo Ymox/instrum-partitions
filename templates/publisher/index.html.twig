@@ -10,7 +10,7 @@
 			<tr>
 				<th>{{ 'app.fields.publisher.name'|trans }}</th>
 				<th>{{ 'app.fields.publisher.note'|trans }}</th>
-				<th class="text-center"><a href="{{ path('publisher_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
+				<th class="text-center"><a href="{{ path('publisher_new') }}" class="btn btn-sm btn-success"><i class="fas fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,11 +19,11 @@
 				<td>{{ publisher.name }}</td>
 				<td>{{ publisher.note }}</td>
 				<td class="text-center">
-					<a href="{{ path('publisher_edit', {'id': publisher.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+					<a href="{{ path('publisher_edit', {'id': publisher.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
 					<form action="{{ path('publisher_delete', {'id': publisher.id}) }}" method="post">
 						<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
 						<input type="hidden" name="_method" value="DELETE" />
-						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
 					</form>
 				</td>
 			</tr>

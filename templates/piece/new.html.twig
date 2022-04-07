@@ -3,7 +3,8 @@
 {% block title %}{{ 'app.piece.new.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.2.0/select2-bootstrap-5-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -11,7 +12,7 @@
 
 	{{ include('piece/_form.html.twig', {'form': form}) }}
 
-	<a href="{{ path('piece_index') }}" title="{{ 'global.action.list'|trans }}" class="btn btn-light float-end"><i class="fa fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i></a>
+	<a href="{{ path('piece_index') }}" title="{{ 'global.action.list'|trans }}" class="btn btn-light float-end"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i></a>
 {% endblock %}
 
 {% block javascripts %}
@@ -22,7 +23,9 @@
 		<script src="{{ asset('js/ajaxify.js') }}"></script>
 		<script>/*<[CDATA[*/
 		$(function() {
-			$('select').select2();
+			$('select').select2({
+				theme: "bootstrap-5"
+			});
 		});
 		/*]]>*/
 		</script>

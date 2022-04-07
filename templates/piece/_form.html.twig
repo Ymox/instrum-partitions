@@ -15,7 +15,7 @@
 		<div class="row">
 			{{ form_row(form.location, {'row_attr': {'class': 'col-lg-4 col-md-6 col-sm-12'}}) }}
 			<fieldset class="col-lg-8 col-md-6 col-sm-12">
-				{{ form_label(form.states) }}
+				{{ form_label(form.states, null, {'label_attr': {'class' : 'p-0 mb-2'}}) }}
 				{%- set style = (not piece.hasState(constant('STATE_VERIFIED', piece)) ? 'danger' : (piece.states != 7 ? 'warning' : 'success')) -%}
 				{% do form.states.setRendered %}
 				<div id="{{ form.states.vars.id }}" class="btn-group" role="group">
@@ -34,5 +34,5 @@
 			{{ form_row(form.reference, {'row_attr': {'class': 'col-md-4 col-sm-12'}}) }}
 		</div>
 		{{ form_row(form.note) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fa fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fas fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
 	{{ form_end(form) }}

@@ -9,14 +9,14 @@
 		<thead>
 			<tr>
 				<th>{{ 'app.fields.type.name'|trans }}</th>
-				<th><a href="{{ path('type_new') }}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
+				<th><a href="{{ path('type_new') }}" class="btn btn-sm btn-success"><i class="fas fa-plus-circle" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.new'|trans }}</span></a></th>
 			</tr>
 		</thead>
 		<tbody>
 		{% for type in types %}
 			<tr>
 				<td>{{ type.name }}</td>
-				<td><a href="{{ path('type_edit', {'id': type.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-pencil" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a></td>
+				<td><a href="{{ path('type_edit', {'id': type.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a></td>
 			</tr>
 		{% endfor %}
 		</tbody>

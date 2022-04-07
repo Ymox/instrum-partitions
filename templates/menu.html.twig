@@ -1,5 +1,5 @@
-<nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid">
+<nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-dark bg-dark">
+	<div class="container">
 		<a class="navbar-brand" href="{{ path('piece_index') }}">{{ 'global.site_name'|trans }}</a>
 		<button type="button" class="navbar-toggler navbar-toggler-right" data-bs-toggle="collapse" data-bs-target="#Menu" aria-controls="Menu" aria-expanded="false">
 			<span class="navbar-toggler-icon" title="{{ 'global.action.expand.menu'|trans }}" aria-hidden="true"></span><span class="sr-only">{{ 'global.action.expand.menu'|trans }}</span>
@@ -12,7 +12,7 @@
 							('concert' in app.request.get('_route'))
 						or	('program' in app.request.get('_route'))
 					%} active{% endif %}" id="Concerts" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.concerts.heading'|trans }}</a>
-					<div class="dropdown-menu" aria-labelledby="Concerts">
+					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Concerts">
 						<a class="dropdown-item{% if 'concert' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('concert_index') }}">{{ 'app.menu.concerts.list'|trans }}</a>
 						<a class="dropdown-item{% if 'program' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('program_index') }}">{{ 'app.menu.programs'|trans }}</a>
 					</div>
@@ -27,7 +27,7 @@
 						or	('size' in app.request.get('_route'))
 						or	('type' in app.request.get('_route'))
 					%} active{% endif %}" id="Pieces" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.partitions.heading'|trans }}</a>
-					<div class="dropdown-menu" aria-labelledby="Pieces">
+					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Pieces">
 						<a class="dropdown-item{% if 'piece' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('piece_index') }}">{{ 'app.menu.partitions.list'|trans }}</a>
 						<a class="dropdown-item{% if 'person' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('person_index') }}">{{ 'app.menu.people'|trans }}</a>
 						<a class="dropdown-item{% if 'missing' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('missing_index') }}">{{ 'app.menu.missings'|trans }}</a>
@@ -50,7 +50,7 @@
 							('lending' in app.request.get('_route'))
 						or	('band' in app.request.get('_route'))
 					%} active{% endif %}" id="Lendings" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.lendings.heading'|trans }}</a>
-					<div class="dropdown-menu" aria-labelledby="Lendings">
+					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Lendings">
 						<a class="dropdown-item{% if 'lending' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('lending_index') }}">{{ 'app.menu.lendings.list'|trans }}</a>
 						<a class="dropdown-item{% if 'band' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('band_index') }}">{{ 'app.menu.bands'|trans }}</a>
 					</div>
@@ -63,9 +63,9 @@
 			<ul class="navbar-nav d-flex">
 				<li class="nav-item">
 					{%- if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					<a href="{{ path('logout') }}" class="nav-link"><i class="fa fa-power-off text-danger" aria-hidden="true"></i> {{ 'app.menu.logout'|trans }}</a>
+					<a href="{{ path('logout') }}" class="nav-link"><i class="fas fa-power-off text-danger" aria-hidden="true"></i> {{ 'app.menu.logout'|trans }}</a>
 					{% else -%}
-					<a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'app.menu.login'|trans }}</a>
+					<a href="{{ path('login') }}" class="nav-link"><i class="fas fa-sign-in" aria-hidden="true"></i> {{ 'app.menu.login'|trans }}</a>
 					{% endif -%}
 				</li>
 			</ul>
