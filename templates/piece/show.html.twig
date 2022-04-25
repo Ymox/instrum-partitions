@@ -127,7 +127,7 @@
 				{% if (not piece.parts.isEmpty) %}
 				<tr>
 					<td colspan="4"><h3 id="Parts">{{ 'app.fields.piece.parts'|trans }}
-						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="pull-right"><input type="checkbox" id="CheckAll{{ piece.id }}" class="check-all" data-target=".check-all-{{ piece.id }}"/> <label for="CheckAll{{ piece.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-download" title="{{ 'app.file.download_selected'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'app.file.download_selected'|trans }}</span></button></small>{% endif %}</h3></td>
+						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ piece.id }}" class="check-all" data-target=".check-all-{{ piece.id }}"/> <label for="CheckAll{{ piece.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-download" title="{{ 'app.file.download_selected'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'app.file.download_selected'|trans }}</span></button></small>{% endif %}</h3></td>
 				</tr>
 				<tr>
 					{% for order, part in piece.parts %}
@@ -218,12 +218,12 @@
 				{% if (not movement.parts.isEmpty) %}
 				<tr>
 					<td colspan="4"><h3>{{ 'app.fields.piece.parts'|trans }}
-						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="pull-right"><input type="checkbox" id="CheckAll{{ movement.id }}" class="check-all" data-target=".check-all-{{ movement.id }}" /> <label for="CheckAll{{ movement.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-download"></i></button></small>{% endif %}</h3></td>
+						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ movement.id }}" class="check-all" data-target=".check-all-{{ movement.id }}" /> <label for="CheckAll{{ movement.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-download"></i></button></small>{% endif %}</h3></td>
 				</tr>
 				<tr>
 					{% for order, part in movement.parts %}
 					<td>{% if part.file and is_granted('ROLE_DOWNLOAD') %}<input type="checkbox" name="ids[]" value="{{ part.id }}" id="Part{{ part.id }}" class="check-all-{{ movement.id }}" data-parent="#CheckAll{{ movement.id }}" />
-						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" download="{{ piece.id ~ '-' ~ part.downloadName }}" title="{{ 'app.file.download'|trans }}"><i class="fas fa-floppy-o"></i></a>
+						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" download="{{ piece.id ~ '-' ~ part.downloadName }}" title="{{ 'app.file.download'|trans }}"><i class="fas fa-save"></i></a>
 						{%- endif %}
 						<label for="Part{{ part.id }}">{{ part }}</label>
 					</td>

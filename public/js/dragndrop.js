@@ -79,7 +79,7 @@ $(function() {
 		}
 	);
 	$('form').on('click', '.downloadable .cleaner', function(e) {
-		const $downloadables = $(e.target).closest('.form-group').find('.downloadable');
+		const $downloadables = $(e.target).closest('.file-link').find('.downloadable');
 		$downloadables.toggle();
 		const toClean = $downloadables.find('[data-input-clean]').data('inputClean');
 		toClean.forEach( function(e) {
