@@ -21,7 +21,6 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
     main:
-      anonymous: true
       lazy: true
 
       # activate different ways to authenticate
