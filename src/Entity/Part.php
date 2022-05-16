@@ -160,7 +160,7 @@ class Part
      *
      * @return self
      */
-    public function setFile($file)
+    public function setFile($file = null)
     {
         $this->file = $file;
 
@@ -237,7 +237,7 @@ class Part
      *
      * @return self
      */
-    public function setUpload(\Symfony\Component\HttpFoundation\File\File $upload)
+    public function setUpload(\Symfony\Component\HttpFoundation\File\File $upload = null)
     {
         $this->upload = $upload;
 
@@ -247,7 +247,7 @@ class Part
     /**
      * Get upload
      *
-     * @return \Symfony\Component\HttpFoundation\File\File
+     * @return ?\Symfony\Component\HttpFoundation\File\File
      */
     public function getUpload()
     {
