@@ -32,14 +32,14 @@
 
 	<ul class="list-inline">
 		<li class="list-inline-item">
-			<a href="{{ path('size_index') }}" class="btn btn-light"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.list'|trans }}</span></a>
+			<a href="{{ path('size_index') }}" class="btn btn-light"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.list'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
-			<a href="{{ path('size_edit', {'name': size.name}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.edit'|trans }}</span></a>
+			<a href="{{ path('size_edit', {'name': size.name}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.edit'|trans }}</span></a>
 		</li>
 		<li class="list-inline-item">
 			{{ form_start(delete_form) }}
-				<button type="submit" class="btn btn-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.delete'|trans }}</span></button>
+				<button type="submit" class="btn btn-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.delete'|trans }}</span></button>
 			{{ form_end(delete_form) }}
 		</li>
 	</ul>

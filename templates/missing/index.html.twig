@@ -24,7 +24,7 @@
 					<form action="{{ path('missing_delete', {'id': missing.id}) }}" method="post">
 						<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
 						<input type="hidden" name="_method" value="DELETE" />
-						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.delete'|trans }}</span></button>
+						<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.delete'|trans }}</span></button>
 					</form>
 				</td>
 			</tr>

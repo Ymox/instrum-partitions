@@ -1,6 +1,6 @@
 <ul class="pagination justify-content-sm-center">
 {%- if (page != 1) %}
-	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fas fa-chevron-left" title="{{ 'global.action.page.prev'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.page.prev'|trans }}</span></a></li>
+	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': page - 1})) }}" class="page-link"><i class="fas fa-chevron-left" title="{{ 'global.action.page.prev'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.page.prev'|trans }}</span></a></li>
 {% endif %}
 {% if nbPages > 5 and page > 3 %}
 	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': 1})) }}" class="page-link">1</a></li>
@@ -22,6 +22,6 @@
 	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': nbPages})) }}" class="page-link">{{ nbPages }}</a></li>
 {% endif %}
 {%- if (page != nbPages) %}
-	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fas fa-chevron-right" title="{{ 'global.action.page.next'|trans }}" aria-hidden="true"></i><span class="sr-only">{{ 'global.action.page.next'|trans }}</span></a></li>
+	<li class="page-item"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': page + 1})) }}" class="page-link"><i class="fas fa-chevron-right" title="{{ 'global.action.page.next'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.page.next'|trans }}</span></a></li>
 {% endif %}
 </ul>
