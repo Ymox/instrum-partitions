@@ -152,9 +152,11 @@ app:
     part:
       instrument:
         label: Instrument
+        placeholder: Instrument
         choices: '{instrument} en {key}'
       clef:
         label: Clef
+        placeholder: Clef
         choices:
           short:
             g: 𝄞
@@ -164,7 +166,9 @@ app:
             g: clef de sol
             c: clef d’ut
             f: clef de fa
-      number: Numéro
+      number:
+        label: Numéro
+        placeholder: N°
       solo: Soliste
       upload: Fichier
     instrument:

@@ -38,6 +38,7 @@ class PartType extends AbstractType
                     return $this->translator->trans($message);
                 },
                 'label_format' => 'app.fields.part.%name%.label',
+                'placeholder' => 'app.fields.part.instrument.placeholder',
             ])
             ->add('clef', ChoiceType::class, [
                 'required' => false,
@@ -50,10 +51,16 @@ class PartType extends AbstractType
                     return 'app.fields.part.clef.choices.short.' . $value;
                 },
                 'label_format' => 'app.fields.part.%name%.label',
+                'placeholder' => 'app.fields.part.clef.placeholder',
             ])
             ->add('number', IntegerType::class, [
                 'required' => false,
-                'label_format' => 'app.fields.part.%name%',
+                'label_format' => 'app.fields.part.%name%.label',
+                'attr' => [
+                    'placeholder' => 'app.fields.part.number.placeholder',
+                    'min' => 0,
+                    'max' => 4,
+                ],
             ])
             ->add('solo', CheckboxType::class, [
                 'required' => false,
