@@ -6,22 +6,21 @@
 {% endblock %}
 
 {% block _piece_movements_entry_row %}
-<div class="col">
+<div>
 {% set attr = attr|merge({'class': 'card card-body mb-3' ~ (disabled ? ' bg-danger text-white' : '')}) %}
 {{ block('collection_widget') }}
 </div>
 {% endblock %}
 
-{% block _piece_parts_widget %}
-{% set attr = attr|merge({'class': 'row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-3 dropzone', 'data-upload-uri': path('ajax_upload', {'target': id})}) %}
-{{ block('collection_widget') }}
-{% endblock %}
-
-{% block _piece_parts_entry_row %}
-<div class="col">
-{% set attr = attr|merge({'class': 'card card-body mb-4 dropzone' ~ (disabled ? ' bg-danger text-white' : '')}) %}
-{{ block('collection_widget') }}
-</div>
+{% block _piece_parts_entry_widget %}
+<fieldset class="row align-items-center dropzone{{ disabled ? ' bg-danger text-white' : '' }}">
+{{ form_row(form.upload, {'row_attr': {'class': 'col-lg-5'}, 'label_attr': {'class': 'visually-hidden'}}) }}
+{{ form_row(form.file) }}
+{{ form_row(form.instrument, {'row_attr': {'class': 'col-md-8 col-lg-4'}, 'label_attr': {'class': 'visually-hidden'}}) }}
+{{ form_row(form.clef, {'row_attr': {'class': 'col-sm-4 col-md-1'}, 'label_attr': {'class': 'visually-hidden'}}) }}
+{{ form_row(form.number, {'row_attr': {'class': 'col-sm-4 col-md-1'}, 'label_attr': {'class': 'visually-hidden'}}) }}
+{{ form_row(form.solo, {'row_attr': {'class': 'col-2 col-sm-4 col-md-2 col-lg-2 col-xl-1'}}) }}
+</fieldset>
 {% endblock %}
 
 {% block _piece_missings_widget %}
@@ -30,14 +29,14 @@
 {% endblock %}
 
 {% block _piece_missings_entry_row %}
-<div class="col">
+<div>
 {% set attr = attr|merge({'class': 'card card-body mb-3' ~ (disabled ? ' bg-danger text-white' : '')}) %}
 {{ block('collection_widget') }}
 </div>
 {% endblock %}
 
 {% block file_widget %}
-	{% apply spaceless %}
+	{%- apply spaceless %}
 
 	<div class="input-group file-link" role="group">
 		<div id="{{ id }}_filled" class="input-group-prepend input-group downloadable" style="{% if file_url is null %}display: none;{% endif %}">
@@ -45,14 +44,14 @@
 			<button type="button" class="btn btn-danger cleaner" title="{{ 'app.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fas fa-times"></i></button>
 			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" title="{{ download_name }}" readonly="readonly" />
 		</div>
-		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control downloadable')|trim, 'data-upload-uri': path('ajax_upload', {'target': form.parent.vars.id})}) %}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control rounded-start downloadable')|trim, 'data-upload-uri': path('ajax_upload', {'target': form.parent.vars.id})}) %}
 		{% if file_url is not null %}
 			{%- set attr = attr|merge({'style': (attr.style|default('') ~ ' display: none;')|trim}) -%}
 		{% endif %}
 		{{ block('form_widget') }}
 	</div>
 
-	{% endapply %}
+	{% endapply -%}
 {% endblock %}
 
 {# Errors #}

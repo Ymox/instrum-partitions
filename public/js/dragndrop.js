@@ -59,7 +59,7 @@ $(function() {
 						} else if ($('#' + data.target).prev().find('.adder').length) {
 							const $container = $('#' + data.target);
 							$container.prev().find('.adder').click();
-							$target = $container.find('[name$="' + 'file' + ']"]').last()
+							$target = $container.find('[name$="' + 'file' + ']"]').first()
 						}
 						$target.val(data.fileName);
 						if ($target.prev().find('.downloadable').length) {

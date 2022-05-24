@@ -2,7 +2,7 @@
 		{{ form_row(form.name) }}
 		{{ form_row(form.translation) }}
 		{{ form_row(form.movements) }}
-		{{ form_row(form.parts) }}
+		{{ form_row(form.parts, {'attr': {'class' : 'dropzone attr', 'data-upload-uri': path('ajax_upload', {'target': form.parts.vars.id})}}) }}
 		<div class="row">
 			{{ form_row(form.composers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
 			{{ form_row(form.arrangers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
