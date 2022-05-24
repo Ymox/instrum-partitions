@@ -1,9 +1,9 @@
 $(function() {
 	const addButton = function($where) {
 		$where.prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
-		$('>div, >tbody>tr', $where).filter(function() {
-			return $('>.remover', $where).length === 0;
-		}).css('position', 'relative').find('.card').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;"><i class="fa fa-times"></i></button>')
+		$('>div, >fieldset, >tbody>tr', $where).filter(function() {
+			return $('.remover', $where).length === 0;
+		}).css('position', 'relative').children().append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;"><i class="fa fa-times"></i></button>')
 	}
 	$('[data-prototype]').each( function() {
 		addButton($(this));
@@ -21,9 +21,9 @@ $(function() {
 		const index = new Date().getTime() % (10 * 60 * 1000);
 		prototype = prototype.replace(/__name__(label__)?/ig, index);
 		$container.prepend(prototype);
-		$('>div, >tbody>tr', $container).filter(function() {
-			return $('>.remover', this).length === 0;
-		}).css('position', 'relative').find('.card').append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px;"><i class="fa fa-times"></i></button>');
+		$('>div, >fieldset, >tbody>tr', $container).filter(function() {
+			return $('.remover', this).length === 0;
+		}).css('position', 'relative').children().append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;"><i class="fa fa-times"></i></button>');
 	});
 	$('form').on('click', '.remover', function() {
 		$(this).toggleClass('btn-danger btn-light').html('<i class="fa fa-' + ($(this).is('.btn-danger') ? 'times' : 'undo') + '"></i>');
