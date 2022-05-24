@@ -127,12 +127,12 @@
 				{% if (not piece.parts.isEmpty) %}
 				<tr>
 					<td colspan="4"><h3 id="Parts">{{ 'app.fields.piece.parts'|trans }}
-						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ piece.id }}" class="check-all" data-target=".check-all-{{ piece.id }}"/> <label for="CheckAll{{ piece.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-download" title="{{ 'app.file.download_selected'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'app.file.download_selected'|trans }}</span></button></small>{% endif %}</h3></td>
+						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ piece.id }}" class="check-all" data-target=".check-all-{{ piece.id }}"/> <label for="CheckAll{{ piece.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-file-archive" title="{{ 'app.file.download_selected'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'app.file.download_selected'|trans }}</span></button></small>{% endif %}</h3></td>
 				</tr>
 				<tr>
 					{% for order, part in piece.parts %}
 					<td>{% if part.file and is_granted('ROLE_DOWNLOAD') %}<input type="checkbox" name="ids[]" value="{{ part.id }}" id="Part{{ part.id }}" class="check-all-{{ piece.id }}" data-parent="#CheckAll{{ piece.id }}" />
-						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" download="{{ piece.id ~ '-' ~ part.downloadName }}"><i class="fas fa-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
+						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" download="{{ piece.id ~ '-' ~ part.downloadName }}"><i class="fas fa-file-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
 						{%- endif %}
 						<label for="Part{{ part.id }}">{{ part }}</label>
 					</td>
