@@ -27,6 +27,6 @@ $(function() {
 	});
 	$('form').on('click', '.remover', function() {
 		$(this).toggleClass('btn-danger btn-light').html('<i class="fa fa-' + ($(this).is('.btn-danger') ? 'times' : 'undo') + '"></i>');
-		$(this).closest('div').toggleClass('bg-danger text-white').find(':input:not(button)').prop('disabled', !$(this).is('.btn-danger'));
+		$(this).closest('div, fieldset').toggleClass('bg-danger text-white').find(':input:not(button)').prop('disabled', !$(this).is('.btn-danger'));
 	});
 });
