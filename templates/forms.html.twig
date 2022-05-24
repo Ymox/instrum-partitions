@@ -40,7 +40,7 @@
 
 	<div class="input-group file-link" role="group">
 		<div id="{{ id }}_filled" class="input-group-prepend input-group downloadable" style="{% if file_url is null %}display: none;{% endif %}">
-			<a href="{{ path('part_download', {'id': part_id}) }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'app.file.download'|trans }}"><i class="fas fa-file-download"></i></a>
+			<a href="{{ path('part_download', {'ids': [part_id]}) }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'app.file.download'|trans }}"><i class="fas fa-file-download"></i></a>
 			<button type="button" class="btn btn-danger cleaner" title="{{ 'app.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fas fa-times"></i></button>
 			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" title="{{ download_name }}" readonly="readonly" />
 		</div>
