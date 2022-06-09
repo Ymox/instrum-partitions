@@ -39,6 +39,9 @@ class PartType extends AbstractType
                 },
                 'label_format' => 'app.fields.part.%name%.label',
                 'placeholder' => 'app.fields.part.instrument.placeholder',
+                'attr' => [
+                    'class' => 'searchable',
+                ],
             ])
             ->add('clef', ChoiceType::class, [
                 'required' => false,

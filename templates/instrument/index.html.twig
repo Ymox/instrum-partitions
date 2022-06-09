@@ -18,14 +18,14 @@
 				<th><a href="{{ path('instrument_new') }}" class="btn btn-success"><i class="fas fa-plus"></i></a></th>
 			</tr>
 		</thead>
-		<tfoot>
+		<tfoot class="table-group-divider">
 			<tr>
 				<th colspan="3">
 					{% include 'pagination.html.twig' with {'page': page, 'nbPages': nbPages, 'objectName': 'instrument'} %}
 				</th>
 			</tr>
 		</tfoot>
-		<tbody>
+		<tbody class="table-group-divider">
 		{% for instrument in instruments %}
 			<tr>
 				<td>

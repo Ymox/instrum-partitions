@@ -27,7 +27,10 @@ class ConcertType extends AbstractType
                     $pieceAsString = $piece->getId() . ' - ' . $piece->getName() . ($piece->getTranslation() ? ' (' . $piece->getTranslation() . ')' : null);
                     return $pieceAsString;
                 },
-                'label_format' => 'app.fields.concert.%name%'
+                'label_format' => 'app.fields.concert.%name%',
+                'attr' => [
+                    'class' => 'searchable',
+                ]
             ])
         ;
     }

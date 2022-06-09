@@ -35,7 +35,7 @@ class MovementType extends AbstractType
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
                 'attr'          => [
-                    'class'    => 'addable',
+                    'class'    => 'addable searchable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
                 ],
             ])
@@ -45,7 +45,7 @@ class MovementType extends AbstractType
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
                 'attr'         => [
-                    'class'    => 'addable',
+                    'class'    => 'addable searchable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
                 ],
             ])

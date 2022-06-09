@@ -12,7 +12,7 @@
 				<th><a href="{{ path('band_new') }}" class="btn btn-sm btn-success"><i class="fas fa-plus-circle" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.new'|trans }}</span></a></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="table-group-divider">
 		{% for band in bands %}
 			<tr>
 				<td>{{ band.name }}</td>

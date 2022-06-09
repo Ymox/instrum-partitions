@@ -57,7 +57,7 @@ class PieceType extends AbstractType
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
                 'attr'          => [
-                    'class'    => 'addable',
+                    'class'    => 'addable searchable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
                 ],
             ])
@@ -67,7 +67,7 @@ class PieceType extends AbstractType
                     return $repo->createQueryBuilder('p')->orderBy('p.lastName', 'asc');
                 },
                 'attr'          => [
-                    'class'    => 'addable',
+                    'class'    => 'addable searchable',
                     'data-uri' => $this->urlGenerator->generate('person_new'),
                 ],
             ])
@@ -137,6 +137,9 @@ class PieceType extends AbstractType
             ])
             ->add('publisher', null, [
                 'label_format' => 'app.fields.piece.%name%',
+                'attr' => [
+                    'class' => 'searchable',
+                ],
             ])
             ->add('year', null, [
                 'label_format' => 'app.fields.piece.%name%',

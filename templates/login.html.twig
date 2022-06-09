@@ -4,10 +4,10 @@
 		<meta charset="UTF-8" />
 		<title>{{ 'app.login.title'|trans }} | {{ 'global.site_name'|trans }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
 	</head>
 	<body>
 		{{ include('menu.html.twig') }}
@@ -16,7 +16,7 @@
 			{% if error %}
 				<div class="text-error text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}
-			<form method="post" class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 mx-auto text-center">
+			<form method="post" class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mx-auto text-center">
 				<div class="mb-3 form-floating">
 					<input type="text" name="_username" id="username" class="form-control" placeholder="{{ 'app.login.user'|trans }}" value="{{ lastUsername }}" />
 					<label for="username">{{ 'app.login.user'|trans }}</label>
@@ -31,6 +31,6 @@
 				<button type="submit" class="btn btn-primary"><i class="fas fa-unlock" aria-hidden="true"></i></button>
 			</form>
 		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	</body>
 </html>

@@ -23,7 +23,10 @@ class ProgramType extends AbstractType
                     return $pieceAsString;
                 },
                 'by_reference' => false,
-                'label_format' => 'app.fields.program.%name%'
+                'label_format' => 'app.fields.program.%name%',
+                'attr' => [
+                    'class' => 'searchable',
+                ],
             ])
         ;
     }

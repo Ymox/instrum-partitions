@@ -34,7 +34,7 @@
 						<a href="{{ path('piece_new') }}" class="btn btn-sm btn-success"><i class="fas fa-plus" title="{{ 'global.action.new'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.new'|trans }}</span></a></th>
 				</tr>
 				<tr>
-					<th><label for="SearchId" class="visually-hidden">{{ 'app.fields.id'|trans }}</label><input type="number" name="q[id]" id="SearchId" class="form-control" placeholder="{{ 'app.fields.id'|trans }}"{% if app.request.get('q')['id'] is defined %} value="{{ app.request.get('q')['id'] }}"{% endif %} maxlength="4" min="1" style="width: 4em; padding: inherit" /></th>
+					<th><label for="SearchId" class="visually-hidden">{{ 'app.fields.id'|trans }}</label><input type="number" name="q[id]" id="SearchId" class="form-control px-1" placeholder="{{ 'app.fields.id'|trans }}"{% if app.request.get('q')['id'] is defined %} value="{{ app.request.get('q')['id'] }}"{% endif %} maxlength="4" min="0" style="width: 4em;" /></th>
 					<th><label for="SearchName" class="visually-hidden">{{ 'app.fields.piece.name'|trans }}</label><input type="text" name="q[name]" id="SearchName" class="form-control" placeholder="{{ 'app.fields.piece.name'|trans }}"{% if app.request.get('q')['name'] is defined %} value="{{ app.request.get('q')['name'] }}"{% endif %} /></th>
 					<th><label for="SearchComposer" class="visually-hidden">{{ 'app.fields.piece.composers'|trans }}</label><input type="text" name="q[composer]" id="SearchComposer" class="form-control" placeholder="{{ 'app.fields.piece.composers'|trans }}"{% if app.request.get('q')['composer'] is defined %} value="{{ app.request.get('q')['composer'] }}"{% endif %} /></th>
 					<th><label for="SearchArranger" class="visually-hidden">{{ 'app.fields.piece.arrangers'|trans }}</label><input type="text" name="q[arranger]" id="SearchArranger" class="form-control" placeholder="{{ 'app.fields.piece.arrangers'|trans }}"{% if app.request.get('q')['arranger'] is defined %} value="{{ app.request.get('q')['arranger'] }}"{% endif %} /></th>
@@ -44,7 +44,7 @@
 						<a href="{{ path('piece_index') }}" class="btn btn-sm btn-light"><i class="fas fa-sync-alt" title="{{ 'global.action.reset'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.reset'|trans }}</span></a></th>
 				</tr>
 			</thead>
-			<tfoot>
+			<tfoot class="table-group-divider">
 				<tr>
 					<th>{{ 'app.fields.id'|trans }}</th>
 					<th>{{ 'app.fields.piece.name'|trans }}
@@ -62,7 +62,7 @@
 					</th>
 				</tr>
 			</tfoot>
-			<tbody>
+			<tbody class="table-group-divider">
 			{% for piece in pieces %}
 				<tr{% if piece.location is null %} class="table-info text-info"
 					{%- elseif piece.location == constant('LOCATION_LOST', piece) %} class="table-secondary"

@@ -28,7 +28,7 @@ class LendingType extends AbstractType
                 'choice_label' => 'name',
                 'label_format' => 'app.fields.lending.%name%',
                 'attr'         => [
-                    'class'    => 'addable',
+                    'class'    => 'addable searchable',
                     'data-uri' => $this->urlGenerator->generate('band_new'),
                 ],
             ])
@@ -74,6 +74,9 @@ class LendingType extends AbstractType
                         return $qb;
                     },
                     'label_format'  => 'app.fields.lending.%name%',
+                    'attr' => [
+                        'class' => 'searchable',
+                    ]
                 ]);
             })
         ;

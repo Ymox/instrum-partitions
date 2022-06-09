@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.2.0/select2-bootstrap-5-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -20,11 +20,10 @@
 {% block javascripts %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="{{ asset('js/entity_adder.js') }}"></script>
-		<script src="{{ asset('js/select2.min.js') }}"></script>
 		<script src="{{ asset('js/ajaxify.js') }}"></script>
 		<script>/*<[CDATA[*/
 		$(function() {
-			$('select').select2({
+			$('select.searchable').select2({
 				theme: "bootstrap-5"
 			});
 		});

@@ -21,14 +21,14 @@
 				<th><a href="{{ path('lending_new') }}" class="btn btn-success"><i class="fas fa-plus"></i></a></th>
 			</tr>
 		</thead>
-		<tfoot>
+		<tfoot class="table-group-divider">
 			<tr>
 				<th colspan="4">
 					{% include 'pagination.html.twig' with {'page': page, 'nbPages': nbPages, 'objectName': 'lending'} %}
 				</th>
 			</tr>
 		</tfoot>
-		<tbody>
+		<tbody class="table-group-divider">
 		{% for lending in lendings %}
 			<tr>
 				<td><a href="{{ path('lending_show', {'id': lending.id}) }}">{{ ('app.lending.ours.' ~ (lending.ours ? 'to' : 'by'))|trans ~ ' ' ~ lending.band }}</a>

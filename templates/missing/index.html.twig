@@ -14,7 +14,7 @@
 				<th></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="table-group-divider">
 		{% for missing in missings %}
 			<tr>
 				<td><a href="{{ path('piece_show', {'id': missing.piece.id}) }}">{{ missing.piece.name }}</a></td>

@@ -37,6 +37,7 @@ $(function() {
 		$('.modal-content').load($(e.relatedTarget).attr('href'));
 	});
 	$(document).on('hidden.bs.modal', function(e) {
-		$(e.target).find('.modal-content').empty();
+		const target = $(e.target).find('.modal-content');
+		target.html($(target).data('emptyContent'));
 	});
 });
