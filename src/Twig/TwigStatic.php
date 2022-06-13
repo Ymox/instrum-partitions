@@ -5,14 +5,15 @@ use Twig\Extension\AbstractExtension;
 
 class TwigStatic extends AbstractExtension
 {
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig\TwigFunction('static', [$this, 'getStaticProperty']),
         ];
     }
 
-    public function getStaticProperty($static, $entity = null) {
+    public function getStaticProperty($static, $entity = null)
+    {
         if ($entity != null && !is_string($entity)) {
             $entity = \get_class($entity);
         }
