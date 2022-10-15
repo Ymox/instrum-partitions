@@ -93,10 +93,12 @@ app:
         1: Vérifié
         2: Tamponné
         4: Coloré
+        8: Numérisé
         not:
           1: Non vérifié
           2: Non tamponné
           4: Non coloré
+          8: Non numérisé
       missings: Manques
       publisher: Editeur
       year: Année

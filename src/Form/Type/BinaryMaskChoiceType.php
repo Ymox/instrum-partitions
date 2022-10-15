@@ -29,12 +29,12 @@ class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterf
         ;
     }
 
-    public function getParent()
+    public function getParent(): ?string
     {
         return \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class;
     }
 
-    public function transform($modelData)
+    public function transform($modelData): mixed
     {
         if ($modelData === null) {
             return [];
@@ -49,7 +49,7 @@ class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterf
         return $formData;
     }
 
-    public function reverseTransform($formData)
+    public function reverseTransform($formData): mixed
     {
         return array_sum($formData);
     }

@@ -25,6 +25,8 @@ class Piece
 
     const STATE_COLOURED = 4;
 
+    const STATE_SCANNED = 8;
+
     /**
      * @var float
      */
@@ -142,6 +144,7 @@ class Piece
 
     public static $STATES_LIST = [
         self::STATE_VERIFIED,
+        self::STATE_SCANNED,
         self::STATE_STAMPED,
         self::STATE_COLOURED,
     ];

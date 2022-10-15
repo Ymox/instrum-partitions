@@ -199,7 +199,7 @@
 							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
 						{% endif -%}
 
-						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) %}
+						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) and not movement.hasAnyState(constant('STATE_SCANNED', movement)) %}
 						{%- set style = (not movement.hasState(constant('STATE_VERIFIED', movement)) ? 'danger' : (movement.states != 7 ? 'warning' : 'success')) -%}
 						{%- if is_granted('ROLE_USER') %}<span class="btn-group btn-group-sm">{% else %}({% endif -%}
 						{%- for state in static('STATES_LIST', piece) -%}
