@@ -110,6 +110,7 @@ class PieceType extends AbstractType
                 'label_format'  => 'app.fields.piece.%name%',
             ])
             ->add('location', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
+                'required'     => false,
                 'choices'      => \App\Entity\Piece::$LOCATIONS_LIST,
                 'label_format' => 'app.fields.piece.%name%.label',
                 'placeholder'  => 'app.fields.piece.location.placeholder',
