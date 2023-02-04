@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType;
 
 class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterface
 {
-    private $choices = [];
+    protected $choices = [];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,12 +34,12 @@ class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterf
         return \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class;
     }
 
-    public function transform($modelData): mixed
+    public function transform(mixed $modelData): mixed
     {
         if ($modelData === null) {
             return [];
         } else if (!is_int($modelData)) {
-            throw new \UnexpectedTypeException($modelData, 'integer');
+            throw new UnexpectedTypeException($modelData, 'integer');
         }
 
         foreach ($this->choices as $position => $power) {
@@ -49,7 +49,7 @@ class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterf
         return $formData;
     }
 
-    public function reverseTransform($formData): mixed
+    public function reverseTransform(mixed $formData): mixed
     {
         return array_sum($formData);
     }

@@ -65,6 +65,7 @@
 	<li><a href="#Etats-des-partitions">Etats des partitions</a></li>
 	<li><a href="#Emplacements">Emplacements</a></li>
 	<li><a href="#Que-faire-avec-des-partitions">Que faire avec des partitions qui…</a></li>
+	<li><a href="#Instructions-de-numerisation">Instructions de numérisation</a></li>
 </ol>
 <h2 id="Etats-des-partitions">Etats des partitions</h2>
 <p>Lorsqu’on change de programme et donc qu’on range des partitions, ou que celles-ci changent d’emplacement, il y a trois états à vérifier. Tous ont leur importance pour diverses raisons présentées ci-dessous.</p>
@@ -310,6 +311,8 @@
 		(instruments si♭ (B♭) clef de sol d’un côté et ut (C) clef de fa de l’autre par exemple), on marque les deux côtés.</li>
 	<li>Si la partition est sur plusieurs feuilles séparées, on marque chacune de ces feuilles.</li>
 </ul>
+<h4>{{ 'app.fields.piece.states.8'|trans }}</h4>
+<p>Par souci de gain de place et dans loptique de passer à des commandes de matériel au format électronique, les pièces qui ressortent des archives devraient être numérisées. Voir <a href="#Instructions-de-numerisation">les instructions de numérisation</a></p>
 <h4>{{ 'app.fields.piece.states.2'|trans }}</h4>
 <p class="alert alert-warning">Avant tout marquage au tampon encreur, vérifier scrupuleusement que vous allez mettre le bon numéro. Contrôler non seulement le titre, mais aussi les compositeurs, arrangeurs et l’éditeur.</p>
 <p>Toutes les partitions originales à conserver sont idéalement marquées au tampon encreur du numéro qui peur a été attribué, permettant de regrouper et retrouver les partitions rapidement et d’identifier les feuilles volantes sur lesquelles le titre ne figureraient pas. Le marquage du numéro se fait <strong>en haut à droite du titre</strong> de la partition. Pour la jaquette de la partition de direction, à un endroit où cela restera visible.</p>
@@ -400,4 +403,14 @@
 	<li><i>Etat : <q class="text-danger">{{ 'app.fields.piece.states.1'|trans }}</q></i></li>
 	<li><i>Emplacement : <q class="text-danger">{{ 'app.fields.piece.location.stowed'|trans }}</q></i></li>
 </ul>
+<h2 id="Instructions-de-numerisation">Instructions de numérisation</h2>
+<p>La numérisation des partitions est tout programme, et ça prend du temps. Pour éviter des surprises lors de la réimpression, voici des réglages à appliquer pour optimiser les réimpressions et l’espace de stockage nécessaire.</p>
+<h3>Couleurs</h3>
+<p>Une numérisation <strong>en noir et blanc</strong> suffit amplement, pas besoin de nuances de gris qui posent problème quand le papier source est teinté.</p>
+<h4>Seuil de contraste</h3>
+<p>La valeur de <strong>50 %</strong> suffit et permet d’avoir des noirs nets, mais surtout des jaunes qui sortent blancs.</p>
+<h3>Résolution</h3>
+<p>Pour l’instant, on utilise <strong>300 dpi/ppp</strong>. Cela permet de bons détails pour les agrandissements si nécessaire, tout en conservant des fichiers suffisamment peu gourmands en espace de stockage.</p>
+<h2>Dimensions</h2>
+<p><strong>A5, A4 ou A3 uniquement</strong>. Pour les partitions reçues au format C-B3, on numérisera chaque page au format A4, tandis que les formats carnet de marche seront numérisés en A5 pour faciliter les agrandissements et l'impression à taille réelle</p>
 {% endblock %}

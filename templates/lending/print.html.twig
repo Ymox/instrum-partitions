@@ -30,12 +30,12 @@
 		<tr>
 			<td>{{ piece.name }}</td>
 			<td>{{ piece.id }}</td>
-			<td>{% if not piece.hasState(constant('STATE_COLOURED', piece)) %}<strong class="text-danger">{% endif %}
-				{{ ('app.fields.piece.states.' ~ (piece.hasState(constant('STATE_COLOURED', piece)) ? '' : 'not.') ~ '4')|trans }}
-				{%- if not piece.hasState(constant('STATE_COLOURED', piece)) %}</strong>{% endif %}, 
-				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}<strong class="text-danger">{% endif -%}
-				{{ ('app.fields.piece.states.' ~ (piece.hasState(constant('STATE_STAMPED', piece)) ? '' : 'not.') ~ '2')|trans|lower }} du numéro
-				{%- if not piece.hasState(constant('STATE_STAMPED', piece)) %}</strong>{% endif %}
+			<td>{% if not piece.hasState(enum_value('App\\Config\\State', 'COLOURED')) %}<strong class="text-danger">{% endif %}
+				{{ ('app.fields.piece.states.' ~ (piece.hasState(enum_value('App\\Config\\State', 'COLOURED')) ? '' : 'not.') ~ '4')|trans }}
+				{%- if not piece.hasState(enum_value('App\\Config\\State', 'COLOURED')) %}</strong>{% endif %}, 
+				{%- if not piece.hasState(enum_value('App\\Config\\State', 'STAMPED')) %}<strong class="text-danger">{% endif -%}
+				{{ ('app.fields.piece.states.' ~ (piece.hasState(enum_value('App\\Config\\State', 'STAMPED')) ? '' : 'not.') ~ '2')|trans|lower }} du numéro
+				{%- if not piece.hasState(enum_value('App\\Config\\State', 'STAMPED')) %}</strong>{% endif %}
 				{%- if piece.missings.empty -%}
 					, jeu complet
 				{%- else -%}

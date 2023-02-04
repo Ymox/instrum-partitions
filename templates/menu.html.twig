@@ -9,55 +9,55 @@
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle{% if
-							('concert' in app.request.get('_route'))
-						or	('program' in app.request.get('_route'))
+							('concert' in app.current_route)
+						or	('program' in app.current_route)
 					%} active{% endif %}" id="Concerts" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.concerts.heading'|trans }}</a>
 					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Concerts">
-						<a class="dropdown-item{% if 'concert' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('concert_index') }}">{{ 'app.menu.concerts.list'|trans }}</a>
-						<a class="dropdown-item{% if 'program' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('program_index') }}">{{ 'app.menu.programs'|trans }}</a>
+						<a class="dropdown-item{% if 'concert' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('concert_index') }}">{{ 'app.menu.concerts.list'|trans }}</a>
+						<a class="dropdown-item{% if 'program' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('program_index') }}">{{ 'app.menu.programs'|trans }}</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle{% if
-							('piece' in app.request.get('_route'))
-						or	('person' in app.request.get('_route'))
-						or	('missing' in app.request.get('_route'))
-						or	('publisher' in app.request.get('_route'))
-						or	('instrumentation' in app.request.get('_route'))
-						or	('size' in app.request.get('_route'))
-						or	('type' in app.request.get('_route'))
+							('piece' in app.current_route)
+						or	('person' in app.current_route)
+						or	('missing' in app.current_route)
+						or	('publisher' in app.current_route)
+						or	('instrumentation' in app.current_route)
+						or	('size' in app.current_route)
+						or	('type' in app.current_route)
 					%} active{% endif %}" id="Pieces" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.partitions.heading'|trans }}</a>
 					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Pieces">
-						<a class="dropdown-item{% if 'piece' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('piece_index') }}">{{ 'app.menu.partitions.list'|trans }}</a>
-						<a class="dropdown-item{% if 'person' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('person_index') }}">{{ 'app.menu.people'|trans }}</a>
-						<a class="dropdown-item{% if 'missing' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('missing_index') }}">{{ 'app.menu.missings'|trans }}</a>
+						<a class="dropdown-item{% if 'piece' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('piece_index') }}">{{ 'app.menu.partitions.list'|trans }}</a>
+						<a class="dropdown-item{% if 'person' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('person_index') }}">{{ 'app.menu.people'|trans }}</a>
+						<a class="dropdown-item{% if 'missing' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('missing_index') }}">{{ 'app.menu.missings'|trans }}</a>
 						{% if is_granted('ROLE_USER') -%}
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item{% if 'suisa' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('piece_suisa') }}">{{ 'app.menu.suisa'|trans }}</a>
-						<a class="dropdown-item{% if 'publisher' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('publisher_index') }}">{{ 'app.menu.publishers'|trans }}</a>
+						<a class="dropdown-item{% if 'suisa' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('piece_suisa') }}">{{ 'app.menu.suisa'|trans }}</a>
+						<a class="dropdown-item{% if 'publisher' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('publisher_index') }}">{{ 'app.menu.publishers'|trans }}</a>
 						{% endif -%}
 						{% if is_granted('ROLE_ADMIN') -%}
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item{% if 'instrumentation' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('instrumentation_index') }}">{{ 'app.menu.instrumentations'|trans }}</a>
-						<a class="dropdown-item{% if 'type' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('type_index') }}">{{ 'app.menu.types'|trans }}</a>
-						<a class="dropdown-item{% if 'size' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('size_index') }}">{{ 'app.menu.sizes'|trans }}</a>
+						<a class="dropdown-item{% if 'instrumentation' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('instrumentation_index') }}">{{ 'app.menu.instrumentations'|trans }}</a>
+						<a class="dropdown-item{% if 'type' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('type_index') }}">{{ 'app.menu.types'|trans }}</a>
+						<a class="dropdown-item{% if 'size' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('size_index') }}">{{ 'app.menu.sizes'|trans }}</a>
 						{% endif %}
 					</div>
 				</li>
 				{% if is_granted('ROLE_ADMIN') -%}
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle{% if
-							('lending' in app.request.get('_route'))
-						or	('band' in app.request.get('_route'))
+							('lending' in app.current_route)
+						or	('band' in app.current_route)
 					%} active{% endif %}" id="Lendings" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.lendings.heading'|trans }}</a>
 					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Lendings">
-						<a class="dropdown-item{% if 'lending' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('lending_index') }}">{{ 'app.menu.lendings.list'|trans }}</a>
-						<a class="dropdown-item{% if 'band' in app.request.get('_route') %} active" aria-current="page{% endif %}" href="{{ path('band_index') }}">{{ 'app.menu.bands'|trans }}</a>
+						<a class="dropdown-item{% if 'lending' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('lending_index') }}">{{ 'app.menu.lendings.list'|trans }}</a>
+						<a class="dropdown-item{% if 'band' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('band_index') }}">{{ 'app.menu.bands'|trans }}</a>
 					</div>
 				</li>
 				{% endif %}
 				<li class="nav-item">
-					<a class="nav-link{% if ('instructions' in app.request.get('_route')) %} active" aria-current="page{% endif %}" href="{{ path('instructions') }}" id="Instructions">{{ 'app.menu.instructions'|trans }}</a>
+					<a class="nav-link{% if ('instructions' in app.current_route) %} active" aria-current="page{% endif %}" href="{{ path('instructions') }}" id="Instructions">{{ 'app.menu.instructions'|trans }}</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav d-flex">

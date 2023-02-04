@@ -2,439 +2,258 @@
 
 namespace App\Entity;
 
-/**
- * Piece
- */
+use App\Config\Location;
+use App\Config\State;
+use App\Repository\PieceRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+#[ORM\Table]
+#[ORM\Entity(repositoryClass: PieceRepository::class)]
+#[UniqueEntity(fields: ['name'])]
 class Piece
 {
-    const LOCATION_STOWED = 'stowed';
+    #[ORM\Column(type: 'float')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?float $id = null;
 
-    const LOCATION_SERVER = 'server';
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    const LOCATION_LENT = 'lent';
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $translation = null;
 
-    const LOCATION_RETURNED = 'returned';
+    #[ORM\Column(length: 255, enumType: Location::class, nullable: true)]
+    private ?Location $location = null;
 
-    const LOCATION_SHELF = 'shelf';
+    #[ORM\Column(type: 'integer')]
+    private ?int $states = null;
 
-    const LOCATION_LOST = 'lost';
+    #[ORM\Column(nullable: true)]
+    private ?float $level = null;
 
-    const STATE_VERIFIED = 1;
+    #[ORM\Column(type: 'smallint', nullable: true)]
+    private ?int $year = null;
 
-    const STATE_STAMPED = 2;
+    #[ORM\Column(length: 255, nullable: true, unique: true)]
+    private ?string $reference = null;
 
-    const STATE_COLOURED = 4;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $note = null;
 
-    const STATE_SCANNED = 8;
+    #[ORM\Column(type: 'datetime')]
+    #[Gedmo\Timestampable(on: 'create')]
+    private ?\DateTime $createdAt = null;
 
-    /**
-     * @var float
-     */
-    private $id;
+    #[ORM\OneToMany(targetEntity: Piece::class, mappedBy: 'work', cascade: ['persist'])]
+    private Collection $movements;
 
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\OneToMany(targetEntity: Part::class, mappedBy: 'piece', cascade: ['persist', 'remove'], orphanRemoval: true, fetch: 'EXTRA_LAZY')]
+    #[ORM\OrderBy(['solo' => 'DESC', 'instrument' => 'ASC', 'number' => 'ASC'])]
+    private Collection $parts;
 
-    /**
-     * @var string
-     */
-    private $translation;
+    #[ORM\OneToMany(targetEntity: Missing::class, mappedBy: 'piece', cascade: ['persist', 'remove'], orphanRemoval: true, fetch: 'EXTRA_LAZY')]
+    private Collection $missings;
 
-    /**
-     * @var int
-     */
-    private $location;
+    #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'pieces', cascade: ['persist', 'remove'])]
+    private ?Publisher $publisher = null;
 
-    /**
-     * @var integer
-     */
-    private $states;
+    #[ORM\JoinColumn(name: 'size', referencedColumnName: 'name')]
+    #[ORM\ManyToOne(targetEntity: Size::class, inversedBy: 'pieces', cascade: ['persist'])]
+    private ?Size $size = null;
 
-    /**
-     * @var float
-     */
-    private $level;
+    #[ORM\ManyToOne(targetEntity: Instrumentation::class, inversedBy: 'pieces', cascade: ['persist'])]
+    private ?Instrumentation $instrumentation = null;
 
-    /**
-     * @var integer
-     */
-    private $year;
+    #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'pieces', cascade: ['persist'])]
+    private ?Type $type = null;
 
-    /**
-     * @var string
-     */
-    private $reference;
+    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'pieces')]
+    private ?Program $program = null;
 
-    /**
-     * @var string
-     */
-    private $note;
+    #[ORM\ManyToOne(targetEntity: Piece::class, inversedBy: 'movements')]
+    private ?Piece $work = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
+    #[ORM\JoinTable(name: 'piece_composer')]
+    #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'compositions', cascade: ['persist'])]
+    private Collection $composers;
 
-    /**
-     * @var \App\Entity\Publisher
-     */
-    private $publisher;
+    #[ORM\JoinTable(name: 'piece_arranger')]
+    #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'arrangements', cascade: ['persist'])]
+    private Collection $arrangers;
 
-    /**
-     * @var \App\Entity\Size
-     */
-    private $size;
+    #[ORM\ManyToMany(targetEntity: Concert::class, mappedBy: 'pieces')]
+    #[ORM\OrderBy(['date' => 'DESC'])]
+    private Collection $concerts;
 
-    /**
-     * @var \App\Entity\Instrumentation
-     */
-    private $instrumentation;
+    #[ORM\ManyToMany(targetEntity: Lending::class, mappedBy: 'pieces')]
+    #[ORM\OrderBy(['start' => 'DESC'])]
+    private Collection $lendings;
 
-    /**
-     * @var \App\Entity\Type
-     */
-    private $type;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $program;
-
-    /**
-     * @var \App\Entity\Piece
-     */
-    private $work;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $movements;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $parts;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $missings;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $composers;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $arrangers;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $concerts;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $lendings;
 
     public static $STATES_LIST = [
-        self::STATE_VERIFIED,
-        self::STATE_SCANNED,
-        self::STATE_STAMPED,
-        self::STATE_COLOURED,
+        State::VERIFIED,
+        State::SCANNED,
+        State::STAMPED,
+        State::COLOURED,
     ];
 
     public static $LOCATIONS_LIST = [
-        self::LOCATION_SERVER,
-        self::LOCATION_STOWED,
-        self::LOCATION_SHELF,
-        self::LOCATION_LENT,
-        self::LOCATION_RETURNED,
-        self::LOCATION_LOST,
+        Location::SERVER,
+        Location::STOWED,
+        Location::SHELF,
+        Location::LENT,
+        Location::RETURNED,
+        Location::LOST,
     ];
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
-        $this->movements = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->parts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->missings = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->composers = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->arrangers = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->concerts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->lendings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->movements = new ArrayCollection();
+        $this->parts = new ArrayCollection();
+        $this->missings = new ArrayCollection();
+        $this->composers = new ArrayCollection();
+        $this->arrangers = new ArrayCollection();
+        $this->concerts = new ArrayCollection();
+        $this->lendings = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return float
-     */
-    public function getId()
+    public function getId(): ?float
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Piece
-     */
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set translation
-     *
-     * @param string $translation
-     *
-     * @return Piece
-     */
-    public function setTranslation($translation)
+    public function setTranslation(string $translation): static
     {
         $this->translation = $translation;
 
         return $this;
     }
 
-    /**
-     * Get translation
-     *
-     * @return string
-     */
-    public function getTranslation()
+    public function getTranslation(): ?string
     {
         return $this->translation;
     }
 
-    /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Piece
-     */
-    public function setLocation(string $location = null)
+    public function setLocation(?Location $location = null): static
     {
         $this->location = $location;
 
         return $this;
     }
 
-    /**
-     * Get location
-     *
-     * @return string
-     */
-    public function getLocation()
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
 
-    /**
-     * Set states
-     *
-     * @param integer $state
-     *
-     * @return Piece
-     */
-    public function setStates(int $states = null)
+    public function setStates(int $states = null): static
     {
         $this->states = $states;
 
         return $this;
     }
 
-    /**
-     * Has state
-     *
-     * @param integer $state
-     *
-     * @return Piece
-     */
-    public function hasState(int $state = null)
+    public function hasState(int|State $state = null): ?bool
     {
-        return ($this->states & $state) === $state;
+        if ($state instanceof State) {
+            $value = $state->value;
+        } else {
+            $value = $state;
+        }
+
+        return ($this->states & $value) === $value;
     }
 
-    /**
-     * Has any state
-     *
-     * @param integer $states
-     * @param bool $partial
-     *
-     * @return Piece
-     */
-    public function hasAnyState(int $states = null)
+    public function hasAnyState(int $states = null): ?bool
     {
         return ($this->states & $states) != 0;
     }
 
-    /**
-     * Add state
-     *
-     * @param integer $state
-     *
-     * @return Piece
-     */
-    public function addState(int $state = null)
+    public function addState(int $state = null): static
     {
         $this->states |= $state;
 
         return $this;
     }
 
-    /**
-     * Add state
-     *
-     * @param integer $state
-     *
-     * @return Piece
-     */
-    public function removeState(int $state = null)
+    public function removeState(int $state = null): ?self
     {
         $this->states &= ~$state;
 
         return $this;
     }
 
-    /**
-     * Get states
-     *
-     * @return integer
-     */
-    public function getStates()
+    public function getStates(): ?int
     {
         return $this->states;
     }
 
-    /**
-     * Set level
-     *
-     * @param float $level
-     *
-     * @return Piece
-     */
-    public function setLevel($level)
+    public function setLevel(float $level): static
     {
         $this->level = $level;
 
         return $this;
     }
 
-    /**
-     * Get level
-     *
-     * @return float
-     */
-    public function getLevel()
+    public function getLevel(): ?float
     {
         return $this->level;
     }
 
-    /**
-     * Set year
-     *
-     * @param integer $year
-     *
-     * @return Piece
-     */
-    public function setYear($year)
+    public function setYear(int $year): static
     {
         $this->year = $year;
 
         return $this;
     }
 
-    /**
-     * Get year
-     *
-     * @return integer
-     */
-    public function getYear()
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
-    /**
-     * Set reference
-     *
-     * @param string $reference
-     *
-     * @return Piece
-     */
-    public function setReference($reference)
+    public function setReference(string $reference): static
     {
         $this->reference = $reference;
 
         return $this;
     }
 
-    /**
-     * Get reference
-     *
-     * @return string
-     */
-    public function getReference()
+    public function getReference(): ?string
     {
         return $this->reference;
     }
 
-    /**
-     * Set note
-     *
-     * @param string $note
-     *
-     * @return Piece
-     */
-    public function setNote($note)
+    public function setNote(string $note): static
     {
         $this->note = $note;
 
         return $this;
     }
 
-    /**
-     * Get note
-     *
-     * @return string
-     */
-    public function getNote()
+    public function getNote(): ?string
     {
         return $this->note;
     }
 
-    /**
-     * Add movement
-     *
-     * @param \App\Entity\Piece $movement
-     *
-     * @return Piece
-     */
-    public function addMovement(\App\Entity\Piece $movement)
+    public function addMovement(Piece $movement): static
     {
         $movement->setWork($this);
         $this->movements[] = $movement;
@@ -442,35 +261,18 @@ class Piece
         return $this;
     }
 
-    /**
-     * Remove movement
-     *
-     * @param \App\Entity\Piece $movement
-     */
-    public function removeMovement(\App\Entity\Piece $movement)
+    public function removeMovement(Piece $movement)
     {
         $movement->setWork(null);
         $this->movements->removeElement($movement);
     }
 
-    /**
-     * Get movements
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMovements()
+    public function getMovements(): Collection
     {
         return $this->movements;
     }
 
-    /**
-     * Add part
-     *
-     * @param \App\Entity\Part $part
-     *
-     * @return Piece
-     */
-    public function addPart(\App\Entity\Part $part)
+    public function addPart(Part $part): static
     {
         $part->setPiece($this);
         $this->parts[] = $part;
@@ -478,35 +280,20 @@ class Piece
         return $this;
     }
 
-    /**
-     * Remove part
-     *
-     * @param \App\Entity\Part $part
-     */
-    public function removePart(\App\Entity\Part $part)
+    public function removePart(Part $part): static
     {
-        $part->sePiece(null);
+        $part->setPiece(null);
         $this->parts->removeElement($part);
+
+        return $this;
     }
 
-    /**
-     * Get parts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getParts()
+    public function getParts(): Collection
     {
         return $this->parts;
     }
 
-    /**
-     * Add missing
-     *
-     * @param \App\Entity\Missing $missing
-     *
-     * @return Piece
-     */
-    public function addMissing(\App\Entity\Missing $missing)
+    public function addMissing(Missing $missing): static
     {
         $missing->setPiece($this);
         $this->missings[] = $missing;
@@ -514,326 +301,174 @@ class Piece
         return $this;
     }
 
-    /**
-     * Remove missing
-     *
-     * @param \App\Entity\Missing $missing
-     */
-    public function removeMissing(\App\Entity\Missing $missing)
+    public function removeMissing(Missing $missing): static
     {
         $this->missings->removeElement($missing);
+
+        return $this;
     }
 
-    /**
-     * Get missings
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMissings()
+    public function getMissings(): Collection
     {
         return $this->missings;
     }
 
-    /**
-     * Set publisher
-     *
-     * @param \App\Entity\Publisher $publisher
-     *
-     * @return Piece
-     */
-    public function setPublisher(\App\Entity\Publisher $publisher = null)
+    public function setPublisher(Publisher $publisher = null): static
     {
         $this->publisher = $publisher;
 
         return $this;
     }
 
-    /**
-     * Get publisher
-     *
-     * @return \App\Entity\Publisher
-     */
-    public function getPublisher()
+    public function getPublisher(): ?Publisher
     {
         return $this->publisher;
     }
 
-    /**
-     * Set size
-     *
-     * @param \App\Entity\Size $size
-     *
-     * @return Piece
-     */
-    public function setSize(\App\Entity\Size $size = null)
+    public function setSize(Size $size = null): static
     {
         $this->size = $size;
 
         return $this;
     }
 
-    /**
-     * Get size
-     *
-     * @return \App\Entity\Size
-     */
-    public function getSize()
+    public function getSize(): ?Size
     {
         return $this->size;
     }
 
-    /**
-     * Set instrumentation
-     *
-     * @param \App\Entity\Instrumentation $instrumentation
-     *
-     * @return Piece
-     */
-    public function setInstrumentation(\App\Entity\Instrumentation $instrumentation = null)
+    public function setInstrumentation(Instrumentation $instrumentation = null): ?self
     {
         $this->instrumentation = $instrumentation;
 
         return $this;
     }
 
-    /**
-     * Get instrumentation
-     *
-     * @return \App\Entity\Instrumentation
-     */
-    public function getInstrumentation()
+    public function getInstrumentation(): ?Instrumentation
     {
         return $this->instrumentation;
     }
 
-    /**
-     * Set type
-     *
-     * @param \App\Entity\Type $type
-     *
-     * @return Piece
-     */
-    public function setType(\App\Entity\Type $type = null)
+    public function setType(Type $type = null): static
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * Get type
-     *
-     * @return \App\Entity\Type
-     */
-    public function getType()
+    public function getType(): ?Type
     {
         return $this->type;
     }
 
-    /**
-     * Set program
-     *
-     * @param \App\Entity\Program $program
-     *
-     * @return Piece
-     */
-    public function setProgram(\App\Entity\Program $program = null)
+    public function setProgram(Program $program = null): static
     {
         $this->program = $program;
 
         return $this;
     }
 
-    /**
-     * Get program
-     *
-     * @return \App\Entity\Program
-     */
-    public function getProgram()
+    public function getProgram(): ?Program
     {
         return $this->program;
     }
 
-    /**
-     * Set work
-     *
-     * @param \App\Entity\Piece $work
-     *
-     * @return Piece
-     */
-    public function setWork(\App\Entity\Piece $work = null)
+    public function setWork(Piece $work = null): static
     {
         $this->work = $work;
 
         return $this;
     }
 
-    /**
-     * Get work
-     *
-     * @return \App\Entity\Piece
-     */
-    public function getWork()
+    public function getWork(): ?Piece
     {
         return $this->work;
     }
 
-    /**
-     * Add composer
-     *
-     * @param \App\Entity\Person $composer
-     *
-     * @return Piece
-     */
-    public function addComposer(\App\Entity\Person $composer)
+    public function addComposer(Person $composer): static
     {
         $this->composers[] = $composer;
 
         return $this;
     }
 
-    /**
-     * Remove composer
-     *
-     * @param \App\Entity\Person $composer
-     */
-    public function removeComposer(\App\Entity\Person $composer)
+    public function removeComposer(Person $composer): static
     {
         $this->composers->removeElement($composer);
+
+        return $this;
     }
 
-    /**
-     * Get composers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComposers()
+    public function getComposers(): Collection
     {
         return $this->composers;
     }
 
-    /**
-     * Add arranger
-     *
-     * @param \App\Entity\Person $arranger
-     *
-     * @return Piece
-     */
-    public function addArranger(\App\Entity\Person $arranger)
+    public function addArranger(Person $arranger): static
     {
         $this->arrangers[] = $arranger;
 
         return $this;
     }
 
-    /**
-     * Remove arranger
-     *
-     * @param \App\Entity\Person $arranger
-     */
-    public function removeArranger(\App\Entity\Person $arranger)
+    public function removeArranger(Person $arranger): static
     {
         $this->arrangers->removeElement($arranger);
+
+        return $this;
     }
 
-    /**
-     * Get arrangers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArrangers()
+    public function getArrangers(): Collection
     {
         return $this->arrangers;
     }
 
-    /**
-     * Add concert
-     *
-     * @param \App\Entity\Concert $concert
-     *
-     * @return Piece
-     */
-    public function addConcert(\App\Entity\Concert $concert)
+    public function addConcert(Concert $concert): static
     {
         $this->concerts[] = $concert;
 
         return $this;
     }
 
-    /**
-     * Remove concert
-     *
-     * @param \App\Entity\Concert $concert
-     */
-    public function removeConcert(\App\Entity\Concert $concert)
+    public function removeConcert(Concert $concert): static
     {
         $this->concerts->removeElement($concert);
+
+        return $this;
     }
 
-    /**
-     * Get concerts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getConcerts()
+    public function getConcerts(): Collection
     {
         return $this->concerts;
     }
 
-    /**
-     * Add lending
-     *
-     * @param \App\Entity\Lending $lending
-     *
-     * @return Piece
-     */
-    public function addLending(\App\Entity\Lending $lending)
+    public function addLending(Lending $lending): static
     {
         $this->lendings[] = $lending;
 
         return $this;
     }
 
-    /**
-     * Remove lending
-     *
-     * @param \App\Entity\Lending $lending
-     */
-    public function removeLending(\App\Entity\Lending $lending)
+    public function removeLending(Lending $lending): static
     {
         $this->lendings->removeElement($lending);
+
+        return $this;
     }
 
-    /**
-     * Get lendings
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLendings()
+    public function getLendings(): Collection
     {
         return $this->lendings;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Piece
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }

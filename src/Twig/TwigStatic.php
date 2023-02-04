@@ -12,7 +12,7 @@ class TwigStatic extends AbstractExtension
         ];
     }
 
-    public function getStaticProperty($static, $entity = null)
+    public function getStaticProperty($static, $entity = null): mixed
     {
         if ($entity != null && !is_string($entity)) {
             $entity = \get_class($entity);

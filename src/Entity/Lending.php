@@ -2,214 +2,125 @@
 
 namespace App\Entity;
 
-/**
- * Lending
- */
+use App\Repository\LendingRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+#[ORM\Table(name: 'lending')]
+#[ORM\Entity(repositoryClass: LendingRepository::class)]
 class Lending
 {
-    /**
-     * @var integer
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $contact;
+    #[ORM\Column(length: 255)]
+    private ?string $contact = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $start;
+    #[ORM\Column(type: 'date')]
+    private ?\DateTime $start = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $end;
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?\DateTime $end = null;
 
-    /**
-     * @var string
-     */
-    private $ours;
+    #[ORM\Column(type: 'boolean')]
+    private ?string $ours = null;
 
-    /**
-     * @var \App\Entity\Band
-     */
-    private $band;
+    #[ORM\ManyToOne(targetEntity: Band::class, inversedBy: 'lendings')]
+    private ?Band $band = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pieces;
+    #[ORM\JoinTable(name: 'piece_move')]
+    #[ORM\ManyToMany(targetEntity: Piece::class, inversedBy: 'lendings', cascade: ['persist'])]
+    private Collection $pieces;
 
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
-        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pieces = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set contact
-     *
-     * @param string $contact
-     *
-     * @return Lending
-     */
-    public function setContact($contact)
+    public function setContact(string $contact): static
     {
         $this->contact = $contact;
 
         return $this;
     }
 
-    /**
-     * Get contact
-     *
-     * @return string
-     */
-    public function getContact()
+    public function getContact(): ?string
     {
         return $this->contact;
     }
 
-    /**
-     * Set start
-     *
-     * @param \DateTime $start
-     *
-     * @return Lending
-     */
-    public function setStart($start)
+    public function setStart(\DateTime $start): static
     {
         $this->start = $start;
 
         return $this;
     }
 
-    /**
-     * Get start
-     *
-     * @return \DateTime
-     */
-    public function getStart()
+    public function getStart(): ?\DateTime
     {
         return $this->start;
     }
 
-    /**
-     * Set end
-     *
-     * @param \DateTime $end
-     *
-     * @return Lending
-     */
-    public function setEnd($end)
+    public function setEnd(\DateTime $end): static
     {
         $this->end = $end;
 
         return $this;
     }
 
-    /**
-     * Get end
-     *
-     * @return \DateTime
-     */
-    public function getEnd()
+    public function getEnd(): ?\DateTime
     {
         return $this->end;
     }
 
-    /**
-     * Set ours
-     *
-     * @param string $ours
-     *
-     * @return Lending
-     */
-    public function setOurs($ours)
+    public function setOurs(string $ours): static
     {
         $this->ours = $ours;
 
         return $this;
     }
 
-    /**
-     * Is ours
-     *
-     * @return string
-     */
-    public function isOurs()
+    public function isOurs(): ?string
     {
         return $this->ours;
     }
 
-    /**
-     * Set band
-     *
-     * @param \App\Entity\Band $band
-     *
-     * @return Lending
-     */
-    public function setBand(\App\Entity\Band $band = null)
+    public function setBand(Band $band = null): static
     {
         $this->band = $band;
 
         return $this;
     }
 
-    /**
-     * Get band
-     *
-     * @return \App\Entity\Band
-     */
-    public function getBand()
+    public function getBand(): ?Band
     {
         return $this->band;
     }
 
-    /**
-     * Add piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return Lending
-     */
-    public function addPiece(\App\Entity\Piece $piece)
+    public function addPiece(Piece $piece): static
     {
         $this->pieces[] = $piece;
 
         return $this;
     }
 
-    /**
-     * Remove piece
-     *
-     * @param \App\Entity\Piece $piece
-     */
-    public function removePiece(\App\Entity\Piece $piece)
+    public function removePiece(Piece $piece): static
     {
         $this->pieces->removeElement($piece);
+
+        return $this;
     }
 
-    /**
-     * Get pieces
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPieces()
+    public function getPieces(): Collection
     {
         return $this->pieces;
     }

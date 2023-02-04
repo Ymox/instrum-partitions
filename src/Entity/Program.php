@@ -2,134 +2,83 @@
 
 namespace App\Entity;
 
-/**
- * Program
- */
+use App\Repository\ProgramRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+#[ORM\Table(name: 'program')]
+#[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program
 {
-    /**
-     * @var integer
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    #[Gedmo\Timestampable(on: 'create')]
+    private ?\DateTime $createdAt = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
+    #[ORM\Column(type: 'datetime')]
+    #[Gedmo\Timestampable(on: 'update')]
+    private ?\DateTime $updatedAt = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pieces;
+    #[ORM\OneToMany(targetEntity: Piece::class, mappedBy: 'program', cascade: ['persist'])]
+    private Collection $pieces;
 
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
-        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pieces = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Program
-     */
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Program
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Program
-     */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Add piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return Program
-     */
-    public function addPiece(\App\Entity\Piece $piece)
+    public function addPiece(Piece $piece): static
     {
         $this->pieces[] = $piece;
         $piece->setProgram($this);
@@ -137,25 +86,16 @@ class Program
         return $this;
     }
 
-    /**
-     * Remove piece
-     *
-     * @param \App\Entity\Piece $piece
-     */
-    public function removePiece(\App\Entity\Piece $piece)
+    public function removePiece(Piece $piece): static
     {
-        $this->pieces->removeElement($piece);
         $piece->setProgram(null);
+        $this->pieces->removeElement($piece);
+
+        return $this;
     }
 
-    /**
-     * Get pieces
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPieces()
+    public function getPieces(): Collection
     {
         return $this->pieces;
     }
 }
-

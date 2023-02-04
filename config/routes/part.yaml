@@ -1,4 +1,0 @@
-part_download:
- path: /part/download
- controller: 'App\Controller\PartController::download'
- methods: [GET]

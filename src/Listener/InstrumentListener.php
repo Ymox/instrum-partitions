@@ -2,21 +2,19 @@
 
 namespace App\Listener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use App\Entity\Instrument;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class InstrumentListener
 {
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    public function __construct(\Symfony\Contracts\Translation\TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
-    public function postLoad(\App\Entity\Instrument $entity)
+    public function postLoad(Instrument $entity)
     {
         if ($entity->getKey()) {
             $displayName = $this->translator->trans('app.fields.part.instrument.choices', [

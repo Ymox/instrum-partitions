@@ -8,19 +8,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LendingType extends AbstractType
 {
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(\Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator)
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -82,9 +80,6 @@ class LendingType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

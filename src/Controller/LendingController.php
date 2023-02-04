@@ -4,27 +4,22 @@ namespace App\Controller;
 
 use App\Entity\Lending;
 use App\Entity\Piece;
+use App\Repository\LendingRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Lending controller.
- *
- */
+#[Route('/lending', name: 'lending_')]
 class LendingController extends AbstractController
 {
-    /**
-     * Lists all lending entities.
-     *
-     */
-    public function index(Request $request)
+    #[Route('/', name: 'index')]
+    public function index(Request $request, LendingRepository $lendingRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $repo = $em->getRepository(Lending::class);
-
-        $lendings = $repo->searchBy(
-            $request->query->get('q', []),
+        $lendings = $lendingRepository->searchBy(
+            $request->query->has('q') ? $request->query->all('q') : [],
             [
                 $request->query->get('field', 'l.start') => $request->query->get('direction', 'desc'),
             ],
@@ -38,11 +33,8 @@ class LendingController extends AbstractController
         ]);
     }
 
-    /**
-     * Creates a new lending entity.
-     *
-     */
-    public function new(Request $request)
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $lending = new Lending();
         $form = $this->createForm(\App\Form\LendingType::class, $lending);
@@ -50,7 +42,6 @@ class LendingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->handlePiecesInLending($lending);
-            $em = $this->getDoctrine()->getManager();
             $em->persist($lending);
             $em->flush();
 
@@ -59,29 +50,23 @@ class LendingController extends AbstractController
 
         return $this->render('lending/new.html.twig', [
             'lending' => $lending,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Finds and displays a lending entity.
-     *
-     */
-    public function show(Lending $lending)
+    #[Route('/{id}/show', name: 'show')]
+    public function show(Lending $lending): Response
     {
         $deleteForm = $this->createDeleteForm($lending);
 
         return $this->render('lending/show.html.twig', [
             'lending' => $lending,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing lending entity.
-     *
-     */
-    public function edit(Request $request, Lending $lending)
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Lending $lending, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($lending);
         $editForm = $this->createForm(\App\Form\LendingType::class, $lending);
@@ -89,29 +74,25 @@ class LendingController extends AbstractController
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->handlePiecesInLending($lending);
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('lending_edit', ['id' => $lending->getId()]);
         }
 
         return $this->render('lending/edit.html.twig', [
             'lending' => $lending,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Deletes a lending entity.
-     *
-     */
-    public function delete(Request $request, Lending $lending)
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Request $request, Lending $lending, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($lending);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($lending);
             $em->flush();
         }
@@ -119,14 +100,7 @@ class LendingController extends AbstractController
         return $this->redirectToRoute('lending_index');
     }
 
-    /**
-     * Creates a form to delete a lending entity.
-     *
-     * @param Lending $lending The lending entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Lending $lending)
+    private function createDeleteForm(Lending $lending): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('lending_delete', ['id' => $lending->getId()]))
@@ -135,10 +109,7 @@ class LendingController extends AbstractController
         ;
     }
 
-    /**
-     * Applies location and state(s) to lent or returned pieces
-     */
-    private function handlePiecesInLending(\App\Entity\Lending &$lending)
+    private function handlePiecesInLending(Lending &$lending): void
     {
         if ($lending->isOurs()) {
             $location = $lending->getEnd() ? Piece::LOCATION_SHELF : Piece::LOCATION_LENT;
@@ -152,7 +123,8 @@ class LendingController extends AbstractController
         }
     }
 
-    public function print(Lending $lending)
+    #[Route('/{id}/print', name: 'print', methods: ['DELETE'])]
+    public function print(Lending $lending): Response
     {
         return $this->render('lending/print.html.twig', [
             'lending' => $lending,

@@ -2,110 +2,67 @@
 
 namespace App\Entity;
 
-/**
- * Missing
- */
+use App\Repository\MissingRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+#[ORM\Table(name: 'missing')]
+#[ORM\Entity(repositoryClass: MissingRepository::class)]
 class Missing
 {
-    /**
-     * @var int
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $voice;
+    #[ORM\Column(length: 255)]
+    private ?string $voice = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    #[Gedmo\Timestampable(on: 'create')]
+    private ?\DateTime $createdAt = null;
 
-    /**
-     * @var \App\Entity\Piece
-     */
-    private $piece;
+    #[ORM\JoinColumn(name: 'piece_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: Piece::class, inversedBy: 'missings')]
+    private ?Piece $piece = null;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set voice
-     *
-     * @param string $voice
-     *
-     * @return Missing
-     */
-    public function setVoice($voice)
+    public function setVoice(string $voice): static
     {
         $this->voice = $voice;
 
         return $this;
     }
 
-    /**
-     * Get voice
-     *
-     * @return string
-     */
-    public function getVoice()
+    public function getVoice(): ?string
     {
         return $this->voice;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Missing
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Set piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return Missing
-     */
-    public function setPiece(\App\Entity\Piece $piece)
+    public function setPiece(Piece $piece): static
     {
         $this->piece = $piece;
 
         return $this;
     }
 
-    /**
-     * Get piece
-     *
-     * @return \App\Entity\Piece
-     */
-    public function getPiece()
+    public function getPiece(): ?Piece
     {
         return $this->piece;
     }

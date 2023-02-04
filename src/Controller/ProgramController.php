@@ -3,24 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Program;
+use App\Repository\ProgramRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Program controller.
- *
- */
+#[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
 {
-    /**
-     * Lists all program entities.
-     *
-     */
-    public function index(Request $request)
+    #[Route('/', name: 'index')]
+    public function index(Request $request, ProgramRepository $programRepository): Response
     {
-        $repository = $this->getDoctrine()->getManager()->getRepository(Program::class);
-
-        $programs = $repository->findBy(
+        $programs = $programRepository->findBy(
             [],
             [
                 'updatedAt' => 'DESC',
@@ -29,7 +26,7 @@ class ProgramController extends AbstractController
             $this->getParameter('paginate.per_page'),
             ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
         );
-        $nbPrograms = $repository->countAll();
+        $nbPrograms = $programRepository->countAll();
 
         return $this->render('program/index.html.twig', [
             'programs' => $programs,
@@ -37,18 +34,14 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    /**
-     * Creates a new program entity.
-     *
-     */
-    public function new(Request $request)
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $program = new Program();
         $form = $this->createForm(\App\Form\ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($program);
             $em->flush();
 
@@ -57,29 +50,23 @@ class ProgramController extends AbstractController
 
         return $this->render('program/new.html.twig', [
             'program' => $program,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Finds and displays a program entity.
-     *
-     */
-    public function show(Program $program)
+    #[Route('/{id}/show', name: 'show')]
+    public function show(Program $program): Response
     {
         $deleteForm = $this->createDeleteForm($program);
 
         return $this->render('program/show.html.twig', [
             'program' => $program,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing program entity.
-     *
-     */
-    public function edit(Request $request, Program $program)
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Program $program, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($program);
         $editForm = $this->createForm(\App\Form\ProgramType::class, $program);
@@ -87,29 +74,25 @@ class ProgramController extends AbstractController
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $program->setUpdatedAt(new \DateTime());
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('program_edit', ['id' => $program->getId()]);
         }
 
         return $this->render('program/edit.html.twig', [
             'program' => $program,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Deletes a program entity.
-     *
-     */
-    public function delete(Request $request, Program $program)
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Request $request, Program $program, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($program);
             $em->flush();
         }
@@ -117,14 +100,7 @@ class ProgramController extends AbstractController
         return $this->redirectToRoute('program_index');
     }
 
-    /**
-     * Creates a form to delete a program entity.
-     *
-     * @param Program $program The program entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Program $program)
+    private function createDeleteForm(Program $program): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('program_delete', ['id' => $program->getId()]))

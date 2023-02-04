@@ -2,127 +2,81 @@
 
 namespace App\Entity;
 
-/**
- * Instrumentation
- */
+use App\Repository\InstrumentationRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+#[ORM\Table(name: 'instrumentation')]
+#[ORM\Entity(repositoryClass: InstrumentationRepository::class)]
+#[UniqueEntity(fields: ['name'])]
 class Instrumentation
 {
-    /**
-     * @var int
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $name = null;
 
-    /**
-     * @var string
-     */
-    private $note;
-    
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pieces;
-    
-    /**
-     * Constructor
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $note = null;
+
+    #[ORM\OneToMany(targetEntity: Piece::class, mappedBy: 'instrumentation')]
+    private Collection $pieces;
+
+
     public function __construct()
     {
-        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pieces = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Instrumentation
-     */
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set note
-     *
-     * @param string $note
-     *
-     * @return Instrumentation
-     */
-    public function setNote($note)
+    public function setNote(string $note): static
     {
         $this->note = $note;
 
         return $this;
     }
 
-    /**
-     * Get note
-     *
-     * @return string
-     */
-    public function getNote()
+    public function getNote(): ?string
     {
         return $this->note;
     }
 
-    /**
-     * Add piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return Instrumentation
-     */
-    public function addPiece(\App\Entity\Piece $piece)
+    public function addPiece(Piece $piece): static
     {
         $this->pieces[] = $piece;
 
         return $this;
     }
 
-    /**
-     * Remove piece
-     *
-     * @param \App\Entity\Piece $piece
-     */
-    public function removePiece(\App\Entity\Piece $piece)
+    public function removePiece(Piece $piece): static
     {
         $this->pieces->removeElement($piece);
+
+        return $this;
     }
 
-    /**
-     * Get pieces
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPieces()
+    public function getPieces(): Collection
     {
         return $this->pieces;
     }

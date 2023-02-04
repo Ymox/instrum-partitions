@@ -4,9 +4,9 @@
 
 {% block body -%}
 	<h1>{{ piece.name }}
-		{% if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] -%}
+		{% if piece.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] -%}
 		<small><span class="badge bg-light text-muted">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span></small>
-		{%- elseif piece.location == constant('LOCATION_LOST', piece) -%}
+		{%- elseif piece.location == constant('App\\Config\\Location::LOST') -%}
 		<span class="badge bg-dark">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span>
 		{%- endif %}
 		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
@@ -71,7 +71,7 @@
 							<span class="btn btn-link">
 						{%- endif -%}
 
-						{{ ('app.fields.piece.location.' ~ piece.location|default('placeholder'))|trans -}}
+						{{ ('app.fields.piece.location.' ~ (piece.location is not none ? piece.location.value : 'placeholder'))|trans -}}
 
 						{%- if is_granted('ROLE_USER') -%}</span>
 							<button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" title="{{ 'global.action.quick'|trans }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -80,24 +80,24 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('piece_update', {'id': piece.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 								{% for location in static('LOCATIONS_LIST', piece) %}
-								<a class="dropdown-item{% if piece.location == location %} active{% endif %}" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+								<a class="dropdown-item{% if piece.location == location.value %} active{% endif %}" href="{{ path('piece_update', {'id': piece.id, 'location': location.value}) }}">{{ ('app.fields.piece.location.' ~ location.value)|trans }}</a>
 								{% endfor %}
 							</div>
 						</div>
 						{% endif -%}
 
-						{%- if piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] and not piece.lendings.isEmpty %}
+						{%- if piece.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] and not piece.lendings.isEmpty %}
 							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': piece.lendings.first.id}) }}">{% endif %}
 							{{- piece.lendings.first.band -}}
 							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
 						{% endif -%}
 
-						{%- if piece.states != 0 and not (piece.location in [constant('LOCATION_SERVER', piece), constant('LOCATION_RETURNED', piece), constant('LOCATION_LOST', piece)]) %}
-						{%- set style = (not piece.hasState(constant('STATE_VERIFIED', piece)) ? 'danger' : (piece.states != 7 ? 'warning' : 'success')) -%}
+						{%- if piece.states != 0 and not (piece.location in [constant('App\\Config\\Location::SERVER'), constant('App\\Config\\Location::RETURNED'), constant('App\\Config\\Location::LOST')]) %}
+						{%- set style = (not piece.hasState(enum_value('App\\Config\\State', 'VERIFIED')) ? 'danger' : (piece.states != 7 ? 'warning' : 'success')) -%}
 						{%- if is_granted('ROLE_USER') %} <span class="btn-group btn-group-sm btn-group-toggle" data-bs-toggle="buttons">{% else %} ({% endif -%}
 						{%- for state in static('STATES_LIST', piece) -%}
-							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state): piece.hasState(state) ? -1 : 1}}) }}" class="{{ piece.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
-							{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state.value): piece.hasState(state) ? -1 : 1}}) }}" class="{{ piece.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
+							{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state.value)|trans|lower -}}
 							{%- if is_granted('ROLE_USER') %}</a>{%- elseif not loop.last and not is_granted('ROLE_USER') %}</span>, {% endif -%}
 						{%- endfor %}
 						{%- if is_granted('ROLE_USER') %}</span>{% else %}){% endif -%}
@@ -178,7 +178,7 @@
 							<span class="btn btn-link">
 						{%- endif -%}
 
-							{{ ('app.fields.piece.location.' ~ movement.location|default('placeholder'))|trans -}}
+							{{ ('app.fields.piece.location.' ~ (movement.location is not none ? movement.location.value : 'placeholder'))|trans -}}
 
 						{%- if is_granted('ROLE_USER') -%}</span>
 							<button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -187,24 +187,24 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('piece_update', {'id': movement.id, 'location': null}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 								{% for location in static('LOCATIONS_LIST', movement) %}
-								<a class="dropdown-item{% if movement.location == location %} active{% endif %}" href="{{ path('piece_update', {'id': movement.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+								<a class="dropdown-item{% if movement.location == location %} active{% endif %}" href="{{ path('piece_update', {'id': movement.id, 'location': location.value}) }}">{{ ('app.fields.piece.location.' ~ location.value)|trans }}</a>
 								{% endfor %}
 							</div>
 						</div>
 						{% endif -%}
 
-						{%- if movement.location in [constant('LOCATION_LENT', movement), constant('LOCATION_RETURNED', movement)] %}
+						{%- if movement.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] %}
 							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': movement.lendings.first.id}) }}">{% endif %}
 							{{- movement.lendings.first.band -}}
 							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
 						{% endif -%}
 
-						{%- if movement.states != 0 and movement.location != constant('LOCATION_SERVER', movement) and not movement.hasAnyState(constant('STATE_SCANNED', movement)) %}
-						{%- set style = (not movement.hasState(constant('STATE_VERIFIED', movement)) ? 'danger' : (movement.states != 7 ? 'warning' : 'success')) -%}
+						{%- if movement.states != 0 and movement.location != constant('App\\Config\\Location::SERVER') and not movement.hasAnyState(enum_value('App\\Config\\State', 'SCANNED')) %}
+						{%- set style = (not movement.hasState(enum_value('App\\Config\\State', 'VERIFIED')) ? 'danger' : (movement.states != 7 ? 'warning' : 'success')) -%}
 						{%- if is_granted('ROLE_USER') %}<span class="btn-group btn-group-sm">{% else %}({% endif -%}
-						{%- for state in static('STATES_LIST', piece) -%}
-							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': movement.id, 'states': {(state): movement.hasState(state) ? -1 : 1}}) }}" class="{{ movement.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
-							{{- ('app.fields.piece.states.' ~ (movement.hasState(state) ? '' : 'not.') ~ state)|trans|lower -}}
+						{%- for state in static('STATES_LIST', movement) -%}
+							{%- if is_granted('ROLE_USER') %}<a href="{{ path('piece_update', {'id': movement.id, 'states': {(state.value): movement.hasState(state) ? -1 : 1}}) }}" class="{{ movement.hasState(state) ? 'active ' }}btn btn-{% else %}<span style="text-{%- endif -%}{{ style }}">
+							{{- ('app.fields.piece.states.' ~ (movement.hasState(state) ? '' : 'not.') ~ state.value)|trans|lower -}}
 							{%- if is_granted('ROLE_USER') %}</a>{%- elseif not loop.last and not is_granted('ROLE_USER') %}</span>, {% endif -%}
 						{%- endfor %}
 						{%- if is_granted('ROLE_USER') %}</span>{% else %}){% endif -%}

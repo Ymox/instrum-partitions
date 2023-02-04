@@ -2,225 +2,129 @@
 
 namespace App\Entity;
 
-/**
- * Part
- */
+use App\Listener\PartListener;
+use App\Repository\PartRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Table(name: 'part')]
+#[ORM\Entity(repositoryClass: PartRepository::class)]
 class Part
 {
     const TRANSLATE_DISPLAY = 'display';
 
     const TRANSLATE_DOWNLOAD = 'download';
 
-    /**
-     * @var int
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $clef;
+    #[ORM\Column(length: 3, nullable: true)]
+    private ?string $clef = null;
 
-    /**
-     * @var int
-     */
-    private $number;
+    #[ORM\Column(nullable: true)]
+    private ?int $number = null;
 
-    /**
-     * @var boolean
-     */
-    private $solo;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $solo = null;
 
-    /**
-     * @var string
-     */
-    private $file;
+    #[ORM\Column(nullable: true)]
+    private ?string $file = null;
 
-    /**
-     * @var \App\Entity\Piece
-     */
-    private $piece;
+    #[ORM\JoinColumn(name: 'instrument_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: Instrument::class, inversedBy: 'parts')]
+    private ?Instrument $instrument = null;
 
-    /**
-     * @var \App\Entity\instrument
-     */
-    private $instrument;
+    #[ORM\JoinColumn(name: 'piece_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: Piece::class, inversedBy: 'parts')]
+    private ?Piece $piece = null;
 
-    /**
-     * NOT A PERSISTED PROPERTY
-     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
-     */
-    private $upload;
+    // NOT A PERSISTED PROPERTY
+    private ?\SplFileInfo $upload = null;
 
-    /**
-     * NOT A PERSISTED PROPERTY
-     * @var string
-     */
-    private $downloadFolder;
+    // NOT A PERSISTED PROPERTY
+    private string $downloadFolder = '';
 
-    /**
-     * NOT A PERSISTED PROPERTY
-     * @var string
-     */
-    private $display = '';
+    // NOT A PERSISTED PROPERTY
+    private string $display = '';
 
-    /**
-     * NOT A PERSISTED PROPERTY
-     * @var string
-     */
-    private $downloadName = '';
+    // NOT A PERSISTED PROPERTY
+    private string $downloadName = '';
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set clef
-     *
-     * @param string $clef
-     *
-     * @return self
-     */
-    public function setClef($clef)
+    public function setClef(string $clef): static
     {
         $this->clef = $clef;
 
         return $this;
     }
 
-    /**
-     * Get clef
-     *
-     * @return string
-     */
-    public function getClef()
+    public function getClef(): ?string
     {
         return $this->clef;
     }
 
-    /**
-     * Set number
-     *
-     * @param integer $number
-     *
-     * @return self
-     */
-    public function setNumber($number)
+    public function setNumber(int $number): static
     {
         $this->number = $number;
 
         return $this;
     }
 
-    /**
-     * Get number
-     *
-     * @return int
-     */
-    public function getNumber()
+    public function getNumber(): ?int
     {
         return $this->number;
     }
 
-    /**
-     * Set solo
-     *
-     * @param boolean $solo
-     *
-     * @return self
-     */
-    public function setSolo($solo)
+    public function setSolo(bool $solo): static
     {
         $this->solo = $solo;
 
         return $this;
     }
 
-    /**
-     * Get solo
-     *
-     * @return boolean
-     */
-    public function isSolo()
+    public function isSolo(): ?bool
     {
         return $this->solo;
     }
 
-    /**
-     * Set file
-     *
-     * @param string $file
-     *
-     * @return self
-     */
-    public function setFile($file = null)
+    public function setFile($file = null): static
     {
         $this->file = $file;
 
         return $this;
     }
 
-    /**
-     * Get file
-     *
-     * @return string
-     */
-    public function getFile()
+    public function getFile(): ?string
     {
         return $this->file;
     }
 
-    /**
-     * Set piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return self
-     */
-    public function setPiece(\App\Entity\Piece $piece)
+    public function setPiece(?Piece $piece): static
     {
         $this->piece = $piece;
 
         return $this;
     }
 
-    /**
-     * Get piece
-     *
-     * @return int
-     */
-    public function getPiece()
+    public function getPiece(): ?Piece
     {
         return $this->piece;
     }
 
-    /**
-     * Set instrument
-     *
-     * @param \App\Entity\Instrument $instrument
-     *
-     * @return self
-     */
-    public function setInstrument(\App\Entity\Instrument $instrument)
+    public function setInstrument(Instrument $instrument): static
     {
         $this->instrument = $instrument;
 
         return $this;
     }
 
-    /**
-     * Get instrument
-     *
-     * @return int
-     */
-    public function getInstrument()
+    public function getInstrument(): ?Instrument
     {
         return $this->instrument;
     }
@@ -230,98 +134,50 @@ class Part
         return $this->display;
     }
 
-    /**
-     * Set upload
-     *
-     * @param \Symfony\Component\HttpFoundation\File\File $upload
-     *
-     * @return self
-     */
-    public function setUpload(\Symfony\Component\HttpFoundation\File\File $upload = null)
+    public function setUpload(?\SplFileInfo $upload = null): static
     {
         $this->upload = $upload;
 
         return $this;
     }
 
-    /**
-     * Get upload
-     *
-     * @return ?\Symfony\Component\HttpFoundation\File\File
-     */
-    public function getUpload()
+    public function getUpload(): ?\SplFileInfo
     {
         return $this->upload;
     }
 
-    /**
-     * Set download folder
-     *
-     * @param string $downloadFolder
-     *
-     * @return self
-     */
-    public function setDownloadFolder(string $downloadFolder)
+    public function setDownloadFolder(string $downloadFolder): ?self
     {
         $this->downloadFolder = $downloadFolder;
 
         return $this;
     }
 
-    /**
-     * Get download folder
-     *
-     * @return string
-     */
-    public function getDownloadFolder()
+    public function getDownloadFolder(): ?string
     {
         return $this->downloadFolder;
     }
 
-    /**
-     * Get download path
-     *
-     * @return string
-     */
-    public function getDownloadPath()
+    public function getDownloadPath(): ?string
     {
         return $this->downloadFolder . '/' . $this->file;
     }
 
-    /**
-     * Set display
-     *
-     * @param string $display
-     *
-     * @return self
-     */
-    public function setDisplay(string $display)
+    public function setDisplay(string $display): static
     {
         $this->display = $display;
 
         return $this;
     }
 
-    /**
-     * Set download name
-     *
-     * @param string $downloadName
-     *
-     * @return self
-     */
-    public function setDownloadName(string $downloadName)
+    public function setDownloadName(string $downloadName): static
     {
         $this->downloadName = $downloadName;
 
         return $this;
     }
 
-    /**
-     * Get download name
-     *
-     * @return string
-     */
-    public function getDownloadName()
+    public function getDownloadName(): ?string
     {
         return $this->downloadName;
     }

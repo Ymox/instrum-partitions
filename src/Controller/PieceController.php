@@ -4,27 +4,23 @@ namespace App\Controller;
 
 use App\Entity\Piece;
 use App\Entity\Concert;
+use App\Repository\PieceRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Piece controller.
- *
- */
 class PieceController extends AbstractController
 {
-    /**
-     * Lists all piece entities.
-     *
-     */
-    public function index(Request $request)
+    #[Route('/', name: 'piece_index')]
+    public function index(Request $request, PieceRepository $pieceRepository): Response
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository(Piece::class);
 
-        if (@$request->query->get('q')['id'] && ($piece = $repo->find($request->query->get('q')['id']))) {
+        if ($request->query->has('q') && $request->query->all('q')['id'] && ($piece = $pieceRepository->find($request->query->all('q')['id']))) {
             if ($piece->getWork()) {
                 return $this->redirectToRoute('piece_show', ['id' => $piece->getWork()->getId()]);
             } else {
@@ -32,8 +28,8 @@ class PieceController extends AbstractController
             }
         }
 
-        $pieces = $repo->searchBy(
-            $request->query->get('q', []),
+        $pieces = $pieceRepository->searchBy(
+            $request->query->has('q') ? $request->query->all('q') : [],
             [
                 $request->query->get('field', 'id') => $request->query->get('direction', 'asc'),
             ],
@@ -47,11 +43,8 @@ class PieceController extends AbstractController
         ]);
     }
 
-    /**
-     * Creates a new piece entity.
-     *
-     */
-    public function new(Request $request, TranslatorInterface $translator)
+    #[Route('/piece/new', name: 'piece_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, TranslatorInterface $translator, EntityManagerInterface $em): Response
     {
         $piece = new Piece();
         $piece
@@ -62,7 +55,6 @@ class PieceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($piece);
             $em->flush();
 
@@ -81,63 +73,57 @@ class PieceController extends AbstractController
 
         return $this->render('piece/new.html.twig', [
             'piece' => $piece,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Finds and displays a piece entity.
-     *
-     */
-    public function show(Piece $piece)
+    #[Route('/piece/{id}/show', name: 'piece_show')]
+    public function show(Piece $piece): Response
     {
         $deleteForm = $this->createDeleteForm($piece);
 
         return $this->render('piece/show.html.twig', [
             'piece' => $piece,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing piece entity.
-     *
-     */
-    public function edit(Request $request, Piece $piece)
+    #[Route('/piece/{id}/edit', name: 'piece_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Piece $piece, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($piece);
         $editForm = $this->createForm(\App\Form\PieceType::class, $piece);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('piece_show', ['id' => $piece->getId()]);
         }
 
         return $this->render('piece/edit.html.twig', [
             'piece' => $piece,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Quick update for pieces (states or location)
-     */
-    public function update(Request $request, Piece $piece)
+    #[Route('/piece/{id}/update', name: 'piece_update')]
+    public function update(Request $request, Piece $piece, EntityManagerInterface $em): Response
     {
-        foreach ($request->query->get('states', []) as $state => $action) {
-            if ($action == -1) {
-                $piece->removeState($state);
-            } else {
-                $piece->addState($state);
+        if ($states = $request->query->get('states')) {
+            foreach ($request->query->all('states') as $state => $action) {
+                if ($action == -1) {
+                    $piece->removeState($state);
+                } else {
+                    $piece->addState($state);
+                }
             }
         }
         if ($location = $request->query->get('location')) {
             $piece->setLocation($location);
         }
-        $this->getDoctrine()->getManager()->flush();
+        $em->flush();
 
         if ($return_path = $request->query->get('return_path')) {
             return $this->redirect($return_path);
@@ -147,17 +133,13 @@ class PieceController extends AbstractController
 
     }
 
-    /**
-     * Deletes a piece entity.
-     *
-     */
-    public function delete(Request $request, Piece $piece)
+    #[Route('/', name: 'piece_delete', methods: ['DELETE'])]
+    public function delete(Request $request, Piece $piece, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($piece);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($piece);
             $em->flush();
         }
@@ -165,14 +147,7 @@ class PieceController extends AbstractController
         return $this->redirectToRoute('piece_index');
     }
 
-    /**
-     * Creates a form to delete a piece entity.
-     *
-     * @param Piece $piece The piece entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Piece $piece)
+    private function createDeleteForm(Piece $piece): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('piece_delete', ['id' => $piece->getId()]))
@@ -181,14 +156,8 @@ class PieceController extends AbstractController
         ;
     }
 
-    /**
-     * Allows to handle duplicates in database
-     *
-     * @param Request $request
-     * @param Piece $master The piece that will be kept
-     * @param Piece $duplicate The piece that will be deleted
-     */
-    public function duplicates(Request $request, Piece $master, Piece $duplicate, TranslatorInterface $translator)
+    #[Route('/piece/duplicates/{master}/{duplicate}', methods: ['GET', 'POST'])]
+    public function duplicates(Request $request, Piece $master, Piece $duplicate, TranslatorInterface $translator, EntityManagerInterface $em): Response
     {
         $masterForm = $this->createForm(\App\Form\PieceType::class, $master);
         $masterForm->add('concerts', EntityType::class, [
@@ -199,7 +168,6 @@ class PieceController extends AbstractController
         $masterForm->handleRequest($request);
 
         if ($masterForm->isSubmitted() && $masterForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($duplicate);
             $em->flush();
             $this->addFlash(
@@ -220,12 +188,13 @@ class PieceController extends AbstractController
 
         return $this->render('piece/duplicates.html.twig', [
             'piece' => $master,
-            'master_form' => $masterForm->createView(),
-            'duplicate_form' => $duplicateForm->createView(),
+            'master_form' => $masterForm,
+            'duplicate_form' => $duplicateForm,
         ]);
     }
 
-    public function suisa(Request $request)
+    #[Route('/suisa', name: 'piece_suisa', methods: ['GET', 'POST'])]
+    public function suisa(Request $request, PieceRepository $pieceRepository): Response
     {
         if (!$request->query->get('start') || !$request->query->get('end')) {
             $today = new \DateTime();
@@ -239,8 +208,7 @@ class PieceController extends AbstractController
             $start = new \DateTimeImmutable($request->query->get('start'));
             $end = new \DateTimeImmutable($request->query->get('end'));
         }
-        $pieces = $this->getDoctrine()->getManager()->getRepository(Piece::class)
-            ->findForSuisa($start, $end);
+        $pieces = $pieceRepository->findForSuisa($start, $end);
 
         return $this->render('piece/suisa.html.twig', [
             'pieces' => $pieces,

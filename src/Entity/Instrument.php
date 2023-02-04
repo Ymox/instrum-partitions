@@ -2,172 +2,98 @@
 
 namespace App\Entity;
 
+use App\Listener\InstrumentListener;
+use App\Repository\InstrumentRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * Instrument
- */
+#[ORM\Table(name: 'instrument')]
+#[ORM\Entity(repositoryClass: InstrumentRepository::class)]
 class Instrument
 {
-    /**
-     * @var int
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @var string
-     */
-    private $key;
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $key = null;
 
-    /**
-     * @var string
-     */
-    private $family;
+    #[ORM\Column(length: 15, nullable: true)]
+    private ?string $family = null;
 
-    /**
-     * @var boolean
-     */
-    public $common;
+    #[ORM\Column(type: 'boolean')]
+    public ?bool $common = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $parts;
+    #[ORM\OneToMany(targetEntity: Part::class, mappedBy: 'instrument', cascade: ['persist', 'remove'], orphanRemoval: true, fetch: 'EXTRA_LAZY')]
+    private Collection $parts;
 
-    /**
-     * NOT A PERSISTED PROPERTY
-     * @var string
-     */
-    private $display = '';
+    // NOT A PERSISTED PROPERTY
+    private string $display = '';
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->parts = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName($name)
+    public function setName(string $name): ?self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set key
-     *
-     * @param string $key
-     *
-     * @return self
-     */
-    public function setKey($key)
+    public function setKey(string $key): static
     {
         $this->key = $key;
 
         return $this;
     }
 
-    /**
-     * Get key
-     *
-     * @return string
-     */
-    public function getKey()
+    public function getKey(): ?string
     {
         return $this->key;
     }
 
-    /**
-     * Set family
-     *
-     * @param string $family
-     *
-     * @return self
-     */
-    public function setFamily($family)
+    public function setFamily(string $family): static
     {
         $this->family = $family;
 
         return $this;
     }
 
-    /**
-     * Get family
-     *
-     * @return string
-     */
-    public function getFamily()
+    public function getFamily(): ?string
     {
         return $this->family;
     }
 
-    /**
-     * Set common
-     *
-     * @param boolean $common
-     *
-     * @return self
-     */
-    public function setCommon($common)
+    public function setCommon(bool $common): static
     {
         $this->common = $common;
 
         return $this;
     }
 
-    /**
-     * Get common
-     *
-     * @return boolean
-     */
-    public function isCommon()
+    public function isCommon(): ?bool
     {
         return $this->common;
     }
 
-    /**
-     * Add part
-     *
-     * @param \App\Entity\Part $part
-     *
-     * @return Piece
-     */
-    public function addPart(\App\Entity\Part $part)
+    public function addPart(Part $part): ?Piece
     {
         $part->setInstrument($this);
         $this->parts[] = $part;
@@ -175,23 +101,13 @@ class Instrument
         return $this;
     }
 
-    /**
-     * Remove part
-     *
-     * @param \App\Entity\Part $part
-     */
-    public function removePart(\App\Entity\Part $part)
+    public function removePart(Part $part)
     {
         $part->setInstrument(null);
         $this->parts->removeElement($part);
     }
 
-    /**
-     * Get parts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getParts()
+    public function getParts(): Collection
     {
         return $this->parts;
     }
@@ -201,10 +117,7 @@ class Instrument
         return $this->display;
     }
 
-    /**
-     * Set display
-     */
-    public function setDisplay(string $display): self
+    public function setDisplay(string $display): static
     {
         $this->display = $display;
 

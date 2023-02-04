@@ -65,15 +65,15 @@
 			<tbody class="table-group-divider">
 			{% for piece in pieces %}
 				<tr{% if piece.location is null %} class="table-info text-info"
-					{%- elseif piece.location == constant('LOCATION_LOST', piece) %} class="table-secondary"
-					{%- elseif piece.location in [constant('LOCATION_LENT', piece), constant('LOCATION_RETURNED', piece)] %} class="text-muted"
-					{%- elseif not piece.hasState(constant('STATE_VERIFIED', piece)) %} class="table-danger text-danger"
+					{%- elseif piece.location == constant('App\\Config\\Location::LOST') %} class="table-secondary"
+					{%- elseif piece.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] %} class="text-muted"
+					{%- elseif not piece.hasState(enum_value('App\\Config\\State', 'VERIFIED')) %} class="table-danger text-danger"
 					{%- elseif piece.missings|length %} class="table-warning text-warning"
-					{%- elseif piece.location == constant('LOCATION_SHELF', piece) and piece.hasAnyState(constant('STATE_STAMPED', piece) b-and constant('STATE_COLOURED', piece)) %} class="table-primary text-primary"
-					{%- elseif piece.location == constant('LOCATION_SHELF', piece) and piece.states == 7 %} class="table-success text-success"
+					{%- elseif piece.location == constant('App\\Config\\Location::SHELF') and piece.hasAnyState(enum_value('App\\Config\\State', 'STAMPED') b-and enum_value('App\\Config\\State', 'COLOURED')) %} class="table-primary text-primary"
+					{%- elseif piece.location == constant('App\\Config\\Location::SHELF') and piece.states == 7 %} class="table-success text-success"
 					{%- endif %}>
 					<td><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.id }}</a>
-						{%- if piece.location == constant('LOCATION_SERVER', piece) or piece.hasAnyState(constant('STATE_SCANNED', piece)) -%}
+						{%- if piece.location == constant('App\\Config\\Location::SERVER') or piece.hasAnyState(enum_value('App\\Config\\State', 'SCANNED')) -%}
 						<br />
 						<a href="{{ path('piece_show', {'id': piece.id, '_fragment': 'Parts'}) }}" class="btn btn-sm btn-light"><i class="fas fa-file-download" title="{{ ('global.action.' ~ (is_granted('ROLE_DOWNLOAD') ? 'download' : 'show_parts'))|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ ('global.action.' ~ (is_granted('ROLE_DOWNLOAD') ? 'download' : 'show_parts'))|trans }}</span></a>
 						{%- endif -%}
@@ -103,13 +103,13 @@
 								</button>
 								<div class="dropdown-menu">
 									{% for location in static('LOCATIONS_LIST', piece) %}
-									<a class="dropdown-item{{ piece.location == location ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': location}) }}">{{ ('app.fields.piece.location.' ~ location)|trans }}</a>
+									<a class="dropdown-item{{ piece.location == location ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': location.value}) }}">{{ ('app.fields.piece.location.' ~ location.value)|trans }}</a>
 									{% endfor %}
 									<a class="dropdown-item{{ piece.location is null ? ' active' }}" href="{{ path('piece_update', {'id': piece.id, 'location': ''}) }}">{{ 'app.fields.piece.location.placeholder'|trans }}</a>
 									<div class="dropdown-divider"></div>
 									{%- for state in static('STATES_LIST', piece) -%}
-									<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state): piece.hasState(state) ? -1 : 1}}) }}" class="dropdown-item{{ piece.hasState(state) ? ' active' }}">
-									{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state)|trans -}}
+									<a href="{{ path('piece_update', {'id': piece.id, 'states': {(state.value): piece.hasState(state) ? -1 : 1}}) }}" class="dropdown-item{{ piece.hasState(state) ? ' active' }}">
+									{{- ('app.fields.piece.states.' ~ (piece.hasState(state) ? '' : 'not.') ~ state.value)|trans -}}
 									</a>
 									{% endfor %}
 								</div>
@@ -136,13 +136,13 @@
 					<table class="table table-sm table-hover">
 						<tr class="table-secondary">
 							<td>
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_LOST'))|trans }}
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'LOST'))|trans }}
 							</td>
 						</tr>
 						<tr class="text-muted">
 							<td>
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_RETURNED'))|trans }}<br />
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_LENT'))|trans }}
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'RETURNED'))|trans }}<br />
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'LENT'))|trans }}
 							</td>
 						</tr>
 						<tr class="table-info text-info">
@@ -152,13 +152,13 @@
 						</tr>
 						<tr>
 							<td>
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SERVER'))|trans }}<br />
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_STOWED'))|trans }}
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'SERVER'))|trans }}<br />
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'STOWED'))|trans }}
 							</td>
 						</tr>
 						<tr class="table-danger text-danger">
 							<td class="text-end">
-								{{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_VERIFIED'))|trans }}
+								{{ ('app.fields.piece.states.not.' ~ enum_value('App\\Config\\State', 'VERIFIED'))|trans }}
 							</td>
 						</tr>
 						<tr class="table-warning text-warning">
@@ -168,16 +168,16 @@
 						</tr>
 						<tr class="table-primary text-primary">
 							<td class="text-center">
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SHELF'))|trans }} {{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_COLOURED'))|trans|lower }}<br />
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SHELF'))|trans }} {{ ('app.fields.piece.states.not.' ~ constant('App\\Entity\\Piece::STATE_STAMPED'))|trans|lower }}
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'SHELF'))|trans }} {{ ('app.fields.piece.states.not.' ~ enum_value('App\\Config\\State', 'COLOURED'))|trans|lower }}<br />
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'SHELF'))|trans }} {{ ('app.fields.piece.states.not.' ~ enum_value('App\\Config\\State', 'STAMPED'))|trans|lower }}
 							</td>
 						</tr>
 						<tr class="table-success text-success">
 							<td class="text-center">
-								{{ ('app.fields.piece.location.' ~ constant('App\\Entity\\Piece::LOCATION_SHELF'))|trans }}
-								{{ ('app.fields.piece.states.' ~ constant('App\\Entity\\Piece::STATE_VERIFIED'))|trans|lower }}
-								{{ ('app.fields.piece.states.' ~ constant('App\\Entity\\Piece::STATE_COLOURED'))|trans|lower }}
-								{{ ('app.fields.piece.states.' ~ constant('App\\Entity\\Piece::STATE_STAMPED'))|trans|lower }}
+								{{ ('app.fields.piece.location.' ~ enum_value('App\\Config\\Location', 'SHELF'))|trans }}
+								{{ ('app.fields.piece.states.' ~ enum_value('App\\Config\\State', 'VERIFIED'))|trans|lower }}
+								{{ ('app.fields.piece.states.' ~ enum_value('App\\Config\\State', 'COLOURED'))|trans|lower }}
+								{{ ('app.fields.piece.states.' ~ enum_value('App\\Config\\State', 'STAMPED'))|trans|lower }}
 							</td>
 						</tr>
 					</table>

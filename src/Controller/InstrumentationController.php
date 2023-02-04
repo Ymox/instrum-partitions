@@ -3,42 +3,35 @@
 namespace App\Controller;
 
 use App\Entity\Instrumentation;
+use App\Repository\InstrumentationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Instrumentation controller.
- *
- */
+#[Route('/instrumentation', name: 'instrumentation_')]
 class InstrumentationController extends AbstractController
 {
-    /**
-     * Lists all instrumentation entities.
-     *
-     */
-    public function index()
+    #[Route('/', name: 'index')]
+    public function index(InstrumentationRepository $instrumentationRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $instrumentations = $em->getRepository(Instrumentation::class)->findAll();
+        $instrumentations = $instrumentationRepository->findAll();
 
         return $this->render('instrumentation/index.html.twig', [
             'instrumentations' => $instrumentations,
         ]);
     }
 
-    /**
-     * Creates a new instrumentation entity.
-     *
-     */
-    public function new(Request $request)
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $instrumentation = new Instrumentation();
         $form = $this->createForm(\App\Form\InstrumentationType::class, $instrumentation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($instrumentation);
             $em->flush();
 
@@ -47,44 +40,37 @@ class InstrumentationController extends AbstractController
 
         return $this->render('instrumentation/new.html.twig', [
             'instrumentation' => $instrumentation,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing instrumentation entity.
-     *
-     */
-    public function edit(Request $request, Instrumentation $instrumentation)
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Instrumentation $instrumentation, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($instrumentation);
         $editForm = $this->createForm(\App\Form\InstrumentationType::class, $instrumentation);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('instrumentation_index');
         }
 
         return $this->render('instrumentation/edit.html.twig', [
             'instrumentation' => $instrumentation,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Deletes a instrumentation entity.
-     *
-     */
-    public function delete(Request $request, Instrumentation $instrumentation)
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Request $request, Instrumentation $instrumentation, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($instrumentation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($instrumentation);
             $em->flush();
         }
@@ -92,14 +78,7 @@ class InstrumentationController extends AbstractController
         return $this->redirectToRoute('instrumentation_index');
     }
 
-    /**
-     * Creates a form to delete a instrumentation entity.
-     *
-     * @param Instrumentation $instrumentation The instrumentation entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Instrumentation $instrumentation)
+    private function createDeleteForm(Instrumentation $instrumentation): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('instrumentation_delete', ['id' => $instrumentation->getId()]))

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,9 +17,6 @@ class PieceType extends AbstractType
         $this->urlGenerator = $urlGenerator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -108,8 +106,10 @@ class PieceType extends AbstractType
                     ];
                 },
                 'label_format'  => 'app.fields.piece.%name%',
+                'choice_translation_domain' => false,
             ])
-            ->add('location', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
+            ->add('location', EnumType::class, [
+                'class'        => \App\Config\Location::class,
                 'required'     => false,
                 'choices'      => \App\Entity\Piece::$LOCATIONS_LIST,
                 'label_format' => 'app.fields.piece.%name%.label',
@@ -118,12 +118,14 @@ class PieceType extends AbstractType
                     return 'app.fields.piece.location.' . $value;
                 }
             ])
-            ->add('states', \App\Form\Type\BinaryMaskChoiceType::class, [
+            ->add('states', \App\Form\Type\BinaryMaskEnumType::class, [
+                'class'        => \App\Config\State::class,
                 'choices'      => \App\Entity\Piece::$STATES_LIST,
                 'label_format' => 'app.fields.piece.%name%.label',
                 'choice_label' => function ($choice, $key, $value) {
                     return 'app.fields.piece.states.' . $value;
                 },
+                
             ])
             ->add('missings', CollectionType::class, [
                 'entry_type'   => MissingType::class,
@@ -157,9 +159,6 @@ class PieceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

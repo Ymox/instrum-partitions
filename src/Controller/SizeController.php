@@ -3,42 +3,35 @@
 namespace App\Controller;
 
 use App\Entity\Size;
+use App\Repository\SizeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Size controller.
- *
- */
+#[Route('/size', name: 'size_')]
 class SizeController extends AbstractController
 {
-    /**
-     * Lists all size entities.
-     *
-     */
-    public function index()
+    #[Route('/', name: 'index')]
+    public function index(SizeRepository $sizeRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $sizes = $em->getRepository(Size::class)->findBy([], ['minHeight' => 'asc']);
+        $sizes = $sizeRepository->findBy([], ['minHeight' => 'asc']);
 
         return $this->render('size/index.html.twig', [
             'sizes' => $sizes,
         ]);
     }
 
-    /**
-     * Creates a new size entity.
-     *
-     */
-    public function new(Request $request)
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $size = new Size();
         $form = $this->createForm(\App\Form\SizeType::class, $size);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($size);
             $em->flush();
 
@@ -47,58 +40,48 @@ class SizeController extends AbstractController
 
         return $this->render('size/new.html.twig', [
             'size' => $size,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Finds and displays a size entity.
-     *
-     */
-    public function show(Size $size)
+    #[Route('/{name}/show', name: 'show')]
+    public function show(Size $size): Response
     {
         $deleteForm = $this->createDeleteForm($size);
 
         return $this->render('size/show.html.twig', [
             'size' => $size,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing size entity.
-     *
-     */
-    public function edit(Request $request, Size $size)
+    #[Route('/{name}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Size $size, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($size);
         $editForm = $this->createForm(\App\Form\SizeType::class, $size);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('size_index');
         }
 
         return $this->render('size/edit.html.twig', [
             'size' => $size,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Deletes a size entity.
-     *
-     */
-    public function delete(Request $request, Size $size)
+    #[Route('/{name}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Request $request, Size $size, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($size);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($size);
             $em->flush();
         }
@@ -106,14 +89,7 @@ class SizeController extends AbstractController
         return $this->redirectToRoute('size_index');
     }
 
-    /**
-     * Creates a form to delete a size entity.
-     *
-     * @param Size $size The size entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Size $size)
+    private function createDeleteForm(Size $size): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('size_delete', ['name' => $size->getName()]))

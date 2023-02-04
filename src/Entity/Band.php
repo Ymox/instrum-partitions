@@ -2,98 +2,66 @@
 
 namespace App\Entity;
 
-/**
- * Band
- */
+use App\Repository\BandRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+#[ORM\Table]
+#[ORM\Entity(repositoryClass: BandRepository::class)]
+#[UniqueEntity(fields: ['name'])]
 class Band
 {
-    /**
-     * @var int
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $name = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $lendings;
+    #[ORM\OneToMany(targetEntity: Lending::class, mappedBy: 'band')]
+    private Collection $lendings;
 
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
-        $this->lendings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lendings = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Band
-     */
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Add lending
-     *
-     * @param \App\Entity\Lending $lending
-     *
-     * @return Band
-     */
-    public function addLending(\App\Entity\Lending $lending)
+    public function addLending(Lending $lending): static
     {
         $this->lendings[] = $lending;
 
         return $this;
     }
 
-    /**
-     * Remove lending
-     *
-     * @param \App\Entity\Lending $lending
-     */
-    public function removeLending(\App\Entity\Lending $lending)
+    public function removeLending(Lending $lending): static
     {
         $this->lendings->removeElement($lending);
+
+        return $this;
     }
 
-    /**
-     * Get lendings
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLendings()
+    public function getLendings(): Collection
     {
         return $this->lendings;
     }

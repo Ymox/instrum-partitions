@@ -2,228 +2,129 @@
 
 namespace App\Entity;
 
-/**
- * Size
- */
+use App\Repository\SizeRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+#[ORM\Table(name: 'size')]
+#[ORM\Entity(repositoryClass: SizeRepository::class)]
 class Size
 {
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\Column(length: 127)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private ?string $name = null;
 
-    /**
-     * @var integer
-     */
-    private $minWidth;
+    #[ORM\Column(type: 'smallint', nullable: true)]
+    private ?int $minWidth = null;
 
-    /**
-     * @var integer
-     */
-    private $maxWidth;
+    #[ORM\Column(type: 'smallint')]
+    private ?int $maxWidth = null;
 
-    /**
-     * @var integer
-     */
-    private $minHeight;
+    #[ORM\Column(type: 'smallint', nullable: true)]
+    private ?int $minHeight = null;
 
-    /**
-     * @var integer
-     */
-    private $maxHeight;
+    #[ORM\Column(type: 'smallint')]
+    private ?int $maxHeight = null;
 
-    /**
-     * @var string
-     */
-    private $note;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $note = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pieces;
+    #[ORM\OneToMany(targetEntity: Piece::class, mappedBy: 'size')]
+    private Collection $pieces;
 
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
-        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pieces = new ArrayCollection();
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Size
-     */
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set minWidth
-     *
-     * @param integer $minWidth
-     *
-     * @return Size
-     */
-    public function setMinWidth($minWidth)
+    public function setMinWidth(int $minWidth): static
     {
         $this->minWidth = $minWidth;
 
         return $this;
     }
 
-    /**
-     * Get minWidth
-     *
-     * @return integer
-     */
-    public function getMinWidth()
+    public function getMinWidth(): ?int
     {
         return $this->minWidth;
     }
 
-    /**
-     * Set maxWidth
-     *
-     * @param integer $maxWidth
-     *
-     * @return Size
-     */
-    public function setMaxWidth($maxWidth)
+    public function setMaxWidth(int $maxWidth): static
     {
         $this->maxWidth = $maxWidth;
 
         return $this;
     }
 
-    /**
-     * Get maxWidth
-     *
-     * @return integer
-     */
-    public function getMaxWidth()
+    public function getMaxWidth(): ?int
     {
         return $this->maxWidth;
     }
 
-    /**
-     * Set minHeight
-     *
-     * @param integer $minHeight
-     *
-     * @return Size
-     */
-    public function setMinHeight($minHeight)
+    public function setMinHeight(int $minHeight): static
     {
         $this->minHeight = $minHeight;
 
         return $this;
     }
 
-    /**
-     * Get minHeight
-     *
-     * @return integer
-     */
-    public function getMinHeight()
+    public function getMinHeight(): ?int
     {
         return $this->minHeight;
     }
 
-    /**
-     * Set maxHeight
-     *
-     * @param integer $maxHeight
-     *
-     * @return Size
-     */
-    public function setMaxHeight($maxHeight)
+    public function setMaxHeight(int $maxHeight): static
     {
         $this->maxHeight = $maxHeight;
 
         return $this;
     }
 
-    /**
-     * Get maxHeight
-     *
-     * @return integer
-     */
-    public function getMaxHeight()
+    public function getMaxHeight(): ?int
     {
         return $this->maxHeight;
     }
 
-    /**
-     * Set note
-     *
-     * @param string $note
-     *
-     * @return Size
-     */
-    public function setNote($note)
+    public function setNote(string $note): static
     {
         $this->note = $note;
 
         return $this;
     }
 
-    /**
-     * Get note
-     *
-     * @return string
-     */
-    public function getNote()
+    public function getNote(): ?string
     {
         return $this->note;
     }
 
-    /**
-     * Add piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return Size
-     */
-    public function addPiece(\App\Entity\Piece $piece)
+    public function addPiece(Piece $piece): static
     {
         $this->pieces[] = $piece;
 
         return $this;
     }
 
-    /**
-     * Remove piece
-     *
-     * @param \App\Entity\Piece $piece
-     */
-    public function removePiece(\App\Entity\Piece $piece)
+    public function removePiece(Piece $piece)
     {
         $this->pieces->removeElement($piece);
     }
 
-    /**
-     * Get pieces
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPieces()
+    public function getPieces(): Collection
     {
         return $this->pieces;
     }
@@ -245,7 +146,7 @@ class Size
             $min .= $this->minHeight;
         } else {
             $min .= $this->maxHeight;
-        }
+    }
 
         return $min;
     }

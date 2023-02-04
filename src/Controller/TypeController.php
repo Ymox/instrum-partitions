@@ -3,42 +3,35 @@
 namespace App\Controller;
 
 use App\Entity\Type;
+use App\Repository\TypeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Type controller.
- *
- */
+#[Route('/type', name: 'type_')]
 class TypeController extends AbstractController
 {
-    /**
-     * Lists all type entities.
-     *
-     */
-    public function index()
+    #[Route('/', name: 'index')]
+    public function index(TypeRepository $typeRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $types = $em->getRepository(Type::class)->findAll();
+        $types = $typeRepository->findAll();
 
         return $this->render('type/index.html.twig', [
             'types' => $types,
         ]);
     }
 
-    /**
-     * Creates a new type entity.
-     *
-     */
-    public function new(Request $request)
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $type = new Type();
         $form = $this->createForm(\App\Form\TypeType::class, $type);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($type);
             $em->flush();
 
@@ -47,44 +40,37 @@ class TypeController extends AbstractController
 
         return $this->render('type/new.html.twig', [
             'type' => $type,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing type entity.
-     *
-     */
-    public function edit(Request $request, Type $type)
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Type $type, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($type);
         $editForm = $this->createForm(\App\Form\TypeType::class, $type);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('type_index');
         }
 
         return $this->render('type/edit.html.twig', [
             'type' => $type,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Deletes a type entity.
-     *
-     */
-    public function delete(Request $request, Type $type)
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Request $request, Type $type, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($type);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($type);
             $em->flush();
         }
@@ -92,14 +78,7 @@ class TypeController extends AbstractController
         return $this->redirectToRoute('type_index');
     }
 
-    /**
-     * Creates a form to delete a type entity.
-     *
-     * @param Type $type The type entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Type $type)
+    private function createDeleteForm(Type $type): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('type_delete', ['id' => $type->getId()]))

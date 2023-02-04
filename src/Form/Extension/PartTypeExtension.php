@@ -10,9 +10,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class PartTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var \Symfony\Component\Translation\Translator
-     */
     private $translator;
 
     public function __construct(\Symfony\Contracts\Translation\TranslatorInterface $translator)
@@ -20,19 +17,11 @@ class PartTypeExtension extends AbstractTypeExtension
         $this->translator = $translator;
     }
 
-    /**
-     * Returns the name of the type being extended.
-     *
-     * @return string The name of the type being extended
-     */
     public function getExtendedType()
     {
         return \Symfony\Component\Form\Extension\Core\Type\FileType::class;
     }
 
-    /**
-     * Return the class of the type being extended.
-     */
     public static function getExtendedTypes(): iterable
     {
         // return FormType::class to modify (nearly) every field in the system
@@ -53,8 +42,7 @@ class PartTypeExtension extends AbstractTypeExtension
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        /** @var \App\Entity\Part $part */
-        $part = $form->getParent()->getData();
+            $part = $form->getParent()->getData();
 
         $fileUrl = null;
         $downloadName = null;

@@ -3,42 +3,35 @@
 namespace App\Controller;
 
 use App\Entity\Publisher;
+use App\Repository\PublisherRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Publisher controller.
- *
- */
+#[Route('/publisher', name: 'publisher_')]
 class PublisherController extends AbstractController
 {
-    /**
-     * Lists all publisher entities.
-     *
-     */
-    public function index()
+    #[Route('/', name: 'index')]
+    public function index(PublisherRepository $publisherRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $publishers = $em->getRepository(Publisher::class)->findAll();
+        $publishers = $publisherRepository->findAll();
 
         return $this->render('publisher/index.html.twig', [
             'publishers' => $publishers,
         ]);
     }
 
-    /**
-     * Creates a new publisher entity.
-     *
-     */
-    public function new(Request $request)
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $publisher = new Publisher();
         $form = $this->createForm(\App\Form\PublisherType::class, $publisher);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($publisher);
             $em->flush();
 
@@ -47,44 +40,37 @@ class PublisherController extends AbstractController
 
         return $this->render('publisher/new.html.twig', [
             'publisher' => $publisher,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
-    /**
-     * Displays a form to edit an existing publisher entity.
-     *
-     */
-    public function edit(Request $request, Publisher $publisher)
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Publisher $publisher, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($publisher);
         $editForm = $this->createForm(\App\Form\PublisherType::class, $publisher);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('publisher_index');
         }
 
         return $this->render('publisher/edit.html.twig', [
             'publisher' => $publisher,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $deleteForm,
         ]);
     }
 
-    /**
-     * Deletes a publisher entity.
-     *
-     */
-    public function delete(Request $request, Publisher $publisher)
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Request $request, Publisher $publisher, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($publisher);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($publisher);
             $em->flush();
         }
@@ -92,14 +78,7 @@ class PublisherController extends AbstractController
         return $this->redirectToRoute('publisher_index');
     }
 
-    /**
-     * Creates a form to delete a publisher entity.
-     *
-     * @param Publisher $publisher The publisher entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Publisher $publisher)
+    private function createDeleteForm(Publisher $publisher): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('publisher_delete', ['id' => $publisher->getId()]))

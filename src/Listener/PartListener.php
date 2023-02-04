@@ -2,36 +2,28 @@
 
 namespace App\Listener;
 
+use App\Entity\Part;
+use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PreUpdateEventArgs;
-use App\Entity\Part;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PartListener
 {
-    /**
-     * @var \App\Service\FileUploader
-     */
-    private $uploader;
+    private FileUploader $uploader;
 
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /**
-     * @var string
-     */
-    private $uploadPath;
+    private ?string $uploadPath = null;
 
-    /**
-     * @var string
-     */
-    private $downloadPath;
+    private ?string $downloadPath = null;
 
-    public function __construct(\App\Service\FileUploader $uploader, \Symfony\Contracts\Translation\TranslatorInterface $translator, $uploadPath, $downloadPath)
-    {
+    public function __construct(
+        \App\Service\FileUploader $uploader,
+        \Symfony\Contracts\Translation\TranslatorInterface $translator,
+        $uploadPath,
+        $downloadPath
+    ) {
         $this->uploader = $uploader;
         $this->translator = $translator;
         $this->uploadPath = $uploadPath;
@@ -65,10 +57,8 @@ class PartListener
             return;
         }
 
-        $file = $entity->getUpload();
-
         // only upload new files
-        if (!$file) {
+        if (!($file = $entity->getUpload())) {
             return;
         } elseif ($file instanceof UploadedFile) {
             $fileName = $this->uploader->upload($file, $this->uploadPath);

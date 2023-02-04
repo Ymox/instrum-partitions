@@ -2,128 +2,83 @@
 
 namespace App\Entity;
 
-/**
- * Concert
- */
+use App\Repository\ConcertRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+#[ORM\Table(name: 'concert')]
+#[ORM\Entity(repositoryClass: ConcertRepository::class)]
+#[UniqueEntity(fields: ['name'])]
 class Concert
 {
-    /**
-     * @var int
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $name;
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $name = null;
 
-    /**
-     * @var \DateTime
-     */
-    private $date;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTime $date = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pieces;
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: Piece::class, inversedBy: 'concerts', cascade: ['persist', 'remove'])]
+    private Collection $pieces;
 
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
-        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pieces = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Concert
-     */
-    public function setName($name)
+    public function setName(string $name): ?Concert
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Concert
-     */
-    public function setDate($date)
+    public function setDate(\DateTime $date): static
     {
         $this->date = $date;
 
         return $this;
     }
 
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
 
-    /**
-     * Add piece
-     *
-     * @param \App\Entity\Piece $piece
-     *
-     * @return Concert
-     */
-    public function addPiece(\App\Entity\Piece $piece)
+    public function addPiece(Piece $piece): static
     {
-        $piece->addProgram($this);
+        $piece->addConcert($this);
         $this->pieces[] = $piece;
 
         return $this;
     }
 
-    /**
-     * Remove piece
-     *
-     * @param \App\Entity\Piece $piece
-     */
-    public function removePiece(\App\Entity\Piece $piece)
+    public function removePiece(Piece $piece): static
     {
         $this->pieces->removeElement($piece);
+
+        return $this;
     }
 
-    /**
-     * Get pieces
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPieces()
+    public function getPieces(): Collection
     {
         return $this->pieces;
     }

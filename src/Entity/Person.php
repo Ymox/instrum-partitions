@@ -2,167 +2,102 @@
 
 namespace App\Entity;
 
-/**
- * Person
- */
+use App\Repository\PersonRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+#[ORM\Table(name: 'people')]
+#[ORM\Entity(repositoryClass: PersonRepository::class)]
 class Person
 {
-    /**
-     * @var integer
-     */
-    private $id;
+    #[ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     */
-    private $firstName;
+    #[ORM\Column(length: 255)]
+    private ?string $firstName = null;
 
-    /**
-     * @var string
-     */
-    private $lastName;
+    #[ORM\Column(length: 255)]
+    private ?string $lastName = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $compositions;
+    #[ORM\ManyToMany(targetEntity: Piece::class, mappedBy: 'composers')]
+    private Collection $compositions;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $arrangements;
+    #[ORM\ManyToMany(targetEntity: Piece::class, mappedBy: 'arrangers')]
+    private Collection $arrangements;
 
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
-        $this->compositions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->arrangements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->compositions = new ArrayCollection();
+        $this->arrangements = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     *
-     * @return Person
-     */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
 
         return $this;
     }
 
-    /**
-     * Get firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     *
-     * @return Person
-     */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
 
         return $this;
     }
 
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * Add composition
-     *
-     * @param \App\Entity\Piece $composition
-     *
-     * @return Person
-     */
-    public function addComposition(\App\Entity\Piece $composition)
+    public function addComposition(Piece $composition): static
     {
         $this->compositions[] = $composition;
 
         return $this;
     }
 
-    /**
-     * Remove composition
-     *
-     * @param \App\Entity\Piece $composition
-     */
-    public function removeComposition(\App\Entity\Piece $composition)
+    public function removeComposition(Piece $composition): static
     {
         $this->compositions->removeElement($composition);
+
+        return $this;
     }
 
-    /**
-     * Get compositions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCompositions()
+    public function getCompositions(): Collection
     {
         return $this->compositions;
     }
 
-    /**
-     * Add arrangement
-     *
-     * @param \App\Entity\Piece $arrangement
-     *
-     * @return Person
-     */
-    public function addArrangement(\App\Entity\Piece $arrangement)
+    public function addArrangement(Piece $arrangement): static
     {
         $this->arrangements[] = $arrangement;
 
         return $this;
     }
 
-    /**
-     * Remove arrangement
-     *
-     * @param \App\Entity\Piece $arrangement
-     */
-    public function removeArrangement(\App\Entity\Piece $arrangement)
+    public function removeArrangement(Piece $arrangement): static
     {
         $this->arrangements->removeElement($arrangement);
+
+        return $this;
     }
 
-    /**
-     * Get arrangements
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArrangements()
+    public function getArrangements(): Collection
     {
         return $this->arrangements;
     }

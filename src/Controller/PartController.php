@@ -2,29 +2,29 @@
 
 namespace App\Controller;
 
+use App\Repository\PartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Part controller
- */
+#[Route('/part', name: 'part_')]
 class PartController extends AbstractController
 {
-    public function download(Request $request)
+    #[Route('/download', name: 'download')]
+    public function download(Request $request, PartRepository $partRepository): Response
     {
-        $ids = $request->query->get('ids', []);
+        $ids = $request->query->has('ids') ? $request->query->all('ids') : [];
 
         $result = null;
         $downloadName = 'default.bin';
 
-        /** @var \App\Repository\PartRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(\App\Entity\Part::class);
-        if (count($ids) == 1 && ($part = $repository->find($ids[0]))) {
+        if (count($ids) == 1 && ($part = $partRepository->find($ids[0]))) {
             $result = $part->getUpload();
             $downloadName = $part->getPiece()->getId() . '-' . $part->getDownloadName();
         } else {
             $ids = array_unique($ids);
-            $parts = $repository->findById($ids);
+            $parts = $partRepository->findById($ids);
             if (!empty($parts)) {
                 $downloadName = $parts[0]->getPiece()->getId() .' - ' . $parts[0]->getPiece()->getName();
                 $zipTempPath = $this->getParameter('kernel.project_dir') . '/public/' . uniqid() . '.zip';
@@ -43,7 +43,7 @@ class PartController extends AbstractController
         if ($result) {
             return $this->file($result, preg_replace('`♭`' , 'b', $downloadName));
         } else {
-            return new \Symfony\Component\HttpFoundation\Response($result, \Symfony\Component\HttpFoundation\Response::HTTP_NO_CONTENT);
+            return new Response($result, Response::HTTP_NO_CONTENT);
         }
     }
 }
