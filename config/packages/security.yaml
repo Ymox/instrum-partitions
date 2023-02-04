@@ -5,21 +5,14 @@ security:
     ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
   # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
   password_hashers:
-    Symfony\Component\Security\Core\User\User:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
       algorithm: 'auto'
-      migrate_from:
-        - legacy
 
   # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
   providers:
-    in_memory:
+    config_file_users:
       memory:
         users: "%application_users%"
-
-  encoders:
-    Symfony\Component\Security\Core\User\User:
-      algorithm: bcrypt
-      cost: 12
 
   firewalls:
     # disables authentication for assets and the profiler, adapt it according to your needs
@@ -28,6 +21,7 @@ security:
       security: false
     main:
       lazy: true
+      provider: config_file_users
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -39,7 +33,7 @@ security:
       form_login:
         login_path: login
         check_path: login
-        csrf_token_generator: security.csrf.token_manager
+        enable_csrf: true
 
       logout:
         path: /logout
@@ -65,4 +59,4 @@ security:
     - { path: ^/type, roles: ROLE_ADMIN }
     - { path: ^/piece/duplicates, roles: ROLE_ADMIN }
 
-    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/, roles: PUBLIC_ACCESS }
