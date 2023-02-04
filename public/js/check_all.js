@@ -17,8 +17,8 @@ $(function() {
 				$parent.prop('indeterminate', false);
 				$parent.prop('checked', false);				
 			} else {
-				$parent.prop('checked', false);
 				$parent.prop('indeterminate', true);
+				$parent.prop('checked', false);
 			}
 		});
 	});

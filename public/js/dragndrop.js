@@ -19,10 +19,10 @@ $(function() {
 	).on('drop',
 		'.dropzone',
 		function(e) {
-			var $target = $(e.target).removeClass('is-dragover');
+			let $target = $(e.target).removeClass('is-dragover');
 			e.preventDefault();
 			e.stopPropagation();
-			var uri;
+			let uri;
 			if (!(uri = $target.data('upload-uri'))) {
 				uri = $target.find('[type="file"][data-upload-uri]').data('upload-uri');
 			}
@@ -41,7 +41,7 @@ $(function() {
 					url: uri,
 					data: formData,
 					xhr: function() {
-						var appXhr = $.ajaxSettings.xhr();
+						let appXhr = $.ajaxSettings.xhr();
 		
 						if (appXhr.upload) {
 							appXhr.upload.addEventListener('progress', function(e) {
