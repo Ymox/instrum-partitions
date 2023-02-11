@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FileController extends AbstractController
 {
-    #[Route('/upload', name: 'ajax_upload', methods: ['POST'], condition: 'request.isXmlHttlRequest')]
+    #[Route('/upload', name: 'ajax_upload', methods: ['POST'], condition: 'request.isXmlHttpRequest()')]
     public function ajaxUpload(Request $request, FileUploader $uploader): Response
     {
         $file = $request->files->get('file');
