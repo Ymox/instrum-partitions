@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Config\Location;
 use App\Entity\Piece;
 use App\Entity\Concert;
 use App\Repository\PieceRepository;
@@ -48,7 +49,7 @@ class PieceController extends AbstractController
     {
         $piece = new Piece();
         $piece
-            ->setLocation(Piece::LOCATION_SHELF)
+            ->setLocation(Location::SHELF)
             ->setStates(0)
         ;
         $form = $this->createForm(\App\Form\PieceType::class, $piece);
@@ -111,7 +112,7 @@ class PieceController extends AbstractController
     #[Route('/piece/{id}/update', name: 'piece_update')]
     public function update(Request $request, Piece $piece, EntityManagerInterface $em): Response
     {
-        if ($states = $request->query->get('states')) {
+        if ($request->query->has('states')) {
             foreach ($request->query->all('states') as $state => $action) {
                 if ($action == -1) {
                     $piece->removeState($state);
@@ -121,7 +122,7 @@ class PieceController extends AbstractController
             }
         }
         if ($location = $request->query->get('location')) {
-            $piece->setLocation($location);
+            $piece->setLocation(Location::from($location));
         }
         $em->flush();
 

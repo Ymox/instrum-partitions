@@ -2,7 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Piece;
+use App\Config\Location;
+use App\Config\State;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -64,9 +65,9 @@ class LendingType extends AbstractType
                                 ),
                                 $qb->expr()->eq('l.id', ':lendingId')
                             ))
-                            ->setParameter(':locations', [Piece::LOCATION_SHELF, Piece::LOCATION_STOWED])
+                            ->setParameter(':locations', [Location::SHELF, Location::STOWED])
                             ->setParameter(':lendingId', $lending->getId())
-                            ->setParameter(':state', Piece::STATE_VERIFIED)
+                            ->setParameter(':state', State::VERIFIED)
                         ;
 
                         return $qb;

@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Config\Location;
+use App\Config\State;
 use App\Entity\Lending;
-use App\Entity\Piece;
 use App\Repository\LendingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -112,14 +113,14 @@ class LendingController extends AbstractController
     private function handlePiecesInLending(Lending &$lending): void
     {
         if ($lending->isOurs()) {
-            $location = $lending->getEnd() ? Piece::LOCATION_SHELF : Piece::LOCATION_LENT;
+            $location = $lending->getEnd() ? Location::SHELF : Location::LENT;
         } else {
-            $location = $lending->getEnd() ? Piece::LOCATION_RETURNED : Piece::LOCATION_SHELF;
+            $location = $lending->getEnd() ? Location::RETURNED : Location::SHELF;
         }
 
         foreach ($lending->getPieces() as &$piece) {
             $piece->setLocation($location);
-            $piece->removeState(Piece::STATE_VERIFIED);
+            $piece->removeState(State::VERIFIED);
         }
     }
 
