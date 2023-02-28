@@ -18,8 +18,15 @@
 			{% for piece in concert.pieces -%}
 			<tr>
 				<td><a href="{{ path('piece_show', {'id': piece.id}) }}">{{ piece.name }}</a></td>
-				<td class="text-end">{{ piece.composers|join(', ') }}{% if piece.arrangers.count %}<br />
-					<i>{{ 'app.concert.show.arrangers.short'|trans({'arrangers': piece.arrangers.count}) }} {{ piece.arrangers|join(', ') }}</i>{% endif %}</td>
+				<td class="text-end">
+					{%- for composer in piece.composers -%}
+						{{ composer|initialism }}{{ not loop.last ? ', ' : '' }}
+					{%- endfor -%}
+					{%- if piece.arrangers.count %}<br />
+					<i>{{ 'app.concert.show.arrangers.short'|trans({'arrangers': piece.arrangers.count}) ~ ' ' }}
+					{%- for arranger in piece.arrangers -%}
+						{{ arranger|initialism }}{{ not loop.last ? ', ' : '' }}
+					{%- endfor -%}</i>{% endif %}</td>
 			</tr>
 			{% endfor -%}
 			{% else -%}
