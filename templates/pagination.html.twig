@@ -11,7 +11,7 @@
 	<li class="page-item"><a class="page-link">…</a></li>
 {% endif %}
 {% for i in max(1, page - 2)..min(nbPages, page + 2) %}
-	<li class="page-item{% if i == app.request.get('page', 1) %} active{% endif %}"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
+	<li class="page-item{% if i == page %} active{% endif %}"><a href="{{ path(objectName ~ '_index', app.request.query|merge({'page': i})) }}" class="page-link">{{ i }}</a></li>
 {% endfor %}
 {% if page < nbPages - 4 %}
 	<li class="page-item"><a class="page-link">…</a></li>
