@@ -5,9 +5,9 @@
 {% block body -%}
 	<h1>{{ piece.name }}
 		{% if piece.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] -%}
-		<small><span class="badge bg-light text-muted">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span></small>
+		<small><span class="badge bg-light text-muted">{{ ('app.fields.piece.location.' ~ piece.location.value)|trans }}</span></small>
 		{%- elseif piece.location == constant('App\\Config\\Location::LOST') -%}
-		<span class="badge bg-dark">{{ ('app.fields.piece.location.' ~ piece.location)|trans }}</span>
+		<span class="badge bg-dark">{{ ('app.fields.piece.location.' ~ piece.location.value)|trans }}</span>
 		{%- endif %}
 		{%- if piece.translation %}<br /><small>{{ piece.translation }}</small>{% endif %}</h1>
 
