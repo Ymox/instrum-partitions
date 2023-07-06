@@ -42,7 +42,7 @@ class PartTypeExtension extends AbstractTypeExtension
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-            $part = $form->getParent()->getData();
+        $part = $form->getParent()->getData();
 
         $fileUrl = null;
         $downloadName = null;
@@ -56,7 +56,6 @@ class PartTypeExtension extends AbstractTypeExtension
             }
         }
 
-        // sets a "file_url" variable that will be available when rendering this field
         $view->vars['file_url'] = $fileUrl;
         $view->vars['download_name'] = $downloadName;
         $view->vars['part_id'] = $part ? $part->getId() : '__id__';
