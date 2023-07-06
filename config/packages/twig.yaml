@@ -2,3 +2,5 @@ twig:
   form_themes:
     - bootstrap_5_layout.html.twig
     - forms.html.twig
+  globals:
+    assets_host: "%env(ASSETS_HOST)%"
