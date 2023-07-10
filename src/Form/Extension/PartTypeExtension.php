@@ -10,13 +10,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class PartTypeExtension extends AbstractTypeExtension
 {
-    private $translator;
-
-    public function __construct(\Symfony\Contracts\Translation\TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
     public function getExtendedType()
     {
         return \Symfony\Component\Form\Extension\Core\Type\FileType::class;
@@ -24,7 +17,6 @@ class PartTypeExtension extends AbstractTypeExtension
 
     public static function getExtendedTypes(): iterable
     {
-        // return FormType::class to modify (nearly) every field in the system
         return [
             \Symfony\Component\Form\Extension\Core\Type\FileType::class,
         ];
