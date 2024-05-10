@@ -132,9 +132,9 @@
 				<tr>
 					{% for order, part in piece.parts %}
 					<td>{% if part.file and is_granted('ROLE_DOWNLOAD') %}<input type="checkbox" name="ids[]" value="{{ part.id }}" id="Part{{ part.id }}" class="check-all-{{ piece.id }}" data-parent="#CheckAll{{ piece.id }}" />
-						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" download="{{ piece.id ~ '-' ~ part.downloadName }}"><i class="fas fa-file-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
+						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-file-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
 						{%- endif %}
-						<label for="Part{{ part.id }}">{{ part }}</label>
+						<label for="Part{{ part.id }}">{{ part_t(part, 'short', null, 'app.part.to_string.no_id')|trans }}</label>
 					</td>
 						{% if (not loop.first and loop.index is divisible by(4)) %}
 				</tr>
@@ -223,9 +223,9 @@
 				<tr>
 					{% for order, part in movement.parts %}
 					<td>{% if part.file and is_granted('ROLE_DOWNLOAD') %}<input type="checkbox" name="ids[]" value="{{ part.id }}" id="Part{{ part.id }}" class="check-all-{{ movement.id }}" data-parent="#CheckAll{{ movement.id }}" />
-						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" download="{{ piece.id ~ '-' ~ part.downloadName }}" title="{{ 'app.file.download'|trans }}"><i class="fas fa-save"></i></a>
+						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-file-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
 						{%- endif %}
-						<label for="Part{{ part.id }}">{{ part }}</label>
+						<label for="Part{{ part.id }}">{{ part_t(part, 'short', null, 'app.part.to_string.no_id')|trans }}</label>
 					</td>
 						{% if (not loop.first and loop.index is divisible by(4)) %}
 				</tr>

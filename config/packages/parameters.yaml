@@ -4,7 +4,7 @@ parameters:
   locale: fr
   paginate.per_page: 30
   download_path: '/parts'
-  upload_path: '%kernel.project_dir%/public/%download_path%'
+  upload_path: '%kernel.project_dir%/public%download_path%'
   application_users:
     partitions:
       password: '%env(PARTITIONS_PASSWORD)%'

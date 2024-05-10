@@ -8,6 +8,7 @@ use App\Repository\PieceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields: ['name'])]
 class Piece
 {
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private ?float $id = null;
@@ -30,22 +31,22 @@ class Piece
     #[ORM\Column(length: 255, enumType: Location::class, nullable: true)]
     private ?Location $location = null;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column]
     private ?int $states = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $level = null;
 
-    #[ORM\Column(type: 'smallint', nullable: true)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $year = null;
 
     #[ORM\Column(length: 255, nullable: true, unique: true)]
     private ?string $reference = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $note = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTime $createdAt = null;
 

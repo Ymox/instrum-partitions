@@ -6,6 +6,7 @@ use App\Repository\SizeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Table(name: 'size')]
 #[ORM\Entity(repositoryClass: SizeRepository::class)]
@@ -16,16 +17,16 @@ class Size
     #[ORM\GeneratedValue(strategy: 'NONE')]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'smallint', nullable: true)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $minWidth = null;
 
-    #[ORM\Column(type: 'smallint')]
+    #[ORM\Column(type: Types::SMALLINT)]
     private ?int $maxWidth = null;
 
-    #[ORM\Column(type: 'smallint', nullable: true)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $minHeight = null;
 
-    #[ORM\Column(type: 'smallint')]
+    #[ORM\Column(type: Types::SMALLINT)]
     private ?int $maxHeight = null;
 
     #[ORM\Column(length: 255, nullable: true)]

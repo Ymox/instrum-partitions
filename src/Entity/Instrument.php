@@ -26,7 +26,7 @@ class Instrument
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $family = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column]
     public ?bool $common = null;
 
     #[ORM\OneToMany(targetEntity: Part::class, mappedBy: 'instrument', cascade: ['persist', 'remove'], orphanRemoval: true, fetch: 'EXTRA_LAZY')]
@@ -93,7 +93,7 @@ class Instrument
         return $this->common;
     }
 
-    public function addPart(Part $part): ?Piece
+    public function addPart(Part $part): self
     {
         $part->setInstrument($this);
         $this->parts[] = $part;

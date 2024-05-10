@@ -2,14 +2,30 @@
 
 namespace App\Form\Extension;
 
+use App\Entity\Translatable\PartTranslatableMessage;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PartTypeExtension extends AbstractTypeExtension
 {
+    private TranslatorInterface $translator;
+
+    private UrlGeneratorInterface $urlGenerator;
+
+    private string $downloadPath;
+
+    public function __construct(TranslatorInterface $translator, UrlGeneratorInterface $urlGenerator, string $downloadPath)
+    {
+        $this->translator = $translator;
+        $this->urlGenerator = $urlGenerator;
+        $this->downloadPath = $downloadPath;
+    }
+
     public function getExtendedType()
     {
         return \Symfony\Component\Form\Extension\Core\Type\FileType::class;
@@ -40,11 +56,17 @@ class PartTypeExtension extends AbstractTypeExtension
         $downloadName = null;
         if ($part && $part->getFile()) {
             $accessor = PropertyAccess::createPropertyAccessor();
-            $fileUrl = $accessor->getValue($part, $options['file_property']);
+            if ($part->getId()) {
+                $fileUrl = $this->urlGenerator->generate('part_download', ['ids' => [$part->getId()]]);
+            } else {
+                $fileUrl = $this->urlGenerator->generate('file_download', ['file' => ltrim($this->downloadPath, '/') . $accessor->getValue($part, $options['file_property'])]);
+            }
             if (!empty($options['download_name'])) {
                 $downloadName = $options['download_name'];
+            } else if ($part->getId()) {
+                $downloadName = preg_replace(['` +`', '`\.`', '`♭`'] , ['_', '-', 'b'], (new PartTranslatableMessage($part))->trans($this->translator));
             } else {
-                $downloadName = $part->getDownloadName();
+                $downloadName = mb_substr($fileUrl, 16);
             }
         }
 

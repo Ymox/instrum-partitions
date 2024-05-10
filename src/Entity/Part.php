@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Listener\PartListener;
 use App\Repository\PartRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Table(name: 'part')]
 #[ORM\Entity(repositoryClass: PartRepository::class)]
+#[UniqueEntity(['piece', 'instrument', 'clef', 'number', 'solo'], errorPath: 'instrument', ignoreNull: false)]
 class Part
 {
     const TRANSLATE_DISPLAY = 'display';
@@ -25,7 +26,7 @@ class Part
     #[ORM\Column(nullable: true)]
     private ?int $number = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column]
     private ?bool $solo = null;
 
     #[ORM\Column(nullable: true)]
@@ -117,7 +118,7 @@ class Part
         return $this->piece;
     }
 
-    public function setInstrument(Instrument $instrument): static
+    public function setInstrument(?Instrument $instrument): static
     {
         $this->instrument = $instrument;
 
@@ -143,6 +144,10 @@ class Part
 
     public function getUpload(): ?\SplFileInfo
     {
+        if ($this->upload === null && $this->file && $this->downloadFolder && is_file($filePath = rtrim($this->downloadFolder, '/\\') . '/' . $this->file)) {
+            $this->upload = new \SplFileObject($filePath);
+        }
+
         return $this->upload;
     }
 

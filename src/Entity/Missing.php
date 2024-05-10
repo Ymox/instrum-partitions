@@ -18,7 +18,7 @@ class Missing
     #[ORM\Column(length: 255)]
     private ?string $voice = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTime $createdAt = null;
 

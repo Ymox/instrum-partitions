@@ -58,5 +58,6 @@ security:
     - { path: ^/size, roles: ROLE_ADMIN }
     - { path: ^/type, roles: ROLE_ADMIN }
     - { path: ^/piece/duplicates, roles: ROLE_ADMIN }
+    - { path: ^/clean, roles: ROLE_ADMIN }
 
     - { path: ^/, roles: PUBLIC_ACCESS }

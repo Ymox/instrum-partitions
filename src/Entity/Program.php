@@ -20,11 +20,11 @@ class Program
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTime $createdAt = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTime $updatedAt = null;
 

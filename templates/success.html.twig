@@ -1,0 +1,7 @@
+{% extends app.request.xmlHttpRequest ? 'base_modal.html.twig' : 'base.html.twig' %}
+
+{% block title %}{{ 'app.success'|trans }}{% if not app.request.xmlHttpRequest %} | {{ parent() }}{% endif %}{% endblock %}
+
+{% block body %}
+	<form><p class="alert alert-success">{{ message|trans }}</p></form>
+{% endblock %}

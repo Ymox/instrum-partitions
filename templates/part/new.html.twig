@@ -1,0 +1,14 @@
+{% extends app.request.xmlHttpRequest ? 'base_modal.html.twig' : 'base.html.twig' %}
+
+{% block title %}{{ 'app.part.new.title'|trans }}{% if not app.request.xmlHttpRequest %} | {{ parent() }}{% endif %}{% endblock %}
+
+{% block body %}
+	{% if not app.request.xmlHttpRequest %}
+	<h1>{{ 'app.part.new.heading'|trans }}</h1>
+	{% endif %}
+
+	{{ form_start(form, {'attr': {'class': app.request.xmlHttpRequest ? 'ajaxify' : null}}) }}
+		{{ form_widget(form) }}
+		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fas fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+	{{ form_end(form) }}
+{% endblock %}

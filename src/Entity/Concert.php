@@ -21,7 +21,7 @@ class Concert
     #[ORM\Column(length: 255, unique: true)]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column]
     private ?\DateTime $date = null;
 
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]

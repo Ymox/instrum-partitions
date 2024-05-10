@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app.clean_file.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ assets_host }}/select2/4.0.13/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{{ assets_host }}/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+ul {
+	column-count: 2;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+	<h1>{{ 'app.clean_file.heading'|trans }}</h1>
+
+	<h2>{{ 'app.clean_file.missing.heading'|trans }}</h2>
+
+	{% if missingFiles|length -%}
+	<ul>
+	{%- set previousPiece = missingFiles[0].piece.id -%}
+	{%- for missingFile in missingFiles %}
+	{% if previousPiece != missingFile.piece.id %}
+	</ul>
+	<ul>
+	{%- set previousPiece = missingFile.piece.id -%}
+	{% endif %}
+		<li>{{ missingFile.piece.name }} — {{ part_t(missingFile, 'short', null, 'app.part.to_string.no_id')|trans }}</li>
+	{%- endfor %}
+	</ul>
+	{%- else %}
+	<p>{{ 'app.clean_file.missing.none'|trans }}</p>
+	{%- endif %}
+
+	<h2>{{ 'app.clean_file.useless.heading'|trans }}</h2>
+	{% if uselessFiles|length -%}
+	<ul>
+	{%- for uselessFile in uselessFiles %}
+		<li><a href="{{ path('file_download', {'file': downloadPath|trim('/', 'left') ~ '/' ~ uselessFile}) }}">{{ uselessFile }}</a>
+			<a href="{{ path('part_new', {'file': uselessFile}) }}" data-bs-target="#Modal" data-bs-toggle="modal" target="_blank" class="btn btn-sm btn-outline-success"><i class="fas fa-paperclip" title="{{ 'app.clean_file.action.attach'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'app.clean_file.action.attach'|trans }}</span></a>
+			<form action="{{ path('file_delete', {'file': uselessFile}) }}" method="post" class="d-inline-block">
+				<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
+				<input type="hidden" name="_method" value="DELETE" />
+				<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.delete'|trans }}</span></button>
+			</form></li>
+	{%- endfor %}
+	</ul>
+	{%- else %}
+	<p>{{ 'app.clean_file.useless.none'|trans }}</p>
+	{%- endif %}
+
+	<h2>{{ 'app.clean_file.backup.heading'|trans }}</h2>
+	<p><a href="{{ path('part_backup') }}"><span class="btn btn-sm btn-info"><span class="fas fa-file-archive"></span></span> {{ 'app.clean_file.action.backup'|trans }}</a><p>
+{% endblock %}
+
+{% block javascripts %}
+		<script src="{{ assets_host }}/select2/4.0.13/js/select2.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="{{ asset('js/entity_adder.js') }}"></script>
+		<script src="{{ asset('js/ajaxify.js') }}"></script>
+		<script>/*<[CDATA[*/
+		const observer = new MutationObserver( function(mutations) {
+			mutations.forEach( function(mutation) {
+				$('select.searchable', mutation.addedNodes[4]).select2({theme: "bootstrap-5"});
+			});
+		});
+		observer.observe($('#Modal .modal-content').get(0), { childList: true });
+		/*]]>*/
+		</script>
+{% endblock %}

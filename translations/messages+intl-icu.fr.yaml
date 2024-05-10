@@ -54,6 +54,7 @@ app:
     sizes: Tailles
     instrumentations: Instrumentations
     publishers: Editeurs
+    clean: Gestion des fichiers
     login: Connexion
     logout: Déconnexion
     lendings:
@@ -155,7 +156,11 @@ app:
       instrument:
         label: Instrument
         placeholder: Instrument
-        choices: '{instrument} en {key}'
+        choices: '{instrument}{
+            key, select,
+            EMPTY {}
+            other { en {key}}
+          }'
       clef:
         label: Clef
         placeholder: Clef
@@ -173,6 +178,9 @@ app:
         placeholder: N°
       solo: Soliste
       upload: Fichier
+      piece:
+        label: &part_piece_label Pièce
+        placeholder: *part_piece_label
     instrument:
       name: Nom
       key:
@@ -208,8 +216,11 @@ app:
     success:
       creation:
         piece: La pièce <i>{name}</i> a bien été enregistrée avec le N° <b>{id}</b>
+        part: La partie a été ajoutée à la pièce
       duplicates:
         piece: Cette pièce est désormais <b>uniquement sous ce numéro</b>
+      deletion:
+        file: Le fichier a bien été supprimé
 
   piece:
     suisa:
@@ -236,17 +247,30 @@ app:
       duplicate: Enregistrement à supprimer
 
   part: &part
-    solo:
-      numbered:
-        with_clef: '{instrument} Solo {number} ({clef})'
-        without_clef: '{instrument} Solo {number}'
-      with_clef: '{instrument} Solo ({clef})'
-      without_clef: '{instrument} Solo'
-    numbered:
-      with_clef: '{instrument} {number} ({clef})'
-      without_clef: '{instrument} {number}'
-    with_clef: '{instrument} ({clef})'
-    without_clef: '{instrument}'
+    to_string:
+      default: '{piece_id} - {instrument}{solo, select,
+          1 { Solo}
+          other {}
+        }{number, select,
+          EMPTY {}
+          other { {number}}
+        }{clef, select,
+          EMPTY {}
+          other { ({clef})}
+        }'
+      no_id: '{instrument}{solo, select,
+          1 { Solo}
+          other {}
+        }{number, select,
+          EMPTY {}
+          other { {number}}
+        }{clef, select,
+          EMPTY {}
+          other { ({clef})}
+        }'
+    new:
+      title: &part_new Nouvelle partie
+      heading: *part_new
 
   person:
     new:
@@ -369,3 +393,22 @@ app:
     new:
       title: &program_new Nouveau programme
       heading: *program_new 
+
+  clean_file:
+    title: &clean_title Gestion des fichiers
+    heading: *clean_title
+    missing:
+      heading: Parties avec fichier manquant
+      none: Toutes les parties ont leur fichier
+    useless:
+      heading: Fichiers orphelins
+      none: Aucun fichier orphelin
+    backup:
+      heading: Sauvegarde des fichiers
+    action:
+      attach: Rattacher
+      backup: Effectuer une sauvegarde
+
+  success:
+    creation:
+      part: La partie a été créée. Rechargez la page pour mettre à jour la liste des fichiers orphelins

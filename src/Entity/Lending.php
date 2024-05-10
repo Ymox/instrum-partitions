@@ -6,6 +6,7 @@ use App\Repository\LendingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Table(name: 'lending')]
 #[ORM\Entity(repositoryClass: LendingRepository::class)]
@@ -19,14 +20,14 @@ class Lending
     #[ORM\Column(length: 255)]
     private ?string $contact = null;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $start = null;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $end = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private ?string $ours = null;
+    #[ORM\Column]
+    private ?bool $ours = null;
 
     #[ORM\ManyToOne(targetEntity: Band::class, inversedBy: 'lendings')]
     private ?Band $band = null;
@@ -82,14 +83,14 @@ class Lending
         return $this->end;
     }
 
-    public function setOurs(string $ours): static
+    public function setOurs(bool $ours): static
     {
         $this->ours = $ours;
 
         return $this;
     }
 
-    public function isOurs(): ?string
+    public function isOurs(): ?bool
     {
         return $this->ours;
     }

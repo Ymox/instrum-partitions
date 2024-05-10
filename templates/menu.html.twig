@@ -26,6 +26,7 @@
 						or	('instrumentation' in app.current_route)
 						or	('size' in app.current_route)
 						or	('type' in app.current_route)
+						or	('file_clean' in app.current_route)
 					%} active{% endif %}" id="Pieces" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.menu.partitions.heading'|trans }}</a>
 					<div class="dropdown-menu dropdown-menu-dark" aria-labelledby="Pieces">
 						<a class="dropdown-item{% if 'piece' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('piece_index') }}">{{ 'app.menu.partitions.list'|trans }}</a>
@@ -41,6 +42,8 @@
 						<a class="dropdown-item{% if 'instrumentation' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('instrumentation_index') }}">{{ 'app.menu.instrumentations'|trans }}</a>
 						<a class="dropdown-item{% if 'type' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('type_index') }}">{{ 'app.menu.types'|trans }}</a>
 						<a class="dropdown-item{% if 'size' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('size_index') }}">{{ 'app.menu.sizes'|trans }}</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item{% if 'clean' in app.current_route %} active" aria-current="page{% endif %}" href="{{ path('file_clean') }}">{{ 'app.menu.clean'|trans }}</a>
 						{% endif %}
 					</div>
 				</li>

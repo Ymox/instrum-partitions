@@ -29,10 +29,6 @@ services:
       - { name: 'doctrine.orm.entity_listener', entity: 'App\Entity\Part', lazy: true, event: 'postLoad' }
       - { name: 'doctrine.orm.entity_listener', entity: 'App\Entity\Part', lazy: true, event: 'preUpdate' }
 
-  App\Listener\InstrumentListener:
-    tags:
-      - { name: 'doctrine.orm.entity_listener', entity: 'App\Entity\Instrument', lazy: true, event: postLoad }
-
   Gedmo\Timestampable\TimestampableListener:
     tags:
       - { name: doctrine.event_subscriber, connection: default }
