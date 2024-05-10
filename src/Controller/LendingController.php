@@ -124,7 +124,7 @@ class LendingController extends AbstractController
         }
     }
 
-    #[Route('/{id}/print', name: 'print', methods: ['DELETE'])]
+    #[Route('/{id}/print', name: 'print')]
     public function print(Lending $lending): Response
     {
         return $this->render('lending/print.html.twig', [
