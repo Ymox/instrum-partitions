@@ -221,6 +221,12 @@ app:
         piece: Cette pièce est désormais <b>uniquement sous ce numéro</b>
       deletion:
         file: Le fichier a bien été supprimé
+    warning:
+      deletion:
+        file: Impossible de supprimer le fichier
+    error:
+      deletion:
+        file: Impossible de supprimer le fichier
 
   piece:
     suisa:
