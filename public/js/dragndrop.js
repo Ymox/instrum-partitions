@@ -86,4 +86,8 @@ $(function() {
 			$(e).val(null);
 		})
 	});
+	$('form .dropzone[data-upload-uri]').css({
+		"padding-top": "4em",
+		"background": "linear-gradient(to bottom, #f0f8ff 3.5em, transparent 3.5em)"
+	});
 });
