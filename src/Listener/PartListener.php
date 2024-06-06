@@ -15,16 +15,12 @@ class PartListener
 
     private ?string $uploadPath = null;
 
-    private ?string $downloadPath = null;
-
     public function __construct(
         FileUploader $uploader,
-        $uploadPath,
-        $downloadPath
+        $uploadPath
     ) {
         $this->uploader = $uploader;
         $this->uploadPath = $uploadPath;
-        $this->downloadPath = $downloadPath;
     }
 
     public function prePersist(Part $entity)
@@ -34,7 +30,7 @@ class PartListener
 
     public function postLoad(Part $entity)
     {
-        $entity->setDownloadFolder($this->downloadPath);
+        $entity->setDownloadFolder($this->uploadPath);
     }
 
     public function preUpdate(Part $entity)

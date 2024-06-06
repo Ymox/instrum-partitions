@@ -39,7 +39,7 @@ ul {
 	{%- for uselessFile in uselessFiles %}
 		<li><a href="{{ path('file_download', {'file': downloadPath|trim('/', 'left') ~ '/' ~ uselessFile}) }}">{{ uselessFile }}</a>
 			<a href="{{ path('part_new', {'file': uselessFile}) }}" data-bs-target="#Modal" data-bs-toggle="modal" target="_blank" class="btn btn-sm btn-outline-success"><i class="fas fa-paperclip" title="{{ 'app.clean_file.action.attach'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'app.clean_file.action.attach'|trans }}</span></a>
-			<form action="{{ path('file_delete', {'file': uselessFile}) }}" method="post" class="d-inline-block">
+			<form action="{{ path('file_delete', {'file': downloadPath|trim('/', 'left') ~ '/' ~ uselessFile}) }}" method="post" class="d-inline-block">
 				<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
 				<input type="hidden" name="_method" value="DELETE" />
 				<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.delete'|trans }}</span></button>

@@ -42,7 +42,7 @@ class PartController extends AbstractController
                 if ($zip->open($zipTempPath, \ZipArchive::CREATE) == true) {
                     foreach ($parts as $part) {
                         $zip->addFile(
-                            $this->getParameter('kernel.project_dir') . '/public' .  $part->getDownloadPath(),
+                            $part->getDownloadPath(),
                             (new PartTranslatableMessage($part))->trans($translator) . ' .pdf'
                         );
                         $downloadName .= '-' . (new PartTranslatableMessage($part, translationKey: 'app.part.to_string.no_id'))->trans($translator);
@@ -119,14 +119,13 @@ class PartController extends AbstractController
                     defaultEnableZeroHeader: true,
                     contentType: 'application/zip',
                 );
-                $basePath = $this->getParameter('kernel.project_dir') . '/public';
 
                 foreach ($parts as $part) {
-                    if (!is_file($fullFilePath = $basePath . $part->getDownloadPath())) {
+                    if (!is_file($fullFilePath = $part->getDownloadPath())) {
                         continue;
                     }
                     $zip->addFileFromPath(
-                        $this->sanitizeName((new PartTranslatableMessage($part))->trans($translator)) . '-' . $part->getFile() . '.pdf',
+                        $this->sanitizeName((new PartTranslatableMessage($part))->trans($translator)) . '-' . $part->getFile(),
                         $fullFilePath
                     );
                 }

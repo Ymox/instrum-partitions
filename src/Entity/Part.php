@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PartRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Table(name: 'part')]
 #[ORM\Entity(repositoryClass: PartRepository::class)]
@@ -41,7 +42,7 @@ class Part
     private ?Piece $piece = null;
 
     // NOT A PERSISTED PROPERTY
-    private ?\SplFileInfo $upload = null;
+    private ?File $upload = null;
 
     // NOT A PERSISTED PROPERTY
     private string $downloadFolder = '';
@@ -142,10 +143,10 @@ class Part
         return $this;
     }
 
-    public function getUpload(): ?\SplFileInfo
+    public function getUpload(): ?File
     {
         if ($this->upload === null && $this->file && $this->downloadFolder && is_file($filePath = rtrim($this->downloadFolder, '/\\') . '/' . $this->file)) {
-            $this->upload = new \SplFileObject($filePath);
+            $this->upload = new File($filePath);
         }
 
         return $this->upload;
