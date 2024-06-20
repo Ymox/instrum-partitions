@@ -55,12 +55,56 @@ $(function() {
 					success: function(data) {
 						let $target;
 						if ($('#' + data.target + '_file').is(':input')) {
-							$target = $('#' + data.target + '_file');							
+							$target = $('#' + data.target + '_file');
 						} else if ($('#' + data.target).prev().find('.adder').length) {
 							const $container = $('#' + data.target);
 							$container.prev().find('.adder').click();
-							$target = $container.find('[name$="' + 'file' + ']"]').first()
+							$target = $container.find('[name$="' + 'file' + ']"]').first();
 						}
+						const $subform = $target.prev().closest('[data-prototype] > fieldset');
+						let nonMultipleName;
+						if ($subform.find(':input[name]')[0].name.endsWith('[]')) {
+							nonMultipleName = $subform.find(':input[name]')[0].name.substring(0, -3);
+						} else {
+							nonMultipleName = $subform.find(':input[name]')[0].name;
+						}
+						const baseName = nonMultipleName.substring(0, nonMultipleName.lastIndexOf('['));
+						const regexParts = {};
+						for (const field of $subform.find(':input[name]:not(button, [type="hidden"], [type="file"], [type="button"], [type="reset"], [type="submit"], [type="image"])')) {
+							const fieldName = field.name.substring(baseName.length + 1, field.name.lastIndexOf(']'));
+							tag: switch (field.tagName) {
+								case 'SELECT':
+									const options = [];
+									for (const option of [...$('option', field)].reverse()) {
+										if (!option.value) {
+											continue;
+										}
+										options.push('(?<' + fieldName + '$' + option.value + '>' + (option.dataset?.regex || option.text) + ')');
+									}
+									regexParts[fieldName] = options.join('|');
+									break;
+								case 'INPUT':
+									switch (field.type) {
+										case 'checkbox':
+											const label = $(field).parent().find('[for="' + field.id + '"]')[0];
+											regexParts[fieldName] = '(?<' + fieldName + '>' + (label.dataset?.regex || label.innerText) + ')';
+											break tag;
+										case 'number':
+											regexParts[fieldName] = '(?<' + fieldName + '>' + (field.dataset?.regex || '\\d+') + ')';
+											break tag;
+										default:
+											// no break;
+									}
+								default:
+									regexParts[fieldName] = '(?<' + fieldName + '>)';
+									break;
+							}
+						}
+						let regex = $target.data('regex');
+						for (const property in regexParts) {
+							regex = regex.replace(new RegExp('__' + property + '__', 'g'), regexParts[property]);
+						}
+						regex = RegExp(regex.replace(/♭/g, 'b'), 'gi');
 						$target.val(data.fileName);
 						if ($target.prev().find('.downloadable').length) {
 							const $downloadBlock = $target.prev().find('.downloadable');
@@ -69,6 +113,29 @@ $(function() {
 								.val(data.originalName)
 								.prop('title', data.originalName);
 							$downloadBlock.toggle();
+						}
+						const fullMatches = regex.exec(data.originalName)?.groups;
+						if (fullMatches) {
+							const matches = Object.fromEntries(Object.entries(fullMatches).filter(([_, v]) => v != null));
+							for (const property in matches) {
+								let propertyName;
+								let value;
+								const propertyParts = property.split('$');
+								if (propertyParts.length == 1) {
+									propertyName = property;
+									value = matches[propertyName]
+								} else {
+									propertyName = propertyParts[0];
+									value = propertyParts[1];
+								}
+								const field = $subform.find('[name="' + baseName + '[' + propertyName + ']"]')[0];
+								switch (field.type) {
+									case 'checkbox':
+										field.checked = !!value;
+									default:
+										field.value = value;
+								}
+							}
 						}
 					},
 					complete: function() {

@@ -57,6 +57,11 @@ class PartType extends AbstractType
                 },
                 'label_format' => 'app.fields.part.%name%.label',
                 'placeholder' => 'app.fields.part.clef.placeholder',
+                'choice_attr' => function ($value, $key, $index) {
+                    return [
+                        'data-regex' => $this->translator->trans('app.fields.part.clef.choices.note.' . $value),
+                    ];
+                }
             ])
             ->add('number', IntegerType::class, [
                 'required' => false,
@@ -78,6 +83,9 @@ class PartType extends AbstractType
             ])
             ->add('file', HiddenType::class, [
                 'required' => false,
+                'attr' => [
+                    'data-regex' => '(?:__instrument__)(?: __solo__)?(?: __number__)?(?: \(cl(?:é|ef) d(?:e |\')(?:__clef__)\))?',
+                ],
             ])
         ;
     }

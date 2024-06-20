@@ -173,6 +173,10 @@ app:
             g: clef de sol
             c: clef d’ut
             f: clef de fa
+          note:
+            g: sol
+            c: ut
+            f: fa
       number:
         label: Numéro
         placeholder: N°
