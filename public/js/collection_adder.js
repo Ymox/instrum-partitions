@@ -10,7 +10,7 @@ $(function() {
 		const observer = new MutationObserver( function(mutations) {
 			mutations.forEach( function(mutation) {
 				addButton($(mutation.addedNodes[0]).find('[data-prototype]'));
-				$('select', mutation.addedNodes[0]).select2({theme: "bootstrap-5"});
+				$('select.searchable', mutation.addedNodes[0]).select2({theme: "bootstrap-5"});
 			});
 		});
 		observer.observe(this, { childList: true });
