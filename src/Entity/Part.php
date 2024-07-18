@@ -59,7 +59,7 @@ class Part
         return $this->id;
     }
 
-    public function setClef(string $clef): static
+    public function setClef(?string $clef): static
     {
         $this->clef = $clef;
 
@@ -71,7 +71,7 @@ class Part
         return $this->clef;
     }
 
-    public function setNumber(int $number): static
+    public function setNumber(?int $number): static
     {
         $this->number = $number;
 
