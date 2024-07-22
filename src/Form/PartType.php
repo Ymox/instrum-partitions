@@ -69,7 +69,7 @@ class PartType extends AbstractType
                 'attr' => [
                     'placeholder' => 'app.fields.part.number.placeholder',
                     'min' => 0,
-                    'max' => 4,
+                    'max' => 7,
                 ],
             ])
             ->add('solo', CheckboxType::class, [
