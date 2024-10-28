@@ -77,7 +77,7 @@
 <p class="alert alert-info">Certaines éditions listent exactement les partitions normalement disponibles dans le conducteur, conserver l’ordre de cette liste.</p>
 <p>De manière générale, on retrouve cette logique :</p>
 <ol>
-	<li>directeur en premier ;
+	<li>direction en premier ;
 	<li>parties solistiques de la pièce.<br />
 		A ne pas confondre avec les parties solistiques d’orchestre, pensées pour pallier un manque d’effectif, et qui sont des "voix zéro" pour l’instrument ;</li>
 	<li>puis on regroupe par famille. Dans l’ordre :
@@ -101,9 +101,9 @@
 		<ul>
 			<li>cors : F, E♭ ;</li>
 			<li>euphoniums : B♭ clef de sol, ut (C) clef de fa ;</li>
-			<li>trombones : ut (C) clef de fa, B♭ clef de sol, ut (C) clef d’ut 4 ;</li>
-			<li>basses : E♭, B♭, ut (C).<br />
-				Nota : il arrive que la partition de basse en ut comprenne deux voix, alors elle vient en premier.</li>
+			<li>trombones : ut (C) clef de fa, B♭ clef de sol, ut (C) clef d’ut 4, B♭ clef de fa ;</li>
+			<li>tubas (basses) : E♭, B♭, ut (C).<br />
+				Nota : il arrive que la partition de tuba en ut comprenne deux voix, alors elle vient en premier.</li>
 		</ul>
 	</li>
 </ol>
@@ -124,7 +124,7 @@
 		</thead>
 		<tbody class="table-group-divider">
 			<tr title="1 – permet de se donner rapidement une idée des pièces quand on les ressort des archives">
-				<td>Directeur</td><td>Conductor, (Full) score</td><td>Partitur</td>
+				<td>Direction</td><td>Conductor, (Full) score</td><td>Partitur</td>
 			</tr>
 			<tr title="Soliste (2), bois (3.i), instrument le plus aigu (4), première voix (5 - 1)">
 				<td>Flûte solo 1</td><td>Solo 1st (Concert/Transverse) Flute</td><td>Solo (Quer-)Flöte 1</td>
@@ -411,6 +411,63 @@
 <p>La valeur de <strong>50 %</strong> suffit et permet d’avoir des noirs nets, mais surtout des jaunes qui sortent blancs.</p>
 <h3>Résolution</h3>
 <p>Pour l’instant, on utilise <strong>300 dpi/ppp</strong>. Cela permet de bons détails pour les agrandissements si nécessaire, tout en conservant des fichiers suffisamment peu gourmands en espace de stockage.</p>
-<h2>Dimensions</h2>
-<p><strong>A5, A4 ou A3 uniquement</strong>. Pour les partitions reçues au format C-B3, on numérisera chaque page au format A4, tandis que les formats carnet de marche seront numérisés en A5 pour faciliter les agrandissements et l'impression à taille réelle</p>
+<h3>Dimensions</h3>
+<p><strong>A5, A4 ou A3 uniquement</strong>. Pour les partitions reçues au format C-B3, on numérisera chaque page au format A4 (ou en A3 puis scindera les pages), tandis que les formats carnet de marche seront numérisés en A5 pour faciliter les agrandissements et l’impression à taille réelle</p>
+<h3>Nommage des fichiers</h3>
+<p>Les fichiers n’ont en eux-mêmes pas besoin d’être nommées d’une certaine manière. Lors de la préparation, deux extrêmes s’offrent à l’utilisateur :</p>
+<ol>
+	<li>soit les fichiers sont simplement numérotés par page, et on a conservé le fichier numérisé avec toutes les pages. On peut ainsi renseigner les informations reprises de ce dernier en se basant sur le numéro de page ;</li>
+	<li>soit les fichiers sont nommés de manière très rigoureuse et les informations peuvent être reprises du nom.</li>
+</ol>
+<h4>Nommage rigoureux</h4>
+<p>Le nommage rigoureux des fichiers comporte les éléments suivants, exclusivement dans cet ordre, mais sans être sensible à la casse. Certains éléments sont facultatifs s’ils n’ont pas de raison d’être présents ou s’il n'y a pas de confusion possible.</p>
+<ol>
+	<li><span class="text-primary">Le nom complet avec l'éventuelle transposition, en français</span>.
+		<ul>
+			<li>Les accents doivent être renseignés. Leur absence ne permettra pas l’identification de l’instrument.</li>
+			<li>On pourra conserver le nom simple pour l’instrument le plus courant : <q>Clarinette</q> pour la clarinette en si♭, <q>Cor</q> pour le cor en fa.</li>
+			<li>Avec la transposition s’il y en a plusieurs pour le même instrument, quand il s’agit de la même voix.<br />
+				Par exemple, afin d’éviter la confusion entre clarinette en mi♭ et en si♭, on notera <q>Clarinette en mi<strong>b</strong></q>, et pas seulement <q>Clarinette</q>, qu'on utilisera pour la plus courante clarinette en si♭.<br />
+				Attention évidemment à la différence entre clarinettes en si♭, en mi♭ et alto en mi♭, qui sont trois instruments physiquement différents.</li>
+			<li>Pour faciliter la saisie, on utilisera <q>b</q> au lieu de <q>♭</q> pour le bémol.</li>
+			<li>Le mot <q>en</q> pour la transposition peut être omis, ex. : <q>Clarinette mib</q>.</li>
+		</ul>
+	</li>
+	<li><span class="text-info">Le numéro de voix</span>.
+		<ul>
+			<li>Peut être omis s’il n’y a qu’une unique voix pour l’instrument.</li>
+			<li>Mettre 0 pour les voix qui sont des solistes de registre relatif à l’effectif.</li>
+			<li>En cas de plusieurs voix sur la même partition :
+				<ul>
+					<li>si celle-ci est la seule, ne rien mettre (ex. : tuba en ut) ;</li>
+					<li>sinon, mettre le plus petit numéro (ex. : cor en fa 1 et 3, mettre 1 ; cor en fa 2 et 4, mettre 2 ; trompette 2 et 3, mettre 2).</li>
+				</ul>
+			</li>
+		</ul>
+	<li><span class="text-success">L’éventuelle indication de soliste <em>de la pièce</em></span>, par la mention <strong><q>soliste</q> en toutes lettres</strong>.</li>
+	<li><span class="text-secondary">L’éventuelle indication de clef</span>, <strong>en toutes lettres et entre parenthèses</strong>. Les deux orthographes sont reconnues.</li>
+</ol>
+<p>Quelques exemples sont fournis ci-après.</p>
+<ul>
+	<li><span class="text-primary">Trompette en mib</span> <span class="text-info">1</span> <span class="text-success">soliste</span></li>
+	<li><span class="text-primary">Trompette en mib</span> <span class="text-info">2</span> <span class="text-success">soliste</span></li>
+	<li><span class="text-primary">Clarinette</span> <span class="text-info">1</span></li>
+	<li><span class="text-primary">Clarinette</span> <span class="text-info">2</span> — même s’il y a la voix 3 aussi sur la partition</li>
+	<li><span class="text-primary">Saxophone alto</span> <span class="text-info">2</span></li>
+	<li><span class="text-primary">Trompette</span> <span class="text-info">1</span></li>
+	<li><span class="text-primary">Cor</span> <span class="text-info">1</span> — est souvent doublé par le cor 3</li>
+	<li><span class="text-primary">Cor</span> <span class="text-info">2</span> — est souvent doublé par le cor 4</li>
+	<li><span class="text-primary">Euphonium</span> <span class="text-secondary">(clef de sol)</span></li>
+	<li><span class="text-primary">Euphonium</span> <span class="text-secondary">(clef de fa)</span></li>
+	<li><span class="text-primary">Euphonium en sib</span> <span class="text-secondary">(clef de fa)</span> — seule manière de dissocier ut et si♭ clef de fa</li>
+	<li><span class="text-primary">Trombone</span> <span class="text-info">1</span> <span class="text-secondary">(clef de fa)</span></li>
+	<li><span class="text-primary">Trombone</span> <span class="text-info">1</span> <span class="text-secondary">(clef de sol)</span></li>
+	<li><span class="text-primary">Trombone</span> <span class="text-info">1</span> <span class="text-secondary">(clef d'ut)</span></li>
+	<li><span class="text-primary">Trombone en sib</span> <span class="text-info">1</span> <span class="text-secondary">(clef de fa)</span> — similaire à l’euphonium, seule manière de dissocier ut et si♭ clef de fa</li>
+	<li><span class="text-primary">Tuba</span> <span class="text-secondary">(clef de fa)</span> — même s’il y a deux voix sur la partitions</li>
+	<li><span class="text-primary">Tuba en mi♭</span> <span class="text-secondary">(clef de sol)</span></li>
+	<li><span class="text-primary">Tuba en mi♭</span> <span class="text-secondary">(clef de fa)</span></li>
+	<li><span class="text-primary">Tuba en si♭</span> <span class="text-secondary">(clef de sol)</span></li>
+	<li><span class="text-primary">Tuba en si♭</span> <span class="text-secondary">(clef de fa)</span></li>
+</ul>
 {% endblock %}

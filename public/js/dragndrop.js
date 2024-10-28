@@ -104,7 +104,7 @@ $(function() {
 						for (const property in regexParts) {
 							regex = regex.replace(new RegExp('__' + property + '__', 'g'), regexParts[property]);
 						}
-						regex = RegExp(regex.replace(/♭/g, 'b'), 'gi');
+						regex = RegExp(regex.replace(/♭/g, 'b').replace(' en ', '(?: en)? '), 'gi');
 						$target.val(data.fileName);
 						if ($target.prev().find('.downloadable').length) {
 							const $downloadBlock = $target.prev().find('.downloadable');
