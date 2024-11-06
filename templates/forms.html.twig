@@ -36,8 +36,6 @@
 {% endblock %}
 
 {% block file_widget %}
-	{%- apply spaceless %}
-
 	<div class="input-group file-link" role="group">
 		<div id="{{ id }}_filled" class="input-group-prepend input-group downloadable" style="{% if file_url is null %}display: none;{% endif %}">
 			<a href="{{ file_url }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'app.file.download'|trans }}"><i class="fas fa-file-download"></i></a>
@@ -50,8 +48,6 @@
 		{% endif %}
 		{{ block('form_widget') }}
 	</div>
-
-	{% endapply -%}
 {% endblock %}
 
 {# Errors #}
