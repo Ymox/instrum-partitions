@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Program;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +56,7 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'show')]
-    public function show(Program $program): Response
+    public function show(#[MapEntity] Program $program): Response
     {
         $deleteForm = $this->createDeleteForm($program);
 
@@ -66,7 +67,7 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Program $program, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Program $program, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($program);
         $editForm = $this->createForm(\App\Form\ProgramType::class, $program);
@@ -87,7 +88,7 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Program $program, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Program $program, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($program);
         $form->handleRequest($request);

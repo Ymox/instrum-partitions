@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Band;
 use App\Repository\BandRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,7 +57,7 @@ class BandController extends AbstractController
     }
     
     #[Route('/{id}/show', name: 'show')]
-    public function show(Band $band): Response
+    public function show(#[MapEntity] Band $band): Response
     {
         $deleteForm = $this->createDeleteForm($band);
         
@@ -67,7 +68,7 @@ class BandController extends AbstractController
     }
     
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Band $band, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Band $band, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($band);
         $editForm = $this->createForm(\App\Form\BandType::class, $band);
@@ -87,7 +88,7 @@ class BandController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Band $band, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Band $band, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($band);
         $form->handleRequest($request);

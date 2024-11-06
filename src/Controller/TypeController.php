@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Type;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ class TypeController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Type $type, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Type $type, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($type);
         $editForm = $this->createForm(\App\Form\TypeType::class, $type);
@@ -65,7 +66,7 @@ class TypeController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Type $type, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Type $type, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($type);
         $form->handleRequest($request);

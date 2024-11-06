@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Concert;
 use App\Repository\ConcertRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +53,7 @@ class ConcertController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'show')]
-    public function show(Concert $concert): Response
+    public function show(#[MapEntity] Concert $concert): Response
     {
         $deleteForm = $this->createDeleteForm($concert);
 
@@ -63,7 +64,7 @@ class ConcertController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Concert $concert, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Concert $concert, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($concert);
         $editForm = $this->createForm(\App\Form\ConcertType::class, $concert);
@@ -83,7 +84,7 @@ class ConcertController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Concert $concert, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Concert $concert, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($concert);
         $form->handleRequest($request);

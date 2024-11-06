@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Size;
 use App\Repository\SizeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ class SizeController extends AbstractController
     }
 
     #[Route('/{name}/show', name: 'show')]
-    public function show(Size $size): Response
+    public function show(#[MapEntity(id: 'name')] Size $size): Response
     {
         $deleteForm = $this->createDeleteForm($size);
 
@@ -56,7 +57,7 @@ class SizeController extends AbstractController
     }
 
     #[Route('/{name}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Size $size, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity(id: 'name')] Size $size, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($size);
         $editForm = $this->createForm(\App\Form\SizeType::class, $size);
@@ -76,7 +77,7 @@ class SizeController extends AbstractController
     }
 
     #[Route('/{name}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Size $size, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity(id: 'name')] Size $size, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($size);
         $form->handleRequest($request);

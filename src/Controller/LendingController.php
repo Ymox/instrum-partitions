@@ -7,6 +7,7 @@ use App\Config\State;
 use App\Entity\Lending;
 use App\Repository\LendingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,7 +57,7 @@ class LendingController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'show')]
-    public function show(Lending $lending): Response
+    public function show(#[MapEntity] Lending $lending): Response
     {
         $deleteForm = $this->createDeleteForm($lending);
 
@@ -67,7 +68,7 @@ class LendingController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Lending $lending, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Lending $lending, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($lending);
         $editForm = $this->createForm(\App\Form\LendingType::class, $lending);
@@ -88,7 +89,7 @@ class LendingController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Lending $lending, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Lending $lending, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($lending);
         $form->handleRequest($request);
@@ -125,7 +126,7 @@ class LendingController extends AbstractController
     }
 
     #[Route('/{id}/print', name: 'print')]
-    public function print(Lending $lending): Response
+    public function print(#[MapEntity] Lending $lending): Response
     {
         return $this->render('lending/print.html.twig', [
             'lending' => $lending,

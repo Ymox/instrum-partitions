@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Person;
 use App\Repository\PersonRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,7 +57,7 @@ class PersonController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'show')]
-    public function show(Person $person): Response
+    public function show(#[MapEntity] Person $person): Response
     {
         $deleteForm = $this->createDeleteForm($person);
 
@@ -67,7 +68,7 @@ class PersonController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Person $person, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Person $person, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($person);
         $editForm = $this->createForm(\App\Form\PersonType::class, $person);
@@ -87,7 +88,7 @@ class PersonController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Person $person, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Person $person, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($person);
         $form->handleRequest($request);

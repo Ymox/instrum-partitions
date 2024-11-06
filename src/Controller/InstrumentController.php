@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Instrument;
 use App\Repository\InstrumentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +47,7 @@ class InstrumentController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Instrument $instrument, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Instrument $instrument, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($instrument);
         $editForm = $this->createForm(\App\Form\InstrumentType::class, $instrument);
@@ -66,7 +67,7 @@ class InstrumentController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Instrument $instrument, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Instrument $instrument, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($instrument);
         $form->handleRequest($request);

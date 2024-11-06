@@ -7,6 +7,7 @@ use App\Entity\Piece;
 use App\Entity\Concert;
 use App\Repository\PieceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
@@ -79,7 +80,7 @@ class PieceController extends AbstractController
     }
 
     #[Route('/piece/{id}/show', name: 'piece_show')]
-    public function show(Piece $piece): Response
+    public function show(#[MapEntity] Piece $piece): Response
     {
         $deleteForm = $this->createDeleteForm($piece);
 
@@ -90,7 +91,7 @@ class PieceController extends AbstractController
     }
 
     #[Route('/piece/{id}/edit', name: 'piece_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Piece $piece, EntityManagerInterface $em): Response
+    public function edit(Request $request, #[MapEntity] Piece $piece, EntityManagerInterface $em): Response
     {
         $deleteForm = $this->createDeleteForm($piece);
         $editForm = $this->createForm(\App\Form\PieceType::class, $piece);
@@ -110,7 +111,7 @@ class PieceController extends AbstractController
     }
 
     #[Route('/piece/{id}/update', name: 'piece_update')]
-    public function update(Request $request, Piece $piece, EntityManagerInterface $em): Response
+    public function update(Request $request, #[MapEntity] Piece $piece, EntityManagerInterface $em): Response
     {
         if ($request->query->has('states')) {
             foreach ($request->query->all('states') as $state => $action) {
@@ -158,7 +159,7 @@ class PieceController extends AbstractController
     }
 
     #[Route('/piece/duplicates/{master}/{duplicate}', methods: ['GET', 'POST'])]
-    public function duplicates(Request $request, Piece $master, Piece $duplicate, TranslatorInterface $translator, EntityManagerInterface $em): Response
+    public function duplicates(Request $request, #[MapEntity(id: 'master')] Piece $master, #[MapEntity(id: 'duplicate')] Piece $duplicate, TranslatorInterface $translator, EntityManagerInterface $em): Response
     {
         $masterForm = $this->createForm(\App\Form\PieceType::class, $master);
         $masterForm->add('concerts', EntityType::class, [

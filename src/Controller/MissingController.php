@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Missing;
 use App\Repository\MissingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class MissingController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Request $request, Missing $missing, EntityManagerInterface $em): Response
+    public function delete(Request $request, #[MapEntity] Missing $missing, EntityManagerInterface $em): Response
     {
         $form = $this->createDeleteForm($missing);
         $form->handleRequest($request);
