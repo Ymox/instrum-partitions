@@ -11,14 +11,14 @@ class BinaryMaskChoiceType extends AbstractType implements DataTransformerInterf
 {
     protected $choices = [];
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->choices = $options['choices'];
         $builder->addModelTransformer($this);
         parent::buildForm($builder, $options);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
         $resolver

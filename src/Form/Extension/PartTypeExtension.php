@@ -38,7 +38,7 @@ class PartTypeExtension extends AbstractTypeExtension
         ];
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired([
@@ -48,7 +48,7 @@ class PartTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $part = $form->getParent()->getData();
 

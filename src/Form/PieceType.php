@@ -17,7 +17,7 @@ class PieceType extends AbstractType
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', null, [
@@ -125,7 +125,6 @@ class PieceType extends AbstractType
                 'choice_label' => function ($choice, $key, $value) {
                     return 'app.fields.piece.states.' . $value;
                 },
-                
             ])
             ->add('missings', CollectionType::class, [
                 'entry_type'   => MissingType::class,
@@ -159,7 +158,7 @@ class PieceType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => \App\Entity\Piece::class
