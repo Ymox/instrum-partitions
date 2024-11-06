@@ -19,13 +19,13 @@ class BandController extends AbstractController
     public function index(Request $request, BandRepository $bandRepository): Response
     {
         $bands = $bandRepository->paginateBy([], ['name' => 'ASC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
-        
+
         return $this->render('band/index.html.twig', [
             'bands' => $bands,
             'nbPages' => max(ceil($bands->count() / $this->getParameter('paginate.per_page')), 1),
         ]);
     }
-    
+
     #[Route('/', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -34,11 +34,11 @@ class BandController extends AbstractController
             'action' => $this->generateUrl('band_new'),
         ]);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($band);
             $em->flush();
-            
+
             if ($request->isXmlHttpRequest()) {
                 return $this->json([
                     'value' => $band->getId(),
@@ -46,27 +46,27 @@ class BandController extends AbstractController
                     'text' => (string)$band,
                 ]);
             }
-            
+
             return $this->redirectToRoute('band_show', ['id' => $band->getId()]);
         }
-        
+
         return $this->render('band/new.html.twig', [
             'band' => $band,
             'form' => $form,
         ]);
     }
-    
+
     #[Route('/{id}/show', name: 'show')]
     public function show(#[MapEntity] Band $band): Response
     {
         $deleteForm = $this->createDeleteForm($band);
-        
+
         return $this->render('band/show.html.twig', [
             'band' => $band,
             'delete_form' => $deleteForm,
         ]);
     }
-    
+
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, #[MapEntity] Band $band, EntityManagerInterface $em): Response
     {
