@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 $(function() {
 	$('form').on('dragover dragenter',
@@ -41,8 +41,8 @@ $(function() {
 					url: uri,
 					data: formData,
 					xhr: function() {
-						let appXhr = $.ajaxSettings.xhr();
-		
+						const appXhr = $.ajaxSettings.xhr();
+
 						if (appXhr.upload) {
 							appXhr.upload.addEventListener('progress', function(e) {
 								console.log(e.loaded, e.total);
@@ -153,8 +153,6 @@ $(function() {
 			$(e).val(null);
 		})
 	});
-	$('form .dropzone[data-upload-uri]').css({
-		"padding-top": "4em",
-		"background": "linear-gradient(to bottom, #f0f8ff 3.5em, transparent 3.5em)"
-	});
+	$('form .dropzone[data-upload-uri]').addClass('dropzone-active');
+	$('form .dropzone.dropzone-active').append($('form .dropzone.dropzone-active').data('dropzone-prototype'));
 });

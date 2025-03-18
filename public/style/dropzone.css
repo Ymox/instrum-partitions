@@ -1,0 +1,46 @@
+/*
+w	Wish, colour to reproduce
+t	Transparency to use for the generated colour
+b	Background, colour "beyond" the transparency
+*/
+.dropzone.dropzone-active {
+	/* (w - t * b) / (1 - b) where w = #cff4fc and b = #ffffff, t = 50% */
+	--background: #9fe9fa80;
+	/* There's no way to darken enough the colour to match Bootstrap's
+	--color: #0000ff; */
+	--size: 3.5em;
+	--margin: 1rem;
+	position: relative;
+	&[data-add-direction="prepend"] {
+		/* Just a band, no real gradient */
+		background: linear-gradient(var(--background) var(--size), transparent var(--size));
+		padding-top: calc(var(--size) + var(--margin));
+		.dropzone-info {
+			top: calc(var(--margin) * 2);
+			translate: -50% -75%;
+		}
+	}
+	&[data-add-direction="append"] {
+		/* Just a band, no real gradient */
+		background: linear-gradient(to top, var(--background) var(--size), transparent var(--size));
+		padding-bottom: var(--size);
+		.dropzone-info {
+			bottom: 0;
+			translate: -50% -75%;
+		}
+	}
+	.dropzone-info {
+		/* There's no way to darken enough the colour to match Bootstrap's
+		color: var(--color); */
+		color: #000000;
+		position: absolute;
+		left: 50%;
+		z-index: -1;
+	}
+	&.is-dragover {
+		/* (w - t * b) / (1 - b) where w = #d1e7dd and b = #ffffff, t = 50% */
+		--background: #a3cfbb80;
+		/* There's no way to darken enough the colour to match Bootstrap's
+		--color: #008000; */
+	}
+}

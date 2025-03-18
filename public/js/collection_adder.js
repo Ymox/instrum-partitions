@@ -1,9 +1,12 @@
 $(function() {
+	const removeButton = function($where) {
+		$('>div, >fieldset, >tbody>tr', $where).filter(function(i, retest) {
+			return $('.remover', retest).length === 0 && !$(retest).is('.dropzone-info');
+		}).css('position', 'relative').children().append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;"><i class="fa fa-times"></i></button>')
+	}
 	const addButton = function($where) {
 		$where.prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
-		$('>div, >fieldset, >tbody>tr', $where).filter(function() {
-			return $('.remover', $where).length === 0;
-		}).css('position', 'relative').children().append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;"><i class="fa fa-times"></i></button>')
+		removeButton($where);
 	}
 	$('[data-prototype]').each( function() {
 		addButton($(this));
@@ -20,10 +23,20 @@ $(function() {
 		let prototype = $container.data('prototype');
 		const index = new Date().getTime() % (10 * 60 * 1000);
 		prototype = prototype.replace(/__name__(label__)?/ig, index);
-		$container.prepend(prototype);
-		$('>div, >fieldset, >tbody>tr', $container).filter(function() {
-			return $('.remover', this).length === 0;
-		}).css('position', 'relative').children().append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;"><i class="fa fa-times"></i></button>');
+		if ($container.data('add-direction') == 'prepend') {
+			if ($container.data('dropzone-prototype')) {
+				$container.children(':first-child').after(prototype);
+			} else {
+				$container.prepend(prototype);
+			}
+		} else {
+			if ($container.data('dropzone-prototype')) {
+				$container.children(':last-child').before(prototype);
+			} else {
+				$container.append(prototype);
+			}
+		}
+		removeButton($container);
 	});
 	$('form').on('click', '.remover', function() {
 		$(this).toggleClass('btn-danger btn-light').html('<i class="fa fa-' + ($(this).is('.btn-danger') ? 'times' : 'undo') + '"></i>');

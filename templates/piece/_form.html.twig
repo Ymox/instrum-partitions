@@ -2,7 +2,12 @@
 		{{ form_row(form.name) }}
 		{{ form_row(form.translation) }}
 		{{ form_row(form.movements) }}
-		{{ form_row(form.parts, {'attr': {'class' : 'dropzone', 'data-upload-uri': path('ajax_upload', {'target': form.parts.vars.id})}}) }}
+		{{ form_row(form.parts, {'attr': {
+			'class' : 'dropzone',
+			'data-upload-uri': path('ajax_upload', {'target': form.parts.vars.id}),
+			'data-add-direction': 'append',
+			'data-dropzone-prototype': '<div class="dropzone-info"><i class="fas fa-cloud-upload-alt"></i> ' ~ 'app.dropzone.hint'|trans ~ '</div>'}}
+		) }}
 		<div class="row">
 			{{ form_row(form.composers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
 			{{ form_row(form.arrangers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}

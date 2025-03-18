@@ -33,6 +33,8 @@ global:
       desc: Tri descendant appliqué
 
 app:
+  dropzone:
+    hint: Glissez les fichiers PDF dans cette zone
   login:
     title: &title Authentification
     heading: *title
@@ -118,7 +120,7 @@ app:
       arrangements: Arrangements
     size:
       maxHeight: Hauteur maximale
-      maxWidth: Largeur maximale 
+      maxWidth: Largeur maximale
       minHeight: Hauteur minimale
       minWidth: Largeur minimale
       name: Nom
@@ -144,7 +146,7 @@ app:
     lending:
       band: Ensemble
       contact: Personne de contact
-      start: Commencé 
+      start: Commencé
       end: Clos
       ours: C’est nous qui prêtons
       pieces: Partitions
@@ -211,7 +213,7 @@ app:
           string: Cordes
           percussion: Percussion
           voice: Voix
-      common: 
+      common:
         label: Courant
         "true": Courant
         "false": Peu courant
@@ -289,7 +291,7 @@ app:
     index:
       title: &person_index Compositeurs et arrangeurs
       heading: *person_index
-    
+
   missing:
     index:
       title: &missing_index Voix manquantes
@@ -343,14 +345,14 @@ app:
     new:
       title: &type_new Nouveau type
       heading: *type_new
-      
+
   concert:
     index:
       title: &concert_index Liste des concerts
       heading: *concert_index
     new:
       title: &concert_new Nouveau concert
-      heading: *concert_new   
+      heading: *concert_new
     show:
       too_early: Désolé, mais cette information n’est pas disponible pour le moment. Rendez-vous au concert !
       arrangers:
@@ -402,7 +404,7 @@ app:
       heading: *program_index
     new:
       title: &program_new Nouveau programme
-      heading: *program_new 
+      heading: *program_new
 
   clean_file:
     title: &clean_title Gestion des fichiers
