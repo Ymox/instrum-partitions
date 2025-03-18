@@ -38,8 +38,8 @@
 {% block file_widget %}
 	<div class="input-group file-link" role="group">
 		<div id="{{ id }}_filled" class="input-group-prepend input-group downloadable" style="{% if file_url is null %}display: none;{% endif %}">
-			<a href="{{ file_url }}" download="{{ download_name }}" class="btn btn-info" title="{{ 'app.file.download'|trans }}"><i class="fas fa-file-download"></i></a>
-			<button type="button" class="btn btn-danger cleaner" title="{{ 'app.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fas fa-times"></i></button>
+			<a href="{{ file_url }}" download="{{ download_name }}" class="btn btn-outline-info" title="{{ 'app.file.download'|trans }}"><i class="fas fa-file-download"></i></a>
+			<button type="button" class="btn btn-outline-danger cleaner" title="{{ 'app.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fas fa-times"></i></button>
 			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" title="{{ download_name }}" readonly="readonly" />
 		</div>
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control rounded-start downloadable')|trim, 'data-upload-uri': path('ajax_upload', {'target': form.parent.vars.id})}) %}
