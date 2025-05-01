@@ -3,7 +3,7 @@
  */
 $(function() {
 	$('.check-all').change( function() {
-		const target = $(this).data('target');
+		const target = $(this).data('target').replace(/(?!^)\./g, '\\.');
 		$(target).prop('checked', $(this).prop('checked'));
 	});
 	$('.check-all').each( function() {
@@ -15,7 +15,7 @@ $(function() {
 				$parent.prop('checked', true);
 			} else if ($(target + ':checked').length == 0) {
 				$parent.prop('indeterminate', false);
-				$parent.prop('checked', false);				
+				$parent.prop('checked', false);
 			} else {
 				$parent.prop('indeterminate', true);
 				$parent.prop('checked', false);
