@@ -41,24 +41,26 @@ security:
 
   access_control:
     - { path: /download, roles: ROLE_DOWNLOAD }
+
     - { path: /new, roles: ROLE_USER }
     - { path: /edit, roles: ROLE_USER }
     - { path: /update, roles: ROLE_USER }
     - { path: /upload, roles: ROLE_USER }
-    - { path: ^/publisher, roles: ROLE_USER }
-    - { path: ^/lending, roles: ROLE_USER }
+
     - { path: ^/band, roles: ROLE_USER }
-    - { path: ^/suisa, roles: ROLE_USER }
-    - { path: ^/part, roles: ROLE_USER }
     - { path: ^/instrument, roles: ROLE_USER }
+    - { path: ^/lending, roles: ROLE_USER }
 #   - { path: ^/missing, roles: ROLE_USER }
+    - { path: ^/part, roles: ROLE_USER }
+    - { path: ^/publisher, roles: ROLE_USER }
+    - { path: ^/suisa, roles: ROLE_USER }
 
     - { path: /delete, roles: ROLE_ADMIN }
-    - { path: ^/instrumentation, roles: ROLE_ADMIN }
-    - { path: ^/status, roles: ROLE_ADMIN }
-    - { path: ^/size, roles: ROLE_ADMIN }
-    - { path: ^/type, roles: ROLE_ADMIN }
-    - { path: ^/piece/duplicates, roles: ROLE_ADMIN }
     - { path: ^/clean, roles: ROLE_ADMIN }
+    - { path: ^/instrumentation, roles: ROLE_ADMIN }
+    - { path: ^/piece/duplicates, roles: ROLE_ADMIN }
+    - { path: ^/size, roles: ROLE_ADMIN }
+    - { path: ^/status, roles: ROLE_ADMIN }
+    - { path: ^/type, roles: ROLE_ADMIN }
 
     - { path: ^/, roles: PUBLIC_ACCESS }
