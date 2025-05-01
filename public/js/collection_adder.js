@@ -1,25 +1,35 @@
+/**
+ *
+ */
+const collectionAdderScriptTag = document.currentScript;
 $(function() {
 	const removeButton = function($where) {
 		$('>div, >fieldset, >tbody>tr', $where).filter(function(i, retest) {
 			return $('.remover', retest).length === 0 && !$(retest).is('.dropzone-info');
-		}).css('position', 'relative').children().append('<button type="button" class="btn btn-sm btn-danger remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;"><i class="fa fa-times"></i></button>')
-	}
+		}).css('position', 'relative').children().append(collectionAdderScriptTag.dataset.collectionRemoverPrototype)
+	};
 	const addButton = function($where) {
-		$where.prev().append(' ').append($('<button>', {type: 'button', 'class': 'btn btn-sm btn-success adder', 'html': '<i class="fa fa-plus-circle"></i>'}));
+		$where.prev().append(' ').append(collectionAdderScriptTag.dataset.collectionAdderPrototype);
 		removeButton($where);
 	}
-	$('[data-prototype]').each( function() {
+	$(':not(button)[data-prototype]').each( function() {
 		addButton($(this));
-		const observer = new MutationObserver( function(mutations) {
+		const collectionObserver = new MutationObserver( function(mutations) {
 			mutations.forEach( function(mutation) {
 				addButton($(mutation.addedNodes[0]).find('[data-prototype]'));
 				$('select.searchable', mutation.addedNodes[0]).select2({theme: "bootstrap-5"});
 			});
 		});
-		observer.observe(this, { childList: true });
+		collectionObserver.observe(this, { childList: true });
 	});
-	$('form').on('click', '.adder', function() {
-		const $container = $(this).closest('fieldset').find('[data-prototype]').first();
+	const modalObserver = new MutationObserver( function(mutations) {
+		mutations.forEach( function(mutation) {
+			addButton($(mutation.addedNodes[3]).find('[data-prototype]'));
+		});
+	});
+	modalObserver.observe(document.getElementsByClassName('modal-content')[0], { childList: true });
+	$('form, #Modal').on('click', '.collection-adder', function() {
+		const $container = $(this).closest('fieldset, form').find('[data-prototype]').first();
 		let prototype = $container.data('prototype');
 		const index = new Date().getTime() % (10 * 60 * 1000);
 		prototype = prototype.replace(/__name__(label__)?/ig, index);
@@ -38,8 +48,17 @@ $(function() {
 		}
 		removeButton($container);
 	});
-	$('form').on('click', '.remover', function() {
-		$(this).toggleClass('btn-danger btn-light').html('<i class="fa fa-' + ($(this).is('.btn-danger') ? 'times' : 'undo') + '"></i>');
-		$(this).closest('div, fieldset').toggleClass('bg-danger text-white').find(':input:not(button)').prop('disabled', !$(this).is('.btn-danger'));
+	$('form, #Modal').on('click', '.collection-remover', function() {
+		const newContent = $(this).data('switch-content');
+		const newClass = $(this).data('switch-class');
+		const newParentClass = $(this).data('switch-parent-class');
+		if (newContent) {
+			$(this).data('switch-content', $(this).html());
+			$(this).data('active', !$(this).data('active'));
+			$(this).toggleClass(newClass).html(newContent);
+			$(this).closest('div, fieldset').toggleClass(newParentClass).find(':input:not(button)').prop('disabled', !$(this).data('active'));
+		} else {
+			$(this).closest('div, fieldset').remove();
+		}
 	});
 });

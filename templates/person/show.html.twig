@@ -17,23 +17,23 @@
 			</tr>
 			<tr>
 				<th>{{ 'app.fields.person.compositions'|trans }}</th>
-				<td>{{ person.compositions.count }}{% if person.compositions.count %} <a href="{{ path('piece_index', {'q': {'composer': person.lastName}}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-list"></i></a>{% endif %}</th>
+				<td>{{ person.compositions.count }}{% if person.compositions.count %} <a href="{{ path('piece_index', {'q': {'composer': person.lastName}}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.list' }}" aria-label="{{ 'global.action.list' }}">📃</a>{% endif %}</th>
 				<th>{{ 'app.fields.person.arrangements'|trans }}</th>
-				<td>{{ person.arrangements.count }}{% if person.arrangements.count %} <a href="{{ path('piece_index', {'q': {'arranger': person.lastName}}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-list"></i></a>{% endif %}</th>
+				<td>{{ person.arrangements.count }}{% if person.arrangements.count %} <a href="{{ path('piece_index', {'q': {'arranger': person.lastName}}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.list' }}" aria-label="{{ 'global.action.list' }}">📃</a>{% endif %}</th>
 			</tr>
 		</tbody>
 	</table>
 
 	<ul class="list-inline float-end">
 		<li class="list-inline-item">
-			<a href="{{ path('person_index') }}" class="btn btn-light"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.list'|trans }}</span></a>
+			<a href="{{ path('person_index') }}" class="btn btn-outline-secondary" title="{{ 'global.action.list'|trans }}" aria-label="{{ 'global.action.list'|trans }}">📃</a>
 		</li>
 		<li class="list-inline-item">
-			<a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.edit'|trans }}</span></a>
+			<a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a>
 		</li>
 		<li class="list-inline-item">
 			{{ form_start(delete_form) }}
-				<button type="submit" class="btn btn-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.delete'|trans }}</span></button>
+				<button type="submit" class="btn btn-danger" title="{{ 'global.action.delete'|trans }}" aria-label="{{ 'global.action.delete'|trans }}">🗑️</button>
 			{{ form_end(delete_form) }}
 		</li>
 	</ul>

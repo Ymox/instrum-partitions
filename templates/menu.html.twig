@@ -66,9 +66,9 @@
 			<ul class="navbar-nav d-flex">
 				<li class="nav-item">
 					{%- if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					<a href="{{ path('logout') }}" class="nav-link"><i class="fas fa-power-off text-danger" aria-hidden="true"></i> {{ 'app.menu.logout'|trans }}</a>
+					<a href="{{ path('logout') }}" class="nav-link"><span class="text-danger" style="font-family: power_symbols" aria-hidden="true">⏻</span> {{ 'app.menu.logout'|trans }}</a>
 					{% else -%}
-					<a href="{{ path('login') }}" class="nav-link"><i class="fas fa-sign-in" aria-hidden="true"></i> {{ 'app.menu.login'|trans }}</a>
+					<a href="{{ path('login') }}" class="nav-link">{{ 'app.menu.login'|trans }}</a>
 					{% endif -%}
 				</li>
 			</ul>

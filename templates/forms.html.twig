@@ -3,17 +3,24 @@
 {% block _piece_movements_widget %}
 {% set attr = attr|merge({'class': 'row row-cols-1 row-cols-sm-2 row-cols-md-3'}) %}
 {{ block('collection_widget') }}
-{% endblock %}
+{% endblock _piece_movements_widget %}
 
 {% block _piece_movements_entry_row %}
 <div>
-{% set attr = attr|merge({'class': 'card card-body mb-3' ~ (disabled ? ' bg-danger text-white' : '')}) %}
-{{ block('collection_widget') }}
+{% set attr = attr|merge({'class': 'card card-body mb-3' ~ (disabled ? ' bg-outline-danger text-white' : '')}) %}
+{% if form.parent.vars.allow_delete is defined and form.parent.vars.allow_delete %}
+	{%- set attr = attr|merge({'data-collection-remover-prototype': block('collection_remover')}) -%}
+{% endif %}
+{{ block('form_widget') }}
 </div>
-{% endblock %}
+{% endblock _piece_movements_entry_row %}
 
 {% block _piece_parts_entry_widget %}
-<fieldset class="row align-items-center dropzone{{ disabled ? ' bg-danger text-white' : '' }}">
+<fieldset class="row align-items-center dropzone{{ disabled ? ' bg-danger text-white' : '' }}"
+		{%- if form.parent.vars.allow_delete is defined and form.parent.vars.allow_delete %} data-collection-remover-prototype="
+			{{ block('collection_remover')|e('html_attr') -}}
+		"{%- endif -%}
+	>
 {{ form_row(form.upload, {'row_attr': {'class': 'col-lg-5'}, 'label_attr': {'class': 'visually-hidden'}}) }}
 {{ form_row(form.file) }}
 {{ form_row(form.instrument, {'row_attr': {'class': 'col-md-8 col-lg-4'}, 'label_attr': {'class': 'visually-hidden'}}) }}
@@ -21,26 +28,33 @@
 {{ form_row(form.number, {'row_attr': {'class': 'col-sm-4 col-md-1'}, 'label_attr': {'class': 'visually-hidden'}}) }}
 {{ form_row(form.solo, {'row_attr': {'class': 'col-2 col-sm-4 col-md-2 col-lg-2 col-xl-1'}}) }}
 </fieldset>
-{% endblock %}
+{% endblock _piece_parts_entry_widget %}
 
 {% block _piece_missings_widget %}
 {% set attr = attr|merge({'class': 'row row-cols-1 row-cols-sm-2 row-cols-md-3'}) %}
 {{ block('collection_widget') }}
-{% endblock %}
+{% endblock _piece_missings_widget %}
 
 {% block _piece_missings_entry_row %}
 <div>
 {% set attr = attr|merge({'class': 'card card-body mb-3' ~ (disabled ? ' bg-danger text-white' : '')}) %}
-{{ block('collection_widget') }}
+{% if form.parent.vars.allow_delete is defined and form.parent.vars.allow_delete %}
+	{%- set attr = attr|merge({'data-collection-remover-prototype': block('collection_remover')}) -%}
+{% endif %}
+{{ block('form_widget') }}
 </div>
-{% endblock %}
+{% endblock _piece_missings_entry_row %}
+
+{% block dropzone_prototype %}
+<div class="dropzone-info">🗐 {{ 'app.dropzone.hint'|trans }}</div>
+{%- endblock dropzone_prototype %}
 
 {% block file_widget %}
 	<div class="input-group file-link" role="group">
 		<div id="{{ id }}_filled" class="input-group-prepend input-group downloadable" style="{% if file_url is null %}display: none;{% endif %}">
-			<a href="{{ file_url }}" download="{{ download_name }}" class="btn btn-outline-info" title="{{ 'app.file.download'|trans }}"><i class="fas fa-file-download"></i></a>
-			<button type="button" class="btn btn-outline-danger cleaner" title="{{ 'app.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]"><i class="fas fa-times"></i></button>
-			<input type="text" value="{{ download_name }}" id="{{ id }}_static" class="form-control" title="{{ download_name }}" readonly="readonly" />
+			<a href="{{ file_url }}" download="{{ download_name }}" class="btn btn-outline-info" title="{{ 'app.file.download'|trans }}" aria-label="{{ 'app.file.download'|trans }}">📄</a>
+			<button type="button" class="btn btn-outline-danger cleaner" title="{{ 'app.file.delete'|trans }}" data-input-clean="[&quot;#{{ form.parent.vars.id }}_file&quot;]">🧹</button>
+			<input type="text" value="{{ download_name }}" id="{{ id }}_static" readonly="readonly" class="form-control" title="{{ download_name }}" />
 		</div>
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control rounded-start downloadable')|trim, 'data-upload-uri': path('ajax_upload', {'target': form.parent.vars.id})}) %}
 		{% if file_url is not null %}
@@ -48,18 +62,30 @@
 		{% endif %}
 		{{ block('form_widget') }}
 	</div>
-{% endblock %}
+{% endblock file_widget %}
 
 {# Errors #}
 
 {% block form_errors -%}
 	{% if errors|length > 0 -%}
-	{% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
+	{% if form is not rootform %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
 	<ul class="list-unstyled">
 		{%- for error in errors -%}
-			<li><span class="fas fa-exclamation-triangle"></span> {{ error.message }}</li>
+			<li>❕ {{ error.message }}</li>
 		{%- endfor -%}
 	</ul>
 	{% if form.parent %}</span>{% else %}</div>{% endif %}
 	{%- endif %}
 {%- endblock form_errors %}
+
+{% block collection_adder %}
+<button type="button" class="btn btn-sm btn-outline-success collection-adder">➕</button>
+{%- endblock collection_adder %}
+
+{% block collection_remover %}
+<button type="button" class="btn btn-sm btn-outline-danger collection-remover" style="position: absolute; top: 2px; right: 2px; height: auto; width: auto;" data-active="true" data-switch-content="❌" data-switch-class="btn-outline-danger btn-light" data-switch-parent-class="bg-danger text-white">🗑️</button>
+{%- endblock collection_remover %}
+
+{% block entity_adder %}
+<a href="__uri__" data-bs-target="#Modal" data-bs-toggle="modal" target: '_blank' class="btn btn-sm btn-outline-success entity-adder">➕</a>
+{%- endblock entity_adder %}

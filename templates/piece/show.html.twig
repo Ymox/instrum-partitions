@@ -127,12 +127,12 @@
 				{% if (not piece.parts.isEmpty) %}
 				<tr>
 					<td colspan="4"><h3 id="Parts">{{ 'app.fields.piece.parts'|trans }}
-						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ piece.id }}" class="check-all" data-target=".check-all-{{ piece.id }}"/> <label for="CheckAll{{ piece.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-file-archive" title="{{ 'app.file.download_selected'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'app.file.download_selected'|trans }}</span></button></small>{% endif %}</h3></td>
+						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ piece.id }}" class="check-all" data-target=".check-all-{{ piece.id }}"/> <label for="CheckAll{{ piece.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}" aria-label="{{ 'app.file.download_selected'|trans }}">🗂️</button></small>{% endif %}</h3></td>
 				</tr>
 				<tr>
 					{% for order, part in piece.parts %}
 					<td>{% if part.file and is_granted('ROLE_DOWNLOAD') %}<input type="checkbox" name="ids[]" value="{{ part.id }}" id="Part{{ part.id }}" class="check-all-{{ piece.id }}" data-parent="#CheckAll{{ piece.id }}" />
-						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-file-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
+						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.download'|trans }}" aria-label="{{ 'global.action.download'|trans }}">📄</a>
 						{%- endif %}
 						<label for="Part{{ part.id }}">{{ part_t(part, 'short', null, 'app.part.to_string.no_id')|trans }}</label>
 					</td>
@@ -193,13 +193,13 @@
 						</div>
 						{% endif -%}
 
-						{%- if movement.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] %}
+						{%- if movement.location in [constant('App\\Config\\Location::LENT'), constant('App\\Config\\Location::RETURNED')] and not movement.lendings.isEmpty %}
 							({% if is_granted('ROLE_ADMIN') %}<a href="{{ path('lending_show', {'id': movement.lendings.first.id}) }}">{% endif %}
 							{{- movement.lendings.first.band -}}
 							{%- if is_granted('ROLE_ADMIN') %}</a>{% endif %})
 						{% endif -%}
 
-						{%- if movement.states != 0 and movement.location != constant('App\\Config\\Location::SERVER') and not movement.hasAnyState(enum_value('App\\Config\\State', 'SCANNED')) %}
+						{%- if movement.states != 0 and not (movement.location in [constant('App\\Config\\Location::SERVER'), constant('App\\Config\\Location::RETURNED'), constant('App\\Config\\Location::LOST')]) %}
 						{%- set style = (not movement.hasState(enum_value('App\\Config\\State', 'VERIFIED')) ? 'danger' : (movement.states != 7 ? 'warning' : 'success')) -%}
 						{%- if is_granted('ROLE_USER') %}<span class="btn-group btn-group-sm">{% else %}({% endif -%}
 						{%- for state in static('STATES_LIST', movement) -%}
@@ -218,12 +218,12 @@
 				{% if (not movement.parts.isEmpty) %}
 				<tr>
 					<td colspan="4"><h3>{{ 'app.fields.piece.parts'|trans }}
-						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ movement.id }}" class="check-all" data-target=".check-all-{{ movement.id }}" /> <label for="CheckAll{{ movement.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}"><i class="fas fa-download"></i></button></small>{% endif %}</h3></td>
+						{%- if is_granted('ROLE_DOWNLOAD') -%}<small class="float-end"><input type="checkbox" id="CheckAll{{ movement.id }}" class="check-all" data-target=".check-all-{{ movement.id }}" /> <label for="CheckAll{{ movement.id }}">{{ 'global.action.check_all'|trans }}</label> <button type="submit" class="btn btn-sm btn-info" title="{{ 'app.file.download_selected'|trans }}" aria-label="{{ 'app.file.download_selected'|trans }}">🗂️</button></small>{% endif %}</h3></td>
 				</tr>
 				<tr>
 					{% for order, part in movement.parts %}
 					<td>{% if part.file and is_granted('ROLE_DOWNLOAD') %}<input type="checkbox" name="ids[]" value="{{ part.id }}" id="Part{{ part.id }}" class="check-all-{{ movement.id }}" data-parent="#CheckAll{{ movement.id }}" />
-						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info"><i class="fas fa-file-download" title="{{ 'global.action.download'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.download'|trans }}</span></a>
+						<a href="{{ path('part_download', {'ids': [part.id]}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.download'|trans }}" aria-label="{{ 'global.action.download'|trans }}">📄</a>
 						{%- endif %}
 						<label for="Part{{ part.id }}">{{ part_t(part, 'short', null, 'app.part.to_string.no_id')|trans }}</label>
 					</td>
@@ -244,14 +244,14 @@
 
 	<ul class="list-inline float-end">
 		<li class="list-inline-item">
-			<a href="{{ path('piece_index') }}" class="btn btn-light"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.list'|trans }}</span></a>
+			<a href="{{ path('piece_index') }}" class="btn btn-outline-secondary" title="{{ 'global.action.list'|trans }}" aria-label="{{ 'global.action.list'|trans }}">📃</a>
 		</li>
 		<li class="list-inline-item">
-			<a href="{{ path('piece_edit', {'id': piece.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt" title="{{ 'global.action.edit'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.edit'|trans }}</span></a>
+			<a href="{{ path('piece_edit', {'id': piece.id}) }}" class="btn btn-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a>
 		</li>
 		<li class="list-inline-item">
 			{{ form_start(delete_form) }}
-				<button type="submit" class="btn btn-danger"><i class="fas fa-trash" title="{{ 'global.action.delete'|trans }}" aria-hidden="true"></i><span class="visually-hidden">{{ 'global.action.delete'|trans }}</span></button>
+				<button type="submit" class="btn btn-danger" title="{{ 'global.action.delete'|trans }}" aria-label="{{ 'global.action.delete'|trans }}">🗑️</button>
 			{{ form_end(delete_form) }}
 		</li>
 	</ul>

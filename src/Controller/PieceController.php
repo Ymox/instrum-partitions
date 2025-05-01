@@ -158,7 +158,7 @@ class PieceController extends AbstractController
         ;
     }
 
-    #[Route('/piece/duplicates/{master}/{duplicate}', methods: ['GET', 'POST'])]
+    #[Route('/piece/duplicates/{master}/{duplicate}', name: 'piece_duplicates', methods: ['GET', 'POST'])]
     public function duplicates(Request $request, #[MapEntity(id: 'master')] Piece $master, #[MapEntity(id: 'duplicate')] Piece $duplicate, TranslatorInterface $translator, EntityManagerInterface $em): Response
     {
         $masterForm = $this->createForm(\App\Form\PieceType::class, $master);

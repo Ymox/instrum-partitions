@@ -1,20 +1,14 @@
 /**
- * 
+ *
  */
+const entityAdderPrototype = document.currentScript.dataset.entityAdderPrototype;
 $(function() {
 	const addButton = function($addable) {
 		const uri = $addable.data('uri');
-		const $label = $addable.prev(); 
+		const $label = $addable.prev();
 		if (!$label.find('a').length) {
 			$label.append(' ').append(
-				$('<a>', {
-					href: uri || '#',
-					'data-bs-target': '#Modal',
-					'data-bs-toggle': 'modal',
-					'html': '<i class="fa fa-plus-circle"></i>',
-					target: '_blank',
-					'class': 'btn btn-sm btn-outline-success'
-				})
+				$(entityAdderPrototype.replace(/__uri__/, uri))
 			);
 		}
 	};

@@ -6,8 +6,8 @@
 			'class' : 'dropzone',
 			'data-upload-uri': path('ajax_upload', {'target': form.parts.vars.id}),
 			'data-add-direction': 'append',
-			'data-dropzone-prototype': '<div class="dropzone-info"><i class="fas fa-cloud-upload-alt"></i> ' ~ 'app.dropzone.hint'|trans ~ '</div>'}}
-		) }}
+			'data-dropzone-prototype': block('dropzone_prototype', 'forms.html.twig')
+		}}) }}
 		<div class="row">
 			{{ form_row(form.composers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
 			{{ form_row(form.arrangers, {'row_attr': {'class': 'col-md-6 col-sm-12'}}) }}
@@ -39,5 +39,5 @@
 			{{ form_row(form.reference, {'row_attr': {'class': 'col-md-4 col-sm-12'}}) }}
 		</div>
 		{{ form_row(form.note) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fas fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
+		<button type="submit" class="btn btn-primary float-start" title="{{ 'global.action.validate'|trans }}" aria-label="{{ 'global.action.validate'|trans }}">✔️</button>
 	{{ form_end(form) }}

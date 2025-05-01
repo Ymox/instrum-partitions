@@ -5,10 +5,9 @@
 		<title>{% block title %}{{ 'global.site_name'|trans }}{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="stylesheet" href="{{ assets_host }}/twitter-bootstrap/5.2.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="{{ assets_host }}/font-awesome/5.15.4/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="{{ assets_host }}/font-awesome/5.15.4/css/solid.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="{{ asset('style/style.css') }}" />
 		{% block stylesheets %}{% endblock %}
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🗂️</text><text y=%222em%22 x=%220.7em%22 font-size=%2260%22 fill=%22%23fff%22>🎼</text></svg>">
 	</head>
 	<body>
 		{{ include('menu.html.twig') }}
@@ -24,8 +23,8 @@
 		</div>
 		<div id="Modal" class="modal">
 			<div class="modal-dialog">
-				<div class="modal-content" data-empty-content="&lt;div class=&quot;text-center&quot;&gt;&lt;i class=&quot;fa fa-spinner fa-pulse&quot; title=&quot;{{ 'global.info.loading'|trans }}&quot;&gt;&lt;/i&gt;&lt;span class=&quot;sr-only&quot;&gt;{{ 'global.info.loading'|trans }}&lt;/span&gt;&lt;/div&gt;">
-					<div class="text-center"><i class="fas fa-spinner fa-pulse" title="{{ 'global.info.loading'|trans }}"></i><span class="visually-hidden">{{ 'global.info.loading'|trans }}</span></div>
+				<div class="modal-content" data-empty-content="&lt;div class=&quot;text-center&quot; title=&quot;{{ 'global.info.loading'|trans }}&quot; aria-label=&quot;{{ 'global.info.loading'|trans }}&quot;&gt;⏳&lt;/div&gt;">
+					<div class="text-center" title="{{ 'global.info.loading'|trans }}" aria-label="{{ 'global.info.loading'|trans }}">⏳</div>
 				</div>
 			</div>
 		</div>

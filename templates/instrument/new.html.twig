@@ -10,6 +10,6 @@
 	{{ include('piece/_form.html.twig', {'form': edit_form}) }}
 
 	{% if not app.request.isXmlHttpRequest() %}
-	<a href="{{ path('instrument_index') }}" class="btn btn-light float-end"><i class="fas fa-list"></i></a>
+	<a href="{{ path('instrument_index') }}" class="btn btn-outline-secondary float-end" title="{{ 'global.action.list'|trans }}" aria-label="{{ 'global.action.list'|trans }}">📃</a>
 	{% endif %}
 {% endblock %}

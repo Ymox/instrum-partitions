@@ -13,13 +13,13 @@
 
 	{{ include('piece/_form.html.twig', {'form': form}) }}
 
-	<a href="{{ path('piece_index') }}" title="{{ 'global.action.list'|trans }}" class="btn btn-light float-end"><i class="fas fa-list" title="{{ 'global.action.list'|trans }}" aria-hidden="true"></i></a>
+	<a href="{{ path('piece_index') }}" class="btn btn-outline-secondary float-end" title="{{ 'global.action.list'|trans }}" aria-label="{{ 'global.action.list'|trans }}">📃</a>
 {% endblock %}
 
 {% block javascripts %}
 		<script src="{{ assets_host }}/select2/4.0.13/js/select2.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script src="{{ asset('js/entity_adder.js') }}"></script>
-		<script src="{{ asset('js/collection_adder.js') }}"></script>
+		<script src="{{ asset('js/entity_adder.js') }}" data-entity-adder-prototype="{{ block('entity_adder', 'forms.html.twig')|e('html_attr') }}"></script>
+		<script src="{{ asset('js/collection_adder.js') }}" data-collection-adder-prototype="{{ block('collection_adder', 'forms.html.twig')|e('html_attr') }}" data-collection-remover-prototype="{{ block('collection_remover', 'forms.html.twig')|e('html_attr') }}"></script>
 		<script src="{{ asset('js/dragndrop.js') }}"></script>
 		<script src="{{ asset('js/ajaxify.js') }}"></script>
 		<script>/*<[CDATA[*/
