@@ -7,10 +7,8 @@
 	<h1>{{ 'app.instrument.new.heading'|trans }}</h1>
 	{% endif %}
 
-	{{ form_start(form, {'attr': {'class': app.request.xmlHttpRequest ? 'ajaxify' : null}}) }}
-		{{ form_widget(form) }}
-		<button type="submit" title="{{ 'global.action.validate'|trans }}" class="btn btn-primary float-start"><i class="fas fa-check" title="{{ 'global.action.validate'|trans }}" aria-hidden="true"></i></button>
-	{{ form_end(form) }}
+	{{ include('piece/_form.html.twig', {'form': edit_form}) }}
+
 	{% if not app.request.isXmlHttpRequest() %}
 	<a href="{{ path('instrument_index') }}" class="btn btn-light float-end"><i class="fas fa-list"></i></a>
 	{% endif %}

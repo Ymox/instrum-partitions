@@ -191,6 +191,7 @@ app:
       name: Nom
       key:
         label: Transposition
+        placeholder: — Habituelle —
         choices:
           c:      Ut
           c_flat: Do♭
@@ -207,6 +208,7 @@ app:
           d_flat: Ré♭
       family:
         label: Famille
+        placeholder: — Aucune —
         choices:
           wood: Bois
           brass: Cuivre

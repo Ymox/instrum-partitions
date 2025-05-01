@@ -13,9 +13,7 @@ class InstrumentTranslatableMessage extends TranslatableMessage
             'app.fields.part.instrument.choices',
             [
                 'instrument' => $instrument->getName(),
-                'key'        => $instrument->getKey()
-                    ? new TranslatableMessage('app.fields.instrument.key.choices.' . $instrument->getKey()) 
-                    : 'EMPTY',
+                'key'        => $instrument->getKey() ?? 'EMPTY',
             ],
             $domain
         );

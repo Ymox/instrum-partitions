@@ -18,7 +18,12 @@ class InstrumentController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, InstrumentRepository $instrumentRepository): Response
     {
-        $instruments = $instrumentRepository->paginateBy([], ['common' => 'DESC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
+        $instruments = $instrumentRepository->paginateBy(
+            [],
+            ['common' => 'DESC', 'id' => 'ASC'],
+            $this->getParameter('paginate.per_page'),
+            ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
+        );
 
         return $this->render('instrument/index.html.twig', [
             'instruments' => $instruments,

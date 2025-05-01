@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Listener\InstrumentListener;
+use App\Config\Family;
+use App\Config\Key;
 use App\Repository\InstrumentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Table(name: 'instrument')]
 #[ORM\Entity(repositoryClass: InstrumentRepository::class)]
+#[UniqueEntity(fields: ['name'])]
 class Instrument
 {
     #[ORM\Column]
@@ -21,10 +24,10 @@ class Instrument
     private ?string $name = null;
 
     #[ORM\Column(length: 7, nullable: true)]
-    private ?string $key = null;
+    private ?Key $key = null;
 
     #[ORM\Column(length: 15, nullable: true)]
-    private ?string $family = null;
+    private ?Family $family = null;
 
     #[ORM\Column]
     public ?bool $common = null;
@@ -57,26 +60,26 @@ class Instrument
         return $this->name;
     }
 
-    public function setKey(string $key): static
+    public function setKey(?Key $key): static
     {
         $this->key = $key;
 
         return $this;
     }
 
-    public function getKey(): ?string
+    public function getKey(): ?Key
     {
         return $this->key;
     }
 
-    public function setFamily(string $family): static
+    public function setFamily(?Family $family): static
     {
         $this->family = $family;
 
         return $this;
     }
 
-    public function getFamily(): ?string
+    public function getFamily(): ?Family
     {
         return $this->family;
     }

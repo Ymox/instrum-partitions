@@ -2,10 +2,13 @@
 
 namespace App\Form;
 
+use App\Config\Family;
+use App\Config\Key;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class InstrumentType extends AbstractType
@@ -14,43 +17,19 @@ class InstrumentType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label_format' => 'app.fields.part.%name%',
+                'label_format' => 'app.fields.instrument.%name%',
             ])
-            ->add('key', ChoiceType::class, [
+            ->add('key', EnumType::class, [
                 'required' => false,
-                'choices' => [
-                    'c',
-                    'c_flat',
-                    'b',
-                    'b_flat',
-                    'a',
-                    'a_flat',
-                    'g',
-                    'g_flat',
-                    'f',
-                    'e',
-                    'e_flat',
-                    'd',
-                    'd_flat',
-                ],
-                'choice_label' => function ($value, $key, $index) {
-                    return 'app.fields.instrument.key.choices.' . $value;
-                },
-                'label_format' => 'app.fields.instrument.key.label',
+                'class' => Key::class,
+                'placeholder' => 'app.fields.instrument.key.placeholder',
+                'label_format' => 'app.fields.instrument.%name%.label',
             ])
-            ->add('family', ChoiceType::class, [
+            ->add('family', EnumType::class, [
                 'required' => false,
-                'choices' => [
-                    'wood',
-                    'brass',
-                    'string',
-                    'percussion',
-                    'voice',
-                ],
-                'choice_label' => function ($value, $key, $index) {
-                    return 'app.fields.instrument.family.choices.' . $value;
-                },
-                'label_format' => 'app.fields.instrument.family.label',
+                'class' => Family::class,
+                'placeholder' => 'app.fields.instrument.family.placeholder',
+                'label_format' => 'app.fields.instrument.%name%.label',
             ])
             ->add('common', null, [
                 'label_format' => 'app.fields.instrument.%name%.label',
