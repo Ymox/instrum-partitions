@@ -26,7 +26,7 @@ class BandController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $band = new Band();
