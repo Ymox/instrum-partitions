@@ -6,6 +6,12 @@
 	<h1>{{ 'app.missing.index.heading'|trans }}</h1>
 
 	<table class="table table-sm table-hover">
+		<colgroup>
+			<col />
+			<col />
+			<col />
+			<col class="col-1" />
+		</colgroup>
 		<thead>
 			<tr>
 				<th>{{ 'app.fields.missing.piece'|trans }}</th>
@@ -20,13 +26,11 @@
 				<td><a href="{{ path('piece_show', {'id': missing.piece.id}) }}">{{ missing.piece.name }}</a></td>
 				<td>{{ missing.voice }}</td>
 				<td>{{ missing.createdAt|date('Y-m-d H:i:s') }}</td>
-				<td>
-					<form action="{{ path('missing_delete', {'id': missing.id}) }}" method="post">
+				<td class="text-center"><form action="{{ path('missing_delete', {'id': missing.id}) }}" method="post">
 						<input type="hidden" name="form[_token]" value="{{ csrf_token('form') }}" />
 						<input type="hidden" name="_method" value="DELETE" />
 						<button type="submit" class="btn btn-sm btn-outline-danger" title="{{ 'global.action.delete'|trans }}" aria-label="{{ 'global.action.delete'|trans }}">🗑️</button>
-					</form>
-				</td>
+					</form></td>
 			</tr>
 		{% endfor %}
 		</tbody>

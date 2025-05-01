@@ -6,6 +6,11 @@
 	<h1>{{ 'app.instrumentation.index.heading'|trans }}</h1>
 
 	<table class="table table-sm table-hover">
+		<colgroup>
+			<col />
+			<col />
+			<col class="col-1" />
+		</colgroup>
 		<thead>
 			<tr>
 				<th>{{ 'app.fields.instrumentation.name'|trans }}</th>
@@ -18,7 +23,7 @@
 			<tr>
 				<td>{{ instrumentation.name }}</td>
 				<td>{{ instrumentation.note }}</td>
-				<td><a href="{{ path('instrumentation_edit', {'id': instrumentation.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
+				<td class="text-center"><a href="{{ path('instrumentation_edit', {'id': instrumentation.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
 			</tr>
 		{% endfor %}
 		</tbody>

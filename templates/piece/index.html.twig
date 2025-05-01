@@ -7,6 +7,16 @@
 
 	<form class="table-responsive">
 		<table class="table table-sm table-hover">
+			<colgroup>
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+			</colgroup>
 			<thead>
 				<tr>
 					<th colspan="8">
@@ -163,8 +173,7 @@
 						<i>{{ 'app.piece.index.last_played.unknown'|trans }}</i>
 						{%- endif -%}
 						</td>
-					<td class="text-center">
-						<a href="{{ path('piece_show', {'id': piece.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
+					<td class="text-center"><a href="{{ path('piece_show', {'id': piece.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
 
 						{% if is_granted('ROLE_USER') %}
 						<div class="btn-group btn-group-sm">

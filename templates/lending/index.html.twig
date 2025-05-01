@@ -6,6 +6,12 @@
 	<h1>{{ 'app.lending.index.heading'|trans }}</h1>
 
 	<table class="table table-sm table-hover">
+		<colgroup>
+			<col />
+			<col />
+			<col />
+			<col class="col-2 col-sm-3 col-md-2 col-xl-1" />
+		</colgroup>
 		<thead>
 			<tr>
 				<th colspan="4">
@@ -35,11 +41,9 @@
 					({{ lending.contact }})</td>
 				<td>{{ lending.start|date('Y-m-d') }}</td>
 				<td>{% if lending.end %}{{ lending.end|date('Y-m-d') }}{% else %}{{ 'app.lending.index.not_ended'|trans }}{% endif %}</a></td>
-				<td>
-					<a href="{{ path('lending_show', {'id': lending.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
+				<td class="text-center"><a href="{{ path('lending_show', {'id': lending.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
 					<a href="{{ path('band_show', {'id': lending.band.id}) }}" class="btn btn-sm btn-outline-secondary">👥</a>
-					<a href="{{ path('lending_edit', {'id': lending.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a>
-				</td>
+					<a href="{{ path('lending_edit', {'id': lending.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
 			</tr>
 		{% endfor %}
 		</tbody>

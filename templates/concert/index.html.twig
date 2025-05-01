@@ -6,6 +6,11 @@
 	<h1>{{ 'app.concert.index.heading'|trans }}</h1>
 
 	<table class="table table-sm table-hover">
+		<colgroup>
+			<col />
+			<col />
+			<col class="col-3 col-sm-3 col-md-2 col-xl-1" />
+		</colgroup>
 		<thead>
 			<tr>
 				<th colspan="3">
@@ -31,10 +36,8 @@
 			<tr>
 				<td><a href="{{ path('concert_show', {'id': concert.id}) }}">{{ concert.name }}</a></td>
 				<td>{{ concert.date|date('Y-m-d H:i') }}</td>
-				<td>
-					<a href="{{ path('concert_show', {'id': concert.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
-					<a href="{{ path('concert_edit', {'id': concert.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a>
-				</td>
+				<td class="text-center"><a href="{{ path('concert_show', {'id': concert.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
+					<a href="{{ path('concert_edit', {'id': concert.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
 			</tr>
 		{% endfor %}
 		</tbody>

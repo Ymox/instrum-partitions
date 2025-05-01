@@ -42,7 +42,7 @@
 					{{ 'app.instrument.full_name'|trans({'name': instrument.name, 'key': instrument.key|trans}) }}
 				{%- endif %}</td>
 				<td>{{ instrument.family ? instrument.family|trans }}</td>
-				<td><a href="{{ path('instrument_edit', {'id': instrument.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
+				<td class="text-center"><a href="{{ path('instrument_edit', {'id': instrument.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
 			</tr>
 		{% endfor %}
 		</tbody>

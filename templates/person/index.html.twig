@@ -6,6 +6,11 @@
 	<h1>{{ 'app.person.index.heading'|trans }}</h1>
 
 	<table class="table table-sm table-hover">
+		<colgroup>
+			<col />
+			<col />
+			<col class="col-2 col-sm-3 col-md-2 col-xl-1" />
+		</colgroup>
 		<thead>
 			<tr>
 				<th colspan="3">
@@ -31,10 +36,8 @@
 			<tr>
 				<td><a href="{{ path('person_show', {'id': person.id}) }}">{{ person.firstName }}</a></td>
 				<td><a href="{{ path('person_show', {'id': person.id}) }}">{{ person.lastName }}</a></td>
-				<td>
-					<a href="{{ path('person_show', {'id': person.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
-					<a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a>
-				</td>
+				<td class="text-center"><a href="{{ path('person_show', {'id': person.id}) }}" class="btn btn-sm btn-outline-info" title="{{ 'global.action.show'|trans }}" aria-label="{{ 'global.action.show'|trans }}">👁️</a>
+					<a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-sm btn-outline-warning" title="{{ 'global.action.edit'|trans }}" aria-label="{{ 'global.action.edit'|trans }}">✏️</a></td>
 			</tr>
 		{% endfor %}
 		</tbody>
