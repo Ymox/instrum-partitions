@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\Clef;
 use App\Repository\PartRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -22,7 +23,7 @@ class Part
     private ?int $id = null;
 
     #[ORM\Column(length: 3, nullable: true)]
-    private ?string $clef = null;
+    private ?Clef $clef = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $number = null;
@@ -59,14 +60,14 @@ class Part
         return $this->id;
     }
 
-    public function setClef(?string $clef): static
+    public function setClef(?Clef $clef): static
     {
         $this->clef = $clef;
 
         return $this;
     }
 
-    public function getClef(): ?string
+    public function getClef(): ?Clef
     {
         return $this->clef;
     }

@@ -24,7 +24,7 @@ class PartTranslatableMessage extends TranslatableMessage
                     ? new TranslatableMessage(sprintf(
                             'app.fields.part.clef.choices.%s.%s',
                             $clefContext,
-                            $part->getClef()
+                            $part->getClef()->value
                         ))
                     : 'EMPTY'
             ],

@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
+use App\Config\Clef;
 use App\Entity\Translatable\InstrumentTranslatableMessage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -45,21 +46,14 @@ class PartType extends AbstractType
                     'class' => 'searchable',
                 ],
             ])
-            ->add('clef', ChoiceType::class, [
+            ->add('clef', EnumType::class, [
                 'required' => false,
-                'choices' => [
-                    'g',
-                    'c',
-                    'f',
-                ],
-                'choice_label' => function ($value, $key, $index) {
-                    return 'app.fields.part.clef.choices.short.' . $value;
-                },
+                'class' => Clef::class,
                 'label_format' => 'app.fields.part.%name%.label',
                 'placeholder' => 'app.fields.part.clef.placeholder',
                 'choice_attr' => function ($value, $key, $index) {
                     return [
-                        'data-regex' => $this->translator->trans('app.fields.part.clef.choices.note.' . $value),
+                        'data-regex' => $this->translator->trans('app.fields.part.clef.choices.note.' . $value->value),
                     ];
                 }
             ])
