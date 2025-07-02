@@ -56,10 +56,14 @@ $(function() {
 						let $target;
 						if ($('#' + data.target + '_file').is(':input')) {
 							$target = $('#' + data.target + '_file');
-						} else if ($('#' + data.target).prev().find('.adder').length) {
+						} else if ($('#' + data.target).prev().find('.collection-adder').length) {
 							const $container = $('#' + data.target);
-							$container.prev().find('.adder').click();
-							$target = $container.find('[name$="' + 'file' + ']"]').first();
+							$container.prev().find('.collection-adder').click();
+							if ($container.data('add-direction') == 'prepend') {
+								$target = $container.find('[name$="' + 'file' + ']"]').first();
+							} else {
+								$target = $container.find('[name$="' + 'file' + ']"]').last();
+							}
 						}
 						const $subform = $target.prev().closest('[data-prototype] > fieldset');
 						let nonMultipleName;
