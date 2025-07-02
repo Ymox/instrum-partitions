@@ -43,7 +43,7 @@ app:
 
   menu:
     concerts:
-      heading: Concerts
+      heading: Prestations
       list: Concerts
     programs: Programmes
     partitions:
