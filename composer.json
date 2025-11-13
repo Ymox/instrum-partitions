@@ -4,7 +4,7 @@
 	"license": "proprietary",
 	"type": "project",
 	"require": {
-		"php": ">=8.3.19",
+		"php": ">=8.2.20",
 		"ext-ctype": "*",
 		"ext-iconv": "*",
 		"composer/package-versions-deprecated": "1.11.99.4",
