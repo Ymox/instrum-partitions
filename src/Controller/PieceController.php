@@ -22,9 +22,12 @@ class PieceController extends AbstractController
     public function index(Request $request, PieceRepository $pieceRepository): Response
     {
 
-        if ($request->query->has('q') && $request->query->all('q')['id'] && ($piece = $pieceRepository->find($request->query->all('q')['id']))) {
-            if ($piece->getWork()) {
-                return $this->redirectToRoute('piece_show', ['id' => $piece->getWork()->getId()]);
+        if ($request->query->has('q')
+            && array_key_exists('id', $request->query->all('q'))
+            && ($piece = $pieceRepository->find($request->query->all('q')['id']))
+        ) {
+            if ($work = $piece->getWork()) {
+                return $this->redirectToRoute('piece_show', ['id' => $work->getId()]);
             } else {
                 return $this->redirectToRoute('piece_show', ['id' => $piece->getId()]);
             }
