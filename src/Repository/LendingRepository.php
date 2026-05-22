@@ -51,7 +51,7 @@ class LendingRepository extends ServiceEntityRepository
         }
 
         foreach ($orderBy as $field => $direction) {
-            $qb->addOrderBy($this->sanitizeField($field), $direction);
+            $qb->addOrderBy($this->sanitizeField($field), (strtolower($direction) === 'desc') ? 'desc' : 'asc');
         }
 
         if (null != $limit) {
@@ -81,7 +81,9 @@ class LendingRepository extends ServiceEntityRepository
             case 'start':
             case 'id':
                 $field = 'p.' . $field;
+                break;
             default:
+                $field = 'p.id';
                 break;
         }
 
