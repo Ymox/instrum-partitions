@@ -21,8 +21,8 @@ class ConcertController extends AbstractController
         $concerts = $concertRepository->findBy(
             [],
             ['date' => 'DESC'],
-            $this->getParameter('paginate.per_page'),
-            ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
+            (int)$this->getParameter('paginate.per_page'),
+            max(($request->query->getInt('page', 1) - 1), 0) * (int)$this->getParameter('paginate.per_page')
         );
         $nbConcerts = $concertRepository->countAll();
 

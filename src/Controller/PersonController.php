@@ -18,7 +18,12 @@ class PersonController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, PersonRepository $personRepository): Response
     {
-        $people = $personRepository->paginateBy([], ['lastName' => 'ASC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
+        $people = $personRepository->paginateBy(
+            [],
+            ['lastName' => 'ASC'],
+            (int)$this->getParameter('paginate.per_page'),
+            max(($request->query->getInt('page', 1) - 1), 0) * (int)$this->getParameter('paginate.per_page')
+        );
 
         return $this->render('person/index.html.twig', [
             'people'  => $people,

@@ -38,11 +38,12 @@ class LendingRepository extends ServiceEntityRepository
         $qb ->leftJoin('l.band', 'b')->addSelect('b')
             ->leftJoin('l.pieces', 'p')->addSelect('p');
 
+        $i = 0;
         foreach ($criteria as $field => $value) {
             if (empty($value)) {
                 continue;
             }
-            $marker = ':' . $field;
+            $marker = ':params_' . $i++;
             $qb->andWhere($qb->expr()->like($this->sanitizeField($field), $marker));
             if ($field == 'name') {
                 $qb->orWhere($qb->expr()->like('p.translation', $marker));
@@ -55,10 +56,10 @@ class LendingRepository extends ServiceEntityRepository
         }
 
         if (null != $limit) {
-            $qb->setMaxResults($limit);
+            $qb->setMaxResults(max($limit, 0));
         }
         if (null != $offset) {
-            $qb->setFirstResult($offset);
+            $qb->setFirstResult(max($offset, 0));
         }
 
         $paginator = new Paginator($qb);
@@ -79,7 +80,6 @@ class LendingRepository extends ServiceEntityRepository
                 $field = 'l.contact';
                 break;
             case 'start':
-            case 'id':
                 $field = 'p.' . $field;
                 break;
             default:

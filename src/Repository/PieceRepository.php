@@ -42,11 +42,12 @@ class PieceRepository extends ServiceEntityRepository
             ->leftJoin('p.concerts', 's')->addSelect('s')->setMaxResults(1)
             ->where($qb->expr()->isNull('w.id'));
 
+        $i = 0;
         foreach ($criteria as $field => $value) {
             if (empty($value)) {
                 continue;
             }
-            $marker = ':' . $field;
+            $marker = ':params_' . $i++;
             $qb->andWhere($qb->expr()->like($this->sanitizeField($field), $marker));
             if ($field == 'name') {
                 $qb->orWhere($qb->expr()->like('p.translation', $marker));
@@ -59,10 +60,10 @@ class PieceRepository extends ServiceEntityRepository
         }
 
         if (null != $limit) {
-            $qb->setMaxResults($limit);
+            $qb->setMaxResults(max($limit, 0));
         }
         if (null != $offset) {
-            $qb->setFirstResult($offset);
+            $qb->setFirstResult(max($offset, 0));
         }
 
         $paginator = new Paginator($qb);
@@ -87,7 +88,7 @@ class PieceRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    private function sanitizeField($field)
+    private function sanitizeField(string $field)
     {
         switch ($field) {
             case 'publisher':
@@ -103,7 +104,6 @@ class PieceRepository extends ServiceEntityRepository
             case 'name':
             case 'translation':
             case 'reference':
-            case 'id':
                 $field = 'p.' . $field;
                 break;
             default:

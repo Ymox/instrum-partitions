@@ -32,32 +32,47 @@ class BandRepository extends ServiceEntityRepository
         }
     }
 
-    public function paginateBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): Paginator
+    public function paginateBy(array $criteria, array $orderBy = null, ?int $limit = null, ?int $offset = null): Paginator
     {
         $qb = $this->createQueryBuilder('b');
 
+        $i = 0;
         foreach ($criteria as $field => $value) {
             if (empty($value)) {
                 continue;
             }
-            $marker = ':' . $field;
-            $qb->andWhere($qb->expr()->like('b.' . $field, $marker));
+            $marker = ':params_' . $i++;
+            $qb->andWhere($qb->expr()->like($this->sanitizeField($field), $marker));
             $qb->setParameter($marker, '%' . $value . '%');
         }
 
         foreach ($orderBy as $field => $direction) {
-            $qb->addOrderBy('b.' . $field, $direction);
+            $qb->addOrderBy($this->sanitizeField($field), (strtolower($direction) === 'desc') ? 'desc' : 'asc');
         }
 
         if (null != $limit) {
-            $qb->setMaxResults($limit);
+            $qb->setMaxResults(max($limit, 0));
         }
         if (null != $offset) {
-            $qb->setFirstResult($offset);
+            $qb->setFirstResult(max($offset, 0));
         }
 
         $paginator = new Paginator($qb);
 
         return $paginator;
+    }
+
+    private function sanitizeField(string $field)
+    {
+        switch ($field) {
+            case 'name':
+                $field = 'b.' . $field;
+                break;
+            default:
+                $field = 'b.id';
+                break;
+        }
+
+        return $field;
     }
 }

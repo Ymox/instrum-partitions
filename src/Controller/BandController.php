@@ -18,7 +18,12 @@ class BandController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, BandRepository $bandRepository): Response
     {
-        $bands = $bandRepository->paginateBy([], ['name' => 'ASC'], $this->getParameter('paginate.per_page'), ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page'));
+        $bands = $bandRepository->paginateBy(
+            [],
+            ['name' => 'ASC'],
+            (int)$this->getParameter('paginate.per_page'),
+            max(($request->query->getInt('page', 1) - 1), 0) * (int)$this->getParameter('paginate.per_page')
+        );
 
         return $this->render('band/index.html.twig', [
             'bands' => $bands,

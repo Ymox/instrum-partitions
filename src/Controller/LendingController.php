@@ -22,11 +22,9 @@ class LendingController extends AbstractController
     {
         $lendings = $lendingRepository->searchBy(
             $request->query->has('q') ? $request->query->all('q') : [],
-            [
-                $request->query->get('field', 'l.start') => $request->query->get('direction', 'desc'),
-            ],
-            $this->getParameter('paginate.per_page'),
-            ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
+            [$request->query->get('field', 'l.start') => $request->query->get('direction', 'desc')],
+            (int)$this->getParameter('paginate.per_page'),
+            max(($request->query->getInt('page', 1) - 1), 0) * (int)$this->getParameter('paginate.per_page')
         );
 
         return $this->render('lending/index.html.twig', [

@@ -21,8 +21,8 @@ class InstrumentController extends AbstractController
         $instruments = $instrumentRepository->paginateBy(
             [],
             ['common' => 'DESC', 'id' => 'ASC'],
-            $this->getParameter('paginate.per_page'),
-            ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
+            (int)$this->getParameter('paginate.per_page'),
+            max(($request->query->getInt('page', 1) - 1), 0) * (int)$this->getParameter('paginate.per_page')
         );
 
         return $this->render('instrument/index.html.twig', [

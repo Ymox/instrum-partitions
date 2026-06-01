@@ -37,7 +37,7 @@ class PartRepository extends ServiceEntityRepository
         $qb = $this->getBaseQueryBuilder();
         $qb ->where($qb->expr()->isNotNull('p.file'));
         if ($limit) {
-            $qb->setMaxResults($limit);
+            $qb->setMaxResults(max($limit, 0));
         }
 
         return $qb->getQuery()->getResult();
@@ -58,7 +58,7 @@ class PartRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb ->select('PARTIAL p.{id,file}')
             ->where($qb->expr()->isNotNull('p.file'));
-        
+
         return array_column($qb->getQuery()->getArrayResult(), 'file', 'id');
     }
 

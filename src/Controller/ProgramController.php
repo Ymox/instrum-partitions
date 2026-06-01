@@ -20,12 +20,9 @@ class ProgramController extends AbstractController
     {
         $programs = $programRepository->findBy(
             [],
-            [
-                'updatedAt' => 'DESC',
-                'createdAt' => 'DESC'
-            ],
-            $this->getParameter('paginate.per_page'),
-            ($request->query->get('page', 1) - 1) * $this->getParameter('paginate.per_page')
+            ['updatedAt' => 'DESC', 'createdAt' => 'DESC'],
+            (int)$this->getParameter('paginate.per_page'),
+            max(($request->query->getInt('page', 1) - 1), 0) * (int)$this->getParameter('paginate.per_page')
         );
         $nbPrograms = $programRepository->countAll();
 
