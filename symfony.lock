@@ -1,12 +1,6 @@
 {
-    "doctrine/cache": {
-        "version": "1.11.0"
-    },
     "doctrine/collections": {
         "version": "1.6.7"
-    },
-    "doctrine/common": {
-        "version": "3.1.2"
     },
     "doctrine/dbal": {
         "version": "2.13.1"
@@ -273,9 +267,6 @@
         "version": "v1.22.1"
     },
     "symfony/polyfill-php73": {
-        "version": "v1.22.1"
-    },
-    "symfony/polyfill-php80": {
         "version": "v1.22.1"
     },
     "symfony/process": {
