@@ -21,7 +21,7 @@
 				<tr>
 					<th colspan="8">
 						{%- set query = app.request.query -%}
-						{%- set page = query.get('page', 1) -%}
+						{%- set page = query.getInt('page', 1) -%}
 						{%- include 'pagination.html.twig' with {'page': page, 'nbPages': nbPages, 'objectName': 'piece'} -%}
 					</th>
 				</tr>
